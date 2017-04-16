@@ -1,0 +1,769 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>La ambiguedad de las sentencias if-then-else</TITLE>
+<META NAME="description" CONTENT="La ambiguedad de las sentencias if-then-else">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node179.html">
+<LINK REL="previous" HREF="node177.html">
+<LINK REL="up" HREF="node175.html">
+<LINK REL="next" HREF="node179.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html4036"
+  HREF="node179.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4030"
+  HREF="node175.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4024"
+  HREF="node177.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4032"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4034"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4037"
+  HREF="node179.html">La directiva commit</A>
+<B>Sup:</B> <A NAME="tex2html4031"
+  HREF="node175.html">RecDescent</A>
+<B> Ant:</B> <A NAME="tex2html4025"
+  HREF="node177.html">Orden de Recorrido del</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001130000000000000000">
+La ambiguedad de las sentencias <TT>if-then-else</TT></A>
+</H1>
+Existen lenguajes que son <A NAME="13557"></A><B>intrínsecamente ambiguos</B>, esto lenguajes
+independientes del contexto tales que, cualquier gramática que los
+genere es ambigua. Sin embargo, lo normal es que siempre se pueda encontrar
+una gramática que no sea ambigua y que genere el mismo lenguaje.
+
+<P>
+Existe una ambiguedad en la parte de las sentencias condicionales de un lenguaje.
+Por ejemplo, consideremos la gramática:
+
+<P>
+<BR>
+<BR>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT">SENTENCIA <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ if EXPRESION then SENTENCIA</TD>
+</TR>
+<TR><TD ALIGN="LEFT">SENTENCIA <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ if EXPRESION then SENTENCIA else SENTENCIA</TD>
+</TR>
+<TR><TD ALIGN="LEFT">SENTENCIA <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ OTRASSENTENCIAS</TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+<BR>
+
+<P>
+Aqui OTRASSENTENCIAS es un terminal/comodín para aludir a cualesquiera otras
+sentencias que el lenguaje peuda tener (bucles, asignaciones, llamadas a subrutinas,
+etc.)
+
+<P>
+La gramática es ambigua, ya que para una sentencia como 
+
+<P>
+<DIV ALIGN="CENTER">
+if <IMG
+ WIDTH="25" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img367.png"
+ ALT="$ E_1$">
+ then if <IMG
+ WIDTH="25" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img368.png"
+ ALT="$ E_2$">
+ then <IMG
+ WIDTH="23" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img274.png"
+ ALT="$ S_1$">
+ else <IMG
+ WIDTH="23" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img275.png"
+ ALT="$ S_2$">
+
+</DIV>
+
+<P>
+existen dos árboles posibles: uno que asocia el ``else'' con el primer ``if'' y otra
+que lo asocia con el segundo. Los dos árboles corresponden a las
+dos posibles parentizaciones:
+
+<P>
+<DIV ALIGN="CENTER">
+if <IMG
+ WIDTH="25" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img367.png"
+ ALT="$ E_1$">
+ then (if <IMG
+ WIDTH="25" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img368.png"
+ ALT="$ E_2$">
+ then <IMG
+ WIDTH="23" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img274.png"
+ ALT="$ S_1$">
+ else <IMG
+ WIDTH="23" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img275.png"
+ ALT="$ S_2$">
+)
+
+</DIV>
+
+<P>
+Esta es la regla de prioridad usada en la mayor parte de los lenguajes:
+un ``else'' casa con el ``if' mas cercano. la otra posible parentización
+es:
+
+<P>
+<DIV ALIGN="CENTER">
+if <IMG
+ WIDTH="25" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img367.png"
+ ALT="$ E_1$">
+ then (if <IMG
+ WIDTH="25" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img368.png"
+ ALT="$ E_2$">
+ then <IMG
+ WIDTH="23" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img274.png"
+ ALT="$ S_1$">
+) else <IMG
+ WIDTH="23" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img275.png"
+ ALT="$ S_2$">
+
+</DIV>
+
+<P>
+El siguiente ejemplo considera una aproximación a la resolución del problema usando
+<code>Parse::RecDescent</code>. Para simplificar, la única variable sintáctica que permanece
+del ejemplo anterior es SENTENCIA (que ha sido renombrada <code>st</code>).
+Las demás han sido convertidas en terminales y se han abreviado.
+En esta gramática colocamos primero la regla mas larga <code>st : 'iEt' st 'e' st</code>.
+
+<P>
+<PRE>
+ 1 #!/usr/local/bin/perl5.8.0 -w
+ 2 use strict;
+ 3 use Parse::RecDescent;
+ 4 use Data::Dumper;
+ 5 
+ 6 $::RD_TRACE = 1;
+ 7 $::RD_AUTOACTION =  q{ [@item] };
+ 8 my $grammar = q{
+ 9   prog : st ';' 
+10   st : 'iEt' st 'e' st 
+11      | 'iEt' st 
+12      | 'o' { 'o' }
+13 };
+14 
+15 my $parse = Parse::RecDescent-&gt;new($grammar);
+16 
+17 my $line;
+18 while ($line = &lt;&gt;) {
+19   print "$line\n";
+20   my $result = $parse-&gt;prog($line);
+21   if (defined($result)) { print Dumper($result); }
+22   else { print "Cadena no válida\n"; }
+23 }
+</PRE>
+
+<P>
+En este caso, la variable <code>$::RD_AUTOACTION</code> 
+ha sido establecida a <code>q{ [@item] }</code>. Esto significa
+que cada vez que una producción tenga éxito se
+devolverá una referencia al array conteniendo los atributos
+de los símbolos en la producción.
+El contenido de esta variable es evaluado siempre que la producción
+en cuestión no tenga una acción asociada explícitamente:
+Por tanto, se aplica para todas las reglas
+salvo para la regla en la línea 12, en la que se devuelve el
+carácter <code>'o'</code>.
+
+<P>
+El programa anterior da lugar a la siguiente ejecución:
+<PRE>
+bash-2.05b$ ./ifthenelse.pl file4.txt
+</PRE>
+El fichero <code>file4.txt</code> contiene una sóla línea:
+<PRE>
+$ cat file4.txt
+iEt iEt o e o ;
+</PRE>
+que es una frase con dos posibles árboles.
+RD intentará primero reiteradamente
+la primera de las producciones de <code>st</code>:
+<PRE>
+ 1|   prog   |Trying rule: [prog]                   |
+ 1|   prog   |                                      |"iEt iEt o e o ;\n"
+ 1|   prog   |Trying production: [st ';']           |
+ 1|   prog   |Trying subrule: [st]                  |
+ 2|    st    |Trying rule: [st]                     |
+ 2|    st    |Trying production: ['iEt' st 'e' st]  |
+ 2|    st    |Trying terminal: ['iEt']              |
+ 2|    st    |&gt;&gt;Matched terminal&lt;&lt; (return value:   |
+  |          |[iEt])                                |
+ 2|    st    |                                      |" iEt o e o ;\n"
+ 2|    st    |Trying subrule: [st]                  |
+ 3|    st    |Trying rule: [st]                     |
+ 3|    st    |Trying production: ['iEt' st 'e' st]  |
+ 3|    st    |Trying terminal: ['iEt']              |
+ 3|    st    |&gt;&gt;Matched terminal&lt;&lt; (return value:   |
+  |          |[iEt])                                |
+ 3|    st    |                                      |" o e o ;\n"
+</PRE>
+Esta opción acabará fracasando, ya que sólo hay un <code>else</code>.
+<PRE>
+ 3|    st    |Trying subrule: [st]                  |
+ 4|    st    |Trying rule: [st]                     |
+ 4|    st    |Trying production: ['iEt' st 'e' st]  |
+ 4|    st    |Trying terminal: ['iEt']              |
+ 4|    st    |&lt;&lt;Didn't match terminal&gt;&gt;             |
+</PRE>
+Estamos delante del terminal <code>o</code> y obviamente la primera producción de <code>st</code> 
+no casa, se intenta con la segunda, la cual naturalmente fracasrá:
+<PRE>
+ 4|    st    |                                      |"o e o ;\n"
+ 4|    st    |Trying production: ['iEt' st]         |
+ 4|    st    |                                      |" o e o ;\n"
+ 4|    st    |Trying terminal: ['iEt']              |
+ 4|    st    |&lt;&lt;Didn't match terminal&gt;&gt;             |
+ 4|    st    |                                      |"o e o ;\n"
+ 4|    st    |Trying production: ['o']              |
+</PRE>
+Seguimos delante del terminal <code>o</code> y la segunda producción de <code>st</code> 
+tampoco casa, se intenta con la tercera producción:
+<PRE>
+ 4|    st    |                                      |" o e o ;\n"
+ 4|    st    |Trying terminal: ['o']                |
+ 4|    st    |&gt;&gt;Matched terminal&lt;&lt; (return value:   |
+  |          |[o])                                  |
+ 4|    st    |                                      |" e o ;\n"
+ 4|    st    |Trying action                         |
+ 4|    st    |&gt;&gt;Matched action&lt;&lt; (return value: [o])|
+</PRE>
+La <code>o</code> por fin ha sido emparejada.
+Se ha ejecutado la acción no automática.
+
+<P>
+<PRE>
+ 4|    st    |&gt;&gt;Matched production: ['o']&lt;&lt;         |
+ 4|    st    |&gt;&gt;Matched rule&lt;&lt; (return value: [o])  |
+ 4|    st    |(consumed: [ o])                      |
+ 3|    st    |&gt;&gt;Matched subrule: [st]&lt;&lt; (return     |
+  |          |value: [o]                            |
+</PRE>
+Recuérdese por donde íbamos conjeturando. Se ha construido el 
+árbol (erróneo):
+<PRE>
+st
+ |
+ ` 'iEt'  st    'e'  st
+           |    
+           ` 'iEt'  st    'e'  st
+                    |      ^
+                    ` 'o'
+</PRE>
+Por ello, el <code>e</code> va a ser consumido sin problema:
+<PRE>
+ 3|    st    |Trying terminal: ['e']                |
+ 3|    st    |&gt;&gt;Matched terminal&lt;&lt; (return value:   |
+  |          |[e])                                  |
+ 3|    st    |                                      |" o ;\n"
+ 3|    st    |Trying subrule: [st]                  |
+ 4|    st    |Trying rule: [st]                     |
+ 4|    st    |Trying production: ['iEt' st 'e' st]  |
+ 4|    st    |Trying terminal: ['iEt']              |
+ 4|    st    |&lt;&lt;Didn't match terminal&gt;&gt;             |
+ 4|    st    |                                      |"o ;\n"
+ 4|    st    |Trying production: ['iEt' st]         |
+ 4|    st    |                                      |" o ;\n"
+ 4|    st    |Trying terminal: ['iEt']              |
+ 4|    st    |&lt;&lt;Didn't match terminal&gt;&gt;             |
+ 4|    st    |                                      |"o ;\n"
+ 4|    st    |Trying production: ['o']              |
+ 4|    st    |                                      |" o ;\n"
+ 4|    st    |Trying terminal: ['o']                |
+ 4|    st    |&gt;&gt;Matched terminal&lt;&lt; (return value:   |
+  |          |[o])                                  |
+ 4|    st    |                                      |" ;\n"
+ 4|    st    |Trying action                         |
+ 4|    st    |&gt;&gt;Matched action&lt;&lt; (return value: [o])|
+ 4|    st    |&gt;&gt;Matched production: ['o']&lt;&lt;         |
+ 4|    st    |&gt;&gt;Matched rule&lt;&lt; (return value: [o])  |
+ 4|    st    |(consumed: [ o])                      |
+ 3|    st    |&gt;&gt;Matched subrule: [st]&lt;&lt; (return     |
+  |          |value: [o]                            |
+ 3|    st    |Trying action                         |
+ 3|    st    |&gt;&gt;Matched action&lt;&lt; (return value:     |
+  |          |[ARRAY(0x830cc04)])                   |
+</PRE>
+Hemos construido el árbol:
+<PRE>
+st
+ |
+ ` 'iEt'  st    'e'  st
+           |     ^
+           ` 'iEt'  st    'e'  st
+                    |          |
+                    ` 'o'      `o
+</PRE>
+Asi pues la segunda regla conjeturada <code>st : 'iEt' st 'e' st</code> ha tenido
+éxito. Después de esto esperamos ver <code>e</code>, pero lo que hay en la entrada 
+es un punto y coma.
+<PRE>
+ 3|    st    |&gt;&gt;Matched production: ['iEt' st 'e'   |
+  |          |st]&lt;&lt;                                 |
+ 3|    st    |&gt;&gt;Matched rule&lt;&lt; (return value:       |
+  |          |[ARRAY(0x830cc04)])                   |
+ 3|    st    |(consumed: [ iEt o e o])              |
+ 2|    st    |&gt;&gt;Matched subrule: [st]&lt;&lt; (return     |
+  |          |value: [ARRAY(0x830cc04)]             |
+ 2|    st    |Trying terminal: ['e']                |
+ 2|    st    |&lt;&lt;Didn't match terminal&gt;&gt;             |
+ 2|    st    |                                      |";\n"
+</PRE>
+Se ha fracasado. Se probará a este nivel con la siguiente regla
+<code>st : 'iEt' st</code> (que acabará produciendo un árbol de acuerdo
+con la regla del ``if'' mas cercano). 
+Mágicamente, la entrada consumida es devuelta
+para ser procesada de nuevo (obsérvese la tercera columna). 
+Sin embargo, los efectos laterales que
+las acciones ejecutadas por las acciones asociadas con los falsos
+éxitos permanecen. En este caso, por la forma en la que
+hemos escrito las acciones, no hay ningún efecto lateral.
+<PRE>
+ 2|    st    |Trying production: ['iEt' st]         |
+ 2|    st    |                                      |"iEt iEt o e o ;\n"
+ 2|    st    |Trying terminal: ['iEt']              |
+ 2|    st    |&gt;&gt;Matched terminal&lt;&lt; (return value:   |
+  |          |[iEt])                                |
+ 2|    st    |                                      |" iEt o e o ;\n"
+ 2|    st    |Trying subrule: [st]                  |
+ 3|    st    |Trying rule: [st]                     |
+ 3|    st    |Trying production: ['iEt' st 'e' st]  |
+</PRE>
+Ahora el analizador va a intentar el árbol:
+<PRE>
+st
+ |
+ ` 'iEt'  st  
+           |   
+           ` 'iEt'  st    'e'  st
+</PRE>
+que se corresponde con la interpretación clásica: 
+<A NAME="13563"></A><B>El <TT>else</TT> casa con el <TT>if</TT> mas cercano</B>.
+<PRE>
+ 3|    st    |Trying terminal: ['iEt']              |
+ 3|    st    |&gt;&gt;Matched terminal&lt;&lt; (return value:   |
+  |          |[iEt])                                |
+ 3|    st    |                                      |" o e o ;\n"
+ 3|    st    |Trying subrule: [st]                  |
+</PRE>
+La ineficiencia de RD es clara aqui. Va a intentar de
+nuevo las diferentes reglas hasta dar con la del <code>'o'</code>
+<PRE>
+ 4|    st    |Trying rule: [st]                     |
+ 4|    st    |Trying production: ['iEt' st 'e' st]  |
+ 4|    st    |Trying terminal: ['iEt']              |
+ 4|    st    |&lt;&lt;Didn't match terminal&gt;&gt;             |
+ 4|    st    |                                      |"o e o ;\n"
+ 4|    st    |Trying production: ['iEt' st]         |
+ 4|    st    |                                      |" o e o ;\n"
+ 4|    st    |Trying terminal: ['iEt']              |
+ 4|    st    |&lt;&lt;Didn't match terminal&gt;&gt;             |
+ 4|    st    |                                      |"o e o ;\n"
+ 4|    st    |Trying production: ['o']              |
+ 4|    st    |                                      |" o e o ;\n"
+ 4|    st    |Trying terminal: ['o']                |
+ 4|    st    |&gt;&gt;Matched terminal&lt;&lt; (return value:   |
+  |          |[o])                                  |
+ 4|    st    |                                      |" e o ;\n"
+ 4|    st    |Trying action                         |
+ 4|    st    |&gt;&gt;Matched action&lt;&lt; (return value: [o])|
+ 4|    st    |&gt;&gt;Matched production: ['o']&lt;&lt;         |
+ 4|    st    |&gt;&gt;Matched rule&lt;&lt; (return value: [o])  |
+ 4|    st    |(consumed: [ o])                      |
+ 3|    st    |&gt;&gt;Matched subrule: [st]&lt;&lt; (return     |
+  |          |value: [o]                            |
+</PRE>
+Ahora el ``else'' será consumido por la 
+sentencia condicional anidada:
+<PRE>
+ 3|    st    |Trying terminal: ['e']                |
+ 3|    st    |&gt;&gt;Matched terminal&lt;&lt; (return value:   |
+  |          |[e])                                  |
+ 3|    st    |                                      |" o ;\n"
+</PRE>
+y de nuevo debemos pasar por el calvario
+de todas las reglas, ya que la <code>'o'</code> es la última
+de las reglas:
+<PRE>
+ 3|    st    |Trying subrule: [st]                  |
+ 4|    st    |Trying rule: [st]                     |
+ 4|    st    |Trying production: ['iEt' st 'e' st]  |
+ 4|    st    |Trying terminal: ['iEt']              |
+ 4|    st    |&lt;&lt;Didn't match terminal&gt;&gt;             |
+ 4|    st    |                                      |"o ;\n"
+ 4|    st    |Trying production: ['iEt' st]         |
+ 4|    st    |                                      |" o ;\n"
+ 4|    st    |Trying terminal: ['iEt']              |
+ 4|    st    |&lt;&lt;Didn't match terminal&gt;&gt;             |
+ 4|    st    |                                      |"o ;\n"
+ 4|    st    |Trying production: ['o']              |
+ 4|    st    |                                      |" o ;\n"
+ 4|    st    |Trying terminal: ['o']                |
+ 4|    st    |&gt;&gt;Matched terminal&lt;&lt; (return value:   |
+  |          |[o])                                  |
+ 4|    st    |                                      |" ;\n"
+ 4|    st    |Trying action                         |
+ 4|    st    |&gt;&gt;Matched action&lt;&lt; (return value: [o])|
+ 4|    st    |&gt;&gt;Matched production: ['o']&lt;&lt;         |
+ 4|    st    |&gt;&gt;Matched rule&lt;&lt; (return value: [o])  |
+ 4|    st    |(consumed: [ o])                      |
+</PRE>
+A partir de aqui todo encaja. Nótese la ejecución
+de la acción automática:
+<PRE>
+ 3|    st    |&gt;&gt;Matched subrule: [st]&lt;&lt; (return     |
+  |          |value: [o]                            |
+ 3|    st    |Trying action                         |
+ 3|    st    |&gt;&gt;Matched action&lt;&lt; (return value:     |
+  |          |[ARRAY(0x82f2774)])                   |
+ 3|    st    |&gt;&gt;Matched production: ['iEt' st 'e'   |
+  |          |st]&lt;&lt;                                 |
+ 3|    st    |&gt;&gt;Matched rule&lt;&lt; (return value:       |
+  |          |[ARRAY(0x82f2774)])                   |
+ 3|    st    |(consumed: [ iEt o e o])              |
+ 2|    st    |&gt;&gt;Matched subrule: [st]&lt;&lt; (return     |
+  |          |value: [ARRAY(0x82f2774)]             |
+ 2|    st    |Trying action                         |
+ 2|    st    |&gt;&gt;Matched action&lt;&lt; (return value:     |
+  |          |[ARRAY(0x830c41c)])                   |
+ 2|    st    |&gt;&gt;Matched production: ['iEt' st]&lt;&lt;    |
+ 2|    st    |&gt;&gt;Matched rule&lt;&lt; (return value:       |
+  |          |[ARRAY(0x830c41c)])                   |
+ 2|    st    |(consumed: [iEt iEt o e o])           |
+ 1|   prog   |&gt;&gt;Matched subrule: [st]&lt;&lt; (return     |
+  |          |value: [ARRAY(0x830c41c)]             |
+</PRE>
+A estas alturas hemos construido el árbol:
+<PRE>
+st
+ |
+ ` 'iEt'  st    
+           |   
+           ` 'iEt'  st    'e'  st
+                    |          |
+                    ` 'o'      `o
+</PRE>
+y el punto y coma nos espera en la entrada:
+<PRE>
+ 1|   prog   |Trying terminal: [';']                |
+ 1|   prog   |&gt;&gt;Matched terminal&lt;&lt; (return value:   |
+  |          |[;])                                  |
+ 1|   prog   |                                      |"\n"
+ 1|   prog   |Trying action                         |
+ 1|   prog   |&gt;&gt;Matched action&lt;&lt; (return value:     |
+  |          |[ARRAY(0x830c314)])                   |
+ 1|   prog   |&gt;&gt;Matched production: [st ';']&lt;&lt;      |
+ 1|   prog   |&gt;&gt;Matched rule&lt;&lt; (return value:       |
+  |          |[ARRAY(0x830c314)])                   |
+ 1|   prog   |(consumed: [iEt iEt o e o ;])         |
+</PRE>
+Ahora ya se ejecuta la línea <code>print Dumper($result)</code>
+en el programa principal, volcando la estructura de datos
+construida durante el análisis:
+<PRE>
+$VAR1 = [ 'prog',
+          [ 'st',
+            'iEt',
+            [ 'st',
+              'iEt', 'o', 'e', 'o'
+            ]
+          ],
+          ';'
+        ];
+</PRE>
+
+<P>
+<P>
+<DIV><B>Ejercicio  6.3.1</B> &nbsp; 
+<I>Si cambiamos el orden de las producciones  y no forzamos
+a que la sentencia acabe en punto y coma:
+</I><PRE>
+my $grammar = q{
+  st : 'iEt' st { [ @item ] }
+     | 'iEt' st 'e' st { [ @item ] }
+     | 'o'
+};
+</PRE><I>
+¿Que árbol se obtendrá al darle la entrada <code>iEt iEt o e o ;</code>?
+¿Que ocurre si, manteniendo este orden, forzamos a que el programa termine en
+punto y coma?
+</I><PRE>
+my $grammar = q{
+  prog : st ';'
+  st : 'iEt' st { [ @item ] }
+     | 'iEt' st 'e' st { [ @item ] }
+     | 'o'
+};
+</PRE><I>
+¿Es aceptada la cadena?</I></DIV><P></P>
+
+<P>
+<P>
+<DIV><B>Ejercicio  6.3.2</B> &nbsp; 
+<I>La regla ``tod else casa con el if mas cercano''
+puede hacerse explícita usando 
+esta otra gramática:
+</I>
+<P>
+<I>
+<BR>
+<BR>
+</I>
+<DIV ALIGN="CENTER"><TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><I>
+SENTENCIA </I></TD>
+<TD ALIGN="LEFT"><I><!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ </I></TD>
+<TD ALIGN="LEFT"><I>EQUI                        </I></TD>
+<TD ALIGN="LEFT"><I><IMG
+ WIDTH="10" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ \vert$">
+ NOEQUI</I></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><I> 
+EQUI      </I></TD>
+<TD ALIGN="LEFT"><I><!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ </I></TD>
+<TD ALIGN="LEFT"><I>if EXPRESION then EQUI else EQUI </I></TD>
+<TD ALIGN="LEFT"><I><IMG
+ WIDTH="10" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ \vert$">
+ OTRASSENTENCIAS</I></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><I> 
+NOEQUI    </I></TD>
+<TD ALIGN="LEFT"><I><!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ </I></TD>
+<TD ALIGN="LEFT"><I>if EXPRESION then SENTENCIA    </I></TD>
+<TD ALIGN="LEFT"><I><IMG
+ WIDTH="10" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ \vert$">
+ </I></TD>
+</TR>
+<TR><TD></TD>
+<TD></TD>
+<TD ALIGN="LEFT"><I>if EXPRESION then EQUI else NOEQUI </I></TD>
+<TD></TD>
+</TR>
+</TABLE></DIV><I>
+<BR>
+<BR>
+</I>
+<P>
+<I>Escriba un analizador sintáctico para la gramática usando RD y analice 
+su comportamiento.</I></DIV><P></P>
+
+<P>
+<HR>
+<A NAME="tex2html4036"
+  HREF="node179.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4030"
+  HREF="node175.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4024"
+  HREF="node177.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4032"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4034"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4037"
+  HREF="node179.html">La directiva commit</A>
+<B>Sup:</B> <A NAME="tex2html4031"
+  HREF="node175.html">RecDescent</A>
+<B> Ant:</B> <A NAME="tex2html4025"
+  HREF="node177.html">Orden de Recorrido del</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

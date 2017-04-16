@@ -1,0 +1,406 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Eliminación de la Recursión por la Izquierda en un Esquema de Traducción</TITLE>
+<META NAME="description" CONTENT="Eliminación de la Recursión por la Izquierda en un Esquema de Traducción">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node143.html">
+<LINK REL="previous" HREF="node141.html">
+<LINK REL="up" HREF="node140.html">
+<LINK REL="next" HREF="node143.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3520"
+  HREF="node143.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3514"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3508"
+  HREF="node141.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3516"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3518"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3521"
+  HREF="node143.html">Ejercicio</A>
+<B>Sup:</B> <A NAME="tex2html3515"
+  HREF="node140.html">Recursión por la Izquierda</A>
+<B> Ant:</B> <A NAME="tex2html3509"
+  HREF="node141.html">Eliminación de la Recursión</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00982000000000000000"></A>
+<A NAME="subsection:eliminarecesquem"></A>
+<BR>
+Eliminación de la Recursión por la Izquierda en un Esquema de Traducción
+</H2>
+La eliminación de la recursión por la izquierda es sólo un paso: debe 
+ser extendida a esquemas de traducción, 
+de manera que no sólo se preserve el lenguaje
+sino la secuencia de acciones. Supongamos que tenemos un esquema de
+traducción de la forma:
+
+<P>
+<BR>
+<BR>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $A   \rightarrow A \alpha$
+ -->
+<IMG
+ WIDTH="69" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img129.png"
+ ALT="$ A \rightarrow A \alpha$">
+</TD>
+<TD ALIGN="LEFT"><code>{ alpha_action }</code></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $A   \rightarrow A \beta$
+ -->
+<IMG
+ WIDTH="69" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img139.png"
+ ALT="$ A \rightarrow A \beta$">
+</TD>
+<TD ALIGN="LEFT"><code>{ beta_action }</code></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $A   \rightarrow \gamma$
+ -->
+<IMG
+ WIDTH="55" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img30.png"
+ ALT="$ A \rightarrow \gamma$">
+</TD>
+<TD ALIGN="LEFT"><code>{ gamma_action }</code></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+
+<P>
+para una sentencia como <!-- MATH
+ $\gamma \beta \alpha$
+ -->
+<IMG
+ WIDTH="37" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img140.png"
+ ALT="$ \gamma \beta \alpha$">
+ la secuencia de
+acciones será: 
+
+<P>
+<DIV ALIGN="CENTER">
+<code>gamma_action  beta_action alpha_action</code>
+
+</DIV>
+
+<P>
+¿Cómo construir un esquema de traducción para la gramática resultante
+de eliminar la recursión por la izquierda que ejecute las acciones
+asociadas en el mismo orden?. Supongamos para simplificar,
+que las acciones no dependen
+de atributos ni computan atributos, sino que actúan sobre
+variables globales. En tal caso, la siguiente
+ubicación de las acciones da lugar a que se ejecuten en el mismo
+orden:
+
+<P>
+<BR>
+<BR>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $A   \rightarrow \gamma$
+ -->
+<IMG
+ WIDTH="55" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img30.png"
+ ALT="$ A \rightarrow \gamma$">
+ <code>{ gamma_action }</code> <IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img141.png"
+ ALT="$ R$">
+</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $R   \rightarrow \beta$
+ -->
+<IMG
+ WIDTH="56" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img142.png"
+ ALT="$ R \rightarrow \beta$">
+ <code> { beta_action }</code> <IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img141.png"
+ ALT="$ R$">
+</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $R   \rightarrow \alpha$
+ -->
+<IMG
+ WIDTH="57" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img143.png"
+ ALT="$ R \rightarrow \alpha$">
+ <code> { alpha_action }</code> <IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img141.png"
+ ALT="$ R$">
+</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $R   \rightarrow \epsilon$
+ -->
+<IMG
+ WIDTH="52" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img144.png"
+ ALT="$ R \rightarrow \epsilon$">
+</TD>
+</TR>
+</TABLE>
+
+<P>
+Si hay atributos en juego, la estrategia para construir un
+esquema de traducción equivalente para la gramática resultante
+de eliminar la recursividad por la izquierda se complica.
+Consideremos de nuevo el esquema de traducción de infijo a
+postfijo de expresiones aritméticas de restas:
+
+<P>
+<BR>
+<BR>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $expr   \rightarrow expr_1  -  NUM$
+ -->
+<IMG
+ WIDTH="179" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img118.png"
+ ALT="$ expr \rightarrow expr_1 - NUM$">
+</TD>
+<TD ALIGN="LEFT"><code>{ $expr{T} = $expr[1]{T}." ".$NUM{VAL}." - "}</code></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $expr   \rightarrow NUM$
+ -->
+<IMG
+ WIDTH="116" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img119.png"
+ ALT="$ expr \rightarrow NUM$">
+</TD>
+<TD ALIGN="LEFT"><code>{ $expr{T} = $NUM{VAL} }</code></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+
+<P>
+En este caso introducimos un atributo <code>H</code> para los nodos de la clase
+<IMG
+ WIDTH="13" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img145.png"
+ ALT="$ r$">
+ el cuál 
+acumula la traducción a postfijo hasta el momento. Observe como
+este atributo se computa en un nodo <IMG
+ WIDTH="13" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img145.png"
+ ALT="$ r$">
+ a partir del
+correspondiente atributo del el padre y/o de los hermanos del nodo:
+
+<P>
+<BR>
+<BR>
+
+<!-- MATH
+ $expr   \rightarrow NUM$
+ -->
+<IMG
+ WIDTH="116" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img119.png"
+ ALT="$ expr \rightarrow NUM$">
+ <code>{ $r{H} = $NUM{VAL} }</code>  <IMG
+ WIDTH="13" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img145.png"
+ ALT="$ r$">
+ <code>{ $expr{T} = $r{T} }</code> 
+<BR><!-- MATH
+ $r   \rightarrow - NUM$
+ -->
+<IMG
+ WIDTH="102" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img146.png"
+ ALT="$ r \rightarrow - NUM$">
+ <code>{ $r_1{H} = $r{H}." ".$NUM{VAL}." - " }</code> <IMG
+ WIDTH="20" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img147.png"
+ ALT="$ r_1$">
+ <code>{ $r{T} = $r_1{T} }</code>
+<BR><!-- MATH
+ $r \rightarrow \epsilon$
+ -->
+<IMG
+ WIDTH="47" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img138.png"
+ ALT="$ r \rightarrow \epsilon$">
+ <code>{ $r{T} = $r{H} }</code>
+<BR>
+<BR>
+
+<P>
+El atributo <code>H</code> es un ejemplo de atributo heredado.
+
+<P>
+<HR>
+<A NAME="tex2html3520"
+  HREF="node143.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3514"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3508"
+  HREF="node141.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3516"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3518"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3521"
+  HREF="node143.html">Ejercicio</A>
+<B>Sup:</B> <A NAME="tex2html3515"
+  HREF="node140.html">Recursión por la Izquierda</A>
+<B> Ant:</B> <A NAME="tex2html3509"
+  HREF="node141.html">Eliminación de la Recursión</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,702 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Bypass Automático</TITLE>
+<META NAME="description" CONTENT="Bypass Automático">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node245.html">
+<LINK REL="previous" HREF="node243.html">
+<LINK REL="up" HREF="node229.html">
+<LINK REL="next" HREF="node245.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html5086"
+  HREF="node245.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5080"
+  HREF="node229.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5074"
+  HREF="node243.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5082"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5084"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5087"
+  HREF="node245.html">La opción alias de</A>
+<B>Sup:</B> <A NAME="tex2html5081"
+  HREF="node229.html">Análisis Sintáctico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5075"
+  HREF="node243.html">Nombres para los Atributos</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0013150000000000000000"></A>
+<A NAME="section:bypassautomatico"></A><A NAME="section:bypass"></A>
+<BR>
+Bypass Automático
+</H1>
+La directiva  %tree  admite la opción  bypass .
+Esta opción ayuda en la fase de construcción del AST automatizando
+<A NAME="18506"></A><B>operaciones de bypass</B>.
+Entendemos por <A NAME="18508"></A><B>operación de bypass</B> 
+a la operación de retornar el nodo hijo al nodo padre del actual (abuelo del hijo), 
+obviando así la presencia del nodo actual en el AST final.
+
+<P>
+La opción de  bypass  modifica la forma en la que Eyapp construye el árbol:
+Si se usa la opción bypass, <B>Eyapp hará automáticamente una operación
+de bypass a todo nodo que 
+resulte con un sólo hijo en tiempo de construcción el árbol</B>.
+Además <B>Eyapp cambiará la clase del nodo hijo a la clase del
+nodo siendo puenteado si a este se le dió un nombre explícitamente</B>
+a través de la directiva <code>%name</code>.
+
+<P>
+Hay dos razones principales por las que un nodo pueda resultar - en tiempo 
+de construcción del árbol - con un sólo hijo:
+
+<P>
+
+<UL>
+<LI>La mas obvia es que el nodo tuviera ya un sólo hijo por la forma de la gramática:
+el nodo en cuestión se corresponde con la parte izquierda de una <A NAME="18510"></A><B>regla de producción 
+unaria</B> de la forma <!-- MATH
+ $E \rightarrow NUM$
+ -->
+<IMG
+ WIDTH="94" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img500.png"
+ ALT="$ E \rightarrow NUM$">
+ o <!-- MATH
+ $E \rightarrow VAR$
+ -->
+<IMG
+ WIDTH="86" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img509.png"
+ ALT="$ E \rightarrow VAR$">
+.
+
+<P>
+<PRE>
+ 25 exp:
+ 26     %name NUM
+ 27     NUM
+ 28   | %name VAR
+ 29     VAR
+</PRE>
+En este caso un árbol de la forma <code>PLUS(NUM(TERMINAL[4]), VAR(TERMINAL[a])</code> 
+se verá transformado en <code>PLUS(NUM[4], VAR[a])</code>. El primer nodo
+<code>TERMINAL</code> será rebautizado (re-bendecido) en la clase <code>NUM</code>.
+y el segundo en la clase <code>VAR</code>.
+
+<P>
+Observe que este proceso de renombre ocurre sólo si 
+el nodo eliminado tiene un nombre explícito dado con la directiva
+<code>%name</code>. Así en la regla unaria:
+<PRE>
+pl@nereida:~/LEyapp/examples$ sed -ne '/^line:/,/^;$/p' TreeBypass.eyp | cat -n
+     1  line:
+     2      exp '\n'
+     3  ;
+</PRE>
+ocurre un bypass automático  pero el nodo hijo de <code>exp</code> conserva su nombre.
+Por ejemplo, un árbol como
+<code>exp_10(PLUS(NUM(TERMINAL),NUM(TERMINAL)))</code>
+se transforma en 
+<code>PLUS(NUM,NUM)</code>. Mientras que los nodos <code>TERMINAL</code> fueron renombrados 
+como nodos <code>NUM</code> el nodo <code>PLUS</code> no lo fué.
+
+<P>
+</LI>
+<LI>La otra razón para que ocurra un bypass automático 
+es que - aunque la parte derecha de la regla
+de producción tuviera mas de un símbolo -
+sus restantes hijos sean podados
+por ser terminales sintácticos.  Esto ocurre, por ejemplo, con los
+paréntesis en la regla
+<!-- MATH
+ $E \rightarrow ( E )$
+ -->
+<IMG
+ WIDTH="73" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img510.png"
+ ALT="$ E \rightarrow ( E )$">
+.
+
+<P>
+Por ejemplo, un árbol como:
+<PRE>
+PAREN(PLUS(NUM( TERMINAL[2]),NUM(TERMINAL[3])))
+</PRE>
+se convierte en:
+<PRE>
+PLUS(NUM[2],NUM[3])
+</PRE>
+</LI>
+</UL>
+
+<P>
+
+<H4><A NAME="SECTION0013150010000000000000">
+Un Ejemplo con <TT>bypass</TT> Automático</A>
+</H4>
+  
+
+<P>
+<PRE>
+pl@nereida:~/LEyapp/examples$ cat -n TreeBypass.eyp
+ 1  # TreeBypass.eyp
+ 2  %right  '='
+ 3  %left   '-' '+'
+ 4  %left   '*' '/'
+ 5  %left   NEG
+ 6  %right  '^'
+ 7
+ 8  %tree bypass
+ 9
+10  %{
+11  sub NUM::info {
+12    my $self = shift;
+13
+14    $self-&gt;{attr};
+15  }
+16
+17  *VAR::info = \&amp;NUM::info;
+18  %}
+19  %%
+</PRE>
+Dado que los nodos <code>TERMINAL</code> serán rebautizados como nodos <code>VAR</code> y <code>NUM</code>,
+dotamos a dichos nodos de métodos <code>info</code> (líneas 11-17)
+que serán usados durante 
+la impresión del árbol con el método <code>str</code>.
+
+<P>
+<PRE>
+21  line:
+22      exp '\n'
+23  ;
+24
+25  exp:
+26      %name NUM
+27      NUM
+28    | %name VAR
+29      VAR
+30    | %name ASSIGN
+31      var '=' exp
+32    | %name PLUS
+33      exp '+' exp
+34    | %name MINUS
+35      exp '-' exp
+36    | %name TIMES
+37      exp '*' exp
+38    | %name DIV
+39      exp '/' exp
+40    | %name UMINUS
+41      '-' exp %prec NEG
+42    | %name EXPON
+43      exp '^' exp
+44    | '(' exp ')'
+45  ;
+46
+47  var:
+48      %name VAR
+49         VAR
+50  ;
+51  %%
+</PRE>
+Observe las líneas 30-31 y 47-49. La gramática original
+tenía sólo una regla para la asignación:
+<PRE>
+  exp:
+      %name NUM
+      NUM
+    | %name VAR
+      VAR
+    | %name ASSIGN
+      VAR '=' exp
+</PRE>
+Si se hubiera dejado en esta forma un árbol como 
+<code>ASSIGN(TERMINAL[a], NUM(TERMINAL[4]))</code> 
+quedaría como
+<code>ASSIGN(TERMINAL[a], NUM[4])</code>.
+La introdución de la variable sintáctica <code>var</code> 
+en la regla de asignación y de su regla unaria (líneas 47-50)
+produce un bypass y da lugar al árbol
+<code>ASSIGN(VAR[a], NUM[4])</code>.
+
+<P>
+
+<H4><A NAME="SECTION0013150020000000000000">
+Rutinas de Soporte</A>
+</H4>
+  
+
+<P>
+<PRE>
+53  sub _Error {
+54          exists $_[0]-&gt;YYData-&gt;{ERRMSG}
+55      and do {
+56          print $_[0]-&gt;YYData-&gt;{ERRMSG};
+57          delete $_[0]-&gt;YYData-&gt;{ERRMSG};
+58          return;
+59      };
+60      print "Syntax error.\n";
+61  }
+62
+63  my $input;
+64
+65  sub _Lexer {
+66      my($parser)=shift;
+67
+68      # topicalize $input
+69      for ($input) {
+70        s/^[ \t]+//;      # skip whites
+71        return('',undef) unless $_;
+72        return('NUM',$1) if s{^([0-9]+(?:\.[0-9]+)?)}{};
+73        return('VAR',$1) if s/^([A-Za-z][A-Za-z0-9_]*)//;
+74        return($1,$1)    if s/^(.)//s;
+75      }
+76      return('',undef);
+77  }
+78
+79  sub Run {
+80      my($self)=shift;
+81
+82      $input = shift;
+83      print $input;
+84      return $self-&gt;YYParse( yylex =&gt; \&amp;_Lexer, yyerror =&gt; \&amp;_Error,
+85        #yydebug =&gt; 0xF
+86      );
+87  }
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0013150030000000000000">
+El Programa Cliente</A>
+</H4>
+  
+
+<P>
+<PRE>
+pl@nereida:~/LEyapp/examples$ cat -n usetreebypass.pl
+ 1  #!/usr/bin/perl -w
+ 2  # usetreebypass.pl prueba2.exp
+ 3  use strict;
+ 4  use TreeBypass;
+ 5
+ 6  sub slurp_file {
+ 7    my $fn = shift;
+ 8    my $f;
+ 9
+10    local $/ = undef;
+11    if (defined($fn)) {
+12      open $f, $fn  or die "Can't find file $fn!\n";
+13    }
+14    else {
+15      $f = \*STDIN;
+16    }
+17    my $input = &lt;$f&gt;;
+18    return $input;
+19  }
+20
+21  my $parser = TreeBypass-&gt;new();
+22
+23  my $input = slurp_file( shift() );
+24  my $tree = $parser-&gt;Run($input);
+25  die "There were errors\n" unless defined($tree);
+26
+27  $Parse::Eyapp::Node::INDENT = 2;
+28  print $tree-&gt;str."\n";
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0013150040000000000000">
+Ejecuciones</A>
+</H4>
+  
+
+Veamos las salidas obtenidas sobre diversas entradas:
+<PRE>
+pl@nereida:~/LEyapp/examples$ eyapp TreeBypass.eyp
+pl@nereida:~/LEyapp/examples$ usetreebypass.pl prueba2.exp
+a=(2+b)*3
+
+ASSIGN(
+  VAR[a],
+  TIMES(
+    PLUS(
+      NUM[2],
+      VAR[b]
+    ),
+    NUM[3]
+  ) # TIMES
+) # ASSIGN
+pl@nereida:~/LEyapp/examples$ usetreebypass.pl prueba3.exp
+a=2-b*3
+
+ASSIGN(
+  VAR[a],
+  MINUS(
+    NUM[2],
+    TIMES(
+      VAR[b],
+      NUM[3]
+    )
+  ) # MINUS
+) # ASSIGN
+pl@nereida:~/LEyapp/examples$ usetreebypass.pl prueba4.exp
+4*3
+
+TIMES(
+  NUM[4],
+  NUM[3]
+)
+pl@nereida:~/LEyapp/examples$ usetreebypass.pl prueba5.exp
+2-)3*4
+Syntax error.
+There were errors
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0013150050000000000000">
+La Directiva <TT>no bypass</TT></A>
+</H4>
+  
+
+La cláusula <code>bypass</code> suele producir un 
+buen número de podas y reorganizaciones del árbol.
+
+<P>
+Es preciso tener especial cuidado en su uso.
+De hecho, el programa anterior contiene errores.
+Obsérvese la conducta del analizador para la entrada 
+<code>-(2-3)</code>:
+<PRE>
+pl@nereida:~/LEyapp/examples$ usetreebypass.pl prueba7.exp
+-(2-3)
+
+UMINUS(
+  NUM[2],
+  NUM[3]
+)
+</PRE>
+
+<P>
+Que es una salida errónea: además de los bypasses en los terminales
+se ha producido un bypass adicional sobre el nodo
+<code>MINUS</code> en el árbol original 
+
+<P>
+<PRE>
+UMINUS(MINUS(NUM(TERMINAL[2],NUM(TERMINAL[3]))))
+</PRE>
+
+<P>
+dando lugar al árbol:
+<PRE>
+UMINUS(NUM[2],NUM[3])
+</PRE>
+
+<P>
+El bypass automático se 
+produce en la regla del menos unario ya que 
+el terminal <code>'-'</code> es  por defecto -
+un terminal sintáctico:
+<PRE>
+25  exp:
+..      ...........
+40    | %name UMINUS
+41      '-' exp %prec NEG
+</PRE>
+
+<P>
+Mediante la aplicación de la directiva
+<code>%no bypass UMINUS</code> a la regla (línea 16 abajo) 
+inhibimos la aplicación del bypass a la misma:
+
+<P>
+<PRE>
+pl@nereida:~/LEyapp/examples$ sed -ne '/^exp:/,/^;$/p' TreeBypassNoBypass.eyp | cat -n
+     1  exp:
+     2      %name NUM
+     3      NUM
+     4    | %name VAR
+     5      VAR
+     6    | %name ASSIGN
+     7      var '=' exp
+     8    | %name PLUS
+     9      exp '+' exp
+    10    | %name MINUS
+    11      exp '-' exp
+    12    | %name TIMES
+    13      exp '*' exp
+    14    | %name DIV
+    15      exp '/' exp
+    16    | %no bypass UMINUS
+    17      '-' exp %prec NEG
+    18    | %name EXPON
+    19      exp '^' exp
+    20    | '(' exp ')'
+    21  ;
+</PRE>
+
+<P>
+<PRE>
+pl@nereida:~/LEyapp/examples$ usetreebypassnobypass.pl prueba7.exp
+-(2-3)
+
+UMINUS(
+  MINUS(
+    NUM[2],
+    NUM[3]
+  )
+) # UMINUS
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0013150060000000000000">
+El Método <TT>YYBypassrule</TT></A>
+</H4>
+  
+
+<P>
+Aún mas potente que la directiva es usar el método  YYBypassrule 
+el cual permite  modificar dinámicamente el estatus de bypass de una regla de producción.
+Vea esta nueva versión del anterior ejemplo:
+<PRE>
+pl@nereida:~/LEyapp/examples$ sed -ne '/%%/,/%%/p' TreeBypassDynamic.eyp | cat -n
+ 1  %%
+ 2
+ 3  line:
+ 4      exp '\n'
+ 5  ;
+ 6
+ 7  exp:
+ 8      %name NUM
+ 9      NUM
+10    | %name VAR
+11      VAR
+12    | %name ASSIGN
+13      var '=' exp
+14    | %name PLUS
+15      exp '+' exp
+16    | %name MINUS
+17      exp '-' exp
+18    | %name TIMES
+19      exp '*' exp
+20    | %name DIV
+21      exp '/' exp
+22    | %name UMINUS
+23      '-' exp %prec NEG
+24        {
+25          $_[0]-&gt;YYBypassrule(0);
+26          goto &amp;Parse::Eyapp::Driver::YYBuildAST;
+27        }
+28    | %name EXPON
+29      exp '^' exp
+30    | '(' exp ')'
+31  ;
+32
+33  var:
+34      %name VAR
+35         VAR
+36  ;
+37  %%
+</PRE>
+El analizador produce un árbol sintáctico correcto 
+cuando aparecen menos unarios:
+<PRE>
+pl@nereida:~/LEyapp/examples$ usetreebypassdynamic.pl
+-(2--3*5)
+-(2--3*5)
+
+UMINUS(
+  MINUS(
+    NUM[2],
+    TIMES(
+      UMINUS(
+        NUM[3]
+      ),
+      NUM[5]
+    ) # TIMES
+  ) # MINUS
+) # UMINUS
+</PRE>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html5088"
+  HREF="node244.html#SECTION0013150010000000000000">Un Ejemplo con <TT>bypass</TT> Automático</A>
+<LI><A NAME="tex2html5089"
+  HREF="node244.html#SECTION0013150020000000000000">Rutinas de Soporte</A>
+<LI><A NAME="tex2html5090"
+  HREF="node244.html#SECTION0013150030000000000000">El Programa Cliente</A>
+<LI><A NAME="tex2html5091"
+  HREF="node244.html#SECTION0013150040000000000000">Ejecuciones</A>
+<LI><A NAME="tex2html5092"
+  HREF="node244.html#SECTION0013150050000000000000">La Directiva <TT>no bypass</TT></A>
+<LI><A NAME="tex2html5093"
+  HREF="node244.html#SECTION0013150060000000000000">El Método <TT>YYBypassrule</TT></A>
+</UL></UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html5086"
+  HREF="node245.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5080"
+  HREF="node229.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5074"
+  HREF="node243.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5082"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5084"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5087"
+  HREF="node245.html">La opción alias de</A>
+<B>Sup:</B> <A NAME="tex2html5081"
+  HREF="node229.html">Análisis Sintáctico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5075"
+  HREF="node243.html">Nombres para los Atributos</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

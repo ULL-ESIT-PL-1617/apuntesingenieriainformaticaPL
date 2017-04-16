@@ -1,0 +1,556 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Las Expresiones Regulares como Exploradores de un Árbol de Soluciones</TITLE>
+<META NAME="description" CONTENT="Las Expresiones Regulares como Exploradores de un Árbol de Soluciones">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node75.html">
+<LINK REL="previous" HREF="node73.html">
+<LINK REL="up" HREF="node70.html">
+<LINK REL="next" HREF="node75.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2313"
+  HREF="node75.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2307"
+  HREF="node70.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2301"
+  HREF="node73.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2309"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2311"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2314"
+  HREF="node75.html">Número de substituciones realizadas</A>
+<B>Sup:</B> <A NAME="tex2html2308"
+  HREF="node70.html">Casos de Estudio</A>
+<B> Ant:</B> <A NAME="tex2html2302"
+  HREF="node73.html">Análisis de cadenas con</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html2315"
+  HREF="node74.html#SECTION00854010000000000000">Números Primos</A>
+<LI><A NAME="tex2html2316"
+  HREF="node74.html#SECTION00854020000000000000">Ecuaciones Diofánticas: Una solución</A>
+<LI><A NAME="tex2html2317"
+  HREF="node74.html#SECTION00854030000000000000">Ecuaciones Diofánticas: Todas las soluciones</A>
+<LI><A NAME="tex2html2318"
+  HREF="node74.html#SECTION00854040000000000000">Ecuaciones Diofánticas: Resolutor general</A>
+<LI><A NAME="tex2html2319"
+  HREF="node74.html#SECTION00854050000000000000">Las  Tres Hijas</A>
+<LI><A NAME="tex2html2320"
+  HREF="node74.html#SECTION00854060000000000000">Mochila 0-1</A>
+<LI><A NAME="tex2html2321"
+  HREF="node74.html#SECTION00854070000000000000">Véase también</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION00854000000000000000">
+Las Expresiones Regulares como Exploradores de un Árbol de Soluciones</A>
+</H2>
+
+<P>
+
+<H4><A NAME="SECTION00854010000000000000">
+Números Primos</A>
+</H4>
+  
+
+<P>
+El siguiente programa evalúa si un número es primo o no:
+<PRE>
+pl@nereida:~/Lperltesting$ cat -n isprime.pl
+ 1  #!/usr/bin/perl -w
+ 2  use strict;
+ 3
+ 4  my $num = shift;
+ 5  die "Usage: $0 integer\n" unless (defined($num) &amp;&amp; $num =~ /^\d+$/);
+ 6
+ 7  if (("1" x $num) =~ /^(11+)\1+$/) {
+ 8    my $factor = length($1);
+ 9    print "$num is $factor x ".$num/$factor."\n";
+10  }
+11  else {
+12    print "$num is prime\n";
+13  }
+</PRE>
+Siguen varias ejecuciones:
+<PRE>
+pl@nereida:~/Lperltesting$ ./isprime.pl 35.32
+Usage: ./isprime.pl integer
+pl@nereida:~/Lperltesting$ ./isprime.pl 47
+47 is prime
+pl@nereida:~/Lperltesting$ ./isprime.pl 137
+137 is prime
+pl@nereida:~/Lperltesting$ ./isprime.pl 147
+147 is 49 x 3
+pl@nereida:~/Lperltesting$ ./isprime.pl 137
+137 is prime
+pl@nereida:~/Lperltesting$ ./isprime.pl 49
+49 is 7 x 7
+pl@nereida:~/Lperltesting$ ./isprime.pl 47
+47 is prime
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00854020000000000000">
+Ecuaciones Diofánticas: Una solución</A>
+</H4>
+  
+
+<P>
+Según dice la entrada <A NAME="tex2html155"
+  HREF="http://en.wikipedia.org/wiki/Diophantine_equation">Diophantine_equation</A>
+en la wikipedia:
+
+<P>
+<BLOCKQUOTE><I>In mathematics, a Diophantine equation is an indeterminate polynomial equation that allows the variables to be integers only. 
+</I></BLOCKQUOTE>
+
+<P>
+La siguiente sesión con el depurador muestra como se puede 
+resolver una ecuación lineal diofántica con coeficientes 
+positivos usando una expresión regular:
+
+<P>
+<PRE>
+  DB&lt;1&gt; # Resolvamos 3x + 2y + 5z = 40
+DB&lt;2&gt; x ('a'x40) =~  /^((?:...)+)((?:..)+)((?:.....)+)$/
+0  'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+1  'aa'
+2  'aaaaa'
+DB&lt;3&gt; x map { length }  ('a'x40) =~  /^((?:...)+)((?:..)+)((?:.....)+)$/
+0  33
+1  2
+2  5
+DB&lt;4&gt; @c = (3, 2, 5)
+DB&lt;5&gt; x map { length($_) / $c[$i++] }  ('a'x40) =~  /^((?:...)+)((?:..)+)((?:.....)+)$/
+0  11
+1  1
+2  1
+DB&lt;6&gt; p 3*11+2*1+5*1
+40
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00854030000000000000">
+Ecuaciones Diofánticas: Todas las soluciones</A>
+</H4>
+  
+
+<P>
+Usando el verbo <code>(*FAIL)</code> es posible obtener todas las soluciones:
+<PRE>
+main::(-e:1):   0
+DB&lt;1&gt;  sub equ { my @c = @_; print "\t3*$c[0]+2*$c[1]+5*$c[2] = ",3*$c[0]+2*$c[1]+5*$c[2],"\n" }
+DB&lt;2&gt; sub f { my @c = ((length($1)/3), (length($2)/2), (length($3)/5)); equ(@c); }
+DB&lt;3&gt; x ('a'x40) =~  /^((?:...)+)((?:..)+)((?:.....)+)$(?{ f() })(*FAIL)/x
+        3*11+2*1+5*1 = 40
+        3*9+2*4+5*1 = 40
+        3*8+2*3+5*2 = 40
+        3*7+2*7+5*1 = 40
+        3*7+2*2+5*3 = 40
+        3*6+2*6+5*2 = 40
+        3*6+2*1+5*4 = 40
+        3*5+2*10+5*1 = 40
+        3*5+2*5+5*3 = 40
+        3*4+2*9+5*2 = 40
+        3*4+2*4+5*4 = 40
+        3*3+2*13+5*1 = 40
+        3*3+2*8+5*3 = 40
+        3*3+2*3+5*5 = 40
+        3*2+2*12+5*2 = 40
+        3*2+2*7+5*4 = 40
+        3*2+2*2+5*6 = 40
+        3*1+2*16+5*1 = 40
+        3*1+2*11+5*3 = 40
+        3*1+2*6+5*5 = 40
+        3*1+2*1+5*7 = 40
+  empty array
+DB&lt;4&gt;
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00854040000000000000">
+Ecuaciones Diofánticas: Resolutor general</A>
+</H4>
+  
+
+<P>
+El siguiente programa recibe en línea de comandos los coeficientes y 
+término inependeinte de una ecuación lineal diofántica con coeficientes 
+positivos y muestra todas las soluciones. El
+algoritmo primero crea una cadena conteniendo 
+el código Perl que contiene la expresión regular adecuada 
+para pasar luego a evaluarlo:
+<PRE>
+pl@nereida:~/Lperltesting$ cat -n diophantinesolvergen.pl
+ 1  #!/usr/local/lib/perl/5.10.1/bin//perl5.10.1 -w
+ 2  use v5.10;
+ 3  use strict;
+ 4
+ 5  # Writes a Perl solver for
+ 6  # a1 x1 + a2 x2 + ... + an xn = b
+ 7  # a_i and b integers &gt; 0
+ 8  #
+ 9
+10  my $b = pop;
+11  my @a = @ARGV;
+12  my $debug = 1;
+13
+14  my $b1 = '1'x$b;
+15  my @a1 = map { '1'x$_ } @a;
+16  my @index = map { 'length($'.$_.")/".$a[$_-1] } 1..(@a);
+17  my $aux = join ",", @index;
+18
+19  my $regexp = '^';
+20  $regexp .= "((?:$_)+)" for @a1;
+21
+22  $regexp .= '$(?{ f() })(*FAIL)';
+23
+24  my $solver = &lt;&lt;"SOLVER";
+25  my \@stack;
+26  sub f {
+27    my \@s = ($aux);
+28    push \@stack, [ \@s ];
+29  }
+30
+31  q{$b1} =~ m{$regexp}x;
+32
+33  return \@stack;
+34  SOLVER
+35
+36  print "Solver:\n--------\n$solver\n--------\n" if $debug;
+37
+38  my @stack = eval $solver;
+39
+40  say("@$_") for @stack
+</PRE>
+Sigue un ejemplo de ejecución:
+<PRE>
+pl@nereida:~/Lperltesting$ ./diophantinesolvergen.pl 3 2 5 40
+Solver:
+--------
+my @stack;
+sub f {
+  my @s = (length($1)/3,length($2)/2,length($3)/5);
+  push @stack, [ @s ];
+}
+
+q{1111111111111111111111111111111111111111} =~ m{^((?:111)+)((?:11)+)((?:11111)+)$(?{ f() })(*FAIL)}x;
+
+return @stack;
+
+--------
+11 1 1
+9 4 1
+8 3 2
+7 7 1
+7 2 3
+6 6 2
+6 1 4
+5 10 1
+5 5 3
+4 9 2
+4 4 4
+3 13 1
+3 8 3
+3 3 5
+2 12 2
+2 7 4
+2 2 6
+1 16 1
+1 11 3
+1 6 5
+1 1 7
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00854050000000000000">
+Las  Tres Hijas</A>
+</H4>
+  
+
+<A NAME="parrfo:lastreshijas"></A>
+<P>
+En la páginas de Retos Matemáticos de
+
+<P>
+<A NAME="tex2html156"
+  HREF="http://divulgamat.ehu.es/weborriak/RetosMatematicos/Problemas/Prob15.asp">DIVULGAMAT</A>
+<P>
+puede encontrarse el siguiente problema:
+
+<P>
+<P>
+<DIV><B>Ejercicio  3.5.1</B> &nbsp; 
+<I>Dos matemáticos se vieron en la calle después de muchos años sin coincidir.
+</I>
+<P>
+<UL>
+<LI>¡Hola!, ¿qué tal?, ¿te casaste?, y... ¿cuántos hijos tienes?
+</LI>
+<LI>Pues tengo tres hijas.
+</LI>
+<LI>¿y qué años tienen?
+</LI>
+<LI>¡A ver si lo adivinas!: el producto de las edades de las tres es 36, y su suma es el número del portal que ves enfrente...
+</LI>
+<LI>¡Me falta un dato!
+</LI>
+<LI>¡Ah, sí!, ¡la mayor toca el piano!
+</LI>
+</UL>
+<P>
+<I>¿Qué edad tendrán las tres hijas?
+</I>
+<P>
+<I>¿Podemos ayudarnos de una expresión regular para resolver el problema?
+Al ejecutar el siguiente programa:
+</I>
+<P><PRE>
+pl@nereida:~/Lperltesting$ cat -n playspiano.pl
+ 1  #!/usr/local/lib/perl/5.10.1/bin//perl5.10.1  -w
+ 2  use v5.10;
+ 3  use strict;
+ 4  use List::Util qw{sum};
+ 5
+ 6  local our %u;
+ 7  sub f {
+ 8    my @a = @_;
+ 9    @a = sort { $b &lt;=&gt; $a } (length($a[1]), length($a[0])/length($a[1]), 36/length($a[0]) );
+10
+11    local $" = ", ";
+12    say "(@a)\t ".sum(@a) unless exists($u{"@a"});
+13    $u{"@a"} = undef;
+14  }
+15
+16  say "SOL\t\tNUMBER";
+17  my @a =  ('1'x36) =~
+18           /^((1+)\2+)(\1+)$
+19                     (?{ f($1, $2, $3)
+20                      })
+21             (*FAIL)
+22           /x;
+</PRE>
+<P>
+<I>obtenemos la salida:
+</I>
+<P><PRE>
+pl@nereida:~/Lperltesting$ ./playspiano.pl
+SOL             NUMBER
+(9, 2, 2)        13
+(6, 3, 2)        11
+(4, 3, 3)        10
+(18, 2, 1)       21
+(12, 3, 1)       16
+(9, 4, 1)        14
+(6, 6, 1)        13
+</PRE>
+<P>
+<I>Explique el funcionamiento del programa. 
+A la vista de la salida ¿Cuáles eran las 
+edades de las hijas?</I></DIV><P></P>
+
+<P>
+
+<H4><A NAME="SECTION00854060000000000000">
+Mochila 0-1</A>
+</H4>
+  
+
+<P>
+Para una definición del problema vea la sección 
+<A NAME="tex2html157"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/node205.html">El Problema de la Mochila 0-1</A>
+en los apuntes de LHP
+<P>
+<DIV><B>Ejercicio  3.5.2</B> &nbsp; 
+<I>¿Sería capaz de resolver usando expresiones regulares el problema de la mochila 0-1?
+</I>
+<P>
+<I>¡Si lo logra merece el premio a la solución mas freak que se haya encontrado para dicho problema!</I></DIV><P></P>
+
+<P>
+
+<H4><A NAME="SECTION00854070000000000000">
+Véase también</A>
+</H4>
+  
+
+<P>
+Véase  también:
+
+<UL>
+<LI>Véase el nodo en <A NAME="tex2html158"
+  HREF="http://www.perlmonks.org/?node_id=796576">PerlMonks</A>
+<B>The Oldest Plays the Piano</B>
+</LI>
+<LI><A NAME="tex2html159"
+  HREF="http://blog.stevenlevithan.com/archives/algebra-with-regexes">Solving Algebraic Equations Using Regular Expressions</A>
+</LI>
+</UL>
+
+<P>
+<HR>
+<A NAME="tex2html2313"
+  HREF="node75.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2307"
+  HREF="node70.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2301"
+  HREF="node73.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2309"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2311"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2314"
+  HREF="node75.html">Número de substituciones realizadas</A>
+<B>Sup:</B> <A NAME="tex2html2308"
+  HREF="node70.html">Casos de Estudio</A>
+<B> Ant:</B> <A NAME="tex2html2302"
+  HREF="node73.html">Análisis de cadenas con</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

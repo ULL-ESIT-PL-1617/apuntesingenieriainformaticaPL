@@ -1,0 +1,833 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Generación de Código: Máquina Basada en Registros</TITLE>
+<META NAME="description" CONTENT="Generación de Código: Máquina Basada en Registros">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node165.html">
+<LINK REL="previous" HREF="node162.html">
+<LINK REL="up" HREF="node105.html">
+<LINK REL="next" HREF="node164.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3812"
+  HREF="node164.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3806"
+  HREF="node105.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3800"
+  HREF="node162.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3808"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3810"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3813"
+  HREF="node164.html">Práctica: Generación de Código</A>
+<B>Sup:</B> <A NAME="tex2html3807"
+  HREF="node105.html">La Estructura de los</A>
+<B> Ant:</B> <A NAME="tex2html3801"
+  HREF="node162.html">Generación de Código: Máquina</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION009150000000000000000">
+Generación de Código: Máquina Basada en Registros</A>
+</H1>
+La máquina orientada a pila para la que generamos código en la sección
+<A HREF="node162.html#section:pila">4.14</A>
+es un ejemplo de la clase de máquinas que es usada por la mayoría 
+de los lenguajes interpretados: Perl, Python; java, etc.
+
+<P>
+En esta sección introduciremos una máquina basada en registros.
+Suponemos que la máquina tiene <IMG
+ WIDTH="14" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img10.png"
+ ALT="$ k$">
+ registros <!-- MATH
+ $R_0 \ldots R_{k-1}$
+ -->
+<IMG
+ WIDTH="90" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img337.png"
+ ALT="$ R_0 \ldots R_{k-1}$">
+.
+Las instrucciones toman dos argumentos, dejando el resultado en
+el primer argumento. Son las siguientes:
+
+<P>
+<BR>
+<BR>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><code>LOADM Ri, [a]</code></TD>
+<TD ALIGN="LEFT"><IMG
+ WIDTH="72" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img338.png"
+ ALT="$ R_i = M_a$">
+</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>LOADC Ri, c</code></TD>
+<TD ALIGN="LEFT"><IMG
+ WIDTH="54" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img339.png"
+ ALT="$ R_i = c$">
+</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>STORE [a], Ri</code></TD>
+<TD ALIGN="LEFT"><IMG
+ WIDTH="72" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img340.png"
+ ALT="$ M_a = R_i$">
+</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>ADDR Ri, Rj</code></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $R_i += R_j$
+ -->
+<IMG
+ WIDTH="80" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img341.png"
+ ALT="$ R_i += R_j$">
+</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>ADDM Ri, [a]</code></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $R_i += M_a$
+ -->
+<IMG
+ WIDTH="85" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img342.png"
+ ALT="$ R_i += M_a$">
+</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><code>ADDC Ri, c</code></TD>
+<TD ALIGN="LEFT"><IMG
+ WIDTH="68" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img343.png"
+ ALT="$ R_i += c$">
+</TD>
+</TR>
+<TR><TD ALIGN="LEFT">...</TD>
+<TD ALIGN="LEFT">...</TD>
+</TR>
+</TABLE>
+
+<P>
+El problema es generar el código con el menor número 
+de instrucciones posible, teniendo 
+en cuenta la limitación existente de registros.
+
+<P>
+Supongamos que queremos traducir un subárbol
+<!-- MATH
+ $OP(t_1, t_2)$
+ -->
+<IMG
+ WIDTH="81" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img344.png"
+ ALT="$ OP(t_1, t_2)$">
+ y que la traducción del subárbol <IMG
+ WIDTH="19" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img345.png"
+ ALT="$ t_1$">
+ requiere <IMG
+ WIDTH="20" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img147.png"
+ ALT="$ r_1$">
+ registros
+y que la traducción de <IMG
+ WIDTH="19" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img346.png"
+ ALT="$ t_2$">
+ requiere <IMG
+ WIDTH="20" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img347.png"
+ ALT="$ r_2$">
+ registros, con <!-- MATH
+ $r_1 < r_2 \le k$
+ -->
+<IMG
+ WIDTH="92" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img348.png"
+ ALT="$ r_1 &lt; r_2 \le k$">
+.
+Si realizamos primero la evaluación de <IMG
+ WIDTH="19" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img345.png"
+ ALT="$ t_1$">
+, debemos dejar el 
+resultado en un registro que no podrá ser utilizado en la evaluación de 
+<IMG
+ WIDTH="19" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img346.png"
+ ALT="$ t_2$">
+. Si <IMG
+ WIDTH="53" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img349.png"
+ ALT="$ r_2 = k$">
+, la evaluación de <IMG
+ WIDTH="19" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img346.png"
+ ALT="$ t_2$">
+ podría dar lugar 
+a la necesidad de recurrir a almacenamiento temporal.
+Esta situación no se da si evaluamos primero <IMG
+ WIDTH="19" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img346.png"
+ ALT="$ t_2$">
+.
+En tal caso, dado que hay un registro en el que se guarda el resultado de
+<IMG
+ WIDTH="19" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img346.png"
+ ALT="$ t_2$">
+, quedan libres al menos <IMG
+ WIDTH="50" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img350.png"
+ ALT="$ r_2 - 1$">
+ registros. 
+Como <!-- MATH
+ $r_2 - 1 \ge r_1$
+ -->
+<IMG
+ WIDTH="89" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img351.png"
+ ALT="$ r_2 - 1 \ge r_1$">
+ se sigue que tenemos suficientes registros
+para traducir <IMG
+ WIDTH="19" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img345.png"
+ ALT="$ t_1$">
+.
+Como regla general es mejor evaluar primero el subárbol
+que mayores requerimientos de registros tiene.
+
+<P>
+La siguiente cuestión es como calcular los requerimientos en registros
+de una expresión dada. No consideraremos en esta fase límites en el número de 
+registros disponibles. Obsérvese que si los requerimientos para los subárboles
+son distintos, <!-- MATH
+ $r_1 \neq r_2$
+ -->
+<IMG
+ WIDTH="59" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img352.png"
+ ALT="$ r_1 \neq r_2$">
+ la traducción puede realizarse usando 
+el máximo de ambos <!-- MATH
+ $\max\{r_1, r_2\}$
+ -->
+<IMG
+ WIDTH="93" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img353.png"
+ ALT="$ \max\{r_1, r_2\}$">
+ siguiendo la estrategia 
+de traducir primero el que mayores requerimentos tenga. 
+Si son iguales entonces se necesitan <IMG
+ WIDTH="50" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img354.png"
+ ALT="$ r_1 + 1$">
+
+registros ya que es necesario un registro para guardar el resultado de
+la primera traducción. 
+
+<P>
+Nótese que, como el juego de instrucciones
+para un operando  puede tener como segundo argumento una dirección de memoria,
+los ``segundos operandos'' no necesitan registro. Por ejemplo, 
+el árbol  <IMG
+ WIDTH="94" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img355.png"
+ ALT="$ PLUS(a,b)$">
+ se traduce por 
+
+<P>
+<PRE>
+LOADM R0, a
+PLUSM R0, b
+</PRE>
+
+<P>
+Asi <IMG
+ WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img356.png"
+ ALT="$ b$">
+ no requiere registro, mientras que <IMG
+ WIDTH="14" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img54.png"
+ ALT="$ a$">
+ si lo requiere. Por tanto, las 
+hojas izquierdas requieren de registro mientras que las hojas derechas no.
+
+<P>
+Si <IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img187.png"
+ ALT="$ t$">
+ es un nodo de la forma
+<!-- MATH
+ $OP(t_1, t_2)$
+ -->
+<IMG
+ WIDTH="81" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img344.png"
+ ALT="$ OP(t_1, t_2)$">
+ el número de registros <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img357.png"
+ ALT="$ r_t$">
+ requeridos por <IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img187.png"
+ ALT="$ t$">
+ viene dado por 
+la fórmula:
+
+<P>
+<BR>
+<BR>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ $r_t =  \left \{ \begin{array}{ll}
+               \max\{r_1, r_2\} & \mbox{si $r_1 \neq r_2$}\\
+               r_1 + 1 & \mbox{si $r_1 = r_2$} 
+           \end{array}
+        \right .$
+ -->
+<IMG
+ WIDTH="248" HEIGHT="62" ALIGN="MIDDLE" BORDER="0"
+ SRC="img358.png"
+ ALT="$ r_t = \left \{ \begin{array}{ll}
+\max\{r_1, r_2\} &amp; \mbox{si $r_1 \neq r_2$}\\
+r_1 + 1 &amp; \mbox{si $r_1 = r_2$}
+\end{array}\right .$">
+
+</DIV>
+<BR>
+<BR>
+
+<P>
+Dotaremos a cada nodo del AST de un método <code>required_registers</code>
+que computa la demanda en registros de dicho nodo. 
+Lo que haremos es introducir en la clase <code>Operation</code> de la cual heredan
+las operaciones binarias el correspondiente método <code>required_registers</code>:
+
+<P>
+<PRE>
+package Operation;
+our @ISA = ("Binary");
+
+sub required_registers {
+  my $self = shift;
+
+  my $rl = $self-&gt;LEFT-&gt;required_registers('LEFT');
+  my $rr = $self-&gt;RIGHT-&gt;required_registers('RIGHT');
+  $self-&gt;{REQ_REG} = ($rl == $rr)? $rl+1: Aux::max($rl, $rr);
+  return $self-&gt;REQ_REG;
+}
+</PRE>
+
+<P>
+El segundo argumento que recibe <code>required_registers</code> es 
+su posición (izquierda o derecha) entre los hijos de su padre.
+dicha información no es usada en los nodos binarios. 
+Su necesidad queda clara cuando se considera el cómputo
+del número de registros requeridos por las hojas.
+
+<P>
+El cómputo en las hojas corre a cargo del correspondiente método
+en la clase <code>Value</code>. Los nodos de tipo número (clase <code>NUM</code>), cadena 
+(clase <code>STR</code>) y variable (clase <code>ID</code>)
+heredan de la clase <code>Value</code>.
+
+<P>
+<PRE>
+package Value;
+our @ISA = ("Leaf");
+
+sub required_registers {
+  my $self = shift;
+  my $position = shift;
+
+  $self-&gt;{REQ_REG} = ($position eq 'LEFT') ? 1 : 0;
+  return $self-&gt;REQ_REG;
+}
+</PRE>
+
+<P>
+El atributo <code>REQ_REG</code> se computa para cada una de las sentencias 
+del programa:
+
+<P>
+<PRE>
+package STATEMENTS;
+
+sub required_registers {
+  my $self = shift;
+  my @sts = @{$self};
+
+  for (@sts) {
+    $_-&gt;required_registers;
+  }
+}
+</PRE>
+
+<P>
+Por supuesto los nodos <code>ASSIGN</code> y <code>PRINT</code>
+poseen sus propios métodos <code>required_registers</code>.
+
+<P>
+Una vez computados los requerimientos en registros de cada
+nódo, la generación de código para un nodo gestiona la
+asignación de registros usando una cola en la que se guardan 
+los registros disponibles. Se
+siguen básicamente dos reglas para la traducción de un
+nodo  <code>Operation</code>:
+
+<P>
+
+<OL>
+<LI>Realizar primero la traducción del hijo con mayores
+requerimientos y luego el otro
+</LI>
+<LI>El resultado queda siempre en el registro que ocupa 
+<U>la primera posición</U> en la cola
+</LI>
+</OL>
+
+<P>
+Hay cuatro casos a considerar: el primero 
+es que el operando derecho sea una hoja.
+La generación de código para este caso es:
+
+<P>
+<PRE>
+package Operation;
+our @ISA = ("Binary");
+...
+
+sub gen_code {
+  my $self = shift;
+
+  if ($self-&gt;RIGHT-&gt;isa('Leaf')) {
+    my $right = $self-&gt;RIGHT;
+    my $a = $right-&gt;VAL;
+    my $rightoperand = $right-&gt;gen_operand; # valor o dirección 
+    my $key = $right-&gt;key;                  # M, C, etc.
+    $self-&gt;LEFT-&gt;gen_code;
+    Aux::emit($self-&gt;nemonic."$key $RSTACK[0], $rightoperand # $a\n");
+  }
+  ...
+}
+</PRE>
+La generación del nemónico se basa en tres métodos:
+
+<P>
+
+<UL>
+<LI>El método <code>nemonic</code> devuelve el nemónico asociado con el nodo.
+Por ejemplo, para la clase <code>TIMES</code> el código es:
+<PRE>
+sub  nemonic {
+  return "MULT";
+}
+</PRE>
+</LI>
+<LI>El método <code>key</code> devuelve el sufijo que hay que añadir 
+para completar el nemónico, en términos de como sea el
+operando: <code>C</code> para los números, <code>M</code> para los 
+identificadores, etc.
+</LI>
+<LI>El método <code>gen_operand</code> genera el operando. Así para las clases
+número e identificador su código es:
+
+<P>
+<BR>
+<BR>
+<BR>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142><PRE>
+package NUM;
+...
+sub gen_operand {
+  my $self = shift;
+
+  return $self-&gt;VAL;
+}
+</PRE></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=283><PRE>
+package ID;
+...
+sub gen_operand {
+  my $self = shift;
+
+  return $symbol_table{$self-&gt;VAL}-&gt;{ADDRESS},
+}
+</PRE></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+<BR>
+
+<P>
+</LI>
+</UL>
+
+<P>
+El resto del código distingue  tres casos,
+según sean <IMG
+ WIDTH="20" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img147.png"
+ ALT="$ r_1$">
+, <IMG
+ WIDTH="20" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img347.png"
+ ALT="$ r_2$">
+ y el número de registros
+disponibles. 
+Los dos primeros casos desglosan
+la posibilidad de que uno de los dos subárboles
+pueda realizarse con el número de registros
+disponible (<!-- MATH
+ $\min \{r_1, r_2 \} < k$
+ -->
+<IMG
+ WIDTH="123" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img359.png"
+ ALT="$ \min \{r_1, r_2 \} &lt; k$">
+).
+El tercer caso corresponde a que 
+se necesiten temporales: <!-- MATH
+ $\min \{r_1, r_2 \} \ge k$
+ -->
+<IMG
+ WIDTH="123" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img360.png"
+ ALT="$ \min \{r_1, r_2 \} \ge k$">
+.
+
+<P>
+<PRE>
+ 1   ...
+ 2   if ($self-&gt;RIGHT-&gt;isa('Leaf')) { ...  }
+ 3   else { # Hijo derecho no es una hoja
+ 4     my ($t1, $t2) = ($self-&gt;LEFT, $self-&gt;RIGHT);
+ 5     my ($r1, $r2) = ($t1-&gt;REQ_REG, $t2-&gt;REQ_REG);
+ 6 
+ 7     if ($r1 &lt; Aux::min($r2, $NUM_REG)) {
+ 8       $t2-&gt;gen_code;
+ 9       my $R = shift @RSTACK;
+10       $t1-&gt;gen_code;
+11       Aux::emit($self-&gt;nemonic."R $RSTACK[0], $R\n");
+12       push @RSTACK, $R;
+13     }
+14     ...
+15   }
+</PRE>
+En este caso debemos realizar primero la traducción
+del hijo derecho. Salvando su resultado en <code>$R</code>. 
+El registro es retirado de la cola y traducimos el 
+lado izquierdo. El resultado ha quedado en el primer
+registro de la cola. Emitimos la operación, añadiendo
+el sufijo <code>R</code>, ya que se trata de una operación entre registros
+y posteriormente devolvemos el registro a la cola.
+
+<P>
+<P>
+<DIV><B>Ejercicio  4.15.1</B> &nbsp; 
+<I>Responda a las siguientes preguntas:
+</I>
+<P>
+<OL>
+<LI>Si en el código anterior sustituimos la línea 12
+
+<P>
+<DIV ALIGN="CENTER">
+<code>push @RSTACK, $R</code>
+
+</DIV>
+
+<P>
+por 
+
+<P>
+<DIV ALIGN="CENTER">
+<code>unshift @RSTACK, $R</code> 
+
+</DIV>
+
+<P>
+¿Seguiría funcionando el código?
+
+<P>
+</LI>
+<LI>¿Podemos asegurar en este subcaso que el código generado para <code>$t2</code>
+(línea 8) se ha realizado integramente en los registros?
+</LI>
+</OL></DIV><P></P>
+
+<P>
+Los otros dos casos tienen similar tratamiento:
+
+<P>
+<PRE>
+  if ($self-&gt;RIGHT-&gt;isa('Leaf')) { ...  }
+  else { ...
+    if ($r1 &lt; Aux::min($r2, $NUM_REG)) { ... }
+    elsif (($r1 &gt;= $r2) and ($r2 &lt; $NUM_REG)) {
+      $t1-&gt;gen_code;
+      my $R = shift @RSTACK;
+      $t2-&gt;gen_code;
+      Aux::emit($self-&gt;nemonic."R $R, $RSTACK[0]\n");
+      unshift @RSTACK, $R;
+    }
+    elsif (($r1 &gt;= $NUM_REG) and ($r2 &gt;= $NUM_REG)) {
+      $t2-&gt;gen_code;
+      Aux::emit("STORE $T, $RSTACK[0]\n");
+      $T++;
+      $t1-&gt;gen_code;
+      $T--;
+      Aux::emit($self-&gt;nemonic."M $RSTACK[0], $T\n");
+    }
+  }
+}
+</PRE>
+
+<P>
+Antes de comenzar a generar el código,
+la variable <code>$T</code> debe ser inicializada a un valor apropiado, 
+de manera que se usen direcciones no ocupadas por los datos.
+Por ejemplo:
+
+<P>
+<PRE>
+local $T =  $final_global_address+length($data);
+</PRE>
+
+<P>
+El método <code>gen_code</code> sólo debería ser llamado sobre una hoja
+si se trata de una hoja izquierda (en cuyo caso el número de
+registros requeridos es uno):
+<PRE>
+package Value;
+our @ISA = ("Leaf");
+...
+
+sub gen_code {
+  my $self = shift;
+  my $a = $self-&gt;VAL;
+
+  if ($self-&gt;REQ_REG == 1) {
+    if (ref($self) eq "NUM") { Aux::emit("LOADC $RSTACK[0], $a\n"); }
+    else { 
+      my $address = $symbol_table{$a}-&gt;{ADDRESS};
+      Aux::emit("LOADM $RSTACK[0], $address # $a\n");
+    }
+  }
+  else {
+    croak("gen_code visita hoja izquierda con REQ_REG = ".$self-&gt;REQ_REG);
+  }
+}
+</PRE>
+
+<P>
+La pila de registros es inicializada al número de registros disponibles:
+
+<P>
+<PRE>
+use constant LAST_REG =&gt; 1;
+our @RSTACK = map "R$_", 0..LAST_REG; # Registros disponibles
+</PRE>
+
+<P>
+<P>
+<DIV><B>Ejercicio  4.15.2</B> &nbsp; 
+<I>Responda a las siguientes preguntas:
+</I>
+<P>
+<UL>
+<LI>¿Cuáles son los requerimientos de registros para un nodo de la clase <IMG
+ WIDTH="80" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img225.png"
+ ALT="$ ASSIGN$">
+?
+</LI>
+<LI>¿Cuáles son los requerimientos de registros para un nodo de la clase <IMG
+ WIDTH="69" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img255.png"
+ ALT="$ PRINT$">
+?
+</LI>
+<LI>¿Se puede lograr la funcionalidad proveída por el método 
+<code>required_registers</code>
+<BR>
+usando <code>match_and_transform</code>? 
+
+<P>
+¿Sería necesario introducir modificaciones
+en <code>match_and_transform</code>? Si es así, ¿Cuáles?.
+</LI>
+</UL></DIV><P></P>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html3814"
+  HREF="node164.html">Práctica: Generación de Código</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html3812"
+  HREF="node164.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3806"
+  HREF="node105.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3800"
+  HREF="node162.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3808"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3810"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3813"
+  HREF="node164.html">Práctica: Generación de Código</A>
+<B>Sup:</B> <A NAME="tex2html3807"
+  HREF="node105.html">La Estructura de los</A>
+<B> Ant:</B> <A NAME="tex2html3801"
+  HREF="node162.html">Generación de Código: Máquina</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

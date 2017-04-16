@@ -1,0 +1,307 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Práctica: Calculadora con Regexp::Grammars</TITLE>
+<META NAME="description" CONTENT="Práctica: Calculadora con Regexp::Grammars">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="previous" HREF="node103.html">
+<LINK REL="up" HREF="node85.html">
+<LINK REL="next" HREF="node105.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2855"
+  HREF="node105.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2849"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2845"
+  HREF="node103.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2851"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2853"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2856"
+  HREF="node105.html">La Estructura de los</A>
+<B>Sup:</B> <A NAME="tex2html2850"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2846"
+  HREF="node103.html">Reciclando una Regexp::Grammar</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0081119000000000000000">
+Práctica: Calculadora con <TT>Regexp::Grammars</TT></A>
+</H2>
+   <A NAME="6856"></A>
+
+<P>
+
+<UL>
+<LI>Reforme la estructura del ejemplo para que tenga una jerarquía
+de desarrollo de acuerdo a los estándares de Perl. Use <A NAME="tex2html212"
+  HREF="http://search.cpan.org/perldoc/?h2xs"><TT>h2xs</TT></A>
+o bien <A NAME="tex2html213"
+  HREF="http://search.cpan.org/perldoc?Module::Starter">Module::Starter</A>. Use el espacio de nombres <code>Calculator</code>.
+Mueva el módulo <code>Operator</code> a <code>Calculator::Operator</code>.
+Lea el capítulo <A NAME="tex2html214"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/node170.html">Modulos</A>
+de los apuntes de LHP.
+
+<P>
+</LI>
+<LI>Defina el conjunto de pruebas que deberá pasar su traductor.
+Añádalas como pruebas <code>TODO</code>. Cuando la funcionalidad 
+a comprobar esté operativa cambie su estatus.
+
+<P>
+</LI>
+<LI>Añada variables y la expresión de asignación:
+
+<P>
+<PRE>
+b = a = 4*2
+</PRE>
+que será traducida a postfijo como:
+
+<P>
+<PRE>
+4 2 * a = b =
+</PRE>
+El operador de asignación es asociativo a derechas.
+El valor devuelto por una expresión de asignación es el valor asignado.
+
+<P>
+Use un hash para implantar la relación nombre-valor
+en el caso de la evaluación
+
+<P>
+</LI>
+<LI>Introduzca la expresión bloque:
+
+<P>
+<PRE>
+c = { a = 4; b = 2*a }
+</PRE>
+
+<P>
+Los bloques son listas entre llaves de expresiones separadas por punto y coma.
+El valor retornado por una expresión bloque es el último evaluado 
+en el bloque.
+
+<P>
+El símbolo de arranque de la gramática (esto es, el patrón regular
+contra el que hay que casar) será la expresión bloque.
+
+<P>
+</LI>
+<LI>Introduzca las expresiones de comparación <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>==</code> y <code>!=</code>
+con la prioridad adecuada. Tenga en cuenta que una expresión como:
+<PRE>
+a = b+2 &gt; c*4
+</PRE>
+deberá entenderse como
+<PRE>
+a = ((b+2) &gt; (c*4))
+</PRE>
+Esto es, se traducirá como:
+<PRE>
+b 2 + c 4 * &gt; a =
+</PRE>
+
+<P>
+</LI>
+<LI>Introduzca la expresión <code>if ... then ... else</code>. La parte del <code>else</code>
+será opcional:
+<PRE>
+c = if a &gt; 0 then { a = a -1; 2*a } else { b + 2 };
+d = if a &gt; 0 then { a = b -1; 2*b };
+</PRE>
+un <code>else</code> casa con el <code>if</code> mas cercano. 
+La sentencia:
+<PRE>
+if (a &gt; 0) then if (b &gt; 0) then {5} else {6}
+</PRE>
+se interpreta como:
+<PRE>
+if (a &gt; 0) then (if (b &gt; 0) then {5} else {6})
+</PRE>
+y no como:
+<PRE>
+if (a &gt; 0) then (if (b &gt; 0) then {5}) else {6}
+</PRE>
+Se traducirá como:
+<PRE>
+        a
+        0
+        &gt;
+        jz endif124
+        b
+        0
+        &gt;
+        jz else125
+        5
+        j endif126
+:else125
+        6
+:endif124
+:endif125
+        ...
+</PRE>
+</LI>
+<LI>Escriba un intérprete de la máquina orientada a pila definida en los apartados anteriores.
+El código generado debería poder ejecutarse correctamente en el intérprete.
+</LI>
+</UL>
+
+<P>
+<HR>
+<A NAME="tex2html2855"
+  HREF="node105.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2849"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2845"
+  HREF="node103.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2851"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2853"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2856"
+  HREF="node105.html">La Estructura de los</A>
+<B>Sup:</B> <A NAME="tex2html2850"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2846"
+  HREF="node103.html">Reciclando una Regexp::Grammar</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

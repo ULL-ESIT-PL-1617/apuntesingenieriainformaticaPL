@@ -1,0 +1,343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Transformaciones Arbol con treereg</TITLE>
+<META NAME="description" CONTENT="Transformaciones Arbol con treereg">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node273.html">
+<LINK REL="previous" HREF="node271.html">
+<LINK REL="up" HREF="node267.html">
+<LINK REL="next" HREF="node273.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html5564"
+  HREF="node273.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5558"
+  HREF="node267.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5552"
+  HREF="node271.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5560"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5562"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5565"
+  HREF="node273.html">Transformaciones de Árboles con</A>
+<B>Sup:</B> <A NAME="tex2html5559"
+  HREF="node267.html">Transformaciones Árbol con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5553"
+  HREF="node271.html">El método m</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001550000000000000000">
+Transformaciones Arbol con <TT>treereg</TT></A>
+</H1>
+La distribución de <code>Eyapp</code> provee un conjunto de
+módulos que permiten la manipulación y transformación 
+del AST. La formas mas usual de hacerlo es escribir
+el programa de transformaciones árbol en un fichero
+separado. El tipo <code>.trg</code> se asume por defecto.
+El ejemplo que sigue trabaja en cooperación
+con el programa Eyapp presentado en la sección
+<A HREF="node240.html#section:treedirective">8.11</A>
+página <A HREF="node240.html#code:eyapprule6">8.11</A>.
+El programa árbol sustituye nodos producto por un número potencia de
+dos por nodos unarios de desplazamiento a izquierda. De este modo
+facilitamos la tarea de la generación de un código mas eficiente:
+
+<P>
+<PRE>
+pl@nereida:~/LEyapp/examples$ cat -n Shift.trg
+ 1  # File: Shift.trg
+ 2  {
+ 3    sub log2 {
+ 4      my $n = shift;
+ 5      return log($n)/log(2);
+ 6    }
+ 7
+ 8    my $power;
+ 9  }
+10  mult2shift: TIMES($e, NUM($m))
+11    and { $power = log2($m-&gt;{attr}); (1 &lt;&lt; $power) == $m-&gt;{attr} } =&gt; {
+12      $_[0]-&gt;delete(1);
+13      $_[0]-&gt;{shift} = $power;
+14      $_[0]-&gt;type('SHIFTLEFT');
+15    }
+</PRE>
+Obsérvese que la variable léxica <code>$power</code> es visible en la definición
+de la transformación <code>mult2shift</code>.
+Compilamos el programa de transformaciones usando el guión  treereg :
+<PRE>
+nereida:~/src/perl/YappWithDefaultAction/examples&gt; treereg Shift
+nereida:~/src/perl/YappWithDefaultAction/examples&gt; ls -ltr | tail -1
+-rw-rw----  1 pl users   1405 2006-11-06 14:09 Shift.pm
+</PRE>
+Como se ve, la compilación produce un módulo que <code>Shift.pm</code>
+que contiene el código de los
+analizadores.
+El código generado por la versión 0.2 de  treereg  es el siguiente:
+<PRE>
+pl@nereida:~/LEyapp/examples$ cat -n Shift.pm
+ 1  package Shift;
+ 2
+ 3  # This module has been generated using Parse::Eyapp::Treereg
+ 4  # from file Shift.trg. Don't modify it.
+ 5  # Change Shift.trg instead.
+ 6  # Copyright (c) Casiano Rodriguez-Leon 2006. Universidad de La Laguna.
+ 7  # You may use it and distribute it under the terms of either
+ 8  # the GNU General Public License or the Artistic License,
+ 9  # as specified in the Perl README file.
+10
+11  use strict;
+12  use warnings;
+13  use Carp;
+14  use Parse::Eyapp::_TreeregexpSupport qw(until_first_match checknumchildren);
+15
+16  our @all = ( our $mult2shift, ) = Parse::Eyapp::YATW-&gt;buildpatterns(mult2shift =&gt; \&amp;mult2shift, );
+17
+18  #line 2 "Shift.trg"
+19
+20    sub log2 {
+21      my $n = shift;
+22      return log($n)/log(2);
+23    }
+24
+25    my $power;
+26
+27
+28    sub mult2shift {
+29      my $mult2shift = $_[3]; # reference to the YATW pattern object
+30      my $e;
+31      my $NUM;
+32      my $TIMES;
+33      my $m;
+34
+35      {
+36        my $child_index = 0;
+37
+38        return 0 unless (ref($TIMES = $_[$child_index]) eq 'TIMES');
+39      return 0 unless defined($e = $TIMES-&gt;child(0+$child_index));
+40      return 0 unless (ref($NUM = $TIMES-&gt;child(1+$child_index)) eq 'NUM');
+41      return 0 unless defined($m = $NUM-&gt;child(0+$child_index));
+42      return 0 unless do
+43  #line 10 "Shift.trg"
+44        { $power = log2($m-&gt;{attr}); (1 &lt;&lt; $power) == $m-&gt;{attr} };
+45
+46      } # end block of child_index
+47  #line 11 "Shift.trg"
+48    {
+49      $_[0]-&gt;delete(1);
+50      $_[0]-&gt;{shift} = $power;
+51      $_[0]-&gt;type('SHIFTLEFT');
+52    }
+53
+54    } # end of mult2shift
+55
+56
+57  1;
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION001550010000000000000">
+Uso de los Módulos Generados</A>
+</H4>
+  
+
+<P>
+El programa de análisis se limita a cargar los dos módulos generados,
+crear el analizador, llamar al método <code>Run</code> 
+para crear el árbol y proceder a las sustituciones mediante la llamada
+<code>$t-&gt;s(@Shift::all)</code>:
+<PRE>
+pl@nereida:~/LEyapp/examples$ cat -n useruleandshift.pl
+ 1  #!/usr/bin/perl -w
+ 2  use strict;
+ 3  use Rule5;
+ 4  use Parse::Eyapp::Base qw(insert_function);
+ 5  use Shift;
+ 6
+ 7  sub SHIFTLEFT::info { $_[0]{shift} }
+ 8  insert_function('TERMINAL::info', \&amp;TERMINAL::attr);
+ 9
+10  my $parser = new Rule5();
+11  my $t = $parser-&gt;Run;
+12  print "***********\n",$t-&gt;str,"\n";
+13  $t-&gt;s(@Shift::all);
+14  print "***********\n",$t-&gt;str,"\n";
+</PRE>
+Cuando alimentamos el programa con la entrada <code>a=b*32</code> obtenemos la
+siguiente salida:
+<PRE>
+pl@nereida:~/LEyapp/examples$ useruleandshift.pl
+a=b*32
+***********
+ASSIGN(TERMINAL[a],TIMES(VAR(TERMINAL[b]),NUM(TERMINAL[32])))
+***********
+ASSIGN(TERMINAL[a],SHIFTLEFT[5](VAR(TERMINAL[b])))
+</PRE>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html5566"
+  HREF="node272.html#SECTION001550010000000000000">Uso de los Módulos Generados</A>
+</UL></UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html5564"
+  HREF="node273.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5558"
+  HREF="node267.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5552"
+  HREF="node271.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5560"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5562"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5565"
+  HREF="node273.html">Transformaciones de Árboles con</A>
+<B>Sup:</B> <A NAME="tex2html5559"
+  HREF="node267.html">Transformaciones Árbol con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5553"
+  HREF="node271.html">El método m</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

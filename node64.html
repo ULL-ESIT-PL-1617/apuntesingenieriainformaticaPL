@@ -1,0 +1,624 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Ejecución de Código dentro de una Expresión Regular</TITLE>
+<META NAME="description" CONTENT="Ejecución de Código dentro de una Expresión Regular">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node65.html">
+<LINK REL="previous" HREF="node63.html">
+<LINK REL="up" HREF="node56.html">
+<LINK REL="next" HREF="node65.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2114"
+  HREF="node65.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2108"
+  HREF="node56.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2102"
+  HREF="node63.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2110"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2112"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2115"
+  HREF="node65.html">Expresiones Regulares en tiempo</A>
+<B>Sup:</B> <A NAME="tex2html2109"
+  HREF="node56.html">Algunas Extensiones</A>
+<B> Ant:</B> <A NAME="tex2html2103"
+  HREF="node63.html">Perl 5.10: Numeración de</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html2116"
+  HREF="node64.html#SECTION00828010000000000000">Resultado de la última ejecución</A>
+<LI><A NAME="tex2html2117"
+  HREF="node64.html#SECTION00828020000000000000">El Código empotrado no es interpolado</A>
+<LI><A NAME="tex2html2118"
+  HREF="node64.html#SECTION00828030000000000000">Contenido del último paréntesis y la variable por defecto en acciones empotradas</A>
+<LI><A NAME="tex2html2119"
+  HREF="node64.html#SECTION00828040000000000000">Los cuantificadores y el código empotrado</A>
+<LI><A NAME="tex2html2120"
+  HREF="node64.html#SECTION00828050000000000000">Ámbito</A>
+<LI><A NAME="tex2html2121"
+  HREF="node64.html#SECTION00828060000000000000">Caveats</A>
+<LI><A NAME="tex2html2122"
+  HREF="node64.html#SECTION00828070000000000000">Depurando con código empotrado Colisiones en los Nombres de las Subexpresiones Regulares</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION00828000000000000000"></A>
+<A NAME="subsection:codigoenregexp"></A>
+<BR>
+Ejecución de Código dentro de una Expresión Regular
+</H2>
+
+<P>
+Es posible introducir código Perl dentro de una expresión regular.
+Para ello se usa la notación <code>(?{code})</code>.
+
+<P>
+El siguiente texto esta tomado de la sección 'A-bit-of-magic:-executing-Perl-code-in-a-regular-expression' en <A NAME="tex2html93"
+  HREF="http://perldoc.perl.org/perlretut.html#A-bit-of-magic:-executing-Perl-code-in-a-regular-expression"><TT>perlretut</TT></A>:
+
+<P>
+<BLOCKQUOTE><I>Normally, regexps are a part of Perl expressions. Code evaluation
+expressions turn that around by allowing arbitrary Perl code to be a
+part of a regexp. A code evaluation expression is denoted (?code),
+with code a string of Perl statements.
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>Be warned that this feature is considered experimental, and may be
+changed without notice.
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>Code expressions are zero-width assertions, and the value they return
+depends on their environment. 
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>There are two possibilities: either the
+code expression is used as a conditional in a conditional expression
+<code>(?(condition)...)</code>, or it is not. 
+</I></BLOCKQUOTE>
+<UL>
+<LI><BLOCKQUOTE>
+If the code expression is a conditional,
+the code is evaluated and the result (i.e., the result of the last
+statement) is used to determine truth or falsehood. 
+</BLOCKQUOTE>
+<P>
+</LI>
+<LI><BLOCKQUOTE>
+If the code expression
+is not used as a conditional, the assertion always evaluates true and
+the result is put into the special variable <code>$^R</code> . The variable <code>$^R</code> can
+then be used in code expressions later in the regexp
+
+</BLOCKQUOTE>
+</LI>
+</UL> 
+
+<P>
+
+<H4><A NAME="SECTION00828010000000000000">
+Resultado de la última ejecución</A>
+</H4>
+  
+
+<P>
+Las expresiones de código son <A NAME="3279"></A><I>zero-width assertions</I>: no consumen entrada.
+El resultado de la ejecución se salva en la variable especial <code>$^R</code>.
+
+<P>
+Veamos un ejemplo:
+
+<P>
+<PRE>
+pl@nereida:~/Lperltesting$ perl5.10.1 -wde 0
+main::(-e:1):   0
+  DB&lt;1&gt; $x = "abcdef"
+  DB&lt;2&gt; $x =~ /abc(?{ "Hi mom\n" })def(?{ print $^R })$/
+Hi mom
+  DB&lt;3&gt; $x =~ /abc(?{ print "Hi mom\n"; 4 })def(?{ print "$^R\n" })/
+Hi mom
+4
+  DB&lt;4&gt; $x =~ /abc(?{ print "Hi mom\n"; 4 })ddd(?{ print "$^R\n" })/ # does not match
+  DB&lt;5&gt;
+</PRE>
+En el último ejemplo (línea <code>DB&lt;4&gt;</code>) ninguno de los <code>print</code> se ejecuta dado que no hay matching.
+
+<P>
+
+<H4><A NAME="SECTION00828020000000000000">
+El Código empotrado no es interpolado</A>
+</H4>
+  
+
+<P>
+Tomado de la sección 'Extended-Patterns' en <A NAME="tex2html94"
+  HREF="http://perldoc.perl.org/perlre.html#Extended-Patterns"><TT>perlre</TT></A>:
+
+<P>
+<BLOCKQUOTE><I>This zero-width assertion evaluates any embedded Perl code. It always
+succeeds, and its code  is not interpolated. Currently, the rules to
+determine where the code  ends are somewhat convoluted.
+</I></BLOCKQUOTE>
+
+<P>
+
+<H4><A NAME="SECTION00828030000000000000">
+Contenido del último paréntesis y la variable por defecto en acciones empotradas</A>
+</H4>
+  
+
+<P>
+Tomado de la sección 'Extended-Patterns' en <A NAME="tex2html95"
+  HREF="http://perldoc.perl.org/perlre.html#Extended-Patterns"><TT>perlre</TT></A>:
+<BLOCKQUOTE><I>... can be used with the special variable <code>$^N</code> to
+capture the results of submatches in variables without having to keep
+track of the number of nested parentheses. For example:
+</I></BLOCKQUOTE>
+<P><PRE>
+pl@nereida:~/Lperltesting$ perl5.10.1 -wdE 0
+main::(-e:1):   0
+  DB&lt;1&gt; $x = "The brown fox jumps over the lazy dog"
+  DB&lt;2&gt; x $x =~ /the (\S+)(?{ $color = $^N }) (\S+)(?{ $animal = $^N })/i
+0  'brown'
+1  'fox'
+  DB&lt;3&gt; p "color=$color animal=$animal\n"
+color=brown animal=fox
+  DB&lt;4&gt; $x =~ /the (\S+)(?{ print (substr($_,0,pos($_)))."\n" }) (\S+)/i
+The brown
+</PRE>
+<P>
+<BLOCKQUOTE><I>Inside the <code>(?{...})</code> block, <code>$_</code> refers to the string the
+regular expression is matching against. You can also use <code>pos()</code> to know
+what is the current position of matching within this string.
+</I></BLOCKQUOTE>
+
+<P>
+
+<H4><A NAME="SECTION00828040000000000000">
+Los cuantificadores y el código empotrado</A>
+</H4>
+  
+
+<P>
+Si se usa un cuantificador sobre un código empotrado,
+actúa como un bucle:
+
+<P>
+<PRE>
+pl@nereida:~/Lperltesting$ perl5.10.1 -wde 0
+main::(-e:1):   0
+  DB&lt;1&gt; $x = "aaaa"
+  DB&lt;2&gt;  $x =~ /(a(?{ $c++ }))*/
+  DB&lt;3&gt; p $c
+4
+  DB&lt;4&gt; $y = "abcd"
+  DB&lt;5&gt; $y =~ /(?:(.)(?{ print "-$1-\n" }))*/
+-a-
+-b-
+-c-
+-d-
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00828050000000000000">
+Ámbito</A>
+</H4>
+  
+
+<P>
+Tomado (y modificado el ejemplo) de la sección 'Extended-Patterns' en <A NAME="tex2html97"
+  HREF="http://perldoc.perl.org/perlre.html#Extended-Patterns"><TT>perlre</TT></A>:
+
+<P>
+<BLOCKQUOTE><I>...The code  is properly scoped in the following sense: If the
+assertion is backtracked (compare la sección 'Backtracking' en <A NAME="tex2html96"
+  HREF="http://perldoc.perl.org/perlre.html#Backtracking"><TT>perlre</TT></A>), all changes introduced
+after localization are undone, so that
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>
+<pre>
+pl@nereida:~/Lperltesting$ cat embededcodescope.pl
+  <span class="synStatement">use strict</span>;
+
+  <span class="synStatement">our</span> (<span class="synIdentifier">$cnt</span>, <span class="synIdentifier">$res</span>);
+
+<span class="synIdentifier">  </span><span class="synStatement">sub</span><span class="synIdentifier"> echo </span>{
+    <span class="synStatement">local</span> <span class="synStatement">our</span> <span class="synIdentifier">$pre</span> = <span class="synStatement">substr</span>(<span class="synIdentifier">$_</span>,<span class="synConstant">0</span>,<span class="synStatement">pos</span>(<span class="synIdentifier">$_</span>));
+    <span class="synStatement">local</span> <span class="synStatement">our</span> <span class="synIdentifier">$post</span> = (<span class="synStatement">pos</span>(<span class="synIdentifier">$_</span>) &lt; <span class="synStatement">length</span>)? (<span class="synStatement">substr</span>(<span class="synIdentifier">$_</span>,<span class="synConstant">1</span>+<span class="synStatement">pos</span>(<span class="synIdentifier">$_</span>))) : <span class="synConstant">''</span>;
+
+    <span class="synStatement">print</span>(<span class="synConstant">"</span><span class="synIdentifier">$pre</span><span class="synConstant">(count = </span><span class="synIdentifier">$cnt</span><span class="synConstant">)</span><span class="synIdentifier">$post</span><span class="synSpecial">\n</span><span class="synConstant">"</span>);
+  }
+
+  <span class="synIdentifier">$_</span> = <span class="synConstant">'a'</span> x <span class="synConstant">8</span>;
+  m&lt;
+    (?{ <span class="synIdentifier">$cnt</span> = <span class="synConstant">0</span> }) <span class="synComment"># Initialize $cnt.</span>
+    (
+      a
+      (?{
+        <span class="synStatement">local</span> <span class="synIdentifier">$cnt</span> = <span class="synIdentifier">$cnt</span> + <span class="synConstant">1</span>; <span class="synComment"># Update $cnt, backtracking-safe.</span>
+        echo();
+      })
+    )*
+    aaaa
+    (?{ <span class="synIdentifier">$res</span> = <span class="synIdentifier">$cnt</span> }) <span class="synComment"># On success copy to non-localized</span>
+    <span class="synComment"># location.</span>
+  &gt;x;
+
+  <span class="synStatement">print</span> <span class="synConstant">"FINAL RESULT: cnt = </span><span class="synIdentifier">$cnt</span><span class="synConstant"> res =</span><span class="synIdentifier">$res</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+</pre>
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>will set <code>$res = 4</code> . Note that after the match, <code>$cnt</code> returns to the
+globally introduced value, because the scopes that restrict local
+operators are unwound.
+</I></BLOCKQUOTE><PRE>
+pl@nereida:~/Lperltesting$ perl5.8.8 -w embededcodescope.pl
+a(count = 1)aaaaaa
+aa(count = 2)aaaaa
+aaa(count = 3)aaaa
+aaaa(count = 4)aaa
+aaaaa(count = 5)aa
+aaaaaa(count = 6)a
+aaaaaaa(count = 7)
+aaaaaaaa(count = 8)
+FINAL RESULT: cnt = 0 res =4
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00828060000000000000">
+Caveats</A>
+</H4>
+  
+
+<P>
+
+<UL>
+<LI>
+<BLOCKQUOTE><I>Due to an unfortunate implementation issue, the Perl code contained
+in these blocks is treated as a compile time <A NAME="tex2html98"
+  HREF="http://en.wikipedia.org/wiki//Closure_(computer_science)">closure</A>
+that can have
+seemingly bizarre consequences when used with <A NAME="tex2html99"
+  HREF="http://en.wikipedia.org/wiki/Static_scoping_.28also_known_as_lexical_scoping.29">lexically scoped variables</A>
+inside of subroutines or loops. There are various workarounds for this,
+including simply using global variables instead. If you are using this
+construct and strange results occur then check for the use of lexically
+scoped variables.
+</I></BLOCKQUOTE>
+</LI>
+<LI>
+<BLOCKQUOTE><I>For reasons of security, this construct is forbidden if the regular
+expression involves run-time interpolation of variables, unless the
+perilous <code>use re 'eval'</code> pragma has been used (see <A NAME="tex2html100"
+  HREF="http://search.cpan.org/perldoc?re">re</A>),
+or the variables
+contain results of <code>qr//</code> operator (see <code>"qr/STRING/imosx"</code> in 
+<A NAME="tex2html101"
+  HREF="http://search.cpan.org/perldoc/?perlop"><TT>perlop</TT></A>).
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>This restriction is due to the wide-spread and remarkably convenient
+custom of using run-time determined strings as patterns. For example:
+</I></BLOCKQUOTE>
+<P><PRE>
+   1. $re = &lt;&gt;;
+   2. chomp $re;
+   3. $string =~ /$re/;
+</PRE>
+<P>
+<BLOCKQUOTE><I>Before Perl knew how to execute interpolated code within a pattern, this
+operation was completely safe from a security point of view, although
+it could raise an exception from an illegal pattern. If you turn on the
+<code>use re 'eval'</code> , though, it is no longer secure, so you should only do
+so if you are also using <A NAME="tex2html102"
+  HREF="http://en.wikipedia.org/wiki/Taint_checking">taint</A>
+checking. Better yet, use the carefully
+constrained evaluation within a <A NAME="tex2html103"
+  HREF="http://search.cpan.org/perldoc?Safe">Safe</A>
+compartment. See perlsec for details
+about both these mechanisms. (Véase la sección 'Taint-mode' en <A NAME="tex2html104"
+  HREF="http://perldoc.perl.org/perlsec.html#Taint-mode"><TT>perlsec</TT></A>)
+</I></BLOCKQUOTE> 
+
+<P>
+</LI>
+<LI>
+<BLOCKQUOTE><I>Because Perl's regex engine is currently <B>not re-entrant</B>, interpolated
+code may not invoke the regex engine either directly with <code>m//</code> or 
+<code>s///</code>, or indirectly with functions such as <A NAME="tex2html105"
+  HREF="http://www.ayni.com/perldoc/functions/split.html"><TT>split</TT></A>.
+</I></BLOCKQUOTE>
+</LI>
+</UL>
+
+<P>
+
+<H4><A NAME="SECTION00828070000000000000">
+Depurando con código empotrado Colisiones en los Nombres de las Subexpresiones Regulares</A>
+</H4>
+  
+
+<P>
+Las acciones empotradas pueden utilizarse como mecanismo de 
+depuración y de descubrimiento del comportamiento de nuestras expresiones 
+regulares.
+
+<P>
+En el siguiente programa se produce una colisión
+entre los nombres <code>&lt;i&gt;</code> y <code>&lt;j&gt;</code> de los patrones 
+que ocurren en el patrón <code>&lt;expr&gt;</code>
+y en el patrón principal:
+
+<P>
+
+<pre>
+pl@nereida:~/Lperltesting$ cat -n clashofnamedofssets.pl
+<span class="synLinenum">    1</span>   <span class="synComment">#!/usr/local/lib/perl/5.10.1/bin//perl5.10.1</span>
+<span class="synLinenum">    2</span>   <span class="synStatement">use </span>v5.<span class="synConstant">10</span>;
+<span class="synLinenum">    3</span> 
+<span class="synLinenum">    4</span>   <span class="synStatement">my</span> <span class="synIdentifier">$input</span>;
+<span class="synLinenum">    5</span> 
+<span class="synLinenum">    6</span>   <span class="synStatement">local</span> <span class="synIdentifier">$"</span> = <span class="synConstant">", "</span>;
+<span class="synLinenum">    7</span> 
+<span class="synLinenum">    8</span>   <span class="synStatement">my</span> <span class="synIdentifier">$parser</span> = <span class="synConstant">qr{</span>
+<span class="synLinenum">    9</span> <span class="synConstant">      ^ </span><span class="synSpecial">(?</span><span class="synConstant">&lt;i&gt; </span><span class="synSpecial">(?</span><span class="synConstant">&amp;expr</span><span class="synSpecial">))</span><span class="synConstant"> </span><span class="synSpecial">(?</span><span class="synConstant">&lt;j&gt; </span><span class="synSpecial">(?</span><span class="synConstant">&amp;expr</span><span class="synSpecial">))</span><span class="synConstant"> </span><span class="synSpecial">\z</span>
+<span class="synLinenum">   10</span> <span class="synConstant">        </span><span class="synSpecial">(?</span><span class="synConstant">{</span>
+<span class="synLinenum">   11</span> <span class="synConstant">             say "main </span><span class="synSpecial">$+</span><span class="synConstant"> hash:";</span>
+<span class="synLinenum">   12</span> <span class="synConstant">             say " </span><span class="synSpecial">(</span><span class="synIdentifier">$_</span><span class="synConstant"> =&gt; </span><span class="synIdentifier">$+</span><span class="synConstant">{</span><span class="synIdentifier">$_</span><span class="synConstant">}</span>) <span class="synConstant">" for sort keys %+;</span>
+<span class="synLinenum">   13</span> <span class="synConstant">         })</span>
+<span class="synLinenum">   14</span> 
+<span class="synLinenum">   15</span> <span class="synConstant">      (?(DEFINE)</span>
+<span class="synLinenum">   16</span> <span class="synConstant">          (?&lt;expr&gt;</span>
+<span class="synLinenum">   17</span> <span class="synConstant">              (?&lt;i&gt; . )</span>
+<span class="synLinenum">   18</span> <span class="synConstant">              (?&lt;j&gt; . )</span>
+<span class="synLinenum">   19</span> <span class="synConstant">                (?{</span>
+<span class="synLinenum">   20</span> <span class="synConstant">                    say "</span>expr \<span class="synIdentifier">$+</span> hash:<span class="synConstant">";</span>
+<span class="synLinenum">   21</span> <span class="synConstant">                    say "</span> (<span class="synIdentifier">$_</span> =&gt; <span class="synIdentifier">$+</span>{<span class="synIdentifier">$_</span>}) <span class="synConstant">" for sort keys %+;</span>
+<span class="synLinenum">   22</span> <span class="synConstant">                })</span>
+<span class="synLinenum">   23</span> <span class="synConstant">          )</span>
+<span class="synLinenum">   24</span> <span class="synConstant">      )</span>
+<span class="synLinenum">   25</span> <span class="synConstant">  }x;</span>
+<span class="synLinenum">   26</span> 
+<span class="synLinenum">   27</span> <span class="synConstant">  </span><span class="synIdentifier">$input</span><span class="synConstant"> = &lt;&gt;;</span>
+<span class="synLinenum">   28</span> <span class="synConstant">  chomp(</span><span class="synIdentifier">$input</span><span class="synConstant">);</span>
+<span class="synLinenum">   29</span> <span class="synConstant">  if (</span><span class="synIdentifier">$input</span><span class="synConstant"> =~ </span><span class="synIdentifier">$parser</span><span class="synConstant">) {</span>
+<span class="synLinenum">   30</span> <span class="synConstant">    say "</span>matches: (<span class="synIdentifier">$&amp;</span>)<span class="synConstant">";</span>
+<span class="synLinenum">   31</span> <span class="synConstant">  }</span>
+</pre>
+La colisión hace que la salida sea esta:
+<PRE>
+pl@nereida:~/Lperltesting$ ./clashofnamedofssets.pl
+abab
+expr $+ hash:
+ (i =&gt; a)
+ (j =&gt; b)
+expr $+ hash:
+ (i =&gt; ab)
+ (j =&gt; b)
+main $+ hash:
+ (i =&gt; ab)
+ (j =&gt; ab)
+matches: (abab)
+</PRE>
+Si se evitan las colisiones, 
+se evita la pérdida de información:
+
+<pre>
+pl@nereida:~/Lperltesting$ cat -n namedoffsets.pl
+<span class="synLinenum">    1</span>   <span class="synComment">#!/usr/local/lib/perl/5.10.1/bin//perl5.10.1</span>
+<span class="synLinenum">    2</span>   <span class="synStatement">use </span>v5.<span class="synConstant">10</span>;
+<span class="synLinenum">    3</span> 
+<span class="synLinenum">    4</span>   <span class="synStatement">my</span> <span class="synIdentifier">$input</span>;
+<span class="synLinenum">    5</span> 
+<span class="synLinenum">    6</span>   <span class="synStatement">local</span> <span class="synIdentifier">$"</span> = <span class="synConstant">", "</span>;
+<span class="synLinenum">    7</span> 
+<span class="synLinenum">    8</span>   <span class="synStatement">my</span> <span class="synIdentifier">$parser</span> = <span class="synConstant">qr{</span>
+<span class="synLinenum">    9</span> <span class="synConstant">      ^ </span><span class="synSpecial">(?</span><span class="synConstant">&lt;i&gt; </span><span class="synSpecial">(?</span><span class="synConstant">&amp;expr</span><span class="synSpecial">))</span><span class="synConstant"> </span><span class="synSpecial">(?</span><span class="synConstant">&lt;j&gt; </span><span class="synSpecial">(?</span><span class="synConstant">&amp;expr</span><span class="synSpecial">))</span><span class="synConstant"> </span><span class="synSpecial">\z</span>
+<span class="synLinenum">   10</span> <span class="synConstant">        </span><span class="synSpecial">(?</span><span class="synConstant">{</span>
+<span class="synLinenum">   11</span> <span class="synConstant">             say "main </span><span class="synSpecial">$+</span><span class="synConstant"> hash:";</span>
+<span class="synLinenum">   12</span> <span class="synConstant">             say " </span><span class="synSpecial">(</span><span class="synIdentifier">$_</span><span class="synConstant"> =&gt; </span><span class="synIdentifier">$+</span><span class="synConstant">{</span><span class="synIdentifier">$_</span><span class="synConstant">}</span>) <span class="synConstant">" for sort keys %+;</span>
+<span class="synLinenum">   13</span> <span class="synConstant">         })</span>
+<span class="synLinenum">   14</span> 
+<span class="synLinenum">   15</span> <span class="synConstant">      (?(DEFINE)</span>
+<span class="synLinenum">   16</span> <span class="synConstant">          (?&lt;expr&gt;</span>
+<span class="synLinenum">   17</span> <span class="synConstant">              (?&lt;i_e&gt; . )</span>
+<span class="synLinenum">   18</span> <span class="synConstant">              (?&lt;j_e&gt; . )</span>
+<span class="synLinenum">   19</span> <span class="synConstant">                (?{</span>
+<span class="synLinenum">   20</span> <span class="synConstant">                    say "</span>expr \<span class="synIdentifier">$+</span> hash:<span class="synConstant">";</span>
+<span class="synLinenum">   21</span> <span class="synConstant">                    say "</span> (<span class="synIdentifier">$_</span> =&gt; <span class="synIdentifier">$+</span>{<span class="synIdentifier">$_</span>}) <span class="synConstant">" for sort keys %+;</span>
+<span class="synLinenum">   22</span> <span class="synConstant">                })</span>
+<span class="synLinenum">   23</span> <span class="synConstant">          )</span>
+<span class="synLinenum">   24</span> <span class="synConstant">      )</span>
+<span class="synLinenum">   25</span> <span class="synConstant">  }x;</span>
+<span class="synLinenum">   26</span> 
+<span class="synLinenum">   27</span> <span class="synConstant">  </span><span class="synIdentifier">$input</span><span class="synConstant"> = &lt;&gt;;</span>
+<span class="synLinenum">   28</span> <span class="synConstant">  chomp(</span><span class="synIdentifier">$input</span><span class="synConstant">);</span>
+<span class="synLinenum">   29</span> <span class="synConstant">  if (</span><span class="synIdentifier">$input</span><span class="synConstant"> =~ </span><span class="synIdentifier">$parser</span><span class="synConstant">) {</span>
+<span class="synLinenum">   30</span> <span class="synConstant">    say "</span>matches: (<span class="synIdentifier">$&amp;</span>)<span class="synConstant">";</span>
+<span class="synLinenum">   31</span> <span class="synConstant">  }</span>
+</pre>
+
+<P>
+que al ejecutarse produce:
+
+<P>
+<PRE>
+pl@nereida:~/Lperltesting$ ./namedoffsets.pl
+abab
+expr $+ hash:
+ (i_e =&gt; a)
+ (j_e =&gt; b)
+expr $+ hash:
+ (i =&gt; ab)
+ (i_e =&gt; a)
+ (j_e =&gt; b)
+main $+ hash:
+ (i =&gt; ab)
+ (j =&gt; ab)
+matches: (abab)
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html2114"
+  HREF="node65.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2108"
+  HREF="node56.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2102"
+  HREF="node63.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2110"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2112"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2115"
+  HREF="node65.html">Expresiones Regulares en tiempo</A>
+<B>Sup:</B> <A NAME="tex2html2109"
+  HREF="node56.html">Algunas Extensiones</A>
+<B> Ant:</B> <A NAME="tex2html2103"
+  HREF="node63.html">Perl 5.10: Numeración de</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,394 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Un Algoritmo de Unificación</TITLE>
+<META NAME="description" CONTENT="Un Algoritmo de Unificación">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="previous" HREF="node317.html">
+<LINK REL="up" HREF="node314.html">
+<LINK REL="next" HREF="node319.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html6368"
+  HREF="node319.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6362"
+  HREF="node314.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6358"
+  HREF="node317.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6364"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6366"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6369"
+  HREF="node319.html">Práctica: Inferencia de Tipos</A>
+<B>Sup:</B> <A NAME="tex2html6363"
+  HREF="node314.html">Análisis de Tipos de</A>
+<B> Ant:</B> <A NAME="tex2html6359"
+  HREF="node317.html">El Compilador</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html6370"
+  HREF="node318.html#SECTION0018204010000000000000">La Cabecera del Módulo de Unificación</A>
+<LI><A NAME="tex2html6371"
+  HREF="node318.html#SECTION0018204020000000000000">La Función <TT>set</TT></A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION0018204000000000000000">
+Un Algoritmo de Unificación</A>
+</H2>
+
+<P>
+El algoritmo de unificación recibe dos referencias <code>$m</code> y <code>$n</code> a los 
+árboles que van a ser unificados. Retorna verdadero si la unificación puede
+tener lugar y falso en caso contrario.
+La equivalencia se mantiene utilizando un atributo cuyo nombre es <code>$set</code>.
+Todos los nodos en una clase de equivalencia tienen un único representante.
+Los atributos <code>$set</code> de los nodos
+en una misma clase referencian al representante 
+(posiblemente de forma indirecta, via los campos <code>$set</code> de otros nodos).
+El atributo <code>$set</code> del representante canónico apunta a si mismo.
+Inicialmente cada nodo esta en una clase única.
+
+<P>
+<PRE>
+ 99  sub unify {
+100    my ($m, $n) = @_;
+101
+102    my $s = representative($m);
+103    my $t = representative($n);
+104
+105    return 1 if ($s == $t);
+106
+107    return 1 if $samebasic-&gt;($s, $t);
+108
+109    print "Unifying ".representative($s)-&gt;str." and ".representative($t)-&gt;str."\n" if $debug;
+110    return 1 if (mergevar($s, $t));
+111
+112    if (ref($s) eq ref($t)) {
+113       $s-&gt;{$set} = representative($t);
+114       my $i = 0;
+115       for ($s-&gt;children) {
+116         my $tc = $t-&gt;child($i++);
+117         return 0 unless unify($_, $tc);
+118       }
+119       return 1;
+120    }
+121
+122    return 0;
+123  }
+</PRE>
+
+<P>
+Nótese que unificar <code>$m</code> y <code>$n</code> es unificar sus representantes canónicos
+<code>$s</code> y <code>$t</code>. Los representantes serán iguales si <code>$m</code> y <code>$n</code>
+ya están en la misma clase de equivalencia.
+
+<P>
+El algoritmo de unificación usa las 
+siguientes funciones auxiliares:
+
+<OL>
+<LI>La función <code>representative</code> retorna una referencia al representante ccanónico
+de la clase:
+
+<P>
+<PRE>
+ 83  sub representative {
+ 84    my $t = shift;
+ 85
+ 86    if (@_) {
+ 87      $t-&gt;{$set} = shift;
+ 88      return $t;
+ 89    }
+ 90    $t = $t-&gt;{$set} while defined($t-&gt;{set}) &amp;&amp; ($t != $t-&gt;{$set});
+ 91    die "Representative ($set) not defined!".Dumper($t) unless defined($t-&gt;{set});
+ 92    return $t;
+ 93  }
+</PRE>
+También  permite cambiar el representante. 
+</LI>
+<LI>Si <code>$s</code> y <code>$t</code> representan el mismo tipo básico la función
+referenciada por <code>$samebasic</code> devolverá verdadero. La función
+<code>$samebasic</code>  es definida  por medio de la función <code>set</code>
+junto con los otros parámetros del algoritmode unificación.
+
+<P>
+<PRE>
+203  Aho::Unify-&gt;set(
+204    key    =&gt; 'set',
+205    isvar  =&gt; sub { $_[0] =~ /^Parse::Eyapp::Node::TYPEVAR/ },
+206    samebasic =&gt; sub {
+207      my ($s, $t) = @_;
+208
+209      return (((ref($s) eq 'INT') || (ref($s) eq'STRING')) &amp;&amp; (ref($s) eq ref($t)));
+210    },
+211    debug =&gt; $debug,
+212  );
+</PRE>
+</LI>
+<LI>Si una de los dos árboles <code>$s</code> o <code>$t</code> es una variable la introducimos en la clase de 
+equivalencia de la otra. Puesto que cada variable fresca es un único nodo (estamos trabajando con un DAG)
+la actualización de la clase de equivalencia será visible en todas las apariciones de esta variable. 
+Además <code>representative</code> recorre la lista de enlaces de unificación retornando
+el tipo básico o constructor con el que la variable se ha unificado.
+
+<P>
+La función <code>mergevar</code> mezcla las clases de equivalencia cuando uno de los
+representantes es una variable:
+<PRE>
+ 67  sub mergevar {
+ 68    my ($s, $t) = @_;
+ 69
+ 70    if (isvar($s))  {
+ 71      $s-&gt;{$set} = representative($t);
+ 72      print $s-&gt;str." = ".representative($t)-&gt;str."\n" if $debug;
+ 73      return 1;
+ 74    }
+ 75    if (isvar($t)) {
+ 76      $t-&gt;{$set} = representative($s);
+ 77      print $t-&gt;str." = ".representative($s)-&gt;str."\n" if $debug;
+ 78      return 1;
+ 79    }
+ 80    return 0;
+ 81  }
+</PRE>
+
+<P>
+</LI>
+<LI>El programador puede proporcionar mediante el método <code>set</code> 
+una función <code>$isvar</code> que permite añadir variables adicionales:
+
+<P>
+<PRE>
+ 23  sub isvar {
+ 24    my $x = $isvar-&gt;(@_);
+ 25    return $x if $x;
+ 26    return 1 if $_[0] =~ /^Parse::Eyapp::Node::TYPEVAR::[\w:]+$/;
+ 27  }
+</PRE>
+El espacio de nombres <code>Parse::Eyapp::Node::TYPEVAR</code>
+se usa para las variables.
+
+<P>
+</LI>
+</OL>
+
+<P>
+
+<H4><A NAME="SECTION0018204010000000000000">
+La Cabecera del Módulo de Unificación</A>
+</H4>
+  
+
+<P>
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Aho-Polymorphism/lib/Aho$ cat -n Unify.pm
+  1  package Aho::Unify;
+  2  use Data::Dumper;
+  3  use Parse::Eyapp::Node;
+  4  use base qw (Exporter);
+  5  our @EXPORT_OK = qw(
+  6    unify
+  7    new_var
+  8    fresh
+  9    representative
+ 10    strunifiedtree
+ 11    hnewunifiedtree
+ 12    newunifiedtree
+ 13    selfrep
+ 14  );
+ 15  our %EXPORT_TAGS = ( 'all' =&gt; [ @EXPORT_OK ] );
+ 16
+ 17  my $count = 0;
+ 18  my $set = 'representative';
+ 19  my $isvar = sub { };
+ 20  my $samebasic = sub { };
+ 21  my $debug = 0;
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0018204020000000000000">
+La Función <TT>set</TT></A>
+</H4>
+  
+
+<P>
+<PRE>
+ 29  sub set {
+ 30     my $class = shift if @_ %2;
+ 31     $class = __PACKAGE__ unless defined($class);
+ 32
+ 33     my %handler = @_;
+ 34
+ 35     $set = 'representative';
+ 36     $set = $handler{key} if exists($handler{key});
+ 37     $isvar = $handler{isvar} if exists($handler{isvar});
+ 38     $samebasic = $handler{samebasic} if exists($handler{samebasic});
+ 39     $debug = $handler{debug} if exists($handler{debug});
+ 40     $count = 0;
+ 41
+ 42     bless { key =&gt; $set, isvar =&gt; $isvar, samebasic =&gt; $samebasic, count =&gt; $count }, $class;
+ 43  }
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html6368"
+  HREF="node319.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6362"
+  HREF="node314.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6358"
+  HREF="node317.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6364"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6366"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6369"
+  HREF="node319.html">Práctica: Inferencia de Tipos</A>
+<B>Sup:</B> <A NAME="tex2html6363"
+  HREF="node314.html">Análisis de Tipos de</A>
+<B> Ant:</B> <A NAME="tex2html6359"
+  HREF="node317.html">El Compilador</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

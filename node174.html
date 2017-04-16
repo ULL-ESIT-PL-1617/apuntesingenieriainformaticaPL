@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Usando Text::Balanced</TITLE>
+<META NAME="description" CONTENT="Usando Text::Balanced">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="previous" HREF="node173.html">
+<LINK REL="up" HREF="node167.html">
+<LINK REL="next" HREF="node175.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3966"
+  HREF="node175.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3960"
+  HREF="node167.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3956"
+  HREF="node173.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3962"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3964"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3967"
+  HREF="node175.html">RecDescent</A>
+<B>Sup:</B> <A NAME="tex2html3961"
+  HREF="node167.html">Construcción de Analizadores Léxicos</A>
+<B> Ant:</B> <A NAME="tex2html3957"
+  HREF="node173.html">El Módulo Parse::Flex</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001060000000000000000">
+Usando <TT>Text::Balanced</TT></A>
+</H1>
+La función <code>extract_multiple</code> del módulo <TT>Text::Balanced</TT>
+puede ser considerada un generador de analizadores léxicos. 
+El primer argumento es la cadena a ser procesada y el segundo
+la lista de <A NAME="13226"></A><B>extractores</B> a aplicar a dicha cadena.
+Un extractor puede ser una subrutina, pero también una expresión regular 
+o una cadena.
+
+<P>
+En un contexto de lista devuelve la lista con las subcadenas de la cadena original, según han sido 
+producidas por los extractores. En un contexto escalar devuelve la primera subcadena que pudo ser extraída de la cadena original. En cualquier caso, <code>extract_multiple</code> empieza 
+en la posición actual de búsqueda indicada por <code>pos</code> y actualiza el valor de <code>pos</code>
+de manera adecuada.
+
+<P>
+Si el extractor es una referencia a un hash, deberá contener exactamente un elemento. La clave 
+actúa como nombre del terminal o <B>token</B> y el valor es un extractor. La clave es utilizada
+para bendecir la cadena casada por el extractor.
+
+<P>
+Veamos un programa de ejemplo:
+<PRE>
+$ cat extract_variable.pl
+#!/usr/local/bin/perl5.8.0 -w
+
+use strict;
+use Text::Balanced qw( extract_variable extract_quotelike
+                       extract_codeblock extract_multiple);
+
+my $text = &lt;&lt;'EOS'
+#!/usr/local/bin/perl5.8.0 -w
+
+$pattern = shift || '';
+$pattern =~ s{::}{/}g;
+$pattern =~ s{$}{.pm};
+@dirs = qw(
+/usr/local/lib/perl5/5.8.0/i686-linux
+/usr/local/lib/perl5/5.8.0
+/usr/local/lib/perl5/site_perl/5.8.0/i686-linux
+/usr/local/lib/perl5/site_perl/5.8.0
+/usr/local/lib/perl5/site_perl
+/usr/lib/perl5
+/usr/share/perl5
+/usr/lib/perl/5.6.1
+/usr/share/perl/5.6.1
+);
+
+for (@dirs) {
+  my $file = $_."/".$pattern;
+  print "$file\n" if (-e $file);
+}
+
+EOS
+;
+my @tokens = &amp;extract_multiple(
+  $text,
+  [
+   {variable =&gt; sub { extract_variable($_[0], '') }},
+   {quote =&gt; sub { extract_quotelike($_[0],'') }},
+   {code =&gt; sub { extract_codeblock($_[0],'{}','') }},
+   {comment =&gt; qr/#.*/}
+  ],
+  undef,
+  0
+)
+;
+
+for (@tokens) {
+  if (ref($_)) {
+    print ref($_),"=&gt; $$_\n";
+  }
+  else {
+    print "other things: $_\n";
+  }
+}
+</PRE>
+La subrutina <code>extract_variable</code> extrae cualqueir variable
+Perl válida. El primer argumento
+es la cadena a ser procesada, el segundo es una cadena que especifica 
+un patrón indicando el prefijo a saltarse. Si se omite como en el ejemplo,
+se usarán blancos.  La subrutina <code>extract_quotelike</code>
+extrae cadenas Perl en cualqueira de sus múltiples formas de 
+representación. La subrutina <code>extract_codeblock</code> extrae un 
+bloque de código.
+
+<P>
+Ejecución del programa anterior:
+<PRE>
+$ ./extract_variable.pl
+comment=&gt; #!/usr/local/bin/perl5.8.0 -w
+other things:
+
+
+variable=&gt; $pattern
+other things:  = shift ||
+quote=&gt; ''
+other things: ;
+
+variable=&gt; $pattern
+other things:  =~
+quote=&gt; s{::}{/}g
+other things: ;
+
+variable=&gt; $pattern
+other things:  =~
+quote=&gt; s{$}{.pm}
+other things: ;
+
+variable=&gt; @dirs
+other things:  =
+quote=&gt; qw(
+/usr/local/lib/perl5/5.8.0/i686-linux
+/usr/local/lib/perl5/5.8.0
+/usr/local/lib/perl5/site_perl/5.8.0/i686-linux
+/usr/local/lib/perl5/site_perl/5.8.0
+/usr/local/lib/perl5/site_perl
+/usr/lib/perl5
+/usr/share/perl5
+/usr/lib/perl/5.6.1
+/usr/share/perl/5.6.1
+)
+other things: ;
+
+for (
+variable=&gt; @dirs
+other things: )
+code=&gt; {
+  my $file = $_."/".$pattern;
+  print "$file\n" if (-e $file);
+}
+other things:
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html3966"
+  HREF="node175.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3960"
+  HREF="node167.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3956"
+  HREF="node173.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3962"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3964"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3967"
+  HREF="node175.html">RecDescent</A>
+<B>Sup:</B> <A NAME="tex2html3961"
+  HREF="node167.html">Construcción de Analizadores Léxicos</A>
+<B> Ant:</B> <A NAME="tex2html3957"
+  HREF="node173.html">El Módulo Parse::Flex</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

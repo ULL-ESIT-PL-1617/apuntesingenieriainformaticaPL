@@ -1,0 +1,260 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Análisis Sintáctico con Parse::Eyapp</TITLE>
+<META NAME="description" CONTENT="Análisis Sintáctico con Parse::Eyapp">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node261.html">
+<LINK REL="previous" HREF="node190.html">
+<LINK REL="up" HREF="perlexamples.html">
+<LINK REL="next" HREF="node230.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html4789"
+  HREF="node230.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4783"
+  HREF="perlexamples.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4777"
+  HREF="node228.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4785"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4787"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4790"
+  HREF="node230.html">Conceptos Básicos para el</A>
+<B>Sup:</B> <A NAME="tex2html4784"
+  HREF="perlexamples.html">Análisis Léxico y Sintáctico</A>
+<B> Ant:</B> <A NAME="tex2html4778"
+  HREF="node228.html">El Generador de Analizadores</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001300000000000000000"></A>
+<A NAME="chapter:parseeyapp"></A>
+<BR>
+Análisis Sintáctico con <TT>Parse::Eyapp</TT>
+</H1>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html4791"
+  HREF="node230.html">Conceptos Básicos para el Análisis Sintáctico</A>
+<LI><A NAME="tex2html4792"
+  HREF="node231.html"><TT>Parse::Eyapp</TT>: Un Generador de Analizadores Sintácticos</A>
+<LI><A NAME="tex2html4793"
+  HREF="node232.html">Depuración de Errores</A>
+<LI><A NAME="tex2html4794"
+  HREF="node233.html">Acciones y Acciones por Defecto</A>
+<LI><A NAME="tex2html4795"
+  HREF="node234.html">Traducción de Infijo a Postfijo</A>
+<LI><A NAME="tex2html4796"
+  HREF="node235.html">Práctica: Traductor de Términos a GraphViz</A>
+<LI><A NAME="tex2html4797"
+  HREF="node236.html">Práctica: Gramática Simple en <TT>Parse::Eyapp</TT></A>
+<LI><A NAME="tex2html4798"
+  HREF="node237.html">El Método <TT>YYName</TT> y la Directiva <TT>%name</TT></A>
+<LI><A NAME="tex2html4799"
+  HREF="node238.html">Construyendo el Arbol de Análisis Sintactico Mediante Directivas</A>
+<LI><A NAME="tex2html4800"
+  HREF="node239.html">La Maniobra de <TT>bypass</TT></A>
+<LI><A NAME="tex2html4801"
+  HREF="node240.html">Salvando la Información en los Terminales Sintácticos</A>
+<LI><A NAME="tex2html4802"
+  HREF="node241.html">Práctica: Análisis Sintáctico</A>
+<LI><A NAME="tex2html4803"
+  HREF="node242.html">Podando el Arbol</A>
+<LI><A NAME="tex2html4804"
+  HREF="node243.html">Nombres para los Atributos</A>
+<LI><A NAME="tex2html4805"
+  HREF="node244.html">Bypass Automático</A>
+<LI><A NAME="tex2html4806"
+  HREF="node245.html">La opción <TT>alias</TT> de <TT>%tree</TT></A>
+<LI><A NAME="tex2html4807"
+  HREF="node246.html">Diseño de Analizadores con <TT>Parse::Eyapp</TT></A>
+<LI><A NAME="tex2html4808"
+  HREF="node247.html">Práctica: Construcción del Arbol para el Lenguaje Simple</A>
+<LI><A NAME="tex2html4809"
+  HREF="node248.html">Práctica: Ampliación del Lenguaje Simple</A>
+<LI><A NAME="tex2html4810"
+  HREF="node249.html">Agrupamiento y Operadores de Listas</A>
+<LI><A NAME="tex2html4811"
+  HREF="node250.html">El método <TT>str</TT> en Mas Detalle</A>
+<LI><A NAME="tex2html4812"
+  HREF="node251.html">El Método <TT>descendant</TT></A>
+<LI><A NAME="tex2html4813"
+  HREF="node252.html">Conceptos Básicos del Análisis LR</A>
+<LI><A NAME="tex2html4814"
+  HREF="node253.html">Construcción de las Tablas para el Análisis SLR</A>
+<UL>
+<LI><A NAME="tex2html4815"
+  HREF="node254.html">Los conjuntos de Primeros y Siguientes</A>
+<LI><A NAME="tex2html4816"
+  HREF="node255.html">Construcción de las Tablas</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html4817"
+  HREF="node256.html">Algoritmo de Análisis LR</A>
+<LI><A NAME="tex2html4818"
+  HREF="node257.html">Precedencia y Asociatividad</A>
+<LI><A NAME="tex2html4819"
+  HREF="node258.html">Acciones en Medio de una Regla</A>
+<LI><A NAME="tex2html4820"
+  HREF="node259.html">Manejo en <TT>eyapp</TT> de Atributos Heredados</A>
+<LI><A NAME="tex2html4821"
+  HREF="node260.html">Acciones en Medio de una Regla y Atributos Heredados</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html4789"
+  HREF="node230.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4783"
+  HREF="perlexamples.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4777"
+  HREF="node228.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4785"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4787"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4790"
+  HREF="node230.html">Conceptos Básicos para el</A>
+<B>Sup:</B> <A NAME="tex2html4784"
+  HREF="perlexamples.html">Análisis Léxico y Sintáctico</A>
+<B> Ant:</B> <A NAME="tex2html4778"
+  HREF="node228.html">El Generador de Analizadores</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Traducción de Infijo a Postfijo</TITLE>
+<META NAME="description" CONTENT="Traducción de Infijo a Postfijo">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node235.html">
+<LINK REL="previous" HREF="node233.html">
+<LINK REL="up" HREF="node229.html">
+<LINK REL="next" HREF="node235.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html4913"
+  HREF="node235.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4907"
+  HREF="node229.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4901"
+  HREF="node233.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4909"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4911"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4914"
+  HREF="node235.html">Práctica: Traductor de Términos</A>
+<B>Sup:</B> <A NAME="tex2html4908"
+  HREF="node229.html">Análisis Sintáctico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html4902"
+  HREF="node233.html">Acciones y Acciones por</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001350000000000000000">
+Traducción de Infijo a Postfijo</A>
+</H1>
+
+<P>
+Las acción por defecto (en yacc <code>$$ = $1</code>) puede ser modificada
+de manera parecida a como lo hace la variable <code>$::RD_AUTOACTION</code> en
+<code>Parse::RecDescent</code> usando la directiva <code>%defaultaction</code>:
+
+<P>
+<PRE>
+%defaultaction { perl code }
+</PRE>
+
+<P>
+El código especificado en la acción por defecto
+se ejecutará siempre que se produzca una reducción 
+por una regla en la que no se haya explicitado
+código.
+
+<P>
+El siguiente ejemplo traduce una expresión en infijo
+como <code>a=b*-3</code> a una en postfijo como <code>a b 3 NEG * = </code>:
+
+<P>
+<PRE>
+  # File Postfix.yp
+  %right  '='
+  %left   '-' '+'
+  %left   '*' '/'
+  %left   NEG
+  %{
+  use IO::Interactive qw(interactive);
+  %}
+
+  %defaultaction {
+    my $self = shift;
+
+    return  "$_[0]" if (@_==1);  # NUM and VAR
+    return  "$_[0] $_[2] $_[1]"  if (@_==3); # other operations
+    die "Fatal Error\n";
+  }
+
+  %%
+  line: (exp  { print "$_[1]\n" })?
+  ;
+
+  exp:        NUM
+          |   VAR
+          |   VAR '=' exp
+          |   exp '+' exp
+          |   exp '-' exp
+          |   exp '*' exp
+          |   exp '/' exp
+          |   '-' exp %prec NEG { "$_[2] NEG" }
+          |   '(' exp ')' { $_[2] }
+  ;
+
+  %%
+
+  sub _Error {
+    my($token)=$_[0]-&gt;YYCurval;
+    my($what)= $token ? "input: '$token'" : "end of input";
+    my @expected = $_[0]-&gt;YYExpect();
+
+    local $" = ', ';
+    die "Syntax error near $what. Expected one of these tokens: @expected\n";
+  }
+
+  my $x;
+
+  sub _Lexer {
+    my($parser)=shift;
+
+    for ($x) {
+      s/^\s+//;
+      $_ eq '' and return('',undef);
+
+      s/^([0-9]+(?:\.[0-9]+)?)//   and return('NUM',$1);
+      s/^([A-Za-z][A-Za-z0-9_]*)// and return('VAR',$1);
+      s/^(.)//s                    and return($1,$1);
+    }
+  }
+
+  sub Run {
+    my($self)=shift;
+    print {interactive} "Write an expression: ";
+    $x = &lt;&gt;;
+    $self-&gt;YYParse( yylex =&gt; \&amp;_Lexer, yyerror =&gt; \&amp;_Error,
+      #yydebug =&gt; 0xFF
+    );
+  }
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html4913"
+  HREF="node235.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4907"
+  HREF="node229.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4901"
+  HREF="node233.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4909"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4911"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4914"
+  HREF="node235.html">Práctica: Traductor de Términos</A>
+<B>Sup:</B> <A NAME="tex2html4908"
+  HREF="node229.html">Análisis Sintáctico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html4902"
+  HREF="node233.html">Acciones y Acciones por</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

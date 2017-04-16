@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>La Cabecera: Diferencias entre yacc y yapp</TITLE>
+<META NAME="description" CONTENT="La Cabecera: Diferencias entre yacc y yapp">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node214.html">
+<LINK REL="previous" HREF="node212.html">
+<LINK REL="up" HREF="node211.html">
+<LINK REL="next" HREF="node214.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html4568"
+  HREF="node214.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4562"
+  HREF="node211.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4556"
+  HREF="node212.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4564"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4566"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4569"
+  HREF="node214.html">El Cuerpo</A>
+<B>Sup:</B> <A NAME="tex2html4563"
+  HREF="node211.html">La Gramática de yapp</A>
+<B> Ant:</B> <A NAME="tex2html4557"
+  HREF="node212.html">La Cabecera</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0012192000000000000000"></A>
+<A NAME="subsection:cabecerayaccyapp"></A>
+<BR>
+La Cabecera: Diferencias entre <TT>yacc</TT> y <TT>yapp</TT>
+</H2>
+Las declaraciones de tipo
+correspondientes a <code>%union</code> y a las especificaciones de 
+tipo entre símbolos menor mayor (<code>&lt;tipo&gt;</code>) en declaraciones <code>token</code> y 
+<code>%type</code> no son usadas por <code>yapp</code>. Estas declaraciones son
+necesarias cuando el código de las acciones semánticas
+se escribe en <code>C</code> como es el caso de <A NAME="15091"></A><TT>yacc</TT> y <A NAME="15096"></A><TT>bison</TT>.
+Sigue un ejemplo de programa <code>yacc</code>/<code>bison</code> que usa declaraciones <code>%union</code>
+y de tipo para los atributos:
+
+<P>
+<PRE>
+ 1 %{
+ 2 #include &lt;stdio.h&gt;
+ 3 
+ 4 #define CLASE(x) ((x == 1)?"global":"local")
+ 5 #define TIPO(x) ((x == 1)?"float":"integer")
+ 6 %}
+ 7 
+ 8 %union {
+ 9   int n;   /* enumerado */
+10   char *s; /* cadena */
+11 }
+12 
+13 %token &lt;n&gt; FLOAT INTEGER 
+14 %token &lt;n&gt; GLOBAL 
+15 %token &lt;n&gt; LOCAL 
+16 %token &lt;s&gt; NAME
+17 %type &lt;n&gt; class type
+18 
+19 %%
+</PRE>
+La declaración <code>%union</code> de la línea 8 indica que los atributos
+son de dos tipos: enteros y punteros a caracteres. 
+El nombre del campo es posteriormente usado en las 
+declaraciones de las líneas 13-17 para indicar el tipo 
+del atributo asociado con la variable o con el terminal.
+Así, la declaración de la línea 13 indica 
+que los terminales <code>FLOAT</code> e <code>INTEGER</code>
+son de tipo entero, mientras que la declaración de la línea 16 nos
+dice que el terminal <code>NAME</code> es de tipo cadena.
+<PRE>
+29 class
+30   : GLOBAL { $$ = 1; }
+31   | LOCAL  { $$ = 2; }
+32   ;
+33 
+34 type
+35   : FLOAT   { $$ = 1; }
+36   | INTEGER { $$ = 2; }
+37   ;
+</PRE>
+La información proveída sobre los tipos permite a <code>yacc</code> 
+introducir automáticamente en el código <code>C</code> producido 
+los <B>typecasting</B> o ahormados
+para las asignaciones de las líneas 30-31 y 35-36. Obsérve que
+en <code>yacc</code> el atributo de la variable en la parte izquierda
+se denota por <code>$$</code>.
+
+<P>
+Otra diferencia entre <code>yacc</code> y <code>yapp</code> es que en <code>yacc</code> los 
+atributos de la parte derecha no constituyen un vector, denotándose
+por <code>$1</code>, <code>$2</code>, <code>$3</code> ...
+
+<P>
+En ocasiones <code>yacc</code> no puede determinar el tipo de un atributo. 
+En particular cuando se habla del atributo asociado con una acción
+intermedia, ya que esta no tiene variable sintáctica asociada 
+explícitamente o bien cuando se habla de los atributos
+de símbolos que están a la izquierda de la reducción actual
+(véase la sección <A HREF="node259.html#section:heredados">8.28</A>). Los atributos de símbolos 
+a la izquierda de la producción actual se denotan en <code>yacc</code> por números 
+no positivos <code>$0</code>, <code>$-1</code>, <code>$-2</code> .... 
+
+<P>
+En estos casos 
+el programador deberá especificar explícitamente el tipo del 
+atributo usando la notación <code>$&lt;tipo&gt;#</code>. Donde <code>tipo</code> es 
+uno de los campos de la <code>union</code> y <code>#</code> es el numeral 
+del símbolo correspondiente:
+
+<P>
+<PRE>
+39 namelist
+40   : NAME   { printf("%s de clase %s, tipo %s\n",$1,CLASE($&lt;n&gt;-1),TIPO($&lt;n&gt;0)); }
+41   | namelist ',' NAME 
+42       { printf("%s de clase %s, tipo %s\n",$3,CLASE($&lt;n&gt;-1),TIPO($&lt;n&gt;0)); }
+43   ;
+44 %%
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html4568"
+  HREF="node214.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4562"
+  HREF="node211.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4556"
+  HREF="node212.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4564"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4566"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4569"
+  HREF="node214.html">El Cuerpo</A>
+<B>Sup:</B> <A NAME="tex2html4563"
+  HREF="node211.html">La Gramática de yapp</A>
+<B> Ant:</B> <A NAME="tex2html4557"
+  HREF="node212.html">La Cabecera</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

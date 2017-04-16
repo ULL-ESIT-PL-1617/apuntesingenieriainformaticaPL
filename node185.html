@@ -1,0 +1,310 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Usando la directiva autotree</TITLE>
+<META NAME="description" CONTENT="Usando la directiva autotree">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node186.html">
+<LINK REL="previous" HREF="node184.html">
+<LINK REL="up" HREF="node175.html">
+<LINK REL="next" HREF="node186.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html4134"
+  HREF="node186.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4128"
+  HREF="node175.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4122"
+  HREF="node184.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4130"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4132"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4135"
+  HREF="node186.html">Práctica</A>
+<B>Sup:</B> <A NAME="tex2html4129"
+  HREF="node175.html">RecDescent</A>
+<B> Ant:</B> <A NAME="tex2html4123"
+  HREF="node184.html">El Hash %item</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0011100000000000000000">
+Usando la directiva <TT>autotree</TT></A>
+</H1>
+La directiva <code>&lt;autotree&gt;</code> hace que RD construya automáticamente
+una representación del árbol sintáctico concreto.
+Cada nodo del árbol, correspondiendo a una parte 
+derecha de una regla de producción es bendecido (usando <code>bless</code>)
+en una clase cuyo nombre es el de la variable sintáctica que 
+produce: viene a ser equivalente a <code>{ bless \%item, $item[0] }</code>.
+
+<P>
+<PRE>
+$ cat ./infixautotree.pl
+#!/usr/local/bin/perl5.8.0 -w
+use strict;
+use Parse::RecDescent;
+use Data::Dumper;
+
+#$::RD_TRACE = 1;
+my $grammar = q{
+  &lt;autotree&gt;
+  expre  : &lt;leftop: prods '+' prods&gt;
+  prods : &lt;leftop: unario '*' unario&gt;
+  unario: "(" expre ")" |  numero
+  numero : /\d+(\.\d+)?/
+};
+
+my $parse = new Parse::RecDescent($grammar);
+my $line = shift;
+my $result = $parse-&gt;expre($line);
+if (defined($result)) {
+    print "Válida:\n", Dumper($result);
+}
+  else { print "Cadena no válida\n"; }
+</PRE>
+
+<P>
+Las reglas que consisten en un sólo terminal, como la de número,
+llevan un tratamiento especial. En ese caso el código
+ejecutado es:
+<PRE>
+{ bless {__VALUE__=&gt;$item[1]}, $item[0] }
+</PRE>
+
+<P>
+La estructura resultante es relativamente compleja. 
+Cada nodo es bendecido
+en la clase con nombre el de la variable sintáctica, esto es, con nombre 
+el de la regla. Podemos sacar ventaja de esta aproximación si asociamos 
+métodos de procesamiento con cada tipo de nodo.
+Por ejemplo, para hacer un recorrido del árbol sintáctico, podríamos 
+extender el ejemplo anterior como sigue:
+
+<P>
+<PRE>
+$ cat infixautotree2.pl
+...
+
+sub expre::traverse {
+  my $root = shift;
+  my $level = shift;
+
+  process($root, $level, '__RULE__');
+  foreach (@{$root-&gt;{__DIRECTIVE1__}}) {
+    $_-&gt;traverse($level+1);
+  }
+}
+
+sub prods::traverse {
+  my $root = shift;
+  my $level = shift;
+
+  process($root, $level, '__RULE__');
+  foreach (@{$root-&gt;{__DIRECTIVE1__}}) {
+    $_-&gt;traverse($level+1);
+  }
+}
+
+sub unario::traverse {
+  my $root = shift;
+  my $level = shift;
+
+  process($root, $level, '__RULE__');
+  my $child = $root-&gt;{numero} || $root-&gt;{expre};
+  $child-&gt;traverse($level+1);
+}
+
+sub numero::traverse {
+  my $root = shift;
+  my $level = shift;
+
+  process($root, $level, '__VALUE__');
+}
+
+sub process {
+  my $root = shift;
+  my $level = shift;
+  my $value = shift;
+
+  print " "x($width*$level),$root-&gt;{$value},"\n";
+}
+</PRE>
+Sigue un ejemplo de ejecución:
+<PRE>
+$ ./infixautotree2.pl '2+3*(5+2)+9' 6
+Válida:
+expre
+      prods
+            unario
+                  2
+      prods
+            unario
+                  3
+            unario
+                  expre
+                        prods
+                              unario
+                                    5
+                        prods
+                              unario
+                                    2
+      prods
+            unario
+                  9
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html4134"
+  HREF="node186.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4128"
+  HREF="node175.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4122"
+  HREF="node184.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4130"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4132"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4135"
+  HREF="node186.html">Práctica</A>
+<B>Sup:</B> <A NAME="tex2html4129"
+  HREF="node175.html">RecDescent</A>
+<B> Ant:</B> <A NAME="tex2html4123"
+  HREF="node184.html">El Hash %item</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

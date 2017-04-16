@@ -1,0 +1,290 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Repaso: Pruebas en el Análisis Léxico</TITLE>
+<META NAME="description" CONTENT="Repaso: Pruebas en el Análisis Léxico">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="previous" HREF="node121.html">
+<LINK REL="up" HREF="node119.html">
+<LINK REL="next" HREF="node123.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3208"
+  HREF="node123.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3202"
+  HREF="node119.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3198"
+  HREF="node121.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3204"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3206"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3209"
+  HREF="node123.html">Conceptos Básicos para el</A>
+<B>Sup:</B> <A NAME="tex2html3203"
+  HREF="node119.html">Pruebas para el Analizador</A>
+<B> Ant:</B> <A NAME="tex2html3199"
+  HREF="node121.html">Práctica: Pruebas en el</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00943000000000000000"></A>
+   <A NAME="10012"></A>
+<BR>
+Repaso: Pruebas en el Análisis Léxico
+</H2>
+
+<OL>
+<LI>¿Cuál es la diferencia entre los operadores <code>==</code> y <code>eq</code>?
+</LI>
+<LI>¿Cuáles son los parámetros de la función <code>ok</code>?
+</LI>
+<LI>¿Cuáles son los parámetros de la función <code>is</code>?
+</LI>
+<LI>¿Porqué es conveniente nombrar las pruebas con un nombre que empiece por
+un número?
+</LI>
+<LI>¿Como puedo ejecutar los tests en modo <B>verbose</B>?
+</LI>
+<LI>¿Como puedo probar un código que produce la detención del programa?
+</LI>
+<LI>¿Que contiene la variable <code>$@</code>?
+</LI>
+<LI>¿Que hace la función <code>like</code>?
+</LI>
+<LI>¿Que contiene la variable <code>$#-</code>? ¿Y <code>$+</code>?
+(Consulte <A HREF="node53.html#section:variablesmagicasereg">3.1.4</A>)
+</LI>
+<LI>¿Porqué la función <code>use_ok</code> es llamada dentro de un <code>BEGIN</code>?
+</LI>
+<LI>¿Que es una prueba <code>SKIP</code>?
+</LI>
+<LI>¿Que es una prueba <code>TODO</code>?
+</LI>
+<LI>¿Que hace la función <code>pod_file_ok</code>?
+¿A que módulo pertenece?
+</LI>
+<LI>¿Que hace el operador <code>tr</code>?
+</LI>
+<LI>¿Qué devuelve el operador <code>tr</code>?
+</LI>
+<LI>¿Que hace la opción <code>d</code> de <code>tr</code>?
+(consulte <A HREF="node78.html#section:tr">3.5</A>)
+</LI>
+<LI>Explique la conducta de la siguiente sesión con el depurador:
+<PRE>
+  DB&lt;1&gt; $a = '"Focho \"mucha\" chufa"'
+  DB&lt;2&gt; print $a
+"Focho \"mucha\" chufa"
+  DB&lt;3&gt; print $&amp; if $a =~ m{^"([^"]|\\")*"}
+"Focho \"
+  DB&lt;4&gt; print $&amp; if $a =~ m{^"(\\"||[^"])*"}
+"Focho \"mucha\" chufa"
+</PRE>
+</LI>
+<LI>Supuesto que tuvieramos el operador menos en nuestro lenguaje y
+dada la entrada <code>a = 2-3</code>, ¿Que devolverá su analizador léxico? 
+¿Devuelve <code>ID PUN NUM NUM</code> o bien <code>ID PUN NUM PUN NUM</code>?
+(hemos simplificado el flujo eliminando los atributos).
+</LI>
+<LI>¿Que hace la llamada
+<code>use Test::More qw(no_plan);</code>?
+</LI>
+<LI>¿Que hace la función <code>can_ok</code>? ¿Qué argumentos tiene?
+</LI>
+<LI>Explique las causas de la siguiente conducta del depurador:
+<PRE>
+  DB&lt;1&gt; $a='4+5'
+  DB&lt;2&gt; print "($&amp;) " while ($a =~ m/(\G\d+)/gc) or ($a =~ m/(\G\+)/gc);
+(4) (+) (5)
+  DB&lt;3&gt; $a='4+5' # inicializamos la posición de búsqueda
+  DB&lt;4&gt; print "($&amp;) " while ($a =~ m/(\G\d+)/g) or ($a =~ m/(\G\+)/g);
+(4)
+  DB&lt;5&gt; $a='4+5'
+  DB&lt;6&gt; print "($&amp;) " while ($a =~ m/\G\d+|\G\+/g)
+(4) (+) (5)
+</PRE>
+</LI>
+<LI>¿Que diferencia hay entre <code>is_deeply</code> e <code>is</code>?
+
+<P>
+</LI>
+<LI>¿Que argumentos recibe la función <code>throws_ok</code>?
+¿En que módulo se encuentra?
+
+<P>
+</LI>
+<LI>¿Que hace el comando
+<code>HARNESS_PERL_SWITCHES=-MDevel::Cover make test</code>?
+
+<P>
+</LI>
+<LI>¿Cómo se interpreta el cubrimiento de las sentencias? ¿y de las subrutinas?
+¿y de las ramas? ¿y las condiciones lógicas?
+¿En cual de estos factores es realista y deseable lograr un cubrimiento
+del %100 con nuestras pruebas?
+
+<P>
+</LI>
+<LI>¿Que pasa si después de haber desarrollado un número de pruebas
+cambio la interfaz de mi API?
+
+<P>
+</LI>
+<LI>¿Que hace el comando <code>perl -d:DProf programa</code>? ¿Para que sirve?
+</LI>
+</OL>
+
+<P>
+<HR>
+<A NAME="tex2html3208"
+  HREF="node123.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3202"
+  HREF="node119.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3198"
+  HREF="node121.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3204"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3206"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3209"
+  HREF="node123.html">Conceptos Básicos para el</A>
+<B>Sup:</B> <A NAME="tex2html3203"
+  HREF="node119.html">Pruebas para el Analizador</A>
+<B> Ant:</B> <A NAME="tex2html3199"
+  HREF="node121.html">Práctica: Pruebas en el</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

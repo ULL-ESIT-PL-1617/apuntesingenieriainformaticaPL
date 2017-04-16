@@ -1,0 +1,316 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Ejercicio: Factores Comunes</TITLE>
+<META NAME="description" CONTENT="Ejercicio: Factores Comunes">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node129.html">
+<LINK REL="previous" HREF="node127.html">
+<LINK REL="up" HREF="node125.html">
+<LINK REL="next" HREF="node129.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3312"
+  HREF="node129.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3306"
+  HREF="node125.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3300"
+  HREF="node127.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3308"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3310"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3313"
+  HREF="node129.html">Derivaciones a vacío</A>
+<B>Sup:</B> <A NAME="tex2html3307"
+  HREF="node125.html">Análisis Sintáctico Predictivo Recursivo</A>
+<B> Ant:</B> <A NAME="tex2html3301"
+  HREF="node127.html">Ejercicio: Recorrido del árbol</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00963000000000000000"></A>
+   <A NAME="10020"></A>
+<BR>
+Ejercicio: Factores Comunes
+</H2>
+  
+En el programa <A HREF="node126.html#program:adrp">4.6.1</A> el reconocimiento de las categorías gramáticales
+statements, expression y term (líneas 19-27) difiere del resto. Observe las reglas:
+
+<P>
+<BR>
+<BR>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT">statements   <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ statement  ';'  statements        <IMG
+ WIDTH="10" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ \vert$">
+ statement</TD>
+</TR>
+<TR><TD ALIGN="LEFT">expression   <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ term '+' expression               <IMG
+ WIDTH="10" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ \vert$">
+ term</TD>
+</TR>
+<TR><TD ALIGN="LEFT">term         <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ factor '*' term                   <IMG
+ WIDTH="10" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ \vert$">
+ factor</TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+
+<P>
+¿Son disjuntos los conjuntos <!-- MATH
+ $FIRST(\gamma_i)$
+ -->
+<IMG
+ WIDTH="93" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img66.png"
+ ALT="$ FIRST(\gamma_i)$">
+ para las partes derechas de las reglas
+de statements?
+¿Son disjuntos los conjuntos <!-- MATH
+ $FIRST(\gamma_i)$
+ -->
+<IMG
+ WIDTH="93" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img66.png"
+ ALT="$ FIRST(\gamma_i)$">
+ para las partes derechas de las reglas
+de expression?
+¿Son disjuntos los conjuntos <!-- MATH
+ $FIRST(\gamma_i)$
+ -->
+<IMG
+ WIDTH="93" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img66.png"
+ ALT="$ FIRST(\gamma_i)$">
+ para las partes derechas de las reglas
+de term?
+
+<P>
+Si se tiene una variable con producciones:
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $A   \rightarrow \alpha \beta \mid \alpha \gamma$
+ -->
+<IMG
+ WIDTH="103" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img70.png"
+ ALT="$ A \rightarrow \alpha \beta \mid \alpha \gamma$">
+</TD>
+</TR>
+</TABLE>
+
+<P>
+Las dos producciones tienen un <A NAME="10021"></A><B>máximo factor común</B> en la izquierda
+de su parte derecha <IMG
+ WIDTH="16" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img55.png"
+ ALT="$ \alpha$">
+. Asumimos que <!-- MATH
+ $FIRST(\beta) \cap FIRST(\gamma) = \emptyset$
+ -->
+<IMG
+ WIDTH="225" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img71.png"
+ ALT="$ FIRST(\beta) \cap FIRST(\gamma) = \emptyset$">
+.
+
+<OL>
+<LI>¿Cómo puede modificarse la gramática para obtener una nueva gramática que cumpla la condición de que las partes derechas tienen conjuntos <!-- MATH
+ $FIRST(\gamma_i)$
+ -->
+<IMG
+ WIDTH="93" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img66.png"
+ ALT="$ FIRST(\gamma_i)$">
+ disjuntos?
+</LI>
+<LI>¿Puede modificarse la técnica APDR para que funcione sobre gramáticas con este tipo 
+de producciones?. Observe el código asociado con statements, expression  y term.
+¿Cómo sería el esquema general?
+</LI>
+</OL>
+
+<P>
+<HR>
+<A NAME="tex2html3312"
+  HREF="node129.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3306"
+  HREF="node125.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3300"
+  HREF="node127.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3308"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3310"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3313"
+  HREF="node129.html">Derivaciones a vacío</A>
+<B>Sup:</B> <A NAME="tex2html3307"
+  HREF="node125.html">Análisis Sintáctico Predictivo Recursivo</A>
+<B> Ant:</B> <A NAME="tex2html3301"
+  HREF="node127.html">Ejercicio: Recorrido del árbol</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

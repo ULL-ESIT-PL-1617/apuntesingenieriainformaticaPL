@@ -1,0 +1,652 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Introducción</TITLE>
+<META NAME="description" CONTENT="Introducción">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node127.html">
+<LINK REL="previous" HREF="node125.html">
+<LINK REL="up" HREF="node125.html">
+<LINK REL="next" HREF="node127.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3284"
+  HREF="node127.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3278"
+  HREF="node125.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3272"
+  HREF="node125.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3280"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3282"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3285"
+  HREF="node127.html">Ejercicio: Recorrido del árbol</A>
+<B>Sup:</B> <A NAME="tex2html3279"
+  HREF="node125.html">Análisis Sintáctico Predictivo Recursivo</A>
+<B> Ant:</B> <A NAME="tex2html3273"
+  HREF="node125.html">Análisis Sintáctico Predictivo Recursivo</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00961000000000000000"></A>
+<A NAME="subsection:introduccion"></A>
+<BR>
+Introducción
+</H2>
+En este método se asocia una subrutina con cada variable sintáctica <IMG
+ WIDTH="53" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img51.png"
+ ALT="$ A \in V$">
+. Dicha subrutina 
+(que llamaremos <code>A</code>) reconocerá el lenguaje generado desde la variable <IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ A$">
+:
+
+<P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ $L_A(G) = \{ x \in \Sigma^* : A \stackrel{*}{\Longrightarrow} x \}$
+ -->
+<IMG
+ WIDTH="222" HEIGHT="45" ALIGN="MIDDLE" BORDER="0"
+ SRC="img52.png"
+ ALT="$ L_A(G) = \{ x \in \Sigma^* : A \stackrel{*}{\Longrightarrow} x \}$">
+
+</DIV>
+
+<P>
+En este método se escribe una rutina <code>A</code> por variable sintáctica <IMG
+ WIDTH="53" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img51.png"
+ ALT="$ A \in V$">
+. 
+Se le da a la rutina asociada el mismo nombre que a la variable sintáctica
+asociada. La función de la rutina <code>A</code> asociada con la variable
+<IMG
+ WIDTH="53" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img51.png"
+ ALT="$ A \in V$">
+ es reconocer el lenguaje <IMG
+ WIDTH="43" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img53.png"
+ ALT="$ L(A)$">
+ generado por <IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ A$">
+.
+La estrategia general que sigue la rutina <code>A</code> para reconocer
+<IMG
+ WIDTH="43" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img53.png"
+ ALT="$ L(A)$">
+ es decidir en términos del terminal <IMG
+ WIDTH="14" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img54.png"
+ ALT="$ a$">
+ en la entrada
+que regla de producción concreta <!-- MATH
+ $A \rightarrow \alpha$
+ -->
+<IMG
+ WIDTH="56" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img26.png"
+ ALT="$ A \rightarrow \alpha$">
+ se aplica para
+a continuación comprobar que la entrada que sigue pertenece al lenguaje generado por 
+<IMG
+ WIDTH="16" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img55.png"
+ ALT="$ \alpha$">
+. 
+En un analizador predictivo descendente recursivo (APDR) se asume que el símbolo que actualmente 
+esta siendo observado (denotado <code>lookahead</code>) permite determinar unívocamente
+que producción de <IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ A$">
+ hay que aplicar. 
+Una vez que se ha determinado que la regla por la que continuar la derivación
+es <!-- MATH
+ $A \rightarrow \alpha$
+ -->
+<IMG
+ WIDTH="56" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img26.png"
+ ALT="$ A \rightarrow \alpha$">
+ se procede a reconocer <!-- MATH
+ $L_{\alpha}(G)$
+ -->
+<IMG
+ WIDTH="53" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img56.png"
+ ALT="$ L_{\alpha}(G)$">
+,
+el lenguaje generado por <IMG
+ WIDTH="16" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img55.png"
+ ALT="$ \alpha$">
+. Si <!-- MATH
+ $\alpha = X_1 \ldots X_n$
+ -->
+<IMG
+ WIDTH="111" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img57.png"
+ ALT="$ \alpha = X_1 \ldots X_n$">
+,
+las apariciones de terminales <IMG
+ WIDTH="25" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img58.png"
+ ALT="$ X_i$">
+ en <IMG
+ WIDTH="16" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img55.png"
+ ALT="$ \alpha$">
+ son emparejadas
+con los terminales en la entrada mientras que las apariciones de variables <IMG
+ WIDTH="62" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img59.png"
+ ALT="$ X_i = B$">
+
+en <IMG
+ WIDTH="16" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img55.png"
+ ALT="$ \alpha$">
+ se traducen en llamadas a la correspondiente subrutina asociada con <code>B</code>.
+
+<P>
+Para ilustrar el método,
+simplificaremos la gramática presentada en el ejercicio
+<A HREF="node124.html#ejercicio:tutugrammar">4.5.1</A> eliminando las declaraciones:
+
+<P>
+<BR>
+<BR>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT">statements   <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ statement  ';'  statements        <IMG
+ WIDTH="10" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ \vert$">
+ statement</TD>
+</TR>
+<TR><TD ALIGN="LEFT">statement    <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ ID '=' expression                 <IMG
+ WIDTH="10" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ \vert$">
+ P  expression</TD>
+</TR>
+<TR><TD ALIGN="LEFT">expression   <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ term '+' expression               <IMG
+ WIDTH="10" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ \vert$">
+ term</TD>
+</TR>
+<TR><TD ALIGN="LEFT">term         <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ factor '*' term                   <IMG
+ WIDTH="10" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ \vert$">
+ factor</TD>
+</TR>
+<TR><TD ALIGN="LEFT">factor       <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ '(' expression ')' <IMG
+ WIDTH="10" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ \vert$">
+ ID <IMG
+ WIDTH="10" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ \vert$">
+ NUM</TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+
+<P>
+La secuencia de llamadas cuando se procesa la entrada mediante 
+el siguiente programa construye ``implícitamente'' el árbol 
+de análisis sintáctico concreto.
+
+<P>
+Dado que estamos usando <code>strict</code> se requiere prototipar las funciones
+al comienzo del fichero:
+<PRE>
+sub parse();
+sub statements();
+sub statement();
+sub expression();
+sub term();
+sub factor();
+sub idlist();
+sub declaration();
+sub declarations();
+</PRE>
+
+<P>
+Para saber mas sobre prototipos consulte <A HREF="#section:prototipos">
+<IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> [<A
+ HREF="node323.html#CasianoIntroAPerl">4</A>].
+
+<P>
+<P>
+<DIV><A NAME="program:adrp"><B>Programa  4.6.1</B></A> &nbsp; <PRE>
+ 1 sub match {
+ 2   my $t = shift;
+ 3 
+ 4   if ($lookahead eq $t) {
+ 5     ($lookahead, $value) = splice @tokens,0,2; 
+ 6     if (defined($lookahead)) { 
+ 7       $lookahead = $value if ($lookahead eq 'PUN');
+ 8     } else { $lookahead = 'EOI'; }
+ 9   }
+10   else { error("Se esperaba $t y se encontro $lookahead\n"); }
+11 }
+12 
+13 sub statement {
+14   if ($lookahead eq 'ID') { match('ID'); match('='); expression; }
+15   elsif ($lookahead eq 'P') { match('P'); expression; }
+16   else { error('Se esperaba un identificador'); }
+17 }
+18 
+19 sub term() {
+20   factor;
+21   if ($lookahead eq '*') { match('*'); term; }
+22 }
+23 
+24 sub expression() {
+25   term;
+26   if ($lookahead eq '+') { match('+'); expression; }
+27 }
+28 
+29 sub factor() {
+30   if ($lookahead eq 'NUM') { match('NUM'); }
+31   elsif ($lookahead eq 'ID') { match('ID'); }
+32   elsif ($lookahead eq '(') { match('('); expression; match(')'); }
+33   else { error("Se esperaba (, NUM o ID"); }
+34 }
+35 
+36 sub statements {
+37   statement;
+38   if ($lookahead eq ';') { match(';'); statements; }
+39 }
+40 
+41 sub parser {
+42   ($lookahead, $value) = splice @tokens,0,2; 
+43   statements; match('EOI');
+44 }
+</PRE></DIV><P></P>
+
+<P>
+Como vemos en el ejemplo, el análisis predictivo confía en que, si estamos
+ejecutando la entrada del procedimiento <code>A</code>,
+el cuál está asociado con la variable <IMG
+ WIDTH="53" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img51.png"
+ ALT="$ A \in V$">
+, el símbolo terminal
+que esta en la entrada <IMG
+ WIDTH="14" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img54.png"
+ ALT="$ a$">
+ determine de manera unívoca la regla
+de producción <!-- MATH
+ $A \rightarrow a \alpha$
+ -->
+<IMG
+ WIDTH="65" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img60.png"
+ ALT="$ A \rightarrow a \alpha$">
+ que debe ser procesada.
+
+<P>
+Si se piensa, esta condición requiere que todas las partes derechas <IMG
+ WIDTH="16" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img55.png"
+ ALT="$ \alpha$">
+ de
+las reglas <!-- MATH
+ $A \rightarrow \alpha$
+ -->
+<IMG
+ WIDTH="56" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img26.png"
+ ALT="$ A \rightarrow \alpha$">
+ de <IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ A$">
+ ``comiencen'' por diferentes símbolos.
+Para formalizar esta idea, introduciremos el concepto de
+conjunto <!-- MATH
+ $FIRST(\alpha)$
+ -->
+<IMG
+ WIDTH="90" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img61.png"
+ ALT="$ FIRST(\alpha)$">
+:
+
+<P>
+<P>
+<DIV><B>Definición  4.6.1</B> &nbsp; 
+<I>Dada una gramática 
+<!-- MATH
+ $G=(\Sigma,V,P,S)$
+ -->
+<IMG
+ WIDTH="126" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img21.png"
+ ALT="$ G =(\Sigma,V,P,S)$">
+ y un símbolo <!-- MATH
+ $\alpha \in (V \cup \Sigma)^*$
+ -->
+<IMG
+ WIDTH="104" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img62.png"
+ ALT="$ \alpha \in (V \cup \Sigma)^*$">
+ se define el conjunto 
+<!-- MATH
+ $FIRST(\alpha)$
+ -->
+<IMG
+ WIDTH="90" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img61.png"
+ ALT="$ FIRST(\alpha)$">
+ como:
+</I>
+<P>
+<I><!-- MATH
+ $FIRST(\alpha) = \left \{ b \in \Sigma :  \alpha  \stackrel{*}{\Longrightarrow}  b \beta \right \}
+\cup N(\alpha)$
+ -->
+<IMG
+ WIDTH="319" HEIGHT="50" ALIGN="MIDDLE" BORDER="0"
+ SRC="img63.png"
+ ALT="$ FIRST(\alpha) = \left \{ b \in \Sigma : \alpha \stackrel{*}{\Longrightarrow} b \beta \right \}
+\cup N(\alpha)$">
+ 
+</I>
+<P>
+<I>donde:
+</I>
+<P>
+<I><!-- MATH
+ $N(\alpha) = \left \{ \begin{array}{ll}
+                         \left \{ \epsilon \right \}& \mbox{si $\alpha \stackrel{*}{\Longrightarrow} \epsilon$} \\
+                         \emptyset & \mbox{en otro caso} 
+                      \end{array}
+             \right.$
+ -->
+<IMG
+ WIDTH="232" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img64.png"
+ ALT="$ N(\alpha) = \left \{ \begin{array}{ll}
+\left \{ \epsilon \right \}&amp; \mbox{si $...
+...rightarrow} \epsilon$} \\
+\emptyset &amp; \mbox{en otro caso}
+\end{array}\right. $">
+ 
+</I>
+<P></DIV><P></P>
+
+<P>
+Podemos reformular ahora nuestra afirmación anterior en estos términos:
+Si <!-- MATH
+ $A \rightarrow \gamma_1 \mid \ldots \mid \gamma_n$
+ -->
+<IMG
+ WIDTH="129" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img65.png"
+ ALT="$ A \rightarrow \gamma_1 \mid \ldots \mid \gamma_n$">
+ y los conjuntos <!-- MATH
+ $FIRST(\gamma_i)$
+ -->
+<IMG
+ WIDTH="93" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img66.png"
+ ALT="$ FIRST(\gamma_i)$">
+ son 
+disjuntos podemos construir el procedimiento para la variable <IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ A$">
+ siguiendo
+este seudocódigo:
+
+<P>
+<PRE>
+sub A {
+  if ($lookahead in FIRST(gamma_1)) { imitar gamma_1 }
+  elsif ($lookahead in FIRST(gamma_2)) { imitar gamma_2 }
+  ...
+  else ($lookahead in FIRST(gamma_n)) { imitar gamma_n }
+}
+</PRE>
+
+<P>
+Donde si <IMG
+ WIDTH="21" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img67.png"
+ ALT="$ \gamma_j$">
+ es <!-- MATH
+ $X_1 \ldots X_k$
+ -->
+<IMG
+ WIDTH="76" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img68.png"
+ ALT="$ X_1 \ldots X_k$">
+ el código <code>gamma_j</code> consiste
+en una secuencia <!-- MATH
+ $i = 1 \ldots k$
+ -->
+<IMG
+ WIDTH="79" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img69.png"
+ ALT="$ i = 1 \ldots k$">
+ de llamadas de uno de estos dos tipos:
+
+<UL>
+<LI>Llamar a la subrutina <code>X_i</code> si <IMG
+ WIDTH="25" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img58.png"
+ ALT="$ X_i$">
+ es una variable sintáctica
+</LI>
+<LI>Hacer una llamada a <code>match(X_i)</code> si <IMG
+ WIDTH="25" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img58.png"
+ ALT="$ X_i$">
+ es un terminal
+</LI>
+</UL>
+
+<P>
+<HR>
+<A NAME="tex2html3284"
+  HREF="node127.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3278"
+  HREF="node125.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3272"
+  HREF="node125.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3280"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3282"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3285"
+  HREF="node127.html">Ejercicio: Recorrido del árbol</A>
+<B>Sup:</B> <A NAME="tex2html3279"
+  HREF="node125.html">Análisis Sintáctico Predictivo Recursivo</A>
+<B> Ant:</B> <A NAME="tex2html3273"
+  HREF="node125.html">Análisis Sintáctico Predictivo Recursivo</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

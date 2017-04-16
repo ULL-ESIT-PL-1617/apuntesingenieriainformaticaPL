@@ -1,0 +1,833 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>La Comprobación de Tipos de las Funciones Polimorfas</TITLE>
+<META NAME="description" CONTENT="La Comprobación de Tipos de las Funciones Polimorfas">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node317.html">
+<LINK REL="previous" HREF="node315.html">
+<LINK REL="up" HREF="node314.html">
+<LINK REL="next" HREF="node317.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html6337"
+  HREF="node317.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6331"
+  HREF="node314.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6325"
+  HREF="node315.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6333"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6335"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6338"
+  HREF="node317.html">El Compilador</A>
+<B>Sup:</B> <A NAME="tex2html6332"
+  HREF="node314.html">Análisis de Tipos de</A>
+<B> Ant:</B> <A NAME="tex2html6326"
+  HREF="node315.html">Un Lenguaje con Funciones</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html6339"
+  HREF="node316.html#SECTION0018202010000000000000">Reglas a Tener en Cuenta en la Inferencia de Tipos</A>
+<LI><A NAME="tex2html6340"
+  HREF="node316.html#SECTION0018202020000000000000">Programa Árbol para la Inferencia de Tipos</A>
+<LI><A NAME="tex2html6341"
+  HREF="node316.html#SECTION0018202030000000000000">Ejemplo</A>
+<LI><A NAME="tex2html6342"
+  HREF="node316.html#SECTION0018202040000000000000">Un Ejemplo Con Especificación de Tipos Incompleta en C</A>
+<LI><A NAME="tex2html6343"
+  HREF="node316.html#SECTION0018202050000000000000">Inferencia de una Variable Conocido el Tipo de la Función</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION0018202000000000000000">
+La Comprobación de Tipos de las Funciones Polimorfas</A>
+</H2>
+
+<P>
+
+<H4><A NAME="SECTION0018202010000000000000">
+Reglas a Tener en Cuenta en la Inferencia de Tipos</A>
+</H4>
+  
+
+<P>
+Las reglas para la comprobación de tipos para funciones polimorfas
+difiere del de las funciones ordinarias en varios aspectos.
+Consideremos de nuevo el árbol para la llamada 
+<code>first(first(q))</code> decorado con los tipos que deberan
+ser inferidos:
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198><PRE>
+ 1  first :  list(ALPHA) -&gt; ALPHA;
+ 2  q : list(list(int))
+ 3  {
+ 4    first(first(q))
+ 5  }
+</PRE></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=255><PRE>
+EXPS(
+  FUNCTIONCALL[int](
+    ID[first:F(LIST(INT),INT)],
+    FUNCTIONCALL[list(int)](
+      ID[first:F(LIST(LIST(INT)) LIST(INT))],
+      ID[q:LIST(LIST(INT))]
+    )
+  ) # FUNCTIONCALL
+) # EXPS
+</PRE></TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Del ejercicio de hacer la inferencia para el ejemplo sacamos algunas consecuencias:
+
+<OL>
+<LI>Distintas ocurrencias de una función polimorfa en el AST no tienen que
+necesariamente tener el mismo tipo.
+
+<P>
+En la expresión <code>first(first(q))</code> la instancia interna de la función 
+<code>first</code> tiene el tipo 
+
+<P>
+<code>               list(list(int)) -&gt; list(int)</code> 
+
+<P>
+mientras que la 
+externa tiene el tipo 
+
+<P>
+<code>               list(int) -&gt; int</code>
+
+<P>
+Se sigue que cada ocurrencia de <code>first</code>
+tiene su propia visión de la variable <code>ALPHA</code> que se instancia (se <B>unifica</B>)
+a un valor distinto. Por tanto, en cada ocurrencia de <code>first</code>,
+reemplazaremos la variable de tipo <code>ALPHA</code> 
+por una variable <B>fresca</B> <code>ALPHA</code>. Así habrán
+variables frescas <code>ALPHA</code> para los nodos interno y externo de las llamadas
+<code>FUNCTIONCALL(ID[first], ...)</code>
+
+<P>
+</LI>
+<LI><P>
+Puesto que ahora las expresiones de tipo contienen variables debemos extender
+la noción de equivalencia de tipos. Supongamos que una función <code>f</code> 
+de tipo <code>ALPHA -&gt; ALPHA</code> es aplicada a una expresión <code>exp</code> de tipo 
+<code>list(GAMMA)</code>. Es necesario <A NAME="26825"></A><B>unificar</B> ambas expresiones.
+En este caso obtendriámos que <code>ALPHA = list(GAMMA)</code> y que <code>f</code>
+es una función del tipo <code>list(GAMMA) -&gt; list(GAMMA)</code>
+
+<P>
+</LI>
+<LI><P>
+Es necesario disponer de un mecanismo para grabar el resultado 
+de la unificación de dos árboles/dags. Si la unificación de dos expresiones de tipo 
+<code>s</code> y <code>s'</code> resulta en la variable <code>ALPHA</code> representando al tipo <code>t</code>
+entonces <code>ALPHA</code> deberá seguir representando al tipo <code>t</code>
+conforme avancemos en la comprobación de tipos.
+
+<P>
+</LI>
+</OL>
+
+<P>
+
+<H4><A NAME="SECTION0018202020000000000000">
+Programa Árbol para la Inferencia de Tipos</A>
+</H4>
+  
+
+<P>
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Aho-Polymorphism/lib/Aho$ \
+                                                     cat -n Trans.trg
+ 1  /***************** Polymorphic Type Checking *****************/
+ 2    /*
+ 3    eyapp -m Aho::Polymorphism  Polymorphism.eyp;
+ 4    treereg -m Aho::Polymorphism Trans.trg
+ 5    */
+ 6
+ 7  {
+ 8    use Aho::Unify qw(:all);
+ 9  }
+10
+11  functioncall: FUNCTIONCALL($f, $arg)
+12    =&gt; {
+13      my ($name, $line) = @{$f-&gt;{attr}};
+14
+15      my $p = new_var();
+16
+17      my $q = Parse::Eyapp::Node-&gt;hexpand("F", $arg-&gt;{t}, $p, \&amp;selfrep);
+18
+19      if (unify($f-&gt;{t}, $q)) {
+20        print "Unified\n";
+21        print "Now type of ".$f-&gt;str." is ".strunifiedtree($q)."\n";
+22      }
+23      else {
+24        die "Type error at $line\n";
+25      }
+26
+27      $FUNCTIONCALL-&gt;{t} = representative($p);
+28      print "Type of ".$FUNCTIONCALL-&gt;str." is ".$FUNCTIONCALL-&gt;{t}-&gt;str."\n";
+29
+30      return 1;
+31    }
+32
+33  tuple: ARGS($x, $y)
+34    =&gt; {
+35      $ARGS-&gt;{t} = Parse::Eyapp::Node-&gt;hexpand("X", $x-&gt;{t}, $y-&gt;{t},  \&amp;selfrep);
+36    }
+37
+38  id: ID
+39    =&gt; {
+40      my ($name, $line) = @{$ID-&gt;{attr}};
+41      our %st;
+42      my $ts = $st{$name}-&gt;{ts};
+43      $ID-&gt;{t} = fresh($ts);
+44    }
+</PRE>
+
+<P>
+
+<UL>
+<LI>La regla para los identificadores accede al término guardado en la tabla de
+símbolos que describe el tipo del identificador (atributo <code>ts</code>).
+A partir de el se construye el DAG que representa el tipo llamando a 
+la funcion <code>fresh</code> de <code>Aho::Unify</code>. Esta función antes de 
+llamar a <code>hnew</code> ''refresca''  todas las apariciones de variables de tipo.
+Una variable como <code>ALPHA</code> será sustituida por <code>ALPHA#number</code>.
+
+<P>
+<PRE>
+46  sub fresh {
+47    my $ts = shift;
+48    my $regexp = shift;
+49    $regexp = 'Parse::Eyapp::Node::TYPEVAR::[\w:]+' unless defined($regexp);
+50
+51    $ts =~ s/($regexp)/$1$count/g;
+52    $count++;
+53    my @t = Parse::Eyapp::Node-&gt;hnew($ts);
+54    representative($_, $_) for @t;
+55    return $t[0];
+56  }
+</PRE>
+
+<P>
+El algoritmo  de unificación decora los nodos de los DAGs que estan siendo unificados
+con un atributo (atributo cuyo nombre viene dado por la variable <code>$set</code>) 
+que es una referencia al representante de la clase de equivalencia a la que pertenece
+el nodo. Cada clase tiene un único representante al que denominaremos
+representante canónico. El representante de un nodo
+puede obtenerse/modificarse usando la función <code>representative</code> proveída por
+<code>Aho::Unify</code>.
+
+<P>
+<PRE>
+83  sub representative {
+84    my $t = shift;
+85
+86    if (@_) {
+87      $t-&gt;{$set} = shift;
+88      return $t;
+89    }
+90    $t = $t-&gt;{$set} while defined($t-&gt;{set}) &amp;&amp; ($t != $t-&gt;{$set});
+91    die "Representative ($set) not defined!".Dumper($t) unless defined($t-&gt;{set});
+92    return $t;
+93  }
+</PRE>
+
+<P>
+Al comienzo del algoritmo cada nodo pertenece a una clase en la que el 
+único nodo es el mismo. Conforme se avanza en el proceso de unificación las
+clases van aumentando de tamaño.
+
+<P>
+</LI>
+<LI>La acción asociada con la regla <code>tuple</code> correspondiente a expresiones de la forma
+<code>x, y</code> en los argumentos es construir el tipo producto cartesiano
+de los tipos de <code>x</code> e <code>y</code>. 
+
+<P>
+<PRE>
+33  tuple: ARGS($x, $y)
+34    =&gt; {
+35      $ARGS-&gt;{t} = Parse::Eyapp::Node-&gt;hexpand("X", $x-&gt;{t}, $y-&gt;{t},  \&amp;selfrep);
+36    }
+</PRE>
+
+<P>
+El método  hexpand  de <code>Parse::Eyapp::Node</code> permite construir un DAG
+compatible con los construidos con <code>hnew</code> ya que utiliza la misma cache
+de memoización. El método admite como último argumento un manejador-decorador
+de atributos que funciona de manera parecida a como lo hace el correspondiente
+argumento en <code>new</code> y <code>hnew</code>. El manejador  es llamado por
+<code>hexpand</code> con el nodo que acaba de ser creado como único argumento.
+
+<P>
+<P>
+<DIV><B>Ejercicio  13.20.1</B> &nbsp; 
+<I>Podíamos construir el nodo mediante una llamada
+<code>Parse::Eyapp:Node-&gt;new('X')</code> y expandiendo el nodo con hijos <code>$x</code> y <code>$y</code>.
+Sin embargo, este método no conservaría la propiedad de DAG de los grafos de tipo.
+¿Porqué?</I></DIV><P></P>
+
+<P>
+<P>
+<DIV><B>Ejercicio  13.20.2</B> &nbsp; 
+<I>¿Que ocurriría si el nodo se creara con <code>Parse::Eyapp:Node-&gt;hnew('X')</code>
+y luego se expandiera con hijos <code>$x</code> y <code>$y</code>?</I></DIV><P></P>
+
+<P>
+<P>
+<DIV><B>Ejercicio  13.20.3</B> &nbsp; 
+<I>¿En que forma sin usar <code>hexpand</code> podríamos formar un DAG compatible con <code>hnew</code> para
+el árbol <code>X($x-&gt;{t}-&gt;str, $y-&gt;{t}-&gt;str)</code>?</I></DIV><P></P>
+
+<P>
+La función  <code>selfrep</code> - también en <code>Aho::Unify</code> -
+tiene por función iniciar el representante del nodo al propio nodo. De hecho 
+su código es:
+
+<P>
+<PRE>
+    95  sub selfrep {
+    96    representative($_[0], $_[0])
+    97  };
+</PRE>
+
+<P>
+</LI>
+<LI>La regla <code>functioncall</code> para las llamadas <code>FUNCTIONCALL($f, $arg)</code>
+parte de que el tipo mas general asociado con esta clase de nodo debe tener la forma
+<code>F($arg-&gt;{t},$p)</code> donde <code>$p</code> es una nueva variable libre. 
+
+<P>
+<PRE>
+13      my ($name, $line) = @{$f-&gt;{attr}};
+14
+15      my $p = new_var();
+16
+17      my $q = Parse::Eyapp::Node-&gt;hexpand("F", $arg-&gt;{t}, $p, \&amp;selfrep);
+</PRE>
+
+<P>
+La función <code>new_var</code> (en <code>Aho::Unify</code>) proporciona una nueva variable:
+
+<P>
+<PRE>
+58  # The name space Parse::Eyapp::Node::TYPEVAR:: is reserved for tree variables
+59  # Parse::Eyapp::Node::TYPEVAR::_#number is reserved for generated variables
+60  sub new_var {
+61    my $p = Parse::Eyapp::Node-&gt;hnew("Parse::Eyapp::Node::TYPEVAR::_$count");
+62    representative($p, $p);
+63    $count++;
+64    return $p;
+65  }
+</PRE>
+
+<P>
+Las variables
+proveídas tiene la forma  <code>Parse::Eyapp::Node::TYPEVAR::_#number</code>. 
+
+<P>
+La llamada al método <code>hexpand</code> 
+se encarga de crear el DAG asociado con 
+<code>F($arg-&gt;{t},$p)</code>.
+El último argumento de la llamada a <code>hexpand</code> 
+es el manejador de atributos. Pasamos <code>\&selfrep</code> para
+indicar que se trata de un árbol no unificado.
+
+<P>
+Acto seguido se pasa a <A NAME="26831"></A><B>unificar</B> el tipo
+de <code>$f</code> y el tipo mas general <code>F($arg-&gt;{t},$p)</code>. 
+<PRE>
+19      if (unify($f-&gt;{t}, $q)) {
+20        print "Unified\n";
+21        print "Now type of ".$f-&gt;str." is ".strunifiedtree($q)."\n";
+22      }
+23      else {
+24        die "Type error at line $line\n";
+25      }
+</PRE>
+
+<P>
+Si la unificación tiene éxito el tipo asociado con la imagen (con el valor retornado) debe ser
+el tipo unificado de la nueva variable <code>$p</code> que es accedido por medio de la función
+<code>representative</code>. 
+<PRE>
+27      $FUNCTIONCALL-&gt;{t} = representative($p);
+</PRE>
+
+<P>
+</LI>
+<LI>Cada vez que la unificación tiene éxito
+el programa imprime el árbol unificado mediante <code>strunifiedtree</code>.
+La función <code>strunifiedtree</code> (en <code>Aho::Unify</code>) recorre
+el árbol de representantes construyendo el término que lo describe:
+<PRE>
+125 sub strunifiedtree {
+126   my $self = shift;
+127
+128   my $rep = representative($self);
+129   my @children = $rep-&gt;children;
+130   my $desc = ref($rep);
+131   return $desc unless @children;
+132
+133   my @d;
+134   for (@children) {
+135     push @d, strunifiedtree($_);
+136   }
+137   local $" = ",";
+138   $desc .= "(@d)";
+139   return $desc;
+140 }
+</PRE>
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<H4><A NAME="SECTION0018202030000000000000">
+Ejemplo</A>
+</H4>
+  
+
+<P>
+La ejecución del compilador con el programa que hemos usado como ejemplo muestra el proceso
+de inferencia. Empecemos repasando la estructura del árbol y la representación de
+las declaraciones:
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Aho-Polymorphism/lib/Aho/script$ \
+                                                   usepoly.pl prueba01.ply 2
+first type: F(LIST(Parse::Eyapp::Node::TYPEVAR::ALPHA),Parse::Eyapp::Node::TYPEVAR::ALPHA)
+q type: LIST(LIST(INT))
+first :  list(ALPHA) -&gt; ALPHA;
+q : list(list(int))
+{
+  first(first(q))
+}
+....
+Tree:
+EXPS(
+  FUNCTIONCALL(
+    ID[first],
+    FUNCTIONCALL(
+      ID[first],
+      ID[q]
+    )
+  ) # FUNCTIONCALL
+) # EXPS
+</PRE>
+
+<P>
+En primer lugar se calculan los tipos para la llamada interna:
+
+<P>
+<PRE>
+Unifying F(LIST(TYPEVAR::ALPHA1),TYPEVAR::ALPHA1) and F(LIST(LIST(INT)),TYPEVAR::_3)
+Unifying LIST(TYPEVAR::ALPHA1) and LIST(LIST(INT))
+Unifying TYPEVAR::ALPHA1 and LIST(INT)
+TYPEVAR::ALPHA1 = LIST(INT)
+Unifying LIST(INT) and TYPEVAR::_3
+TYPEVAR::_3 = LIST(INT)
+Unified
+Now type of ID[first] is F(LIST(LIST(INT)),LIST(INT))
+Type of FUNCTIONCALL(ID[first],ID[q]) is LIST(INT)
+</PRE>
+Asi se ha inferido que el tipo del argumento de la llamada externa a <code>first</code> es
+<code>LIST(INT)</code>. La inferencia para el tipo del
+nodo externo <code>FUNCTIONCALL</code> prosigue con una nueva variable fresca <code>ALPHA0</code>:
+<PRE>
+Unifying F(LIST(TYPEVAR::ALPHA0),TYPEVAR::ALPHA0) and F(LIST(INT),TYPEVAR::_4)
+Unifying LIST(TYPEVAR::ALPHA0) and LIST(INT)
+Unifying TYPEVAR::ALPHA0 and INT
+TYPEVAR::ALPHA0 = INT
+Unifying INT and TYPEVAR::_4
+TYPEVAR::_4 = INT
+Unified
+Now type of ID[first] is F(LIST(INT),INT)
+Type of FUNCTIONCALL(ID[first],FUNCTIONCALL(ID[first],ID[q])) is INT
+</PRE>
+Por último el programa nos muestra el árbol sintáctico abstracto con
+los tipos inferidos:
+<PRE>
+Tree:
+EXPS(
+  FUNCTIONCALL[INT](
+    ID[first:F(LIST(INT),INT)],
+    FUNCTIONCALL[LIST(INT)](
+      ID[first:F(LIST(LIST(INT)),LIST(INT))],
+      ID[q:LIST(LIST(INT))]
+    )
+  ) # FUNCTIONCALL
+) # EXPS
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0018202040000000000000">
+Un Ejemplo Con Especificación de Tipos Incompleta en C</A>
+</H4>
+  
+
+<P>
+La expresión <code>g(g)</code> en el siguiente programa C muestra la aplicación de una función a
+ella misma. La declaración de la línea 7 define la imagen de <code>g</code> como entera pero
+el tipo de los argumentos queda sin especificar.
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Aho-Polymorphism/lib/Aho/script$ \
+                                                           cat -n macqueen.c
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Aho-Polymorphism/lib/Aho/script$ cat -n macqueen.c
+ 1  #include &lt;stdio.h&gt;
+ 2  #include &lt;stdlib.h&gt;
+ 3
+ 4  int n = 5;
+ 5
+ 6  int f(int g())
+ 7  {
+ 8    int m;
+ 9
+10    m = n;
+11    if (m == 0) return 1;
+12    else {
+13      n = n - 1;
+14      return m * g(g);
+15    }
+16  }
+17
+18  main() {
+19    printf("%d factorial is %d\n", n, f(f));
+20  }
+</PRE>
+
+<P>
+Al ser compilado con <code>gcc</code> el programa no produce errores ni mensajes de advertencia:
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Aho-Polymorphism/lib/Aho/script$ gcc macqueen.c
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Aho-Polymorphism/lib/Aho/script$ a.out
+0 factorial is 120
+</PRE>
+El error que se aprecia en la salida se corrige cuando cambiamos el orden de los
+argumentos en la llamada a <code>printf</code>:
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Aho-Polymorphism/lib/Aho/script$ \
+                    sed -ne '/printf/p' macqueen2.c; gcc macqueen2.c ; a.out
+  printf("%d is the factorial of %d\n", f(f), n);
+120 is the factorial of 5
+</PRE>
+
+<P>
+¿Cuál es la especificación completa del tipo de <code>g</code>?
+
+<P>
+Este ejemplo esta basado en un programa Algol dado por Ledgard  en 1971 [<A
+ HREF="node323.html#ledgard">12</A>].
+Aparece como ejercicio 6.31 en el libro de Aho, Sethi y Ullman [<A
+ HREF="node323.html#aho">9</A>].
+
+<P>
+El siguiente programa en nuestro pequeño lenguaje polimorfo
+modela el problema de determinar el tipo de 
+esta función:
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Aho-Polymorphism/lib/Aho/script$ \
+                                               usepoly.pl exercise6_31.ply 2
+m     : int;
+times : int * int -&gt; int;
+g     : ALPHA
+{
+  times(m, g(g))
+}
+</PRE>
+El árbol y la tabla de símbolos quedan montados después de 
+la primera fase:
+<PRE>
+Tree:
+EXPS(
+  FUNCTIONCALL(
+    ID[times],
+    ARGS(
+      ID[m],
+      FUNCTIONCALL(
+        ID[g],
+        ID[g]
+      )
+    ) # ARGS
+  ) # FUNCTIONCALL
+) # EXPS
+g type: Parse::Eyapp::Node::TYPEVAR::ALPHA
+m type: INT
+times type: F(X(INT,INT),INT)
+</PRE>
+
+<P>
+En primer lugar se procede a la unificación de la llamada interna
+<code>FUNCTIONCALL(ID[g],ID[g])</code>:
+
+<P>
+<PRE>
+Unifying TYPEVAR::ALPHA2 and F(TYPEVAR::ALPHA3,TYPEVAR::_4)
+TYPEVAR::ALPHA2 = F(TYPEVAR::ALPHA3,TYPEVAR::_4)
+Unified
+Now type of ID[g] is F(Parse::Eyapp::Node::TYPEVAR::ALPHA3,Parse::Eyapp::Node::TYPEVAR::_4)
+Type of FUNCTIONCALL(ID[g],ID[g]) is TYPEVAR::_4
+</PRE>
+Después se pasa a la unificación de la llamada externa 
+<code>FUNCTIONCALL(ID[times],ARGS(ID[m], FUNCTIONCALL(...)))</code>:
+<PRE>
+Unifying F(X(INT,INT),INT) and F(X(INT,TYPEVAR::_4),TYPEVAR::_5)
+Unifying X(INT,INT) and X(INT,TYPEVAR::_4)
+Unifying INT and TYPEVAR::_4
+TYPEVAR::_4 = INT
+Unifying INT and TYPEVAR::_5
+TYPEVAR::_5 = INT
+Unified
+Now type of ID[times] is F(X(INT,INT),INT)
+Type of FUNCTIONCALL(ID[times],ARGS(ID[m],FUNCTIONCALL(ID[g],ID[g]))) is INT
+</PRE>
+
+<P>
+Vemos que el tipo de <code>g</code> es <code>F(Parse::Eyapp::Node::TYPEVAR::ALPHA3,Parse::Eyapp::Node::TYPEVAR::_4)</code>
+y que <code>TYPEVAR::_4 = INT</code>. Asi pues el tipo <code>ALPHA</code> de <code>g</code> es
+<code>F(ALPHA,INT)</code>. Por tanto tenemos
+que el tipo inferido para <code>g</code> es un tipo recursivo:
+
+<P>
+<PRE>
+                typedef int ALPHA(ALPHA);
+</PRE>
+El programa nos muestra el árbol anotado con los tipos inferidos:
+<PRE>
+Tree:
+EXPS(
+  FUNCTIONCALL[INT](
+    ID[times:F(X(INT,INT),INT)],
+    ARGS[X(INT,INT)](
+      ID[m:INT],
+      FUNCTIONCALL[INT](
+        ID[g:F(Parse::Eyapp::Node::TYPEVAR::ALPHA3,INT)],
+        ID[g:Parse::Eyapp::Node::TYPEVAR::ALPHA3]
+      )
+    ) # ARGS
+  ) # FUNCTIONCALL
+) # EXPS
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0018202050000000000000">
+Inferencia de una Variable Conocido el Tipo de la Función</A>
+</H4>
+  
+
+<P>
+La decoración ocurre de abajo-arriba y la inferencia sólo se hace
+en los nodos de llamada.  Sin embargo,
+Se puede producir la inferencia del tipo de una variable después 
+de que su nodo haya sido visitado, como muestra el ejemplo:
+
+<P>
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Aho-Polymorphism/lib/Aho/script$ \
+                                           usepoly.pl reverseinference.ply 2
+first :  int -&gt; int;
+q : ALPHA
+{
+  first(q)
+}
+Unifying F(INT,INT) and F(TYPEVAR::ALPHA1,TYPEVAR::_2)
+Unifying INT and TYPEVAR::ALPHA1
+TYPEVAR::ALPHA1 = INT
+Unifying INT and TYPEVAR::_2
+TYPEVAR::_2 = INT
+Unified
+Now type of ID[first] is F(INT,INT)
+Type of FUNCTIONCALL(ID[first],ID[q]) is INT
+Tree:
+EXPS(
+  FUNCTIONCALL[INT](
+    ID[first:F(INT,INT)],
+    ID[q:INT]
+  )
+) # EXPS
+first type: F(INT,INT)
+q type: Parse::Eyapp::Node::TYPEVAR::ALPHA
+</PRE>
+
+<P>
+No obstante, parece razonable que 
+el tipo de una variable que no sea una función debería ser 
+fijo. Dado que las ventajas del polimorfismo 
+se aprecian fundamentalmente en las funciones 
+podemos añadir a nuestro lenguaje reglas
+que prohiban el polimorfismo de variables
+que no sean funciones.
+
+<P>
+<HR>
+<A NAME="tex2html6337"
+  HREF="node317.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6331"
+  HREF="node314.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6325"
+  HREF="node315.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6333"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6335"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6338"
+  HREF="node317.html">El Compilador</A>
+<B>Sup:</B> <A NAME="tex2html6332"
+  HREF="node314.html">Análisis de Tipos de</A>
+<B> Ant:</B> <A NAME="tex2html6326"
+  HREF="node315.html">Un Lenguaje con Funciones</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

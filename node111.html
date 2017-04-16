@@ -1,0 +1,354 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Práctica: Fases de un Compilador</TITLE>
+<META NAME="description" CONTENT="Práctica: Fases de un Compilador">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="previous" HREF="node110.html">
+<LINK REL="up" HREF="node109.html">
+<LINK REL="next" HREF="node112.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3027"
+  HREF="node112.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3021"
+  HREF="node109.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3017"
+  HREF="node110.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3023"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3025"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3028"
+  HREF="node112.html">Análisis Léxico</A>
+<B>Sup:</B> <A NAME="tex2html3022"
+  HREF="node109.html">Las Fases de un</A>
+<B> Ant:</B> <A NAME="tex2html3018"
+  HREF="node110.html">Repaso: Fases de un</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00922000000000000000"></A>
+   <A NAME="9885"></A>
+  
+<A NAME="practica:fases"></A>
+<BR>
+Práctica: Fases de un Compilador
+</H2>
+Reproduzca los pasos explicados en la sección
+<A HREF="node109.html#section:fases">4.2</A> extendiendo el módulo <code>PL::Tutu</code>
+con las funciones de compilación y los correspondientes
+guiones de compilación.
+
+<P>
+Mejore el script <code>tutu</code> para que acepte opciones desde la línea de comandos.
+Debera soportar al menos las siguientes opciones:
+
+<UL>
+<LI><code>--usage</code> 
+
+<P>
+Muestra de forma concisa el comando de uso
+</LI>
+<LI><code>--help</code> 
+
+<P>
+Un resumen de cada opción disponible
+
+<P>
+</LI>
+<LI><code>--version</code>
+
+<P>
+Muestra la versión del programa
+
+<P>
+</LI>
+<LI><code>--man</code> 
+
+<P>
+Muestra la documentación
+</LI>
+</UL>
+
+<P>
+Use para ello el módulo  Getopt::Long .
+Este módulo provee la función  GetOptions  la cual
+se atiene a los estándares de especificación
+de opciones en la línea de comandos POSIX y GNU.
+Esta función soporta el uso del guión doble <code>--</code>
+y el simple así como admitir el prefijo mas corto
+que deshace la ambiguedad entre las diferentes opciones.
+
+<P>
+La llamada a 
+ GetOptions  analiza la l&#237;nea de comandos en
+<code>ARGV</code>
+inicializa la variable asociada de manera adecuada. Retorna un valor verdadero
+si la l&#237;nea de comandos pudo ser procesada con
+En caso contrario emitir&#225;
+un mensaje de error y devolver&#225; falso. Recuerde hacer
+<code>perldoc Getopt::Long</code>
+para obtener informaci&#243;n mas detallada
+
+<P>
+El siguiente ejemplo ilustra el uso de <code>Getopt::Long</code>.
+Se hace uso también del módulo (función  pod2usage  en la línea 63)
+<code>Pod::Usage</code> el cual permite la documentación empotrada.
+
+<P>
+<PRE>
+nereida:~/LEyapp/examples&gt; cat -n treereg
+ 1  #!/usr/bin/perl -w
+ 2  use strict;
+ 3  use Parse::Eyapp::YATW;
+ 4  use Parse::Eyapp::Node;
+ 5  use Parse::Eyapp::Treeregexp;
+ 6  use Carp;
+ 7  use Getopt::Long;
+ 8  use Pod::Usage;
+ 9
+10  my $infile;
+11  my $outfile;
+12  my $packagename;
+13  my $prefix = '';
+14  my $syntax = 1;
+15  my $numbers = 1;
+16  my $severity = 0; # 0 = Don't  check arity. 1 = Check arity. 
+17                    # 2 = Check arity and give a warning 3 = ... and croak
+18  GetOptions(
+19    'in=s'       =&gt; \$infile,
+20    'out=s'      =&gt; \$outfile,
+21    'mod=s'      =&gt; \$packagename,
+22    'prefix=s'   =&gt; \$prefix,
+23    'severity=i' =&gt; \$severity,
+24    'syntax!'    =&gt; \$syntax,
+25    'numbers!'   =&gt; \$numbers,
+26    'version'    =&gt; \&amp;version,
+27    'usage'      =&gt; \&amp;usage,
+28    'help'       =&gt; \&amp;man,
+29  ) or croak usage();
+30
+31  # If an argument remains is the inputfile 
+32  ($infile) = @ARGV unless defined($infile);
+33  die usage() unless defined($infile);
+34
+35  my $treeparser = Parse::Eyapp::Treeregexp-&gt;new(
+36                      INFILE   =&gt; $infile,
+37                      OUTFILE  =&gt; $outfile,
+38                      PACKAGE  =&gt; $packagename,
+39                      PREFIX   =&gt; $prefix,
+40                      SYNTAX   =&gt; $syntax,
+41                      NUMBERS  =&gt; $numbers,
+42                      SEVERITY =&gt; $severity
+43                    );
+44
+45  $treeparser-&gt;generate();
+46
+47  sub version {
+48    print "Version $Parse::Eyapp::Treeregexp::VERSION\n";
+49    exit;
+50  }
+51
+52  sub usage {
+53    print &lt;&lt;"END_ERR";
+54  Supply the name of a file containing a tree grammar (.trg)
+55  Usage is:
+56  treereg [-m packagename] [[no]syntax] [[no]numbers] [-severity 0|1|2|3] \
+57          [-p treeprefix] [-o outputfile] -i filename[.trg]
+58  END_ERR
+59    exit;
+60  }
+61
+62  sub man {
+63    pod2usage(
+64      -exitval =&gt; 1,
+65      -verbose =&gt; 2
+66    );
+67  }
+68  __END__
+69
+70  =head1 SYNOPSIS
+71
+72    treereg [-m packagename] [[no]syntax] [[no]numbers] [-severity 0|1|2|3] \
+73            [-p treeprefix] [-o outputfile] -i filename[.trg]
+74    treereg [-m packagename] [[no]syntax] [[no]numbers] [-severity 0|1|2|3] \
+75            [-p treeprefix] [-o outputfile] filename[.trg]
+76 ... # Follows the documentation bla, bla, bla
+</PRE>
+
+<P>
+Ahora podemos ejecutar el guión de múltiples formas:
+<PRE>
+nereida:~/LEyapp/examples&gt; treereg -nos -nonu -se 3 -m Tutu Foldonly1.trg 
+nereida:~/LEyapp/examples&gt; treereg -nos -nonu -s 3 -m Tutu Foldonly1.trg  
+Option s is ambiguous (severity, syntax)
+nereida:~/LEyapp/examples&gt; treereg -nos -bla -nonu -m Tutu Foldonly1.trg
+Unknown option: bla
+nereida:~/LEyapp/examples&gt;
+</PRE>
+
+<P>
+La librería estandar de Perl incluye el módulo <code>Getopt::Long</code>. 
+No es el caso de <code>Pod::Usage</code>. Descarge el módulo e instalelo
+en un directorio local en el que tenga permisos. Si es preciso repase las secciones
+<A HREF="#section:instalacionamano">
+<IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> [<A
+ HREF="node323.html#CasianoIntroAPerl">4</A>] y <A HREF="#section:CPAN">
+<IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> [<A
+ HREF="node323.html#CasianoIntroAPerl">4</A>]  de los apuntes de 
+introducción a Perl.
+
+<P>
+<HR>
+<A NAME="tex2html3027"
+  HREF="node112.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3021"
+  HREF="node109.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3017"
+  HREF="node110.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3023"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3025"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3028"
+  HREF="node112.html">Análisis Léxico</A>
+<B>Sup:</B> <A NAME="tex2html3022"
+  HREF="node109.html">Las Fases de un</A>
+<B> Ant:</B> <A NAME="tex2html3018"
+  HREF="node110.html">Repaso: Fases de un</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

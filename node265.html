@@ -1,0 +1,359 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>El módulo Language::AttributeGrammar</TITLE>
+<META NAME="description" CONTENT="El módulo Language::AttributeGrammar">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node266.html">
+<LINK REL="previous" HREF="node264.html">
+<LINK REL="up" HREF="node261.html">
+<LINK REL="next" HREF="node266.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html5445"
+  HREF="node266.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5439"
+  HREF="node261.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5433"
+  HREF="node264.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5441"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5443"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5446"
+  HREF="node266.html">Usando Language::AttributeGrammars con Parse::Eyapp</A>
+<B>Sup:</B> <A NAME="tex2html5440"
+  HREF="node261.html">Análisis Semántico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5434"
+  HREF="node264.html">Definición Dirigida por la</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001440000000000000000"></A>
+<A NAME="section:languageattributegrammar"></A>
+<BR>
+El módulo <TT>Language::AttributeGrammar</TT>
+</H1>
+El módulo 
+<A NAME="tex2html266"
+  HREF="http://search.cpan.org/~lpalmer/Language-AttributeGrammar-0.08/lib/Language/AttributeGrammar.pm">Language::AttributeGrammar</A>
+de Luke Palmer permite experimentar
+en Perl con una variante de las gramáticas atribuidas.
+
+<P>
+
+<H4><A NAME="SECTION001440010000000000000">
+Ejemplo Simple</A>
+</H4>
+  
+
+<P>
+Language::AttributeGrammar  provee un constructor 
+<code>new</code> que recibe la cadena describiendo la 
+gramática atribuída y un método  apply  que recibe
+como argumentos el árbol AST y el atributo a evaluar.
+ Language::AttributeGrammar  toma como entrada un AST en vez de 
+una descripción textual (línea 36).
+<PRE>
+nereida:~/src/perl/attributegrammar/Language-AttributeGrammar-0.08/examples&gt; cat -n atg.pl
+ 1  #!/usr/bin/perl -w
+ 2  use strict;
+ 3  use Language::AttributeGrammar;
+ 4  use Data::Dumper;
+ 5
+ 6  my $grammar = new Language::AttributeGrammar &lt;&lt;'EOG';
+ 7
+ 8  # find the minimum from the leaves up
+ 9  Leaf: $/.min = { $&lt;value&gt; }
+10  Branch: $/.min = {
+11      $&lt;left&gt;.min &lt;= $&lt;right&gt;.min ? $&lt;left&gt;.min : $&lt;right&gt;.min;
+12  }
+13
+14  # propagate the global minimum downward
+15  ROOT:   $/.gmin       = { $/.min }
+16  Branch: $&lt;left&gt;.gmin  = { $/.gmin }
+17  Branch: $&lt;right&gt;.gmin = { $/.gmin }
+18
+19  # reconstruct the minimized result
+20  Leaf:   $/.result  = { bless { value =&gt; $/.gmin } =&gt; 'Leaf' }
+21  Branch: $/.result  = { bless { left  =&gt; $&lt;left&gt;.result,
+22                                 right =&gt; $&lt;right&gt;.result } =&gt; 'Branch' }
+23
+24  EOG
+25
+26  sub Leaf   { bless { value =&gt; $_[0] } =&gt; 'Leaf' }
+27  sub Branch { bless { left =&gt; $_[0], right =&gt; $_[1] } =&gt; 'Branch' }
+28
+29  my $tree = Branch(
+30              Branch(Leaf(2), Leaf(3)),
+31              Branch(Leaf(1), Branch(Leaf(5), Leaf(9))));
+32  my $result = Branch(
+33              Branch(Leaf(1), Leaf(1)),
+34              Branch(Leaf(1), Branch(Leaf(1), Leaf(1))));
+35
+36  my $t = $grammar-&gt;apply($tree, 'result');
+37
+38  $Data::Dumper::Indent = 1;
+39  print Dumper($t);
+</PRE>
+El objeto representando a la gramática atribuída es creado
+mediante la llamada a  Language::AttributeGrammar::new 
+en la línea 6. La gramática es una secuencia de reglas semánticas.
+Cada regla semántica tiene la forma:
+<PRE>
+nodetype1 : $/.attr_1        = { CÓDIGO PERL($&lt;hijo_i&gt;.attr_k )}
+          | $&lt;hijo_1&gt;.attr_2 = { CÓDIGO PERL($&lt;hijo_i&gt;.attr_k, $/.attr_s )}
+          | $&lt;hijo_2&gt;.attr_3 = { CÓDIGO PERL }
+          ....
+nodetype2 : $/.attr_1        = { CÓDIGO PERL($&lt;hijo_i&gt;.attr_k )}
+          | $&lt;hijo_1&gt;.attr_2 = { CÓDIGO PERL($&lt;hijo_i&gt;.attr_k, $/.attr_s )}
+          | $&lt;hijo_2&gt;.attr_3 = { CÓDIGO PERL }
+          ....
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION001440020000000000000">
+Notaciones Especiales</A>
+</H4>
+  
+
+<P>
+Dentro de la especificación de la gramática es posible hacer uso de las notaciones especiales: 
+
+<UL>
+<LI><code>$/</code> se refiere al nodo que esta siendo visitado
+</LI>
+<LI><code>$/.attr</code> se refiere al atributo <code>attr</code> del nodo que esta siendo visitado
+</LI>
+<LI><code>$&lt;ident&gt;</code> se refiere al hijo del nodo visitado denominado <code>ident</code>. 
+Se asume que el nodo dispone de un método con ese nombre para obtener el hijo.
+La notación <code>$&lt;ident&gt;.attr</code> se refiere al atributo <code>attr</code> del hijo <code>ident</code> del nodo visitado.
+</LI>
+</UL>
+
+<P>
+La llamada al método <code>$grammar-&gt;apply($tree, 'result')</code> en la línea 36 dispara la computación
+de las reglas para el cálculo 
+del atributo <code>result</code> sobre el árbol <code>$tree</code>.
+
+<P>
+Cuando ejecutamos el programa obtenemos la salida:
+<PRE>
+nereida:~/src/perl/attributegrammar/Language-AttributeGrammar-0.08/examples&gt; atg.pl
+$VAR1 = bless( {
+  'left' =&gt; bless( {
+    'left' =&gt; bless( { 'value' =&gt; 1 }, 'Leaf' ),
+    'right' =&gt; bless( { 'value' =&gt; 1 }, 'Leaf' )
+  }, 'Branch' ),
+  'right' =&gt; bless( {
+    'left' =&gt; bless( { 'value' =&gt; 1 }, 'Leaf' ),
+    'right' =&gt; bless( {
+      'left' =&gt; bless( { 'value' =&gt; 1 }, 'Leaf' ),
+      'right' =&gt; bless( { 'value' =&gt; 1 }, 'Leaf' )
+    }, 'Branch' )
+  }, 'Branch' )
+}, 'Branch' );
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION001440030000000000000">
+Descripción del Lenguaje de <TT>Language::AttributeGrammar</TT></A>
+</H4>
+  
+
+<P>
+Sigue una descripción en estilo <code>Parse::Eyapp</code>
+de la gramática aceptada por 
+ Language::AttributeGrammar :
+
+<P>
+<PRE>
+grammar: rule *
+
+rule: nodetype ':' (target '.' attr '=' '{' BLOQUE DE CÓDIGO PERL '}') &lt;* '|'&gt;
+
+target: self | child | accesscode
+</PRE>
+Las variables 
+<code>nodetype</code>, <code>attr</code>, <code>self</code>, <code>child</code> y <code>accesscode</code>
+viene definidas por las siguientes expresiones regulares:
+
+<P>
+<PRE>
+nodetype:    /(::)?\w+(::\w+)*/ # identificador Perl del tipo de nodo (PLUS, MINUS, etc.)
+attr:    /\w+/      # identificador del atributo
+self:    '$/'       # Se refiere al nodo visitado
+child:   /\$&lt;\w+&gt;/  # Hijo del nodo visitado
+accesscode: /`.*?`/ # Código explícito de acceso al hijo del nodo
+</PRE>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html5447"
+  HREF="node265.html#SECTION001440010000000000000">Ejemplo Simple</A>
+<LI><A NAME="tex2html5448"
+  HREF="node265.html#SECTION001440020000000000000">Notaciones Especiales</A>
+<LI><A NAME="tex2html5449"
+  HREF="node265.html#SECTION001440030000000000000">Descripción del Lenguaje de <TT>Language::AttributeGrammar</TT></A>
+</UL></UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html5445"
+  HREF="node266.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5439"
+  HREF="node261.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5433"
+  HREF="node264.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5441"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5443"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5446"
+  HREF="node266.html">Usando Language::AttributeGrammars con Parse::Eyapp</A>
+<B>Sup:</B> <A NAME="tex2html5440"
+  HREF="node261.html">Análisis Semántico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5434"
+  HREF="node264.html">Definición Dirigida por la</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

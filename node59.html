@@ -1,0 +1,987 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Mirando hacia adetrás y hacia adelante</TITLE>
+<META NAME="description" CONTENT="Mirando hacia adetrás y hacia adelante">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node60.html">
+<LINK REL="previous" HREF="node58.html">
+<LINK REL="up" HREF="node56.html">
+<LINK REL="next" HREF="node60.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2017"
+  HREF="node60.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2011"
+  HREF="node56.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2005"
+  HREF="node58.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2013"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2015"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2018"
+  HREF="node60.html">Definición de Nombres de</A>
+<B>Sup:</B> <A NAME="tex2html2012"
+  HREF="node56.html">Algunas Extensiones</A>
+<B> Ant:</B> <A NAME="tex2html2006"
+  HREF="node58.html">Modificadores locales</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html2019"
+  HREF="node59.html#SECTION00823010000000000000">Las zero-width assertions como caso particular de mirar atrás-adelante</A>
+<LI><A NAME="tex2html2020"
+  HREF="node59.html#SECTION00823020000000000000">Lookahead assertion</A>
+<LI><A NAME="tex2html2021"
+  HREF="node59.html#SECTION00823030000000000000">A hard RegEx problem</A>
+<LI><A NAME="tex2html2022"
+  HREF="node59.html#SECTION00823040000000000000">Los paréntesis looakehaed and lookbehind no capturan</A>
+<LI><A NAME="tex2html2023"
+  HREF="node59.html#SECTION00823050000000000000">Limitaciones del lookbehind</A>
+<LI><A NAME="tex2html2024"
+  HREF="node59.html#SECTION00823060000000000000">Negación de los operadores de lookahead y lookbehind</A>
+<LI><A NAME="tex2html2025"
+  HREF="node59.html#SECTION00823070000000000000">Ejemplo: split con lookahead y lookbehind</A>
+<LI><A NAME="tex2html2026"
+  HREF="node59.html#SECTION00823080000000000000">Look Around en perlre</A>
+<LI><A NAME="tex2html2027"
+  HREF="node59.html#SECTION00823090000000000000">Operador de predicción negativo: Última ocurrencia</A>
+<LI><A NAME="tex2html2028"
+  HREF="node59.html#SECTION008230100000000000000">Diferencias entre mirar adelante negativo y mirar adelante con clase negada</A>
+<LI><A NAME="tex2html2029"
+  HREF="node59.html#SECTION008230110000000000000">AND y AND NOT</A>
+<LI><A NAME="tex2html2030"
+  HREF="node59.html#SECTION008230120000000000000">Lookahead negativo versus lookbehind</A>
+<LI><A NAME="tex2html2031"
+  HREF="node59.html#SECTION008230130000000000000">Ejercicios</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION00823000000000000000"></A>
+<A NAME="subsection:lookaheadlookbehind"></A>
+<BR>
+Mirando hacia adetrás y hacia adelante
+</H2>
+
+<P>
+El siguiente fragmento esta 'casi' literalmente tomado
+de la sección 'Looking-ahead-and-looking-behind' en <A NAME="tex2html70"
+  HREF="http://perldoc.perl.org/perlretut.html#Looking-ahead-and-looking-behind"><TT>perlretut</TT></A>:
+
+<P>
+<P>
+<H4><A NAME="SECTION00823010000000000000">
+Las zero-width assertions como caso particular de mirar atrás-adelante</A>
+</H4>
+  
+
+<P>
+In Perl regular expressions, most regexp elements 'eat up' a certain
+amount of string when they match. For instance, the regexp element
+<code>[abc}]</code> eats up one character of the string when it matches, in the sense
+that Perl moves to the next character position in the string after the
+match. There are some elements, however, that don't eat up characters
+(advance the character position) if they match. 
+
+<P>
+The examples we have seen
+so far are the anchors. The anchor <code>^</code> matches the beginning of the line,
+but doesn't eat any characters. 
+
+<P>
+Similarly, the word boundary anchor
+<code>\b</code> matches wherever a character matching <code>\w</code> is next to a character that
+doesn't, but it doesn't eat up any characters itself. 
+
+<P>
+Anchors are examples
+of <A NAME="3117"></A><I>zero-width assertions</I>. Zero-width, because they consume no characters,
+and assertions, because they test some property of the string. 
+
+<P>
+In the
+context of our walk in the woods analogy to regexp matching, most regexp
+elements move us along a trail, but anchors have us stop a moment and
+check our surroundings. If the local environment checks out, we can
+proceed forward. But if the local environment doesn't satisfy us, we
+must backtrack.
+
+<P>
+Checking the environment entails either looking ahead on the trail,
+looking behind, or both. 
+
+<P>
+
+<UL>
+<LI><code>^</code> looks behind, to see that there are no
+characters before. 
+</LI>
+<LI><code>$</code> looks ahead, to see that there are no characters
+after. 
+</LI>
+<LI><code>\b</code> looks both ahead and behind, to see if the characters on either
+side differ in their "word-ness".
+</LI>
+</UL>
+
+<P>
+The lookahead and lookbehind assertions are generalizations of the anchor
+concept. 
+Lookahead and lookbehind are zero-width assertions that let us
+specify which characters we want to test for. 
+
+<P>
+
+<H4><A NAME="SECTION00823020000000000000">
+Lookahead assertion</A>
+</H4>
+  
+
+<P>
+The lookahead assertion
+is denoted by <code>(?=regexp)</code> and the lookbehind assertion is denoted by
+<code>(?&lt;=fixed-regexp)</code>. 
+
+<P>
+En español, operador de ``trailing'' o ``mirar-adelante'' positivo. 
+Por ejemplo, <code>/\w+(?=\t)/</code> solo casa una palabra si va seguida de un tabulador, pero el tabulador no formará parte de <code>$&amp;</code>.
+Ejemplo:
+
+<pre>
+> cat -n lookahead.pl
+<span class="synLinenum">    1</span> <span class="synPreProc">#!/usr/bin/perl</span>
+<span class="synLinenum">    2</span> 
+<span class="synLinenum">    3</span>  <span class="synIdentifier">$a</span> = <span class="synConstant">"bugs the rabbit"</span>;
+<span class="synLinenum">    4</span>  <span class="synIdentifier">$b</span> = <span class="synConstant">"bugs the frog"</span>;
+<span class="synLinenum">    5</span>  <span class="synStatement">if</span> (<span class="synIdentifier">$a</span> =~ <span class="synStatement">m{</span><span class="synConstant">bugs</span><span class="synSpecial">(?=</span><span class="synConstant"> the cat| the rabbit</span><span class="synSpecial">)</span><span class="synStatement">}i</span>) { <span class="synStatement">print</span> <span class="synConstant">"</span><span class="synIdentifier">$a</span><span class="synConstant"> matches. </span><span class="synSpecial">$</span><span class="synConstant">&amp; = </span><span class="synIdentifier">$&amp;</span><span class="synSpecial">\n</span><span class="synConstant">"</span>; }
+<span class="synLinenum">    6</span>  <span class="synStatement">else</span> { <span class="synStatement">print</span> <span class="synConstant">"</span><span class="synIdentifier">$a</span><span class="synConstant"> does not match</span><span class="synSpecial">\n</span><span class="synConstant">"</span>; }
+<span class="synLinenum">    7</span>  <span class="synStatement">if</span> (<span class="synIdentifier">$b</span> =~ <span class="synStatement">m{</span><span class="synConstant">bugs</span><span class="synSpecial">(?=</span><span class="synConstant"> the cat| the rabbit</span><span class="synSpecial">)</span><span class="synStatement">}i</span>) { <span class="synStatement">print</span> <span class="synConstant">"</span><span class="synIdentifier">$b</span><span class="synConstant"> matches. </span><span class="synSpecial">$</span><span class="synConstant">&amp; = </span><span class="synIdentifier">$&amp;</span><span class="synSpecial">\n</span><span class="synConstant">"</span>; }
+<span class="synLinenum">    8</span>  <span class="synStatement">else</span> { <span class="synStatement">print</span> <span class="synConstant">"</span><span class="synIdentifier">$b</span><span class="synConstant"> does not match</span><span class="synSpecial">\n</span><span class="synConstant">"</span>; }
+</pre>
+Al ejecutar el programa obtenemos:
+<PRE>
+&gt; lookahead.pl
+bugs the rabbit matches. $&amp; = bugs
+bugs the frog does not match
+&gt;
+</PRE>
+
+<P>
+Some examples using the debugger<A NAME="tex2html71"
+  HREF="footnode.html#foot2266"><SUP>3.4</SUP></A>:
+
+<P>
+
+<pre>
+  DB<1>  <span class="dbuser">     #012345678901234567890</span>
+  DB<2>  <span class="dbuser">$x = "I catch the housecat 'Tom-cat' with catnip"</span>
+  DB<3>  <span class="dbuser">print "($&) (".pos($x).")\n" if $x  =~ /cat(?=\s)/g</span>
+(cat) (20)                    # matches 'cat' in 'housecat'
+
+  DB<5>  <span class="dbuser">$x = "I catch the housecat 'Tom-cat' with catnip" # To reset pos</span>
+  DB<6>  <span class="dbuser">x @catwords = ($x =~ /(?<=\s)cat\w+/g)</span>
+0  'catch'
+1  'catnip'
+
+  DB<7>  <span class="dbuser">     #012345678901234567890123456789</span>
+  DB<8>  <span class="dbuser">$x = "I catch the housecat 'Tom-cat' with catnip"</span>
+  DB<9>  <span class="dbuser">print "($&) (".pos($x).")\n" if $x =~ /\bcat\b/g</span>
+(cat) (29) # matches 'cat' in 'Tom-cat'
+
+  DB<10>  <span class="dbuser">$x = "I catch the housecat 'Tom-cat' with catnip"</span>
+  DB<11>  <span class="dbuser">x  $x =~ /(?<=\s)cat(?=\s)/</span>
+  empty array
+  DB<12>  <span class="dbuser"># doesn't match; no isolated 'cat' in middle of $x</span>
+</pre>
+
+<P>
+
+<H4><A NAME="SECTION00823030000000000000">
+A hard RegEx problem</A>
+</H4>
+  
+
+<P>
+Véase el nodo <I>A hard RegEx problem</I> en <A NAME="tex2html72"
+  HREF="http://www.perlmonks.org/?node_id=645882">PerlMonks</A>. 
+Un monje solicita:
+
+<P>
+<BLOCKQUOTE><I>Hi Monks,
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>I wanna to match this issues:
+</I></BLOCKQUOTE>
+<P>
+<OL>
+<LI>The string length is between 3 and 10
+</LI>
+<LI>The string ONLY contains [0-9] or [a-z] or [A-Z], but
+</LI>
+<LI>The string must contain a number AND a letter at least 
+</LI>
+</OL>
+<P>
+<BLOCKQUOTE><I>Pls help me check. Thanks
+</I></BLOCKQUOTE>
+
+<P>
+Solución:
+
+<P>
+<PRE>
+casiano@millo:~$ perl -wde 0
+main::(-e:1):   0
+  DB&lt;1&gt; x 'aaa2a1' =~  /\A(?=.*[a-z])(?=.*\d)\w{3,10}\z/i
+0  1
+  DB&lt;2&gt; x 'aaaaaa' =~  /\A(?=.*[a-z])(?=.*\d)\w{3,10}\z/i
+  empty array
+  DB&lt;3&gt; x '1111111' =~  /\A(?=.*[a-z])(?=.*\d)\w{3,10}\z/i
+  empty array
+  DB&lt;4&gt; x '1111111bbbbb' =~  /\A(?=.*[a-z])(?=.*\d)\w{3,10}\z/i
+  empty array
+  DB&lt;5&gt; x '111bbbbb' =~  /\A(?=.*[a-z])(?=.*\d)\w{3,10}\z/i
+0  1
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00823040000000000000">
+Los paréntesis looakehaed and lookbehind no capturan</A>
+</H4>
+  
+
+<P>
+Note that the parentheses in <code>(?=regexp)</code> and <code>(?&lt;=regexp)</code>
+are non-capturing, since these are zero-width assertions. 
+
+<P>
+
+<H4><A NAME="SECTION00823050000000000000">
+Limitaciones del lookbehind</A>
+</H4>
+  
+
+<P>
+Lookahead
+<code>(?=regexp)</code> can match arbitrary regexps, but lookbehind 
+<code>(?&lt;=fixed-regexp)</code>
+only works for regexps of fixed width, i.e., a fixed number of characters
+long. 
+
+<P>
+Thus <code>(?&lt;=(ab|bc))</code> is fine, but <code>(?&lt;=(ab)*)</code> is not. 
+
+<P>
+
+<H4><A NAME="SECTION00823060000000000000">
+Negación de los operadores de lookahead y lookbehind</A>
+</H4>
+  
+
+<P>
+The negated
+versions of the lookahead and lookbehind assertions are denoted by
+<code>(?!regexp)</code> and <code>(?&lt;!fixed-regexp)</code> respectively. 
+They evaluate true if
+the regexps do not match:
+<PRE>
+    $x = "foobar";
+    $x =~ /foo(?!bar)/;  # doesn't match, 'bar' follows 'foo'
+    $x =~ /foo(?!baz)/;  # matches, 'baz' doesn't follow 'foo'
+    $x =~ /(?&lt;!\s)foo/;  # matches, there is no \s before 'foo'
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00823070000000000000">
+Ejemplo: split con lookahead y lookbehind</A>
+</H4>
+  
+
+<P>
+Here is an example where a string containing blank-separated words,
+numbers and single dashes is to be split into its components. 
+
+<P>
+Using <code>/\s+/</code>
+alone won't work, because spaces are not required between dashes, or a
+word or a dash. Additional places for a split are established by looking
+ahead and behind:
+<PRE>
+casiano@tonga:~$ perl5.10.1 -wdE 0
+main::(-e:1):   0
+  DB&lt;1&gt; $str = "one two - --6-8"
+  DB&lt;2&gt; x @toks = split / \s+ | (?&lt;=\S) (?=-) | (?&lt;=-)  (?=\S)/x, $str
+0  'one'
+1  'two'
+2  '-'
+3  '-'
+4  '-'
+5  6
+6  '-'
+7  8
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00823080000000000000">
+Look Around en perlre</A>
+</H4>
+  
+
+<P>
+El siguiente párrafo ha sido extraído la sección 'Look-Around-Assertions' en <A NAME="tex2html73"
+  HREF="http://perldoc.perl.org/pelre.html#Look-Around-Assertions"><TT>pelre</TT></A>.
+Usémoslo como texto de repaso:
+<BLOCKQUOTE><I>Look-around assertions are zero width patterns which match a specific
+pattern without including it in <code>$&amp;</code>. Positive assertions match when their
+subpattern matches, negative assertions match when their subpattern
+fails. Look-behind matches text up to the current match position,
+look-ahead matches text following the current match position.
+</I></BLOCKQUOTE>
+<P>
+<UL>
+<LI><code>(?=pattern)</code>
+
+<P>
+A zero-width positive look-ahead assertion. For example, <code>/\w+(?=\t)/</code> 
+matches a word followed by a tab, without including the tab in <code>$&amp;</code>.
+
+<P>
+</LI>
+<LI><code>(?!pattern)</code>
+
+<P>
+A zero-width negative look-ahead assertion. For example <code>/foo(?!bar)/</code> 
+matches any occurrence of <code>foo</code> that isn't followed by <code>bar</code>. 
+
+<P>
+Note however that look-ahead and look-behind are NOT the same thing. 
+You cannot use this for look-behind.
+
+<P>
+If you are looking for a <code>bar</code> that isn't preceded by a <code>foo</code>,
+<code>/(?!foo)bar/</code> will not do what you want. 
+
+<P>
+That's because the 
+<code>(?!foo)</code> is just saying that the next thing cannot be <code>foo</code>
+-and it's not, it's a <code>bar</code>, so <code>foobar</code> will match. 
+
+<P>
+You would have to do something like <code>/(?!foo)...bar/</code> for that. 
+
+<P>
+We say "like" because there's the case of your <code>bar</code> not having
+three characters before it. 
+
+<P>
+You could cover that this way:
+<code>/(?:(?!foo)...|^.{0,2})bar/</code>. Sometimes it's still easier just to say:
+
+<P>
+<PRE>
+    if (/bar/ &amp;&amp; $` !~ /foo$/)
+</PRE>
+
+<P>
+For look-behind see below.
+
+<P>
+</LI>
+<LI><code>(?&lt;=pattern)</code>
+
+<P>
+A zero-width positive look-behind assertion. 
+
+<P>
+For example, <code>/(?&lt;=\t)\w+/</code>
+matches a word that follows a tab, without including the tab in <code>$&amp;</code>. 
+Works only for fixed-width look-behind.
+
+<P>
+</LI>
+<LI><code>\K</code> 
+
+<P>
+There is a special form of this construct, called <code>\K</code> , which causes
+the regex engine to 'keep' everything it had matched prior to the <code>\K</code>
+and not include it in <code>$&amp;</code>. This effectively provides variable length
+look-behind. The use of <code>\K</code> inside of another look-around assertion is
+allowed, but the behaviour is currently not well defined.
+
+<P>
+For various reasons <code>\K</code> may be significantly more efficient than the
+equivalent <code>(?&lt;=...)</code> construct, and it is especially useful in situations
+where you want to efficiently remove something following something else
+in a string. For instance
+<PRE>
+  s/(foo)bar/$1/g;
+</PRE>
+
+<P>
+can be rewritten as the much more efficient
+<PRE>
+  s/foo\Kbar//g;
+</PRE>
+
+<P>
+Sigue una sesión con el depurador que ilustra la semántica
+del operador:
+
+<P>
+<PRE>
+casiano@millo:~$ perl5.10.1 -wdE 0
+main::(-e:1):   0
+  DB&lt;1&gt; print "&amp; = &lt;$&amp;&gt; 1 = &lt;$1&gt;\n" if "alphabet" =~ /([^aeiou][a-z][aeiou])[a-z]/
+&amp; = &lt;phab&gt; 1 = &lt;pha&gt;
+  DB&lt;2&gt; print "&amp; = &lt;$&amp;&gt; 1 = &lt;$1&gt;\n" if "alphabet" =~ /\K([^aeiou][a-z][aeiou])[a-z]/
+&amp; = &lt;phab&gt; 1 = &lt;pha&gt;
+  DB&lt;3&gt; print "&amp; = &lt;$&amp;&gt; 1 = &lt;$1&gt;\n" if "alphabet" =~ /([^aeiou]\K[a-z][aeiou])[a-z]/
+&amp; = &lt;hab&gt; 1 = &lt;pha&gt;
+  DB&lt;4&gt; print "&amp; = &lt;$&amp;&gt; 1 = &lt;$1&gt;\n" if "alphabet" =~ /([^aeiou][a-z]\K[aeiou])[a-z]/
+&amp; = &lt;ab&gt; 1 = &lt;pha&gt;
+  DB&lt;5&gt; print "&amp; = &lt;$&amp;&gt; 1 = &lt;$1&gt;\n" if "alphabet" =~ /([^aeiou][a-z][aeiou])\K[a-z]/
+&amp; = &lt;b&gt; 1 = &lt;pha&gt;
+  DB&lt;6&gt; print "&amp; = &lt;$&amp;&gt; 1 = &lt;$1&gt;\n" if "alphabet" =~ /([^aeiou][a-z][aeiou])[a-z]\K/
+&amp; = &lt;&gt; 1 = &lt;pha&gt;
+  DB&lt;7&gt; @a = "alphabet" =~ /([aeiou]\K[^aeiou])/g; print "$&amp;\n"
+t
+  DB&lt;8&gt; x @a
+0  'al'
+1  'ab'
+2  'et'
+</PRE>
+
+<P>
+Otro ejemplo: eliminamos los blancos del final en una cadena:
+<PRE>
+  DB&lt;23&gt; $x = '  cadena entre blancos  '
+  DB&lt;24&gt; ($y = $x) =~ s/.*\b\K.*//g
+  DB&lt;25&gt; p "&lt;$y&gt;"
+&lt;  cadena entre blancos&gt;
+</PRE>
+
+<P>
+</LI>
+<LI><code>(?&lt;!pattern)</code> 
+
+<P>
+A zero-width negative look-behind assertion. 
+
+<P>
+For example <code>/(?&lt;!bar)foo/</code> matches any occurrence of 
+ <code>foo</code> that does not follow <code>bar</code>. Works only for fixed-width look-behind.
+</LI>
+</UL>
+<P>
+
+<P>
+Veamos un ejemplo de uso. Se quiere
+sustituir las extensiones <code>.something</code> por <code>.txt</code>
+en cadenas que contienen una ruta a un fichero:
+
+<P>
+<PRE>
+casiano@millo:~$ perl5.10.1 -wdE 0
+main::(-e:1):   0
+  DB&lt;1&gt; ($b = $a = 'abc/xyz.something') =~ s{\.[^.]*$}{.txt}
+  DB&lt;2&gt; p $b
+abc/xyz.txt
+  DB&lt;3&gt; ($b = $a = 'abc/xyz.something') =~ s/\.\K[^.]*$/txt/;
+  DB&lt;4&gt; p $b
+abc/xyz.txt
+  DB&lt;5&gt; p $a
+abc/xyz.something
+</PRE>
+
+<P>
+Véase también:
+
+<UL>
+<LI><A NAME="tex2html74"
+  HREF="http://search.cpan.org/perldoc?Regexp::Keep">Regexp::Keep</A>
+por Jeff Pinyan 
+</LI>
+<LI>El nodo <I>positive look behind regexp mystery</I> en <A NAME="tex2html75"
+  HREF="http://www.perlmonks.org/?node_id=701618">PerlMonks</A>
+</LI>
+</UL>
+
+<P>
+
+<H4><A NAME="SECTION00823090000000000000">
+Operador de predicción negativo: Última ocurrencia</A>
+</H4>
+  
+
+<P>
+Escriba una expresión regular que encuentre la última aparición de la cadena <code>foo</code>
+en una cadena dada.
+<PRE>
+  DB&lt;6&gt; x ($a = 'foo foo bar bar foo bar bar') =~ /foo(?!.*foo)/g; print pos($a)."\n"
+19
+  DB&lt;7&gt; x ($a = 'foo foo bar bar foo bar bar') =~ s/foo(?!.*foo)/\U$&amp;/
+0  1
+  DB&lt;8&gt; x $a
+0  'foo foo bar bar FOO bar bar'
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION008230100000000000000">
+Diferencias entre mirar adelante negativo y mirar adelante con clase negada</A>
+</H4>
+  
+
+<P>
+Aparentemente el operador ``mirar-adelante'' negativo es parecido a usar el operador ``mirar-adelante'' positivo
+con la negación de una clase. 
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=113><PRE>
+/regexp(?![abc])/
+</PRE></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=113><PRE>
+/regexp(?=[^abc])/
+</PRE></TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Sin embargo existen al menos dos diferencias:
+
+<P>
+
+<UL>
+<LI>Una negación de una clase debe casar algo para tener éxito. Un `mirar-adelante'' negativo
+tiene éxito si, en particular no logra casar con algo. 
+Por ejemplo:
+
+<P>
+<code>\d+(?!\.)</code> casa con <code>$a = '452'</code>, mientras que <code>\d+(?=[^.])</code> lo hace, pero porque 
+<code>452</code> es <code>45</code> seguido de un carácter que no es el punto:
+<PRE>
+&gt; cat lookaheadneg.pl
+#!/usr/bin/perl
+
+ $a = "452";
+ if ($a =~ m{\d+(?=[^.])}i) { print "$a casa clase negada. \$&amp; = $&amp;\n"; }
+ else { print "$a no casa\n"; }
+ if ($a =~ m{\d+(?!\.)}i) { print "$a casa predicción negativa. \$&amp; = $&amp;\n"; }
+ else { print "$b no casa\n"; }
+nereida:~/perl/src&gt; lookaheadneg.pl
+452 casa clase negada. $&amp; = 45
+452 casa predicción negativa. $&amp; = 452
+</PRE>
+</LI>
+<LI>Una clase negada casa un único carácter. Un `mirar-adelante'' negativo
+puede tener longitud arbitraria.
+</LI>
+</UL>
+
+<P>
+
+<H4><A NAME="SECTION008230110000000000000">
+AND y AND NOT</A>
+</H4>
+  
+
+<P>
+Otros dos ejemplos: 
+
+<P>
+
+<UL>
+<LI><code>^(?![A-Z]*$)[a-zA-Z]*$</code> 
+
+<P>
+casa con líneas formadas por secuencias de
+letras tales que no todas son mayúsculas.
+(Obsérvese el uso de las anclas).
+
+<P>
+</LI>
+<LI><code>^(?=.*?esto)(?=.*?eso)</code> 
+
+<P>
+casan con cualquier línea en la que aparezcan 
+<code>esto</code> y <code>eso</code>. Ejemplo:
+<PRE>
+&gt; cat estoyeso.pl
+#!/usr/bin/perl
+
+ my $a = shift;
+
+ if ($a =~ m{^(?=.*?esto)(?=.*?eso)}i) { print "$a matches.\n"; }
+ else { print "$a does not match\n"; }
+
+&gt;estoyeso.pl 'hola eso y esto'
+hola eso y esto matches.
+&gt; estoyeso.pl 'hola esto y eso'
+hola esto y eso matches.
+&gt; estoyeso.pl 'hola aquello y eso'
+hola aquello y eso does not match
+&gt; estoyeso.pl 'hola esto y aquello'
+hola esto y aquello does not match
+</PRE>
+El ejemplo muestra que la interpretación es que cada 
+operador mirar-adelante se interpreta siempre a partir de
+la posición actual de búsqueda. La expresión regular anterior
+es básicamente equivalente a <code>(/esto/ &amp;&amp; /eso/)</code>.
+</LI>
+<LI><code>(?!000)(\d\d\d)</code> 
+
+<P>
+casa con cualquier cadena de tres dígitos que no
+sea la cadena <code>000</code>.
+</LI>
+</UL>
+
+<P>
+
+<H4><A NAME="SECTION008230120000000000000">
+Lookahead negativo versus lookbehind</A>
+</H4>
+  
+
+<P>
+Nótese que el ``mirar-adelante'' negativo
+no puede usarse fácilmente para imitar un ``mirar-atrás'',
+esto es, que no se puede imitar la conducta de
+<code>(?&lt;!foo)bar</code> mediante
+algo como <code>(/?!foo)bar</code>. Tenga en cuenta que:
+
+<P>
+
+<UL>
+<LI>Lo que 
+dice <code>(?!foo)</code> es que los tres caracteres que siguen no puede ser <code>foo</code>.  
+
+<P>
+</LI>
+<LI>Así, <code>foo</code> no pertenece a <code>/(?!foo)bar/</code>, pero
+<code>foobar</code> pertenece a  <code>(?!foo)bar/</code> porque <code>bar</code> es una cadena
+cuyos tres siguientes caracteres son <code>bar</code> y no son <code>foo</code>.
+
+<P>
+</LI>
+<LI>Si quisieramos conseguir algo parecido a <code>(?&lt;!foo)bar</code> usando un lookahead negativo
+tendríamos que escribir algo asi como
+<code>/(?!foo)...bar/</code> que casa con una cadena de tres caracteres que no sea <code>foo</code> seguida de 
+<code>bar</code> (pero que tampoco es exactamente equivalente):
+<PRE>
+pl@nereida:~/Lperltesting$ cat -n foobar.pl
+     1  use v5.10;
+     2  use strict;
+     3
+     4  my $a = shift;
+     5
+     6  for my $r (q{(?&lt;!foo)bar}, q{(?!foo)bar}, q{(?!foo)...bar}) {
+     7    if ($a =~ /$r/) {
+     8      say "$a casa con $r"
+     9    }
+    10    else {
+    11      say "$a no casa con $r"
+    12    }
+    13  }
+</PRE>
+
+<P>
+</LI>
+<LI>Al ejecutar con diferentes entradas el programa anterior vemos que la solución 
+<code>q{(?!foo)...bar}</code> se apróxima mas a <code>(q{(?&lt;!foo)bar}</code>:
+<PRE>
+pl@nereida:~/Lperltesting$ perl5.10.1 foobar.pl foobar
+foobar no casa con (?&lt;!foo)bar
+foobar casa con (?!foo)bar
+foobar no casa con (?!foo)...bar
+
+pl@nereida:~/Lperltesting$ perl5.10.1 foobar.pl bar
+bar casa con (?&lt;!foo)bar
+bar casa con (?!foo)bar
+bar no casa con (?!foo)...bar
+</PRE>
+
+<P>
+<P>
+<DIV><B>Ejercicio  3.2.1</B> &nbsp; 
+<I>Explique porqué <code>bar</code> casa con <code>(?&lt;!foo)bar</code> pero no con <code>(?!foo)...bar</code>.
+¿Sabría encontrar una expresión regular mas apropiada usando lookahead negativo?</I></DIV><P></P>
+
+<P>
+</LI>
+<LI>En realidad, posiblemente sea mas legible una solución como:
+<PRE>
+        if (/bar/ and $` !~ /foo$/)
+</PRE>
+o aún mejor (véase <A HREF="node53.html#parrafo:prematch">3.1.4</A>):
+<PRE>
+        if (/bar/p &amp;&amp; ${^PREMATCH} =~ /foo$/)
+</PRE>
+El siguiente programa puede ser utilizado para ilustrar la equivalencia:
+<PRE>
+pl@nereida:~/Lperltesting$ cat -n foobarprematch.pl
+ 1  use v5.10;
+ 2  use strict;
+ 3
+ 4  $_ = shift;
+ 5
+ 6  if (/bar/p &amp;&amp; ${^PREMATCH} =~ /foo$/) {
+ 7    say "$_ no cumple ".q{/bar/p &amp;&amp; ${^PREMATCH} =~ /foo$/};
+ 8  }
+ 9  else {
+10    say "$_ cumple ".q{/bar/p &amp;&amp; ${^PREMATCH} =~ /foo$/};
+11  }
+12  if (/(?&lt;!foo)bar/) {
+13    say "$_ casa con (?&lt;!foo)bar"
+14  }
+15  else {
+16    say "$_ no casa con (?&lt;!foo)bar"
+17  }
+</PRE>
+Siguen dos ejecuciones:
+<PRE>
+pl@nereida:~/Lperltesting$ perl5.10.1 foobarprematch.pl bar
+bar cumple /bar/p &amp;&amp; ${^PREMATCH} =~ /foo$/
+bar casa con (?&lt;!foo)bar
+pl@nereida:~/Lperltesting$ perl5.10.1 foobarprematch.pl foobar
+foobar no cumple /bar/p &amp;&amp; ${^PREMATCH} =~ /foo$/
+foobar no casa con (?&lt;!foo)bar
+</PRE>
+</LI>
+</UL>
+
+<P>
+
+<H4><A NAME="SECTION008230130000000000000">
+Ejercicios</A>
+</H4>
+  
+
+<P>
+<P>
+<DIV><B>Ejercicio  3.2.2</B> &nbsp; 
+<UL>
+<LI>Escriba una sustitución que reemplaze todas las apariciones
+de <code>foo</code> por <code>foo,</code> usando <code>\K</code> o lookbehind
+</LI>
+<LI>Escriba una sustitución que reemplaze todas las apariciones
+de <code>lookahead</code> por <code>look-ahead</code> usando lookaheads y lookbehinds
+</LI>
+<LI>Escriba una expresión regular que capture todo lo que hay 
+entre las cadenas <code>foo</code> y <code>bar</code> siempre que no se incluya la
+palabra <code>baz</code>
+</LI>
+<LI>¿Cuál es la salida?
+<PRE>
+  DB&lt;1&gt; x 'abc' =~ /(?=(.)(.)(.))a(b)/
+</PRE>
+</LI>
+<LI>Se quiere poner un espacio en blanco después de la aparición de cada coma:
+<PRE>
+s/,/, /g;
+</PRE>
+pero se quiere que la sustitución no tenga lugar si la coma esta incrustada entre
+dos dígitos.
+</LI>
+<LI>Se quiere poner un espacio en blanco después de la aparición de cada coma:
+<PRE>
+s/,/, /g;
+</PRE>
+pero se quiere que la sustitución no tenga lugar si la coma esta incrustada entre
+dos dígitos. Además se pide que si hay ya un espacio después de la coma,
+no se duplique
+
+<P>
+</LI>
+<LI>¿Cuál es la salida?
+
+<pre>
+pl<span class="synIdentifier">@nereida</span>:~<span class="synStatement">/</span><span class="synConstant">Lperltesting$ cat -n ABC123</span><span class="synSpecial">.</span><span class="synConstant">pl</span>
+<span class="synConstant">     1  use warnings;</span>
+<span class="synConstant">     2  use strict;</span>
+<span class="synConstant">     3</span>
+<span class="synConstant">     4  my </span><span class="synIdentifier">$c</span><span class="synConstant"> = 0;</span>
+<span class="synConstant">     5  my </span><span class="synIdentifier">@p</span><span class="synConstant"> = </span><span class="synSpecial">(</span><span class="synConstant">'^</span><span class="synSpecial">(</span><span class="synConstant">ABC</span><span class="synSpecial">)(?!</span><span class="synConstant">123</span><span class="synSpecial">)</span><span class="synConstant">', '^</span><span class="synSpecial">(\D*)(?!</span><span class="synConstant">123</span><span class="synSpecial">)</span><span class="synConstant">',</span><span class="synSpecial">)</span><span class="synConstant">;</span>
+<span class="synConstant">     6</span>
+<span class="synConstant">     7  for my </span><span class="synIdentifier">$r</span><span class="synConstant"> </span><span class="synSpecial">(</span><span class="synIdentifier">@p</span><span class="synSpecial">)</span><span class="synConstant"> {</span>
+<span class="synConstant">     8    for my </span><span class="synIdentifier">$s</span><span class="synConstant"> </span><span class="synSpecial">(</span><span class="synConstant">qw{ABC123 ABC445}</span><span class="synSpecial">)</span><span class="synConstant"> {</span>
+<span class="synConstant">     9      </span><span class="synIdentifier">$c</span><span class="synSpecial">++</span><span class="synConstant">;</span>
+<span class="synConstant">    10      print "</span><span class="synIdentifier">$c</span><span class="synConstant">: '</span><span class="synIdentifier">$s</span><span class="synConstant">' =~ </span><span class="synStatement">/</span><span class="synIdentifier">$r</span>/ : <span class="synConstant">";</span>
+<span class="synConstant">    11      &lt;&gt;;</span>
+<span class="synConstant">    12      if (</span><span class="synIdentifier">$s</span><span class="synConstant"> =~ /</span><span class="synIdentifier">$r</span><span class="synConstant">/) {</span>
+<span class="synConstant">    13        print "</span> YES (<span class="synIdentifier">$1</span>)\n<span class="synConstant">";</span>
+<span class="synConstant">    14      }</span>
+<span class="synConstant">    15      else {</span>
+<span class="synConstant">    16        print "</span> NO\n<span class="synConstant">";</span>
+<span class="synConstant">    17      }</span>
+<span class="synConstant">    18    }</span>
+<span class="synConstant">    19  }</span>
+</pre>
+</LI>
+</UL></DIV><P></P>
+
+<P>
+<HR>
+<A NAME="tex2html2017"
+  HREF="node60.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2011"
+  HREF="node56.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2005"
+  HREF="node58.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2013"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2015"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2018"
+  HREF="node60.html">Definición de Nombres de</A>
+<B>Sup:</B> <A NAME="tex2html2012"
+  HREF="node56.html">Algunas Extensiones</A>
+<B> Ant:</B> <A NAME="tex2html2006"
+  HREF="node58.html">Modificadores locales</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

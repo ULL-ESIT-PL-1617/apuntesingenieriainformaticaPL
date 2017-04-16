@@ -1,0 +1,664 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Práctica: Generación Automática de Analizadores Predictivos</TITLE>
+<META NAME="description" CONTENT="Práctica: Generación Automática de Analizadores Predictivos">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="previous" HREF="node137.html">
+<LINK REL="up" HREF="node125.html">
+<LINK REL="next" HREF="node139.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3450"
+  HREF="node139.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3444"
+  HREF="node125.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3440"
+  HREF="node137.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3446"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3448"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3451"
+  HREF="node139.html">Esquemas de Traducción</A>
+<B>Sup:</B> <A NAME="tex2html3445"
+  HREF="node125.html">Análisis Sintáctico Predictivo Recursivo</A>
+<B> Ant:</B> <A NAME="tex2html3441"
+  HREF="node137.html">Práctica: Un analizador APDR</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html3452"
+  HREF="node138.html#SECTION009613010000000000000">Objetivo</A>
+<LI><A NAME="tex2html3453"
+  HREF="node138.html#SECTION009613020000000000000">El Módulo <TT>Grammar</TT></A>
+<LI><A NAME="tex2html3454"
+  HREF="node138.html#SECTION009613030000000000000">Descripción del objetivo: La función <TT>gap</TT></A>
+<LI><A NAME="tex2html3455"
+  HREF="node138.html#SECTION009613040000000000000">Descripción del objetivo: La función <TT>parser</TT></A>
+<LI><A NAME="tex2html3456"
+  HREF="node138.html#SECTION009613050000000000000">Cálculo de los First y los Follow con <TT>PL::FirstFollow</TT></A>
+<LI><A NAME="tex2html3457"
+  HREF="node138.html#SECTION009613060000000000000">Uso de Templates</A>
+<LI><A NAME="tex2html3458"
+  HREF="node138.html#SECTION009613070000000000000">Concatenación y Documentos <TT>HERE</TT></A>
+<LI><A NAME="tex2html3459"
+  HREF="node138.html#SECTION009613080000000000000">Descarga de los Módulos Necesarios</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION009613000000000000000"></A>
+   <A NAME="10038"></A>
+  
+<A NAME="practica:GAP"></A>
+<BR>
+Práctica: Generación Automática de Analizadores Predictivos
+</H2>
+
+<P>
+
+<H4><A NAME="SECTION009613010000000000000">
+Objetivo</A>
+</H4>
+Escriba un módulo <code>GAP.pm</code> que provea una subrutina <code>gap</code> para
+la generación automática de un APDR supuesto que la gramática de entrada es 
+LL(1). 
+
+<P>
+La subrutina <code>gap</code> recibe como entrada la gramática según la estructura de
+datos generada  por la función <code>Grammar::Parse</code> de la versión 0.3 del módulo
+<A NAME="tex2html230"
+  HREF="Grammar-0.03.tar.gz">Grammar</A>. 
+
+<P>
+
+<H4><A NAME="SECTION009613020000000000000">
+El Módulo <TT>Grammar</TT></A>
+</H4>
+
+<P>
+La estructura de datos generada  por la función <code>Grammar::Parse</code>
+se explicó en la práctica  
+<A HREF="node133.html#practica:firstandfollow">4.6.8</A>.
+La estructura ha sido extendida
+en esta versión para incluir el código que se sitúe en la zona de cola.
+Por ejemplo, dada la gramática de entrada:
+
+<P>
+<PRE>
+  Grammar/03/scripts$ cat -n aSb.yp
+       1  %%
+       2  S:
+       3      |   'a' S 'b'
+       4  ;
+       5  %%
+       6
+       7  sub Lex {
+       8    local $_ = shift; # input
+       9    my @tokens;
+      10
+      11
+      12    while ($_) {
+      13      s/^\s*//; # fuera blancos
+      14      push @tokens, $1, $1 if s/^(.)//s
+      15    }
+      16    @tokens;
+      17  }
+      18
+      19  sub main {
+      20    my $filename = shift;
+      21    my $input;
+      22
+      23    if (defined($filename)) {
+      24      local $/ = undef;
+      25      open my $FILE, $filename or die "No se pudo abrir $filename\n";
+      26      $input = &lt;$FILE&gt;;
+      27      close($FILE);
+      28    }
+      29    else { $input = &lt;STDIN&gt; }
+      30
+      31    my @tokens = Lex($input);
+      32    Parse(@tokens); # Llamada al analizador generado
+      33    print "Sintácticamente correcto\n";
+      34  }
+</PRE>
+se genera la siguiente estructura de datos:
+<PRE>
+{
+  'SYMS' =&gt; { 'S' =&gt; 2, 'b' =&gt; 3, 'a' =&gt; 3 },  # Símbolo =&gt; línea de aparición
+  'NULL' =&gt; { 'S' =&gt; 1 }, # Símbolos que se anulan
+  'RULES' =&gt; [ # Reglas 
+               [ 'S', [] ], # S produce vacío
+               [ 'S', [ 'a', 'S', 'b' ] ] # S-&gt; a S b
+             ],
+  'START' =&gt; 'S', # Símbolo de arranque
+  'TERM' =&gt; [ 'b', 'a' ], # Terminales
+  'NTERM' =&gt; { 'S' =&gt; [ 0, 1 ] } # Variables sintácticas e índices de las reglas de esa variable
+  'TAIL' =&gt; [ # [ 'Código de cola', línea en la que está el segundo %% ]
+  '
+
+  sub Lex {
+    local $_ = shift; # input
+    my @tokens;
+
+
+    while ($_) {
+      s/^\\s*//; # fuera blancos
+      push @tokens, $1, $1 if s/^(.)//s
+    }
+    @tokens;
+  }
+
+  sub main {
+    my $filename = shift;
+    my $input;
+
+    if (defined($filename)) {
+      local $/ = undef;
+      open my $FILE, $filename or die "No se pudo abrir $filename\\n";
+      $input = &lt;$FILE&gt;;
+      close($FILE);
+    }
+    else { $input = &lt;STDIN&gt; }
+
+    my @tokens = Lex($input);
+    my $ok = Parse(@tokens); # Llamada al analizador generado
+    print "Sintácticamente correcto\\n" if $ok;
+  }
+
+  ', 5 ], # línea en la que está el segundo %%
+ };
+</PRE>
+
+<P>
+Asi pues la entrada con clave <code>TAIL</code> contiene el código auxiliar de
+cola. Este código debe ser incluido por su programa dentro del texto del
+paquete generado por <code>gap</code>.
+
+<P>
+
+<H4><A NAME="SECTION009613030000000000000">
+Descripción del objetivo: La función <TT>gap</TT></A>
+</H4>
+
+<P>
+La función <code>gap</code> también recibe como entrada el nombre 
+del package:
+<PRE>
+$package_text = &amp;gap($grammar, 'Package_name');
+</PRE>
+La función <code>gap</code> retorna
+una cadena conteniendo el <code>package</code> en el que estan las subrutinas del
+analizador sintáctico. 
+
+<P>
+La idea es que dicha cadena se salvará en un fichero
+con nombre <code>Package_name.pm</code> que podrá posteriormente ser usado 
+(<code>use Package_name</code>) por un programa que necesite analizar entradas
+que se conforman de acuerdo a la especificación de la gramática.
+
+<P>
+
+<H4><A NAME="SECTION009613040000000000000">
+Descripción del objetivo: La función <TT>parser</TT></A>
+</H4>
+La rutina principal del paquete generado se ha de llamar
+<code>parser</code> (esto es, su nombre completo es: <code>Package_name::parser</code>. 
+Evidentemente <code>Package_name</code> debe ser un nombre Perl válido).
+Ninguna subrutina deberá ser exportada sino que deberán ser llamadas
+por su nombre completo.
+
+<P>
+La subrutina <code>parser</code> recibe como argumento el array de 
+terminales, obtiene el primer terminal y llama a la subrutina
+asociada con el símbolo de arranque. Los terminales están representados
+como parejas <!-- MATH
+ $(terminal, atributo)$
+ -->
+<IMG
+ WIDTH="157" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img113.png"
+ ALT="$ (terminal, atributo)$">
+.
+
+<P>
+Observe que, una vez que la cadena <code>$package_text</code> conteniendo el paquete ha sido 
+generada y salvada en un fichero con nombre <code>Package_name.pm</code>, podemos escribir
+un programa cliente:
+
+<P>
+<PRE>
+use strict;
+use Package_name;
+
+&amp;Package_name::main;
+</PRE>
+
+<P>
+Este programa espera una entrada desde fichero o <code>STDIN</code> e
+informa si dicha entrada es sintácticamente correcta o no
+para la gramática en cuestión.
+
+<P>
+
+<H4><A NAME="SECTION009613050000000000000">
+Cálculo de los First y los Follow con <TT>PL::FirstFollow</TT></A>
+</H4>
+
+<P>
+Para facilitar la escritura de <code>GAP.pm</code> pueden hacer uso 
+del módulo <A NAME="tex2html231"
+  HREF="PL-FirstFollow-0.02.tar.gz">PL::FirstFollow</A>
+el cual calcula los <IMG
+ WIDTH="65" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$ FIRST$">
+ y los <IMG
+ WIDTH="89" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img4.png"
+ ALT="$ FOLLOW$">
+. El módulo  PL::FirstFollow 
+depende de 
+<A NAME="tex2html232"
+  HREF="http://search.cpan.org/~jhi/Set-Scalar-1.20/lib/Set/Scalar.pm">Set::Scalar</A>
+escrito por 
+<A NAME="tex2html233"
+  HREF="http://search.cpan.org/~jhi/">Jarkko Hietaniemi</A>: instálelo primero.
+
+<P>
+Deberá familiarizarse con <TT>PL::FirstFollow</TT>, rellenar la
+documentación de todas las subrutinas (apariciones de <code>????</code> en el texto)
+y escribir la documentación siguiendo el template que se provee. 
+<B>Rellene los fragmentos de código que se han sustituido por 
+signos de interrogación</B>.
+Haga un estudio de cubrimiento
+y añada pruebas para mejorar el actual. El actual cubrimiento es:
+<PRE>
+---------------------------- ------ ------ ------ ------ ------ ------ ------
+File                           stmt   bran   cond    sub    pod   time  total
+---------------------------- ------ ------ ------ ------ ------ ------ ------
+...ammar-0.03/lib/Grammar.pm  100.0    n/a    n/a  100.0    0.0   75.3   97.2
+blib/lib/PL/FirstFollow.pm    100.0   92.9   50.0  100.0    0.0   24.7   95.1
+Total                         100.0   92.9   50.0  100.0    0.0  100.0   95.5
+---------------------------- ------ ------ ------ ------ ------ ------ ------
+</PRE>
+Si observa un fallo en  PL::FirstFollow  háganoslo saber y
+además de resolverlo escriba una prueba para detectar el fallo.
+
+<P>
+Haga un estudio de profiling de su aplicación.
+
+<H4><A NAME="SECTION009613060000000000000">
+Uso de Templates</A>
+</H4>
+
+<P>
+Un módulo que puede facilitar la escritura de esta práctica 
+es 
+<A NAME="tex2html234"
+  HREF="http://search.cpan.org/~mjd/Text-Template-1.44/lib/Text/Template.pm">Text::Template</A>
+debido a 
+<A NAME="tex2html235"
+  HREF="http://search.cpan.org/~mjd/">Mark Jason Dominus</A>.
+El siguiente ejemplo de uso es un fragmento de  un traductor - que nunca acabo de terminar
+- que toma con fuente 
+un fichero en el formato que usa Moodle para los cuestionarios (conocido como 
+formato GIFT) y lo convierte en un cuestionario L<SUP><SMALL>A</SMALL></SUP>T<SMALL>E</SMALL>X:
+
+<P>
+<PRE>
+lhp@nereida:~/projects/Gift2LaTeX/Gift2LaTeX/lib$ cat -n Gift2LaTeX.pm
+   1  package Gift2LaTeX;
+   2
+   3  use strict;
+   4  use warnings;
+   5  use Gift;
+   6  use Text::Template;
+   7  use HTML::Latex;
+  ..    ......................................................
+  49  package Gift::TRUEFALSE; # True-false questions belong to this class
+  50
+  51  { # closure
+  52
+  53    die "Can't find $TEMPLATE_DIR/TRUEFALSE_question.tep\n"
+  54          unless -e "$TEMPLATE_DIR/TRUEFALSE_question.tep";
+  55    my $tfq_tmpl = Text::Template-&gt;new( #tfq = true-false question
+  56      DELIMITERS =&gt; ['%&lt;', '%&gt;'];
+  57      SOURCE =&gt; "$TEMPLATE_DIR/TRUEFALSE_question.tep",
+  58    );
+  ..    ......................................................
+  67    sub gen_latex {
+  68      my $self = shift;
+  69
+  70      ########## Generate latex for question
+  71      my $prefix  = $self-&gt;PREFIX;
+  72
+  73      my $sufix = $self-&gt;POSTSTATE;
+  74
+  75      $self-&gt;Error("Only HTML and PLAIN formats are supported\n")
+  76          unless (!$self-&gt;FORMAT or ($self-&gt;FORMAT =~ m{html|plain}i));
+  77
+  78      my ($prefix_tex, $sufix_tex);
+  79      if (defined($self-&gt;FORMAT) and $self-&gt;FORMAT =~ m{plain}i) {
+  80        $prefix_tex = $prefix;
+  81        $sufix_tex  = $sufix;
+  82      }
+  83      else { # HTML by default
+  ..    ......................................................
+  86      }
+  87      my $params = {
+  88        prefix  =&gt; $prefix_tex,
+  89        sufix   =&gt; $sufix_tex,
+  90        separator =&gt; $separator,
+  91        label   =&gt; $label_prefix.$question_number,
+  92        question_number =&gt; $question_number
+  93      };
+  94      my $question_tex = $tfq_tmpl-&gt;fill_in(HASH =&gt; $params);
+  96      ########## Generate latex for answer
+ ...      ....................................
+ 101    }
+ 102  }
+</PRE>
+En la línea 55 se crea el template. El template se lee desde el fichero
+<code>"$TEMPLATE_DIR/TRUEFALSE_question.tep"</code> cuyo contenido es una mezcla
+de texto (en este caso texto L<SUP><SMALL>A</SMALL></SUP>T<SMALL>E</SMALL>X y HTML) con código Perl:
+El código Perl aparece acotado entre los delimitadores <code>'%&lt;'</code>
+y <code>'%&gt;'</code>.
+
+<P>
+<PRE>
+lhp@nereida:~/projects/Gift2LaTeX/Gift2LaTeX/etc/en$ cat -n TRUEFALSE_question.tep
+ 1  \ begin{latexonly}
+ 2    %&lt;$separator%&gt;
+ 3    \ label{question:%&lt;$label%&gt;}
+ 4    %&lt;$prefix%&gt;
+ 5
+ 6    \ begin{center}
+ 7      \ begin{tabular}{llll}
+ 8          $\ bigcirc$ &amp; TRUE &amp; $\ bigcirc$ &amp; FALSE
+ 9      \ end{tabular}
+10
+11      \noindent %&lt;$sufix%&gt;
+12    \ end{center}
+13  \ end{latexonly}
+14
+15  \ begin{htmlonly}
+16  %&lt;$separator%&gt;
+17  \ label{question:%&lt;$label%&gt;}
+18  %&lt;$prefix%&gt;
+19
+20  \ begin{center}
+21    \ begin{tabular}{llll}
+22        \ htmlref{$\bigcirc$}{answer:%&lt;$label%&gt;} &amp; TRUE &amp;
+23        \ htmlref{$\bigcirc$}{answer:%&lt;$label%&gt;} &amp; FALSE
+24    \ end{tabular}
+25
+26    \ noindent %&lt;$sufix%&gt;
+27  \ end{center}
+28  \ end{htmlonly}
+</PRE>
+
+<P>
+El template se rellena en las líneas 87-94. En esa llamada
+se ejecuta el código Perl incrustado en el esqueleto
+y su resultado se inserta en la posición que ocupa en el texto.
+
+<P>
+
+<H4><A NAME="SECTION009613070000000000000">
+Concatenación y Documentos <TT>HERE</TT></A>
+</H4>
+Cuando concatene sangre adecuadamente las concatenaciones:
+<PRE>
+my $usage = "Usage: $0 &lt;file&gt; [-full] [-o] [-beans]\n"
+            . "Options:\n"
+            . "    -full  : produce a full dump\n"
+            . "    -o     : dump in octal\n"
+            . "    -beans : source is Java\n"
+            ;
+</PRE>
+ponga el punto al principio de la siguiente línea, no al final.
+
+<P>
+Pero cuando el número de líneas es grande 
+es mejor
+usar un <A NAME="10039"></A><B>here document</B>
+o <A NAME="10041"></A><B>documento aqui</B>. Veamos un ejemplo:
+<PRE>
+print &lt;&lt;"EOI";
+El programa se deberá ejecutar con:
+
+$0 numfiles $opciones initialvalue
+EOI
+</PRE>
+Para definir un ``documento aqui'' 
+se escribe la etiqueta entrecomillada y precedida de <code>&lt;&lt;</code> y 
+sigue el texto que consituye el <B>here document</B>
+que se delimita por una línea en blanco que empieza por la etiqueta.
+Al documento aquí se le trata como una cadena de doble comilla si
+la etiqueta aparece en doble comilla y como de comilla simple
+si la etiqueta esta  entre comillas simples.
+Observe que el punto y coma se escribe despues 
+de la primera aparición 
+de la etiqueta.
+
+<P>
+Un problema con el uso de los heredoc es que rompen la estructura normal
+del sangrado:
+<PRE>
+if ($usage_error) {
+    warn &lt;&lt;'END_USAGE';
+Usage: qdump &lt;file&gt; [-full] [-o] [-beans]
+Options:
+    -full  : produce a full dump
+    -o     : dump in octal
+    -beans : source is Java
+END_USAGE
+}
+</PRE>
+Es mejor que cada heredoc se aisle en una subrutina y se parametrice con
+las variables que van a ser interpoladas:
+<PRE>
+sub build_usage {
+    my ($prog_name, $file_name) = @_;
+
+    return &lt;&lt;"END_USAGE";
+Usage: $prog_name $file_name [-full] [-o] [-beans]
+Options:
+    -full  : produce a full dump
+    -o     : dump in octal
+    -beans : source is Java
+END_USAGE
+}
+</PRE>
+
+<P>
+que mas tarde puede ser llamado con los valores de interpolación adecuados:
+
+<P>
+<PRE>
+if ($usage_error) {
+    warn build_usage($PROGRAM_NAME, $requested_file);
+}
+</PRE>
+Véase  el libro de Conway  Perl Best Practices
+[<A
+ HREF="node323.html#bestpractices">7</A>]
+para mas detalles sobre buenas prácticas de programación con heredocs.
+
+<P>
+
+<H4><A NAME="SECTION009613080000000000000">
+Descarga de los Módulos Necesarios</A>
+</H4>
+
+<UL>
+<LI>El módulo  Grammar : 
+<A NAME="tex2html236"
+  HREF="http://nereida.deioc.ull.es/~pl/perlexamples/Grammar-0.03.tar.gz">http://nereida.deioc.ull.es/~pl/perlexamples/Grammar-0.03.tar.gz</A>
+<P>
+</LI>
+<LI>El módulo  PL::FirstFollow :
+<A NAME="tex2html237"
+  HREF="http://nereida.deioc.ull.es/~pl/perlexamples/PL-FirstFollow-0.02.tar.gz">http://nereida.deioc.ull.es/~pl/perlexamples/PL-FirstFollow-0.02.tar.gz</A>
+</LI>
+</UL>
+
+<P>
+<HR>
+<A NAME="tex2html3450"
+  HREF="node139.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3444"
+  HREF="node125.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3440"
+  HREF="node137.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3446"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3448"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3451"
+  HREF="node139.html">Esquemas de Traducción</A>
+<B>Sup:</B> <A NAME="tex2html3445"
+  HREF="node125.html">Análisis Sintáctico Predictivo Recursivo</A>
+<B> Ant:</B> <A NAME="tex2html3441"
+  HREF="node137.html">Práctica: Un analizador APDR</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

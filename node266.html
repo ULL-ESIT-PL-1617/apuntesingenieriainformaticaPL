@@ -1,0 +1,487 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Usando Language::AttributeGrammars con Parse::Eyapp</TITLE>
+<META NAME="description" CONTENT="Usando Language::AttributeGrammars con Parse::Eyapp">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="previous" HREF="node265.html">
+<LINK REL="up" HREF="node261.html">
+<LINK REL="next" HREF="node267.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html5460"
+  HREF="node267.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5454"
+  HREF="node261.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5450"
+  HREF="node265.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5456"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5458"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5461"
+  HREF="node267.html">Transformaciones Árbol con Parse::Eyapp</A>
+<B>Sup:</B> <A NAME="tex2html5455"
+  HREF="node261.html">Análisis Semántico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5451"
+  HREF="node265.html">El módulo Language::AttributeGrammar</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001450000000000000000"></A>
+<A NAME="section:attributegrammarswitheyap"></A>
+<BR>
+Usando <TT>Language::AttributeGrammars</TT> con <TT>Parse::Eyapp</TT>
+</H1>
+
+<P>
+
+<H4><A NAME="SECTION001450010000000000000">
+La cláusula <TT>alias</TT> de <TT>%tree</TT></A>
+</H4>
+  
+
+<P>
+El requerimiento de  Language::AttributeGrammars 
+de que los hijos de un nodo puedan ser accedidos 
+a través de un método cuyo nombre sea el nombre del hijo
+no encaja con la forma oficial de acceso 
+a los hijos que usa <code>Parse::Eyapp</code>. 
+La directiva <code>%tree</code> de <code>Parse::Eyapp</code> dispone
+de la opción  alias  la cual hace que los identificadores 
+que aparecen en los usos de la <A NAME="21585"></A><B>notación punto</B> y 
+de la <A NAME="21587"></A><B>notación dolar</B> se interpreten como nombres de métodos
+que proveen acceso al hijo correspondiente
+(véase la sección
+<A HREF="node245.html#section:alias">8.16</A>)
+<PRE>
+nereida:~/src/perl/attributegrammar/Language-AttributeGrammar-0.08/examples&gt; cat -n Calc.pl
+   1  #!/usr/bin/perl -w
+   2  use strict;
+   3  use Parse::Eyapp;
+   4  use Data::Dumper;
+   5  use Language::AttributeGrammar;
+   6
+   7  my $grammar = q{
+  ..  ............... # precedence declarations
+ !15  %tree bypass alias
+  16
+  17  %%
+  18  line: $exp  { $_[1] }
+  19  ;
+  20
+  21  exp:
+  22      %name NUM
+  23            $NUM
+  24          | %name VAR
+  25            $VAR
+  26          | %name ASSIGN
+  27            $VAR '=' $exp
+  28          | %name PLUS
+  29            exp.left '+' exp.right
+  30          | %name MINUS
+  31            exp.left '-' exp.right
+  32          | %name TIMES
+  33            exp.left '*' exp.right
+  34          | %name DIV
+  35            exp.left '/' exp.right
+ !36          | %no bypass UMINUS
+  37            '-' $exp %prec NEG
+  38    |   '(' $exp ')'  { $_[2] } /* Let us simplify a bit the tree */
+  39  ;
+  40
+  41  %%
+  ..  ................ # as usual
+  78  }; # end grammar
+  79
+  80
+  81  $Data::Dumper::Indent = 1;
+  82  Parse::Eyapp-&gt;new_grammar(
+  83    input=&gt;$grammar,
+  84    classname=&gt;'Rule6',
+  85    firstline =&gt;7,
+  86    outputfile =&gt; 'Calc.pm',
+  87  );
+  88  my $parser = Rule6-&gt;new();
+  89  $parser-&gt;YYData-&gt;{INPUT} = "a = -(2*3+5-1)\n";
+  90  my $t = $parser-&gt;Run;
+  91  print "\n***** Before ******\n";
+  92  print Dumper($t);
+  93
+! 94  my $attgram = new Language::AttributeGrammar &lt;&lt;'EOG';
+! 95
+! 96  # Compute the expression
+! 97  NUM:    $/.val = { $&lt;attr&gt; }
+! 98  TIMES:  $/.val = { $&lt;left&gt;.val * $&lt;right&gt;.val }
+! 99  PLUS:   $/.val = { $&lt;left&gt;.val + $&lt;right&gt;.val }
+!100  MINUS:  $/.val = { $&lt;left&gt;.val - $&lt;right&gt;.val }
+!101  UMINUS: $/.val = { -$&lt;exp&gt;.val }
+!102  ASSIGN: $/.val = { $&lt;exp&gt;.val }
+!103  EOG
+!104
+!105  sub NUM::attr {
+!106    $_[0]-&gt;{attr};
+!107  }
+ 108
+!109  my $res = $attgram-&gt;apply($t, 'val');
+ 110
+ 111  $Data::Dumper::Indent = 1;
+ 112  print "\n***** After ******\n";
+ 113  print Dumper($t);
+ 114  print Dumper($res);
+</PRE>
+En la línea 36 hemos usado la directiva  %no bypass  para evitar el 
+puenteo automático del menos unario que causa la clausula <code>bypass</code> 
+que cualifica a la directiva <code>%tree</code> de la línea 15
+(repase la sección <A HREF="node244.html#section:bypass">8.15</A>).
+El método <code>NUM::attr</code> en las
+líneas 105-107 no es necesario y podría haber sido obviado.
+
+<P>
+
+<H4><A NAME="SECTION001450020000000000000">
+Redefiniendo el acceso a los hijos</A>
+</H4>
+  
+
+<P>
+Es posible evitar el uso de la opción  alias  y forzar
+a  Language::AttributeGrammar  a acceder a los hijos
+de un nodo  Parse::Eyapp::Node 
+redefiniendo el método  Language::AttributeGrammar::Parser::_get_child 
+el cual es usado por <TT>Language::AttributeGrammar</TT>
+cuando quiere acceder a un atributo de un nodo.
+
+<P>
+<PRE>
+pl@nereida:~/src/perl/attributegrammar/Language-AttributeGrammar-0.08/examples$ \
+                                                         cat -n CalcNumbers4.pl
+  1  #!/usr/bin/perl -w
+  2  use strict;
+  3  use warnings;
+  4  use Parse::Eyapp;
+  5  use Parse::Eyapp::Base qw{push_method pop_method};
+  6  use Data::Dumper;
+  7  use Language::AttributeGrammar;
+  8
+  9  my $grammar = q{
+ 10    %right  '='
+ 11    %left   '-' '+'
+ 12    %left   '*' '/'
+ 13    %left   NEG
+ 14    %tree bypass
+ 15
+ 16    %%
+ 17    line: $exp  { $_[1] }
+ 18    ;
+ 19
+ 20    exp:
+ 21        %name NUM
+ 22              $NUM
+ 23      | %name VAR
+ 24              $VAR
+ 25      | %name ASSIGN
+ 26              $var '=' $exp
+ 27      | %name PLUS
+ 28              exp.left '+' exp.right
+ 29      | %name MINUS
+ 30              exp.left '-' exp.right
+ 31      | %name TIMES
+ 32              exp.left '*' exp.right
+ 33      | %name DIV
+ 34              exp.left '/' exp.right
+ 35      | %no bypass UMINUS
+ 36              '-' $exp %prec NEG
+ 37      |   '(' $exp ')'  { $_[2] } /* Let us simplify a bit the tree */
+ 38    ;
+ 39
+ 40    var: %name VAR
+ 41               VAR
+ 42    ;
+ 43    %%
+ 44
+ ..      ... # tail as usual
+ 80  }; # end grammar
+ 81
+ 82
+ 83  $Data::Dumper::Indent = 1;
+ 84  Parse::Eyapp-&gt;new_grammar(input=&gt;$grammar, classname=&gt;'SmallCalc' );
+ 85  my $parser = SmallCalc-&gt;new();
+ 86  $parser-&gt;YYData-&gt;{INPUT} = "a = -(2*3+ b = 5-1)\n";
+ 87  my $t = $parser-&gt;Run;
+ 88
+ 89  print "\n***** Syntax Tree  ******\n";
+ 90  push_method(qw{NUM VAR}, info =&gt; sub { $_-&gt;{attr} });
+ 91  print $t-&gt;str;
+ 92
+ 93  #symbol table
+ 94  our %s;
+ 95
+ 96  my $attgram = new Language::AttributeGrammar &lt;&lt;'EOG';
+ 97
+ 98    # Compute the expression
+ 99    NUM:    $/.val = { $/-&gt;{attr} }
+100    TIMES:  $/.val = { $&lt;0&gt;.val * $&lt;1&gt;.val }
+101    PLUS:   $/.val = { $&lt;0&gt;.val + $&lt;1&gt;.val }
+102    MINUS:  $/.val = { $&lt;0&gt;.val - $&lt;1&gt;.val }
+103    UMINUS: $/.val = { -$&lt;0&gt;.val }
+104    ASSIGN: $/.val = { $&lt;1&gt;.val }
+105    ASSIGN: $/.entry = { $::s{$&lt;0&gt;-&gt;{attr}} = $&lt;1&gt;.val; $&lt;0&gt;-&gt;{attr} }
+106  EOG
+107
+108  # rewrite _get_child, save old version
+109  push_method(
+110    'Language::AttributeGrammar::Parser',
+111    _get_child =&gt; sub {
+112      my ($self, $child) = @_;
+113
+114      $self-&gt;child($child);
+115    }
+116  );
+117
+118  my $res = $attgram-&gt;apply($t, 'entry');
+119
+120  # Restore  old version of Language::AttributeGrammar::Parser::_get_child
+121  pop_method('Language::AttributeGrammar::Parser', '_get_child');
+122
+123  $Data::Dumper::Indent = 1;
+124  print "\n***** After call to apply******\n";
+125  push_method(qw{TIMES PLUS MINUS UMINUS ASSIGN},
+126    info =&gt; sub { defined($_-&gt;{val})? $_-&gt;{val} : "" }
+127  );
+128  print $t-&gt;str."\n"; # Tree $t isn't modified nor decorated
+129
+130  #The results are held in the symbol table
+131  print "$_ = $s{$_}\n" for keys(%s);
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION001450030000000000000">
+Efectos Laterales</A>
+</H4>
+  
+
+<P>
+Cuando se ejecuta este programa el volcado de la tabla de símbolos
+se produce la salida:
+<PRE>
+pl@nereida:~/src/perl/attributegrammar/Language-AttributeGrammar-0.08/examples$ \
+                                                                CalcNumbers4.pl
+
+***** Syntax Tree  ******
+ASSIGN(VAR[a],UMINUS(PLUS(TIMES(NUM[2],NUM[3]),ASSIGN(VAR[b],MINUS(NUM[5],NUM[1])))))
+***** After call to apply******
+ASSIGN(VAR[a],UMINUS(PLUS(TIMES(NUM[2],NUM[3]),ASSIGN(VAR[b],MINUS(NUM[5],NUM[1])))))
+a = -10
+</PRE>
+Obsérvese que el árbol original no ha cambiado después de la llamada a
+<code>apply</code>.
+
+<P>
+Teniendo en cuenta que la entrada era <code>a = -(2*3+b=5-1)\n</code> puede sorprender
+que <code>b</code> no haya sido introducido en la tabla de símbolos.
+La razón para la ausencia de <code>b</code> en la tabla de símbolos reside en
+el hecho de que el atributo <code>entry</code> para el nodo raíz del
+árbol asociado con <code>b=5-1</code> nunca es evaluado, ya que no existe un camino
+de dependencias desde el atributo solicitado en la llamada a <code>apply</code>
+hasta el mismo. El problema se arregla creando una dependencia
+que de lugar a la conectividad deseada en el grafo de dependencias
+y provoque la ejecución del código de 
+inserción en la tabla de símbolos como un efecto lateral.
+
+<P>
+<PRE>
+nereida:~/src/perl/attributegrammar/Language-AttributeGrammar-0.08/examples&gt; \
+                                  sed -ne '108,119p' CalcNumbers3.pl | cat -n
+  1  my $attgram = new Language::AttributeGrammar &lt;&lt;'EOG';
+  2
+  3  # Compute the expression
+  4  NUM:    $/.val = { $/-&gt;{attr} }
+  5  TIMES:  $/.val = { $&lt;0&gt;.val * $&lt;1&gt;.val }
+  6  PLUS:   $/.val = { $&lt;0&gt;.val + $&lt;1&gt;.val }
+  7  MINUS:  $/.val = { $&lt;0&gt;.val - $&lt;1&gt;.val }
+  8  UMINUS: $/.val = { -$&lt;0&gt;.val }
+! 9  ASSIGN: $/.val = { $::s{$&lt;0&gt;-&gt;{attr}} = $&lt;1&gt;.val; $&lt;1&gt;.val }
+ 10  EOG
+ 11
+ 12  my $res = $attgram-&gt;apply($t, 'val');
+
+nereida:~/src/perl/attributegrammar/Language-AttributeGrammar-0.08/examples&gt; \
+                                                             CalcNumbers3.pl
+a = -10
+b = 4
+</PRE>
+El código de la línea 9  indica que para calcular el atributo <code>val</code> de un nodo
+de tipo <code>ASSIGN</code> es necesario no sólo calcular el atributo <code>val</code> del
+segundo hijo (<code>$&lt;1&gt;.val</code>) sino tambien ejecutar el código de inserción
+<code>$::s{$&lt;0&gt;-&gt;{attr}} = $&lt;1&gt;.val</code>.
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html5462"
+  HREF="node266.html#SECTION001450010000000000000">La cláusula <TT>alias</TT> de <TT>%tree</TT></A>
+<LI><A NAME="tex2html5463"
+  HREF="node266.html#SECTION001450020000000000000">Redefiniendo el acceso a los hijos</A>
+<LI><A NAME="tex2html5464"
+  HREF="node266.html#SECTION001450030000000000000">Efectos Laterales</A>
+</UL></UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html5460"
+  HREF="node267.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5454"
+  HREF="node261.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5450"
+  HREF="node265.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5456"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5458"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5461"
+  HREF="node267.html">Transformaciones Árbol con Parse::Eyapp</A>
+<B>Sup:</B> <A NAME="tex2html5455"
+  HREF="node261.html">Análisis Semántico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5451"
+  HREF="node265.html">El módulo Language::AttributeGrammar</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

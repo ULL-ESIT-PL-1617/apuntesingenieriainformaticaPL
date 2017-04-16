@@ -1,0 +1,378 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Práctica: Generación de Código</TITLE>
+<META NAME="description" CONTENT="Práctica: Generación de Código">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="previous" HREF="node163.html">
+<LINK REL="up" HREF="node163.html">
+<LINK REL="next" HREF="node165.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3825"
+  HREF="node165.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3819"
+  HREF="node163.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3815"
+  HREF="node163.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3821"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3823"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3826"
+  HREF="node165.html">Optimización de Código</A>
+<B>Sup:</B> <A NAME="tex2html3820"
+  HREF="node163.html">Generación de Código: Máquina</A>
+<B> Ant:</B> <A NAME="tex2html3816"
+  HREF="node163.html">Generación de Código: Máquina</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION009151000000000000000"></A>
+   <A NAME="10144"></A>
+  
+<A NAME="practica:generaciondecodigo"></A>
+<BR>
+Práctica: Generación de Código
+</H2>
+
+<OL>
+<LI>Complete la generación de código para la máquina basada en registros.
+Recuerde que debe escribir el método <code>required_registers</code>
+para las diferentes clases <code>Value</code>, <code>Operation</code>,
+<code>ASSIGN</code>, <code>PRINT</code>, <code>STATEMENTS</code>, etc. 
+Asi mismo deberá escribir el método <code>gen_code</code> para las diversas
+clases: <code>Value</code>, <code>Operation</code>, <code>ASSIGN</code>, <code>PRINT</code>,
+<code>STATEMENTS</code>, etc.
+Recuerde que los temporales usados durante la generación de código
+deben ubicarse en una zona que no esté en uso.
+
+<P>
+</LI>
+<LI>En la sección anterior no se consideraba la generación 
+de código para las cadenas. Amplíe y/o modifique el
+juego de instrucciones como considere conveniente.
+El siguiente ejemplo de traducción sugiere
+como puede ser la generación de código para las cadenas:
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=85>Fuente</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=312>Objeto</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=85><PRE>
+string a,b;
+a = "hola";
+b = a;
+p b
+</PRE></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=312><PRE>
+1 LSTRG  R0, 4, 4 
+2 STORES  0, R0 # a
+3 LOADS  R0, 0 # a
+4 STORES  2, R0 # b
+5 LOADS  R0, 2 # b
+6 PRNTS  R0
+</PRE></TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Asuma que los registros pueden contener dos direcciones de memoria
+(línea 1). La instrucción <code>LSTRG R0, a, b</code> carga las constantes
+(direcciones)
+<code>a</code> y <code>b</code> en el registro.
+La constante <code>"hola"</code> ocupa en  la posición final
+en la que se colocan los contenidos de <code>$data</code> un desplazamiento
+de 4 y ocupa 4 palabras. 
+Las instrucción <code>LOADS R, a</code> carga las dos palabras en las direcciones
+<code>a</code> y <code>a+1</code> en el registro <code>R</code>. 
+La instrucción <code>STORES a, R</code> se encarga de que las dos palabras
+en la dirección <code>a</code> queden referenciando 
+una cadena igual a la apuntada por el registro <code>R</code>.
+La instrucción <code>PRNTS</code> imprime la cadena apuntada
+por el registro.  En una situación mas realista instrucciones como
+<code>STORES a, R</code> y <code>PRNTS</code> probablemente serían llamadas
+a funciones/servicios del sistema o de la librería para soporte
+en tiempo de ejecución asociada al lenguaje.
+
+<P>
+</LI>
+<LI>Se puede mejorar el código generado
+si hacemos uso de las propiedades algebraicas de los 
+operadores.
+Por ejemplo, cuando se tiene un operador conmutativo que ha sido asociado 
+a derechas, como ocurre en este programa fuente:
+<PRE>
+$ cat test18.tutu
+int a,b,c;
+
+a = a + (b + c)
+</PRE>
+
+<P>
+El código producido por el compilador es:
+
+<P>
+<PRE>
+LOADM R0, 0 # a
+LOADM R1, 1 # b
+PLUSM R1, 2 # c
+PLUSR R0, R1
+STORE  0, R0 # a
+</PRE>
+
+<P>
+En este caso, la expresión <code>a + (b + c)</code>  corresponde a un árbol 
+que casa con el patrón árbol
+
+<P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ $PLUS(ID, t)$
+ -->
+<IMG
+ WIDTH="107" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img361.png"
+ ALT="$ PLUS(ID, t)$">
+ and <!-- MATH
+ $\{ r_t \ge 1 \}$
+ -->
+<IMG
+ WIDTH="68" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img362.png"
+ ALT="$ \{ r_t \ge 1 \}$">
+
+</DIV>
+
+<P>
+Donde <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img357.png"
+ ALT="$ r_t$">
+ es el número de registros requeridos por <IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img187.png"
+ ALT="$ t$">
+.
+En tales casos es posible sacar ventaja
+de la conmutatividad de la suma y transformar el
+árbol
+
+<P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ $PLUS(ID, t)$
+ -->
+<IMG
+ WIDTH="107" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img361.png"
+ ALT="$ PLUS(ID, t)$">
+ and <!-- MATH
+ $\{ r_t \ge 1 \} \Longrightarrow PLUS(t, ID)$
+ -->
+<IMG
+ WIDTH="208" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img363.png"
+ ALT="$ \{ r_t \ge 1 \} \Longrightarrow PLUS(t, ID)$">
+
+</DIV>
+
+<P>
+Observe que mientras el primer árbol requiere <!-- MATH
+ $\max \{2, r_t \}$
+ -->
+<IMG
+ WIDTH="85" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img364.png"
+ ALT="$ \max \{2, r_t \}$">
+
+registros, el segundo requiere <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img357.png"
+ ALT="$ r_t$">
+ registros, que en general es menor.
+Esta transformación invierte la traducción:
+
+<P>
+<PRE>
+traduce(t)
+ADDM $RSTACK[0], dirección de ID
+</PRE>
+
+<P>
+que daría lugar a:
+
+<P>
+<PRE>
+LOADM R0, 1 # b
+PLUSM R0, 2 # c
+PLUSM R0, 0 # a
+STORE  0, R0 # a
+</PRE>
+
+<P>
+la cual usa una instrucción y un registro menos.
+
+<P>
+Usando <code>match_and_transform</code> modifique el generador 
+de código para que, después de la fase de cálculo del número
+de registros requeridos, aplique esta 
+transformación sobre los nodos conmutativos cuyo hijo izquierdo
+sea un identificador y su hijo derecho requiera al menos un registro.
+</LI>
+</OL>
+
+<P>
+<HR>
+<A NAME="tex2html3825"
+  HREF="node165.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3819"
+  HREF="node163.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3815"
+  HREF="node163.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3821"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3823"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3826"
+  HREF="node165.html">Optimización de Código</A>
+<B>Sup:</B> <A NAME="tex2html3820"
+  HREF="node163.html">Generación de Código: Máquina</A>
+<B> Ant:</B> <A NAME="tex2html3816"
+  HREF="node163.html">Generación de Código: Máquina</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,418 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>La clase Parse::Lex</TITLE>
+<META NAME="description" CONTENT="La clase Parse::Lex">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node172.html">
+<LINK REL="previous" HREF="node169.html">
+<LINK REL="up" HREF="node167.html">
+<LINK REL="next" HREF="node171.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3913"
+  HREF="node171.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3907"
+  HREF="node167.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3901"
+  HREF="node169.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3909"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3911"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3914"
+  HREF="node171.html">Condiciones de arranque</A>
+<B>Sup:</B> <A NAME="tex2html3908"
+  HREF="node167.html">Construcción de Analizadores Léxicos</A>
+<B> Ant:</B> <A NAME="tex2html3902"
+  HREF="node169.html">Construcción usando la opción</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001030000000000000000">
+La clase <TT>Parse::Lex</TT></A>
+</H1>
+La clase <code>Parse::Lex</code> nos permite crear un analizador léxico.
+La estrategia seguida es mover el puntero de búsqueda dentro de la cadena 
+a analizar utilizando conjuntamente el operador <code>pos()</code> y el ancla
+<code>\G</code>. 
+
+<P>
+<PRE>
+&gt; cat -n tokenizer.pl
+ 1  #!/usr/local/bin/perl
+ 2
+ 3  require 5.004;
+ 4  #BEGIN {  unshift @INC, "../lib"; }
+ 5
+ 6  $^W = 0;
+ 7  use Parse::Lex;
+ 8  print STDERR "Version $Parse::ALex::VERSION\n";
+ 9
+10  @token = (
+11            qw(
+12               ADDOP    [-+]
+13               LEFTP    [\(]
+14               RIGHTP   [\)]
+15               INTEGER  [1-9][0-9]*
+16               NEWLINE  \n
+17              ),
+18            qw(STRING),   [qw(" (?:[^"]+|"")* ")],
+19            qw(ERROR  .*), sub {
+20              die qq!can\'t analyze: "$_[1]"\n!;
+21            }
+22           );
+23
+24  Parse::Lex-&gt;trace;
+25  $lexer = Parse::Lex-&gt;new(@token);
+26
+27  $lexer-&gt;from(\*DATA);
+28  print "Tokenization of DATA:\n";
+29
+30  TOKEN:while (1) {
+31    $token = $lexer-&gt;next;
+32    if (not $lexer-&gt;eoi) {
+33      print "Record number: ", $lexer-&gt;line, "\n";
+34      print "Type: ", $token-&gt;name, "\t";
+35      print "Content:-&gt;", $token-&gt;text, "&lt;-\n";
+36    } else {
+37      last TOKEN;
+38    }
+39  }
+40
+41  __END__
+42  1+2-5
+43  "This is a multiline
+44  string with an embedded "" in it"
+45  this is an invalid string with a "" in it"
+</PRE>
+La línea 3 usa la palabra reservada <code>require</code> la cual normalmente indica la
+existencia de una dependencia. Cuando se usa como:
+
+<P>
+<PRE>
+require "file.pl";
+</PRE>
+simplemente carga el fichero en nuestro programa. Si se omite el sufijo, se asume <code>.pm</code>.
+Si el argumento, como es el caso, es un número o un número de versión, se compara el 
+número de versión de perl (como se guarda en <code>$]</code>) y se compara con el argumento.
+si es mas pequeño, se aborta la ejecución.
+
+<P>
+La línea 4, aunque comentada, contiene una definición del incializador <code>BEGIN</code>.
+Si aparece, este código será ejecutado tan pronto como sea posible.
+el intérprete Perl busca los módulos en uno de varios directorios est&#225;ndar 
+contenidos en la variable de entorno <code>PERL5LIB</code>. Esa lista esta disponible
+en un programa Perl a trav&#233;s de la variable <code>@INC</code>. 
+Recuerda que el compilador sustituye cada <code>::</code> por el separador de caminos. 
+Asi la orden: 
+<code>unshift @INC, "../lib";</code> coloca este directorio entre los
+que Perl realiza la búsqueda por módulos.
+En mi máquina los mósulos de análisis léxico están en:
+<PRE>
+&gt; locate Lex.pm
+/usr/local/lib/perl5/site_perl/5.8.0/Parse/ALex.pm
+/usr/local/lib/perl5/site_perl/5.8.0/Parse/CLex.pm
+/usr/local/lib/perl5/site_perl/5.8.0/Parse/Lex.pm
+/usr/local/lib/perl5/site_perl/5.8.0/Parse/YYLex.pm
+</PRE>
+La línea 6 establece a 0 la variable <code>$^W</code> o <code>$WARNING</code> la cual
+guarda el valora actual de la opción de <B>warning</B>, si es cierto o falso.
+
+<P>
+La línea 7 indica que hacemos uso de la clase <code>Parse::Lex</code>
+y la línea 8 muestra el número de versión. La clase <code>ALex</code>
+es la clase abstracta desde la que heredan las otras. Si editas
+el módulo <code>ALex.pm</code> encontrarás el siguiente comentario que aclara la 
+jerarquía de clases:
+
+<P>
+<PRE>
+# Architecture:
+#           Parse::ALex - Abstract Lexer
+#                |
+#           +----------+
+#           |          |
+#           |     Parse::Tokenizer
+#           |        |     |
+#        LexEvent   Lex  CLex  ...       - Concrete lexers
+</PRE>
+en ese mismo fichero encontrarás la declaración de la variable:
+<PRE>
+$Parse::ALex::VERSION = '2.15';
+</PRE>
+Las líneas de la 10 a la 22 definen el <B>array</B> <code>@token</code>:
+<PRE>
+10  @token = (
+11            qw(
+12               ADDOP    [-+]
+13               LEFTP    [\(]
+14               RIGHTP   [\)]
+15               INTEGER  [1-9][0-9]*
+16               NEWLINE  \n
+17              ),
+18            qw(STRING),   [qw(" (?:[^"]+|"")* ")],
+19            qw(ERROR  .*), sub {
+20              die qq!can\'t analyze: "$_[1]"\n!;
+21            }
+22           );
+</PRE>
+Esto da lugar a un <B>array</B> de la forma:
+<PRE>
+"ADDOP", "[-+]", 
+"LEFTP", "[(]", 
+"RIGHTP", "[)]", 
+"INTEGER", "[1-9][0-9]*", 
+"NEWLINE", "\n", 
+"STRING", ARRAY(0x811f55c),
+"ERROR", ".*", CODE(0x82534b8)
+</PRE>
+Observa que los elementos 11 y 14 son referencias.
+El primero a un <B>array</B> anónimo conteniendo la expresión regular
+<code>"(?:[^"]+</code>"")*"| para las <code>STRING</code> y el segundo es una
+referencia a la subrutina anónima que muestra el mensaje de error.
+
+<P>
+La línea 24 llama al método <code>trace</code> como método de la clase, el cual activa
+el modo ``traza''. La activación del modo traza debe establecerse antes de 
+la creación del analizador léxico. Es por esto que precede 
+a la llamada <code>$lexer = Parse::Lex-&gt;new(@token)</code> en la línea 25.
+Se puede desactivar el modo traza sin mas que hacer una segunda llamada a este método.
+El método admite la forma <code>trace OUTPUT</code>, siendo <code>OUTPUT</code> un
+nombre de fichero o un manipulador ed ficheros. En este caso la traza se redirije
+a dicho fichero.
+
+<P>
+La llamada al método <code>from</code> en la línea 27 establece la fuente de los datos a ser 
+analizados. el argumento de este método puede ser una cadena o una lista de cadenas o una referencia
+a un manipulador de fichero. En este caso  la 
+llamada <code>$lexer-&gt;from(\*DATA)</code> establece  que la entrada se produce
+dede el manipulador de ficheros especial <code>DATA</code>, el cual se refiere a todo el texto
+que sigue al <B>token</B> <code>__END__</code> en el fichero que
+contiene el guión Perl.
+
+<P>
+La llamada al método <code>next</code> en la línea 31 fuerza la búsqueda por el
+siguiente <B>token</B>. Devuelve un objeto de la clase <code>Parse::Token</code>.
+Existe un <B>token</B> especial, <code>Token::EOI</code>| que indica el final de los datos.
+En el ejemplo, el final se detecta a través del método <code>eoi</code>.
+
+<P>
+El método <code>line</code> es usado para devolver el número de línea del registro actual.
+
+<P>
+Los objetos <B>token</B> son definidos mediante la clase <code>Parse::Token</code>, la cual viene con 
+<code>Parse::Lex</code>. la definición de un <B>token</B> normalmente conlleva 
+un nombre simbólico (por ejemplo, <code>INTEGER</code>), seguido de una expresión
+regular. Se puede dar como tercer argumento una referencia a una subrutina anónima,
+en cuyo caso la subrutina es llamada cada vez que se reconoce el <B>token</B>.
+Los argumentos que recibe la subrutina son la referencia al objeto <B>token</B>
+y la cadena reconocida por la expresión regular.
+El valor retornado por la subrutina es usado como los nuevos contenidos de la cadena asociada 
+con el objeto <B>token</B> en cuestión.
+Un objeto <B>token</B> tiene diversos métodos asociados. 
+Asi el método <code>name</code> devuelve el nombre del <B>token</B>.
+El método <code>text</code> devuelve lac adena de caracteres reconocida por medio del <B>token</B>.
+Se le puede pasar un parámetro <code>text EXPR</code> en cuyo caso <code>EXPR</code> define la cadena de
+caracteres asociada con el lexema.
+<PRE>
+&gt; tokenizer.pl
+Version 2.15
+Trace is ON in class Parse::Lex
+Tokenization of DATA:
+[main::lexer|Parse::Lex] Token read (INTEGER, [1-9][0-9]*): 1
+Record number: 1
+Type: INTEGER   Content:-&gt;1&lt;-
+[main::lexer|Parse::Lex] Token read (ADDOP, [-+]): +
+Record number: 1
+Type: ADDOP     Content:-&gt;+&lt;-
+[main::lexer|Parse::Lex] Token read (INTEGER, [1-9][0-9]*): 2
+Record number: 1
+Type: INTEGER   Content:-&gt;2&lt;-
+[main::lexer|Parse::Lex] Token read (ADDOP, [-+]): -
+Record number: 1
+Type: ADDOP     Content:-&gt;-&lt;-
+[main::lexer|Parse::Lex] Token read (INTEGER, [1-9][0-9]*): 5
+Record number: 1
+Type: INTEGER   Content:-&gt;5&lt;-
+[main::lexer|Parse::Lex] Token read (NEWLINE, \n):
+
+Record number: 1
+Type: NEWLINE   Content:-&gt;
+&lt;-
+[main::lexer|Parse::Lex] Token read (STRING, \"(?:[^\"]+|\"\")*\"): "This is a multiline
+string with an embedded "" in it"
+Record number: 3
+Type: STRING    Content:-&gt;"This is a multiline
+string with an embedded "" in it"&lt;-
+[main::lexer|Parse::Lex] Token read (NEWLINE, \n):
+
+Record number: 3
+Type: NEWLINE   Content:-&gt;
+&lt;-
+[main::lexer|Parse::Lex] Token read (ERROR, .*): this is an invalid string with a "" in it"
+can't analyze: "this is an invalid string with a "" in it""
+</PRE>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html3915"
+  HREF="node171.html">Condiciones de arranque</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html3913"
+  HREF="node171.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3907"
+  HREF="node167.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3901"
+  HREF="node169.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3909"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3911"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3914"
+  HREF="node171.html">Condiciones de arranque</A>
+<B>Sup:</B> <A NAME="tex2html3908"
+  HREF="node167.html">Construcción de Analizadores Léxicos</A>
+<B> Ant:</B> <A NAME="tex2html3902"
+  HREF="node169.html">Construcción usando la opción</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

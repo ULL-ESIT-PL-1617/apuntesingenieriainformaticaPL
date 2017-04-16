@@ -1,0 +1,615 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Análisis de Tipos: Conceptos Básicos</TITLE>
+<META NAME="description" CONTENT="Análisis de Tipos: Conceptos Básicos">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node296.html">
+<LINK REL="previous" HREF="node294.html">
+<LINK REL="up" HREF="node294.html">
+<LINK REL="next" HREF="node296.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html5991"
+  HREF="node296.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5985"
+  HREF="node294.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5979"
+  HREF="node294.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5987"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5989"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5992"
+  HREF="node296.html">Conversión de Tipos</A>
+<B>Sup:</B> <A NAME="tex2html5986"
+  HREF="node294.html">Análisis de Tipos</A>
+<B> Ant:</B> <A NAME="tex2html5980"
+  HREF="node294.html">Análisis de Tipos</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001810000000000000000"></A>
+<A NAME="section:tiposconceptosbasicos"></A>
+<BR>
+Análisis de Tipos: Conceptos Básicos
+</H1>
+En la mayoría de los lenguajes los objetos manipulados son declarados en alguna parte
+del programa y usados en otras. Ya dijimos que el análisis de ámbito
+es el cálculo de la función que asigna a un uso de un objeto la definición
+que se le aplica.
+
+<P>
+El análisis de tipos tiene por objetivo asegurar que el uso de los objetos
+definidos es correcto: esto es, que su uso se atiene a la semántica de su
+definición; por ejemplo, que un array de enteros no es llamado 
+como función o que no se intenta incrementar una función o que 
+el valor retornado por una función es de la naturaleza descrita 
+en su definición. 
+
+<P>
+
+<H4><A NAME="SECTION001810010000000000000">
+Expresiones de Tipo, Sistemas de Tipos y Comprobadores de Tipos</A>
+</H4>
+  
+
+<P>
+<P>
+<DIV><B>Definición  13.1.1</B> &nbsp; 
+<I>Una forma adecuada de representar los tipos dentro de un <B>compilador</B>
+es usando un lenguaje de <A NAME="26585"></A><B>expresiones de tipo</B>. Un lenguaje 
+de las expresiones de tipo debe describir de manera clara y sencilla
+los tipos del lenguaje fuente. No confunda este lenguaje con el sub-lenguaje
+del lenguaje fuente que consiste en las declaraciones o definiciones.
+No tienen por que ser iguales. El compilador traduce las declaraciones
+de tipo en expresiones de tipo. El lenguaje de las expresiones de tipo
+es la representación interna que el compilador tiene de estas
+declaraciones y 
+depende del compilador. El lenguaje de las declaraciones no.</I></DIV><P></P>
+
+<P>
+<P>
+<DIV><B>Definición  13.1.2</B> &nbsp; 
+<I>Un <A NAME="26587"></A><B>sistema de tipos</B> de un lenguaje/compilador es el conjunto 
+de reglas del lenguaje (que es traducido e interpretado  por el compilador
+que permiten asignar expresiones de tipo a las instancias
+de uso de los objetos del programa.</I></DIV><P></P>
+
+<P>
+Si bien el sistema de tipos es una propiedad del lenguaje, no es raro
+que los compiladores introduzcan modificaciones en el sistema
+de tipos del lenguaje. Por ejemplo en Pascal el tipo de un array incluye
+los índices del array<A NAME="tex2html281"
+  HREF="footnode.html#foot26021"><SUP>13.1</SUP></A>). 
+Esto y las reglas de equivalencia de tipos de 
+Pascal limitan gravemente la genericidad de las funciones en Pascal. 
+Por eso algunos
+compiladores Pascal permiten en una llamada a función 
+la compatibilidad de tipos entre arrays de diferente tamaño 
+y diferentes conjuntos de índices. Desgraciadamente la forma en la 
+que lo hacen puede diferir de compilador a compilador.
+
+<P>
+<P>
+<DIV><B>Definición  13.1.3</B> &nbsp; 
+<I>Un <A NAME="26589"></A><B>comprobador de tipos</B> verifica que el uso de los objetos en los constructos de uso
+se atiene a lo especificado en sus declaraciones o definiciones de acuerdo a las reglas
+especificadas por el <B>sistema de tipos</B>.</I></DIV><P></P>
+
+<P>
+
+<H4><A NAME="SECTION001810020000000000000">
+Tipado Estático y Tipado Dinámico</A>
+</H4>
+  
+
+<P>
+<P>
+<DIV><B>Definición  13.1.4</B> &nbsp; 
+<I>Un lenguaje de programación tiene <A NAME="26595"></A><B>tipado estático</B> si
+su comprobación de tipos ocurre en tiempo de compilación sin tener
+que comprobar equivalencias en tiempo de ejecución.
+</I>
+<P>
+<I>Un lenguaje de programación tiene <A NAME="26597"></A><B>tipado dinámico</B>
+si el lenguaje realiza comprobaciones de tipo en tiempo de ejecución.
+En un sistema de tipos dinámico <B>los tipos suelen estár asociados con los valores
+no con las variables</B>. </I></DIV><P></P>
+
+<P>
+<P>
+<DIV><B>Definición  13.1.5</B> &nbsp; 
+<I>El tipado dinámico hace mas sencilla la escritura de <A NAME="26599"></A><B>metaprogramas</B>:
+programas que reciben como datos otros códigos y los manipulan para producir
+nuevos códigos.  Parse::Eyapp  y  Parse::Treeregexp  son 
+ejemplos de metaprogramación. Cada vez que escribimos un 
+procesador de patrones, templates o esqueletos de programación 
+estamos haciendo meta-programación.
+</I>
+<P>
+<I>El lenguaje en el que se escribe el metaprograma se denomina <A NAME="26601"></A><B>metalenguaje</B>.
+El lenguaje al que se traduce el metaprograma se denomina 
+<A NAME="26603"></A><B>lenguaje objeto</B>. La capacidad de un lenguaje de programación 
+para ser su propio metalenguaje se denomina <A NAME="26605"></A><B>reflexividad</B>.
+Para que haya reflexión es conveniente que el código sea un tipo de estructura de datos
+soportado por el lenguaje al mismo nivel que otros tipos básicos y 
+que sea posible traducir dinámicamente texto a código.</I></DIV><P></P>
+
+<P>
+
+<H4><A NAME="SECTION001810030000000000000">
+Tipado Fuerte y Tipado Débil</A>
+</H4>
+  
+
+<P>
+<P>
+<DIV><B>Definición  13.1.6</B> &nbsp; 
+<I>Aunque el significado de 
+los términos <A NAME="26611"></A><B>Fuertemente Tipado</B> y su contrario <A NAME="26613"></A><B>Débilmente Tipado</B> varían
+con los autores, parece haber consenso en que los lenguajes con tipado fuerte
+suelen reunir alguna de estas características:
+</I>
+<P>
+<UL>
+<LI>La comprobación en tiempo de compilación de las violaciones de 
+las restricciones impuestas por el sistema de tipos. El compilador asegura 
+que para cualesquiera operaciones los operandos tienen los tipos válidos.
+
+<P>
+</LI>
+<LI>Toda operación sobre tipos inválidos es rechazada bien en tiempo de compilación o de ejecución.
+
+<P>
+</LI>
+<LI>Algunos autores consideran que el término implica desactivar 
+cualquier conversión de tipos implícita. Si el programador quiere
+una conversión deberá explicitarla.
+
+<P>
+</LI>
+<LI>La ausencia de modos de evadir al sistema de tipos.
+
+<P>
+</LI>
+<LI>Que el tipo de un objeto de datos no varíe durante la vida del objeto.
+Por ejemplo, una instancia de una clase no puede ver su clase alterada durante la ejecución.
+</LI>
+</UL></DIV><P></P>
+
+<P>
+
+<H4><A NAME="SECTION001810040000000000000">
+Sobrecarga, Polimorfismo e Inferencia de Tipos</A>
+</H4>
+  
+
+<A NAME="section:sobrecarga"></A>
+<P>
+Un símbolo se dice <A NAME="26619"></A><B>sobrecargado</B> si su significado varía dependiendo
+del contexto. En la mayoría de los lenguajes Los operadores aritméticos suelen estar sobrecargados,
+dado que se sustancian en diferentes algoritmos según sus operandos
+sean enteros, flotantes, etc.
+
+<P>
+En algunos lenguajes se permite la sobrecarga de funciones. 
+así es posible tener dos funciones llamadas <code>min</code>:
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170><PRE>
+int min(int a, int b) { 
+  if (a &lt; b) return a;
+  return b;
+}
+</PRE></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=255><PRE>
+int min(string a, string b) { 
+  if (strcmp(a, b) &lt; 0) return a;
+  return b;
+}
+</PRE></TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+A la hora de evaluar el tipo de las expresiones es el contexto de la llamada
+el que determina el tipo de la expresión:
+
+<P>
+<PRE>
+float x,y;
+int a,b;
+string c,d;
+
+u = min(x,y); /* Puede que correcto: x e y seran truncados a enteros. Tipo entero */
+v = min(a,b); /* Correcto: Tipo devuelto es entero */
+w = min(c,d); /* Correcto: Tipo devuelto es string */
+t = min(x,c); /* Error */
+</PRE>
+
+<P>
+<P>
+<DIV><B>Ejercicio  13.1.1</B> &nbsp; 
+<I>¿Como afecta al análisis de ámbito la sobrecarga de operadores?</I></DIV><P></P>
+
+<P>
+<P>
+<DIV><B>Definición  13.1.7</B> &nbsp; 
+<I>La <A NAME="26621"></A><B>inferencia de tipos</B> hace referencia a aquellos algoritmos
+que deducen automáticamente en tiempo de compilación - sin información adicional del programador, 
+o bien con anotaciones parciales del programador - el tipo asociado con un uso de un objeto
+del programa. Un buen número de lenguajes de programación funcional
+permiten implantar inferencia de tipos (Haskell, OCaml, ML, etc).</I></DIV><P></P>
+Véase como ejemplo de inferencia de tipos la siguiente sesión en <A NAME="26623"></A><B>OCaml</B>:
+<PRE>
+pl@nereida:~/src/perl/attributegrammar/Language-AttributeGrammar-0.08/examples$ ocaml
+        Objective Caml version 3.09.2
+
+# let minimo = fun i j -&gt; if i&lt;j then i else j;;
+val minimo : 'a -&gt; 'a -&gt; 'a = &lt;fun&gt;
+# minimo 2 3;;
+- : int = 2
+# minimo 4.9 5.3;;
+- : float = 4.9
+# minimo "hola" "mundo";;
+- : string = "hola"
+</PRE>
+El compilador <code>OCaml</code> infiere el tipo de las expresiones. 
+Así el tipo asociado con la función <code>minimo</code> es
+<code>'a -&gt; 'a -&gt; 'a</code> que es una <A NAME="26625"></A><B>expresión de tipo</B> que contiene
+<A NAME="26627"></A><B>variables de tipo</B>. El operador <code>-&gt;</code> es asociativo a derechas
+y asi la expresión debe ser leída como <code>'a -&gt; ('a -&gt; 'a)</code>. 
+Básicamente dice: es una función que toma un argumento de tipo <code>'a</code>
+(donde <code>'a</code> es una variable tipo que será instanciada en el momento del uso
+de la función) 
+y devuelve una función que toma elementos de tipo <code>'a</code> y retorna elementos de
+tipo <code>'a</code>. 
+
+<P>
+<P>
+<DIV><B>Definición  13.1.8</B> &nbsp; 
+<I>Aunque podría pensarse que una descripción mas adecuada
+del tipo de la función <code>minimo</code>
+fuera <code>'a x 'a -&gt; 'a</code>, lo cierto es que en algunos lenguajes funcionales
+es usual que todas las funciones sean consideradas como funciones
+de una sóla variable. La función de dos variables <code>'a x 'a -&gt; 'a</code>
+puede verse como una función  <code>'a -&gt; ('a -&gt; 'a)</code>. En efecto la función <code>minimo</code>
+cuando recibe un argumento retorna una función:
+</I><PRE>
+# let min_mundo = minimo "mundo";;
+val min_mundo : string -&gt; string = &lt;fun&gt;
+# min_mundo "pedro";;
+- : string = "mundo"
+# min_mundo "antonio";;
+- : string = "antonio"
+# min_mundo 4;;
+This expression has type int but is here used with type string
+# min_mundo(string_of_int(4));;
+- : string = "4"
+</PRE><I>
+Esta estrategia de reducir funciones de varias variables a funciones
+de una variable que retornan funciones de una variable se conoce con el nombre
+de <A NAME="26629"></A><B>currying</B> o <A NAME="26631"></A><B>aplicación parcial</B>.</I></DIV><P></P>
+
+<P>
+<P>
+<DIV><B>Definición  13.1.9</B> &nbsp; 
+<I>El <A NAME="26633"></A><B>polimorfismo</B> es una propiedad de ciertos lenguajes que permite una interfaz uniforme a diferentes tipos de datos.
+</I>
+<P>
+<I>Se conoce como función <A NAME="26635"></A><B>polimorfa</B> a una función que puede ser aplicada o evaluada sobre diferentes tipos 
+de datos. 
+</I>
+<P>
+<I>Un tipo de datos se dice <A NAME="26637"></A><B>polimorfo</B> si es un tipo de datos generalizado o no completamente especificado. 
+Por ejemplo, una lista cuyos elementos son de cualquier tipo.
+</I>
+<P></DIV><P></P>
+
+<P>
+<P>
+<DIV><B>Definición  13.1.10</B> &nbsp; 
+<I>Se llama <A NAME="26639"></A><B>Polimorfismo Ad-hoc</B> a aquel en el que el número de combinaciones que pueden usarse es finito
+y las combinaciones deben ser definidas antes de su uso. Se habla de <A NAME="26641"></A><B>polimorfismo paramétrico</B>
+si es posible escribir el código sin mención específica
+de los tipos, de manera que el código puede ser usado con un número arbitrario de tipos.</I></DIV><P></P>
+Por ejemplo, la herencia y la sobrecarga de funciones y métodos son mecanismos que proveen
+polimorfismo ad-hoc. Los lenguajes funcionales, como OCaml suelen proveer polimorfismo paramétrico.
+En OOP el polimorfismo paramétrico suele denominarse <A NAME="26643"></A><B>programación genérica</B>
+
+<P>
+En el siguiente ejemplo en <code>OCaml</code> construimos una función similar al <code>map</code> de Perl.
+La función <code>mymap</code> ilustra el polimorfismo paramétrico: la función puede ser usada
+con un número arbitrario de tipos, no hemos tenido que hacer ningún tipo de declaración explícita y sin embargo 
+el uso incorrecto de los tipos es señalado como un error:
+<PRE>
+# let rec mymap f list =
+  match list with
+      [] -&gt; []
+    | hd :: tail -&gt; f hd :: mymap f tail;;
+val mymap : ('a -&gt; 'b) -&gt; 'a list -&gt; 'b list = &lt;fun&gt;
+# mymap (function  n -&gt; n*2) [1;3;5];;
+- : int list = [2; 6; 10]
+# mymap (function  n -&gt; n.[0]) ["hola"; "mundo"];;
+- : char list = ['h'; 'm']
+# mymap (function  n -&gt; n*2) ["hola"; "mundo"];;
+This expression has type string but is here used with type int
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION001810050000000000000">
+Equivalencia de Expresiones de Tipo</A>
+</H4>
+  
+
+<A NAME="section:ejemplodeexpresionesdetipo"></A>
+<P>
+La introducción de nombres para las expresiones de tipo introduce una
+ambiguedad en la interpretación de la equivalencia de tipos. Por ejemplo, dado
+el código:
+<PRE>
+                 typedef int v10[10];
+                 v10 a;
+                 int b[10];
+</PRE>
+¿Se considera que <code>a</code> y <code>b</code> tienen tipos compatibles?
+
+<P>
+<P>
+<DIV><B>Definición  13.1.11</B> &nbsp; 
+<I>Se habla de <A NAME="26649"></A><B>equivalencia de tipos estructural</B> cuando los nombres de tipo son 
+sustituidos por sus definiciones y la equivalencia
+de las expresiones de tipo se traduce en la equivalencia de sus árboles
+sintácticos o DAGs.
+Si los nombres no son sustituidos se habla de <A NAME="26651"></A><B>equivalencia por nombres</B>
+o de <A NAME="26653"></A><B>equivalencia de tipos nominal</B>.</I></DIV><P></P>
+
+<P>
+Si utilizamos la opción de sustituir los nombres por sus definiciones
+y permitimos en la definición de tipo el uso de nombres de tipo no declarados
+se pueden producir ciclos en el grafo de tipos.
+
+<P>
+El lenguaje C impide la presencia de ciclos en el grafo de tipos usando dos reglas:
+
+<OL>
+<LI>Todos los identificadores de tipo han de estar definidos antes de su uso, con la excepción 
+de los punteros a registros no declarados
+</LI>
+<LI>Se usa equivalencia estructural para todos los tipos con la excepción de las <code>struct</code>
+para las cuales se usa equivalencia nominal
+</LI>
+</OL>
+
+<P>
+Por ejemplo, el siguiente programa:
+
+<P>
+<PRE>
+nereida:~/src/perl/testing&gt; cat -n typeequiv.c
+  1  #include &lt;stdio.h&gt;
+  2
+  3  typedef struct {
+  4     int x, y;
+  5     struct record *next;
+  6  } record;
+  7
+  8  record z,w;
+  9
+ 10  struct recordcopy {
+ 11     int x, y;
+ 12     struct recordcopy *next;
+ 13  } r,k;
+ 14
+ 15
+ 16  main() {
+ 17    k = r; /* no produce error */
+ 18    z = w; /* no produce error */
+ 19    r = z;
+ 20  }
+</PRE>
+Produce el siguiente mensaje de error:
+<PRE>
+nereida:~/src/perl/testing&gt; gcc -fsyntax-only typeequiv.c
+typeequiv.c: En la función 'main':
+typeequiv.c:19: error: tipos incompatibles en la asignación
+</PRE>
+
+<P>
+En lenguajes dinámicos una forma habitual de equivalencia de tipos
+es el tipado pato:
+
+<P>
+<P>
+<DIV><B>Definición  13.1.12</B> &nbsp; 
+<I>Se denomina <A NAME="26655"></A><B>duck typing</B> o <A NAME="26657"></A><B>tipado pato</B>
+a una forma de tipado dinámico en la que el conjunto
+de métodos y propiedades del objeto determinan la validez 
+de su uso.
+Esto es: dos objetos pertenecen al mismo tipo-pato si implementan/soportan
+la misma interfaz
+independientemente de si tienen o no una relación
+en la jerarquía de herencia.
+</I>
+<P>
+<I>El término hace referencia 
+al llamado <A NAME="26659"></A><B>test del pato</B>: 
+<B>If it waddles like a duck, and quacks like a duck, it's a duck!</B>.</I></DIV><P></P>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html5993"
+  HREF="node295.html#SECTION001810010000000000000">Expresiones de Tipo, Sistemas de Tipos y Comprobadores de Tipos</A>
+<LI><A NAME="tex2html5994"
+  HREF="node295.html#SECTION001810020000000000000">Tipado Estático y Tipado Dinámico</A>
+<LI><A NAME="tex2html5995"
+  HREF="node295.html#SECTION001810030000000000000">Tipado Fuerte y Tipado Débil</A>
+<LI><A NAME="tex2html5996"
+  HREF="node295.html#SECTION001810040000000000000">Sobrecarga, Polimorfismo e Inferencia de Tipos</A>
+<LI><A NAME="tex2html5997"
+  HREF="node295.html#SECTION001810050000000000000">Equivalencia de Expresiones de Tipo</A>
+</UL></UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html5991"
+  HREF="node296.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5985"
+  HREF="node294.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5979"
+  HREF="node294.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5987"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5989"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5992"
+  HREF="node296.html">Conversión de Tipos</A>
+<B>Sup:</B> <A NAME="tex2html5986"
+  HREF="node294.html">Análisis de Tipos</A>
+<B> Ant:</B> <A NAME="tex2html5980"
+  HREF="node294.html">Análisis de Tipos</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

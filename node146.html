@@ -1,0 +1,522 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Práctica: Eliminación de la Recursividad por la Izquierda</TITLE>
+<META NAME="description" CONTENT="Práctica: Eliminación de la Recursividad por la Izquierda">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="previous" HREF="node145.html">
+<LINK REL="up" HREF="node140.html">
+<LINK REL="next" HREF="node147.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3574"
+  HREF="node147.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3568"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3564"
+  HREF="node145.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3570"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3572"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3575"
+  HREF="node147.html">Árbol de Análisis Abstracto</A>
+<B>Sup:</B> <A NAME="tex2html3569"
+  HREF="node140.html">Recursión por la Izquierda</A>
+<B> Ant:</B> <A NAME="tex2html3565"
+  HREF="node145.html">Ejercicio</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00986000000000000000"></A>
+   <A NAME="10058"></A>
+  
+<A NAME="practica:recizq"></A>
+<BR>
+Práctica: Eliminación de la Recursividad por la Izquierda
+</H2>
+En esta práctica  vamos a 
+extender las fases de análisis léxico y sintáctico del 
+compilador del lenguaje Tutu cuya gramática se definió
+en el ejercicio <A HREF="node124.html#ejercicio:tutugrammar">4.5.1</A> 
+con expresiones que incluyen diferencias 
+y divisiones. Además construiremos una representación
+del árbol sintáctico concreto.
+Para ello consideremos el siguiente esquema de traducción
+recursivo por la izquierda (en concreto las reglas recursivas
+por la izquierda son las 10, 11, 13 y 14):
+
+<P>
+<BR>
+<BR>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1">
+0 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> p  <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ ds  ss     </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $p{t}  = { n =&gt; 0, ds =&gt; $ds{t}, ss =&gt; $ss{t} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+1 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> p  <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ ss         </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $p{t}  = { n =&gt; 1, ss =&gt; $ss{t} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+2 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> ds <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ d  ';'  ds  </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $ds{t} = { n =&gt; 2, d =&gt; $d{t}, ; =&gt; ';', ds =&gt; $ds{t} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+3 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> ds <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ d ';'      </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $ds{t} = { n =&gt; 3, d =&gt; $d{t} ; =&gt; ';' } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+4 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> d  <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ INT  il     </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $d{t}  = { n =&gt; 4, INT =&gt; 'INT', il &gt;$il{t} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+5 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> d  <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ STRING  il </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $d{t}  = { n =&gt; 5, STRING =&gt; 'STRING', il &gt;$il{t} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+6 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> ss <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ s  ';'  ss  </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $ss{t} = { n =&gt; 6, s =&gt; $s{t}, ; =&gt; ';' ss =&gt; $ss{t} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+7 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> ss <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ s          </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $ss{t} = { n =&gt; 7, s =&gt; $s{t} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+8 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> s  <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ ID '=' e    </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $s{t}  = { n =&gt; 8, ID =&gt; $ID{v}, = =&gt; '=', e =&gt; $e{t} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+9 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> s  <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ P  e       </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $s{t}  = { n =&gt; 9, P =&gt; 'P', e =&gt; $e{t} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+10 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> e <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ e1 '+' t    </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $e{t}  = { n =&gt; 10, e =&gt; $e1{t}, + =&gt; '+', t =&gt; $t{t} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+11 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> e <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ e1 '-' t    </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $e{t}  = { n =&gt; 11, e =&gt; $e1{t}, - =&gt; '-', t =&gt; $t{t} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+12 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> e <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ t           </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $e{t}  = { n =&gt; 12, t =&gt; $t{t} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+13 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> t <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ t1 '*' f    </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $t{t}  = { n =&gt; 13, t =&gt; $t1{t}, * =&gt; '*', f =&gt; $f{t} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+14 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> t <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ t '/' f     </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $t{t}  = { n =&gt; 14, t =&gt; $t1{t}, / =&gt; '/', f =&gt; $f{t} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+15 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> t <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ f           </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $t{t}  = { n =&gt; 15, f =&gt; $f{t} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+16 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> f <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ '(' e ')'   </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $f{t}  = { n =&gt; 16, ( =&gt; '(', e =&gt; $e{t}, ) =&gt; ')' } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+17 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> f <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ ID         </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $f{t}  = { n =&gt; 17, ID =&gt; $ID{v} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+18 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> f <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ NUM        </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $f{t}  = { n =&gt; 18, NUM =&gt; $NUM{v} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+19 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> f <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ STR        </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $f{t}  = { n =&gt; 19, STR =&gt; $STR{v} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+20 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> il <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ ID ',' il  </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $il{t} = { n =&gt; 20, ID =&gt; $ID{v}, ',' =&gt; ',', il =&gt; $il{t} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1">  
+
+21 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> il <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ ID         </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> <code>{ $il{t} = { n =&gt; 21, ID =&gt; $ID{v} } }</code></FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+22 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> s <!-- MATH
+ $\rightarrow \epsilon$
+ -->
+<IMG
+ WIDTH="34" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img157.png"
+ ALT="$ \rightarrow \epsilon$">
+ </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1">  <code>{ $s{t} = { n =&gt; 22, s =&gt; '' }}</code></FONT></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+
+<P>
+Por razones de espacio hemos abreviado los nombres de las variables.
+El atributo <code>t</code> (por <B>tree</B>) es una referencia a un hash.
+La entrada <code>n</code> contiene el número de la regla en juego.
+Hay una entrada por símbolo en la parte derecha. El atributo <code>v</code> de 
+<code>ID</code> es la cadena asociada con el identificador. 
+El atributo <code>v</code> de <code>NUM</code> es el valor numérico asociado con el terminal.
+Se trata de, siguiendo la metodología explicada en la sección anterior,
+construir un analizador descendente predictivo recursivo que sea equivalente
+al esquema anterior. Elimine la recursión por la izquierda. Traslade las acciones a los
+lugares convenientes en el nuevo esquema e introduzca los atributos heredados que sean necesarios.
+Genere pruebas siguiendo la metodología 
+explicada en la sección <A HREF="node120.html#subsection:tests">4.4.1</A>. ¡Note que el árbol que debe producir 
+es el de la gramática inicial, ¡No el de la gramática transformada!
+
+<P>
+<HR>
+<A NAME="tex2html3574"
+  HREF="node147.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3568"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3564"
+  HREF="node145.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3570"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3572"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3575"
+  HREF="node147.html">Árbol de Análisis Abstracto</A>
+<B>Sup:</B> <A NAME="tex2html3569"
+  HREF="node140.html">Recursión por la Izquierda</A>
+<B> Ant:</B> <A NAME="tex2html3565"
+  HREF="node145.html">Ejercicio</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

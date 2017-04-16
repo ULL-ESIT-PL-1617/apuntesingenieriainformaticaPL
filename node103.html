@@ -1,0 +1,785 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Reciclando una Regexp::Grammar</TITLE>
+<META NAME="description" CONTENT="Reciclando una Regexp::Grammar">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node104.html">
+<LINK REL="previous" HREF="node102.html">
+<LINK REL="up" HREF="node85.html">
+<LINK REL="next" HREF="node104.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2837"
+  HREF="node104.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2831"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2825"
+  HREF="node102.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2833"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2835"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2838"
+  HREF="node104.html">Práctica: Calculadora con Regexp::Grammars</A>
+<B>Sup:</B> <A NAME="tex2html2832"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2826"
+  HREF="node102.html">Simplificando el AST</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html2839"
+  HREF="node103.html#SECTION0081118010000000000000">Ejecución</A>
+<LI><A NAME="tex2html2840"
+  HREF="node103.html#SECTION0081118020000000000000">Estructura de la aplicación</A>
+<LI><A NAME="tex2html2841"
+  HREF="node103.html#SECTION0081118030000000000000">Programa principal</A>
+<LI><A NAME="tex2html2842"
+  HREF="node103.html#SECTION0081118040000000000000">Las Clases de nodos del AST</A>
+<LI><A NAME="tex2html2843"
+  HREF="node103.html#SECTION0081118050000000000000">Definiendo <TT>sem</TT> para la evaluación de la expresión</A>
+<LI><A NAME="tex2html2844"
+  HREF="node103.html#SECTION0081118060000000000000">Definiendo <TT>sem</TT> para la traducción a postfijo</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION0081118000000000000000"></A>
+<A NAME="subsection:recicla"></A>
+<BR>
+Reciclando una <TT>Regexp::Grammar</TT>
+</H2>
+
+<P>
+
+<H4><A NAME="SECTION0081118010000000000000">
+Ejecución</A>
+</H4>
+  
+
+<P>
+El siguiente programa <code>calculator.pl</code>
+recibe como entrada una expresión en infijo.
+
+<P>
+La ejecución consta de dos bucles.
+En la primera parte se inyecta a la jerarquía de
+clases de los AST generados para las expresiones en infijo
+una semántica que permite 
+evaluar la expresión:
+<PRE>
+    58  require EvalCalc;
+    59
+    60  test_calc(
+    61    'Evaluating infix arithmetic expressions (CTRL-D to end in unix) ',
+    62    sub { print &amp;Data::Dumper::Dumper(shift()) },
+    63  );
+</PRE>
+En esta primera parte mostraremos además el AST
+construido para la expresión infija de entrada.
+
+<pre>
+pl@nereida:~/Lregexpgrammars/demo$ ./calculator.pl
+Evaluating infix arithmetic expressions (CTRL-D to end in unix)
+<span class='lightblue'>8-4-2</span>
+$VAR1 = bless( {
+  'operands' =&gt; [
+    bless( {
+      'operands' =&gt; [
+        bless( {
+          'operands' =&gt; [
+            bless( {
+              'operands' =&gt; [
+                bless( {
+                  'operands' =&gt; [
+                    bless( { '' =&gt; '8', 'val' =&gt; '8' }, <span class='lightblue'>'factor'</span> )
+                  ],
+                  '' =&gt; '8'
+                }, <span class='lightblue'>'factorial'</span> )
+              ],
+              '' =&gt; '8'
+            }, <span class='lightblue'>'power'</span> )
+          ],
+          '' =&gt; '8'
+        }, <span class='lightblue'>'uneg'</span> )
+      ],
+      '' =&gt; '8'
+    }, <span class='lightblue'>'term'</span> ),
+    bless( {
+      'operands' =&gt; [
+        bless( {
+          'operands' =&gt; [
+            bless( {
+              'operands' =&gt; [
+                bless( {
+                  'operands' =&gt; [
+                    bless( { '' =&gt; '4', 'val' =&gt; '4' }, <span class='lightblue'>'factor'</span> )
+                  ],
+                  '' =&gt; '4'
+                }, <span class='lightblue'>'factorial'</span> )
+              ],
+              '' =&gt; '4'
+            }, <span class='lightblue'>'power'</span> )
+          ],
+          '' =&gt; '4'
+        }, <span class='lightblue'>'uneg'</span> )
+      ],
+      '' =&gt; '4'
+    }, <span class='lightblue'>'term'</span> ),
+    bless( {
+      'operands' =&gt; [
+        bless( {
+          'operands' =&gt; [
+            bless( {
+              'operands' =&gt; [
+                bless( {
+                  'operands' =&gt; [
+                    bless( { '' =&gt; '2', 'val' =&gt; '2' }, <span class='lightblue'>'factor'</span> )
+                  ],
+                  '' =&gt; '2'
+                }, <span class='lightblue'>'factorial'</span> )
+              ],
+              '' =&gt; '2'
+            }, <span class='lightblue'>'power'</span> )
+          ],
+          '' =&gt; '2'
+        }, <span class='lightblue'>'uneg'</span> )
+      ],
+      '' =&gt; '2'
+    }, <span class='lightblue'>'term'</span> )
+  ],
+  '' =&gt; '8-4-2',
+  <span class='red'>'operators' =&gt; [
+    '-',
+    '-'
+  ]</span>
+}, <span class='lightblue'>'expr'</span> );
+2
+</pre>
+Observamos que la asociatividad es la correcta.
+El <code>2</code> final es el resultado de la evaluación de
+<code>8-4-2</code>.
+
+<P>
+La estructura del árbol se corresponde con la de la gramática:
+<PRE>
+ 8  my $rbb = do {
+ 9      use Regexp::Grammars;
+10
+11      qr{
+12        \A&lt;expr&gt;\z
+13
+14        &lt;objrule: expr&gt;      &lt;[operands=term]&gt; ** &lt;[operators=addop]&gt;
+15
+16        &lt;objrule: term&gt;      &lt;[operands=uneg]&gt; ** &lt;[operators=mulop]&gt;
+17
+18        &lt;objrule: uneg&gt;      &lt;[operators=minus]&gt;* &lt;[operands=power]&gt;
+19
+20        &lt;objrule: power&gt;     &lt;[operands=factorial]&gt; ** &lt;[operators=powerop]&gt;
+21
+22        &lt;objrule: factorial&gt; &lt;[operands=factor]&gt;  &lt;[operators=(!)]&gt;*
+23
+24        &lt;objrule: factor&gt;    &lt;val=([+-]?\d+(?:\.\d*)?)&gt;
+25                           | \( &lt;MATCH=expr&gt; \)
+26
+27        &lt;token: addop&gt;        [+-]
+28
+29        &lt;token: mulop&gt;        [*/]
+30
+31        &lt;token: powerop&gt;      \*\*|\^
+32
+33        &lt;token: minus&gt;        - &lt;MATCH=(?{ 'NEG' })&gt;
+34
+35      }x;
+36  };
+</PRE>
+
+<P>
+Ahora, en una segunda parte sobreescribimos los métodos
+<code>sem</code> que describen la semántica para producir una traducción
+de infijo a postfijo:
+<PRE>
+ 66  require PostfixCalc;
+ 67  test_calc('Translating expressions to postfix (CTRL-D to end in unix) ');
+</PRE>
+Ahora al proporcionar la entrada <code>6--3!</code> obtenemos:
+<PRE>
+Translating expressions to postfix (CTRL-D to end in unix)
+6--3!
+6 3 ! ~ -
+</PRE>
+Aquí <code>~</code> es el operador de negación unaria y <code>!</code> es el operador
+factorial.
+
+<P>
+
+<H4><A NAME="SECTION0081118020000000000000">
+Estructura de la aplicación</A>
+</H4>
+  
+
+<P>
+Estos son los ficheros que integran la aplicación:
+
+<P>
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo/calculator$ tree
+.
+|-- EvalCalc.pm            # Soporte para la evaluación de la expresión: sem
+|-- Operator.pm            # Soporte a las clases nodo: recorridos
+|-- PostfixCalc.pm         # Soporte para la traducción a postfijo: sem
+`-- calculator.pl          # programa principal
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0081118030000000000000">
+Programa principal</A>
+</H4>
+  
+
+<P>
+En el programa principal definimos la gramática
+y escribimos una subrutina <code>test_calc</code>
+que realiza el parsing. 
+
+<P>
+
+<pre>
+pl@nereida:~/Lregexpgrammars/demo/calculator$ cat -n calculator.pl
+<span class="synLinenum">    1</span>   <span class="synComment">#!/usr/bin/env perl5.10.1</span>
+<span class="synLinenum">    2</span>   <span class="synStatement">use strict</span>;
+<span class="synLinenum">    3</span>   <span class="synStatement">use warnings</span>;
+<span class="synLinenum">    4</span>   <span class="synStatement">use </span><span class="synConstant">5.010</span>;
+<span class="synLinenum">    5</span>   <span class="synStatement">use </span>Data::Dumper;
+<span class="synLinenum">    6</span>   <span class="synIdentifier">$</span><span class="synType">Data::Dumper::</span><span class="synIdentifier">Indent</span> = <span class="synConstant">1</span>;
+<span class="synLinenum">    7</span> 
+<span class="synLinenum">    8</span>   <span class="synStatement">my</span> <span class="synIdentifier">$rbb</span> = <span class="synStatement">do</span> {
+<span class="synLinenum">    9</span>       <span class="synStatement">use </span>Regexp::Grammars;
+<span class="synLinenum">   10</span> 
+<span class="synLinenum">   11</span>       <span class="synConstant">qr{</span>
+<span class="synLinenum">   12</span> <span class="synConstant">        </span><span class="synSpecial">\A</span><span class="synConstant">&lt;expr&gt;</span><span class="synSpecial">\z</span>
+<span class="synLinenum">   13</span> 
+<span class="synLinenum">   14</span> <span class="synConstant">        &lt;objrule: expr&gt;      &lt;</span><span class="synSpecial">[operands=term]</span><span class="synConstant">&gt; </span><span class="synSpecial">**</span><span class="synConstant"> &lt;</span><span class="synSpecial">[operators=addop]</span><span class="synConstant">&gt;</span>
+<span class="synLinenum">   15</span> 
+<span class="synLinenum">   16</span> <span class="synConstant">        &lt;objrule: term&gt;      &lt;</span><span class="synSpecial">[operands=uneg]</span><span class="synConstant">&gt; </span><span class="synSpecial">**</span><span class="synConstant"> &lt;</span><span class="synSpecial">[operators=mulop]</span><span class="synConstant">&gt;</span>
+<span class="synLinenum">   17</span> 
+<span class="synLinenum">   18</span> <span class="synConstant">        &lt;objrule: uneg&gt;      &lt;</span><span class="synSpecial">[operators=minus]</span><span class="synConstant">&gt;</span><span class="synSpecial">*</span><span class="synConstant"> &lt;</span><span class="synSpecial">[operands=power]</span><span class="synConstant">&gt;</span>
+<span class="synLinenum">   19</span> 
+<span class="synLinenum">   20</span> <span class="synConstant">        &lt;objrule: power&gt;     &lt;</span><span class="synSpecial">[operands=factorial]</span><span class="synConstant">&gt; </span><span class="synSpecial">**</span><span class="synConstant"> &lt;</span><span class="synSpecial">[operators=powerop]</span><span class="synConstant">&gt;</span>
+<span class="synLinenum">   21</span> 
+<span class="synLinenum">   22</span> <span class="synConstant">        &lt;objrule: factorial&gt; &lt;</span><span class="synSpecial">[operands=factor]</span><span class="synConstant">&gt;  &lt;</span><span class="synSpecial">[operators=(!)]</span><span class="synConstant">&gt;</span><span class="synSpecial">*</span>
+<span class="synLinenum">   23</span> 
+<span class="synLinenum">   24</span> <span class="synConstant">        &lt;objrule: factor&gt;    &lt;val=</span><span class="synSpecial">([+-]?\d+(?:\.\d*)?)</span><span class="synConstant">&gt;</span>
+<span class="synLinenum">   25</span> <span class="synConstant">                           | </span><span class="synSpecial">\(</span><span class="synConstant"> &lt;MATCH=expr&gt; </span><span class="synSpecial">\)</span>
+<span class="synLinenum">   26</span> 
+<span class="synLinenum">   27</span> <span class="synConstant">        &lt;token: addop&gt;        </span><span class="synSpecial">[+-]</span>
+<span class="synLinenum">   28</span> 
+<span class="synLinenum">   29</span> <span class="synConstant">        &lt;token: mulop&gt;        </span><span class="synSpecial">[*/]</span>
+<span class="synLinenum">   30</span> 
+<span class="synLinenum">   31</span> <span class="synConstant">        &lt;token: powerop&gt;      </span><span class="synSpecial">\*\*</span><span class="synConstant">|</span><span class="synSpecial">^</span>
+<span class="synLinenum">   32</span> 
+<span class="synLinenum">   33</span> <span class="synConstant">        &lt;token: minus&gt;        - &lt;MATCH=</span><span class="synSpecial">(?</span><span class="synConstant">{ 'NEG' </span>}<span class="synSpecial">)</span><span class="synConstant">&gt;</span>
+<span class="synLinenum">   34</span> 
+<span class="synLinenum">   35</span> <span class="synConstant">      }x</span>;
+<span class="synLinenum">   36</span>   };
+<span class="synLinenum">   37</span> 
+<span class="synLinenum">   38</span>   <span class="synStatement">sub </span><span class="synIdentifier">test_calc </span>{
+<span class="synLinenum">   39</span>     <span class="synStatement">my</span> <span class="synIdentifier">$prompt</span> = <span class="synStatement">shift</span>;
+<span class="synLinenum">   40</span>     <span class="synStatement">my</span> <span class="synIdentifier">$handler</span> = <span class="synStatement">shift</span>;
+<span class="synLinenum">   41</span> 
+<span class="synLinenum">   42</span>     <span class="synStatement">say</span> <span class="synIdentifier">$prompt</span>;
+<span class="synLinenum">   43</span>     <span class="synStatement">while</span> (<span class="synStatement">my</span> <span class="synIdentifier">$input</span> = &lt;&gt;) {
+<span class="synLinenum">   44</span>         <span class="synStatement">chomp</span>(<span class="synIdentifier">$input</span>);
+<span class="synLinenum">   45</span>         <span class="synStatement">if</span> (<span class="synIdentifier">$input</span> =~ <span class="synStatement">m{</span><span class="synIdentifier">$rbb</span><span class="synStatement">}</span>) {
+<span class="synLinenum">   46</span>             <span class="synStatement">my</span> <span class="synIdentifier">$tree</span> = <span class="synIdentifier">$/</span>{expr};
+<span class="synLinenum">   47</span>             <span class="synIdentifier">$handler</span>-&gt;(<span class="synIdentifier">$tree</span>) <span class="synStatement">if</span> <span class="synIdentifier">$handler</span>;
+<span class="synLinenum">   48</span> 
+<span class="synLinenum">   49</span>             <span class="synStatement">say</span> <span class="synIdentifier">$tree-&gt;ceval</span>;
+<span class="synLinenum">   50</span> 
+<span class="synLinenum">   51</span>         }
+<span class="synLinenum">   52</span>         <span class="synStatement">else</span> {
+<span class="synLinenum">   53</span>             <span class="synStatement">say</span>(<span class="synConstant">"does not match"</span>);
+<span class="synLinenum">   54</span>         }
+<span class="synLinenum">   55</span>     }
+<span class="synLinenum">   56</span>   }
+<span class="synLinenum">   57</span> 
+<span class="synLinenum">   58</span>   <span class="synStatement">require</span> EvalCalc;
+<span class="synLinenum">   59</span> 
+<span class="synLinenum">   60</span>   test_calc(
+<span class="synLinenum">   61</span>     <span class="synConstant">'Evaluating infix arithmetic expressions (CTRL-D to end in unix) '</span>,
+<span class="synLinenum">   62</span>     <span class="synStatement">sub </span>{ <span class="synStatement">print</span> <span class="synIdentifier">&amp;</span><span class="synType">Data::Dumper::</span><span class="synIdentifier">Dumper</span>(<span class="synStatement">shift</span>()) },
+<span class="synLinenum">   63</span>   );
+<span class="synLinenum">   64</span> 
+<span class="synLinenum">   65</span> 
+<span class="synLinenum">   66</span>   <span class="synStatement">require</span> PostfixCalc;
+<span class="synLinenum">   67</span>   test_calc(<span class="synConstant">'Translating expressions to postfix (CTRL-D to end in unix) '</span>);
+</pre>
+
+<P>
+Los nodos del AST poseen un método <code>ceval</code> que se encarga de 
+realizar la traducción del nodo.
+
+<P>
+
+<H4><A NAME="SECTION0081118040000000000000">
+Las Clases de nodos del AST</A>
+</H4>
+  
+
+<P>
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo/calculator$ cat -n Operator.pm
+   1  #   Class hierarchy diagram:
+   2  #  $ vgg -t 'Operator(LeftBinaryOp(expr,term),RightBinaryOp(power),PreUnaryOp(uneg),PostUnaryOp(factorial))'
+   3  #                           +--------+
+   4  #                           |Operator|
+   5  #                           +--------+
+   6  #          .---------------.----^--------.-------------.
+   7  #    +------------+ +-------------+ +----------+ +-----------+
+   8  #    |LeftBinaryOp| |RightBinaryOp| |PreUnaryOp| |PostUnaryOp|
+   9  #    +------------+ +-------------+ +----------+ +-----------+
+  10  #      .---^--.        |              |               |
+  11  #    +----+ +----+  +-----+         +----+       +---------+
+  12  #    |expr| |term|  |power|         |uneg|       |factorial|
+  13  #    +----+ +----+  +-----+         +----+       +---------+
+  14  #
+  15  #
+  16  # NOTE: package "factor" actually implements numbers and is
+  17  #       outside this hierarchy
+  18  #
+  19  package Operator;
+  20  use strict;
+  21  use Carp;
+  22
+  23  sub Operands {
+  24    my $self = shift;
+  25
+  26    return () unless exists $self-&gt;{operands};
+  27    return @{$self-&gt;{operands}};
+  28  }
+  29
+  30  sub Operators {
+  31    my $self = shift;
+  32
+  33    return () unless exists $self-&gt;{operators};
+  34    return @{$self-&gt;{operators}};
+  35  }
+  36
+  37  sub sem {
+  38    confess "not defined sem";
+  39  }
+  40
+  41  sub make_sem {
+  42    my $class = shift;
+  43    my %semdesc = @_;
+  44
+  45    for my $class (keys %semdesc) {
+  46      my %sem = %{$semdesc{$class}};
+  47
+  48      # Install 'sem' method in $class
+  49      no strict 'refs';
+  50      no warnings 'redefine';
+  51      *{$class."::sem"} = sub {
+  52        my ($self, $op) = @_;
+  53        $sem{$op}
+  54      };
+  55    }
+  56  }
+  57
+  58  package LeftBinaryOp;
+  59  use base qw{Operator};
+  60
+  61  sub ceval {
+  62    my $self = shift;
+  63
+  64    # recursively evaluate the children first
+  65    my @operands = map { $_-&gt;ceval } $self-&gt;Operands;
+  66
+  67    # then combine them
+  68    my $s = shift @operands;
+  69    for ($self-&gt;Operators) {
+  70      $s = $self-&gt;sem($_)-&gt;($s, shift @operands);
+  71    }
+  72    return $s;
+  73  }
+  74
+  75  package RightBinaryOp;
+  76  use base qw{Operator};
+  77
+  78  sub ceval {
+  79    my $self = shift;
+  80
+  81    # recursively evaluate the children first
+  82    my @operands = map { $_-&gt;ceval } $self-&gt;Operands;
+  83
+  84    # then combine them
+  85    my $s = pop @operands;
+  86    for (reverse $self-&gt;Operators) {
+  87      $s = $self-&gt;sem($_)-&gt;(pop @operands, $s);
+  88    }
+  89    return $s;
+  90  }
+  91
+  92  package PreUnaryOp;
+  93  use base qw{Operator};
+  94
+  95  sub ceval {
+  96    my $self = shift;
+  97
+  98    # recursively evaluate the children first
+  99    my @operands = map { $_-&gt;ceval } $self-&gt;Operands;
+ 100
+ 101    # then combine them
+ 102    my $s = shift @operands;
+ 103    for (reverse $self-&gt;Operators) {
+ 104      $s = $self-&gt;sem($_)-&gt;($s);
+ 105    }
+ 106    return $s;
+ 107  }
+ 108
+ 109  package PostUnaryOp;
+ 110  use base qw{Operator};
+ 111
+ 112  sub ceval {
+ 113    my $self = shift;
+ 114
+ 115    # recursively evaluate the children first
+ 116    my @operands = map { $_-&gt;ceval } $self-&gt;Operands;
+ 117
+ 118    # then combine them
+ 119    my $s = shift @operands;
+ 120    for ($self-&gt;Operators) {
+ 121      $s = $self-&gt;sem($_)-&gt;($s);
+ 122    }
+ 123    return $s;
+ 124  }
+ 125
+ 126  package term;
+ 127  use base qw{LeftBinaryOp};
+ 128
+ 129  package expr;
+ 130  use base qw{LeftBinaryOp};
+ 131
+ 132  package power;
+ 133  use base qw{RightBinaryOp};
+ 134
+ 135  package uneg;
+ 136  use base qw{PreUnaryOp};
+ 137
+ 138  package factorial;
+ 139  use base qw{PostUnaryOp};
+ 140
+ 141  package factor;
+ 142
+ 143  sub ceval {
+ 144    my $self = shift;
+ 145
+ 146    return $self-&gt;{val};
+ 147  }
+ 148
+ 149  1;
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0081118050000000000000">
+Definiendo <TT>sem</TT> para la evaluación de la expresión</A>
+</H4>
+  
+
+<P>
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo/calculator$ cat -n EvalCalc.pm
+ 1  package EvalCalc;
+ 2  use strict;
+ 3  use Carp;
+ 4
+ 5  use Operator;
+ 6
+ 7  ####
+ 8  sub f {
+ 9    $_[0]&gt;1?$_[0]*f($_[0]-1):1;
+10  }
+11
+12  sub fac {
+13    my $n = shift;
+14
+15    confess "Not valid number" unless $n =~ /^\d+$/;
+16    f($n);
+17  };
+18
+19  my $s = sub { shift() **  shift() };
+20
+21  Operator-&gt;make_sem(
+22     expr =&gt; {
+23        '+' =&gt; sub { shift()  +  shift() },
+24        '-' =&gt; sub { shift()  -  shift() },
+25     },
+26     term =&gt; {
+27       '*' =&gt; sub { shift()  *  shift() },
+28       '/' =&gt; sub { shift()  /  shift() },
+29     },
+30     power =&gt; {
+31        '^'  =&gt; $s,
+32        '**' =&gt; $s,
+33     },
+34     uneg =&gt; {
+35        'NEG' =&gt; sub { -shift() },
+36     },
+37     factorial =&gt; {
+38        '!' =&gt; \&amp;fac,
+39     },
+40  );
+41
+42  1;
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0081118060000000000000">
+Definiendo <TT>sem</TT> para la traducción a postfijo</A>
+</H4>
+  
+
+<P>
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo/calculator$ cat -n PostfixCalc.pm
+ 1  package PostfixCalc;
+ 2  use strict;
+ 3
+ 4  use Operator;
+ 5
+ 6  # Modify semantics: now translate to postfix
+ 7  my $powers = sub { shift().' '.shift().' **' };
+ 8
+ 9  Operator-&gt;make_sem(
+10     expr =&gt; {
+11        '+' =&gt; sub { shift().' '.shift().' +'  },
+12        '-' =&gt; sub { shift().' '.shift().' -' },
+13      },
+14      term =&gt; {
+15        '*' =&gt; sub { shift().' '.shift().' *'  },
+16        '/' =&gt; sub { shift().' '.shift().' /' },
+17      },
+18      power =&gt; {
+19        '^'  =&gt; $powers,
+20        '**' =&gt; $powers,
+21      },
+22      uneg =&gt; {
+23         # use ~ for unary minus
+24        'NEG' =&gt; sub { shift().' ~' },
+25      },
+26      factorial =&gt; {
+27        '!' =&gt; sub { shift().' !'},
+28      },
+29  );
+30
+31  1;
+</PRE>
+
+<P>
+<P>
+<DIV><B>Ejercicio  3.11.2</B> &nbsp; 
+<UL>
+<LI>Explique el significado de la primera línea del programa principal
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ cat -n calculator.pl
+   1  #!/usr/bin/env perl5.10.1
+</PRE>
+</LI>
+<LI>Explique el significado de <code>$handler</code> en <code>test_calc</code>:
+<PRE>
+  42  sub test_calc {
+  43    my $prompt = shift;
+  44    my $handler = shift;
+  45
+  46    say $prompt;
+  47    while (my $input = &lt;&gt;) {
+  48        chomp($input);
+  49        if ($input =~ m{$rbb}) {
+  50            my $tree = $/{expr};
+  51            $handler-&gt;($tree) if $handler;
+  52
+  53            say $tree-&gt;ceval;
+  54
+  55        }
+  56        else {
+  57            say("does not match");
+  58        }
+  59    }
+  60  }
+</PRE>
+
+<P>
+</LI>
+<LI>Aisle las funciones relacionadas con la creación de semántica
+como <code>make_sem</code>, <code>fac</code> y las llamadas a <code>make_sem</code>
+en un módulo <code>Calculator::Semantics</code> aparte. 
+
+<P>
+</LI>
+<LI>Añada un traductor de infijo a prefijo al código presentado 
+en esta sección. Una expresión como
+<code>2*3+4</code>  se traducirá como <code>+ * 2 3 4</code>
+</LI>
+</UL></DIV><P></P>
+
+<P>
+<HR>
+<A NAME="tex2html2837"
+  HREF="node104.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2831"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2825"
+  HREF="node102.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2833"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2835"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2838"
+  HREF="node104.html">Práctica: Calculadora con Regexp::Grammars</A>
+<B>Sup:</B> <A NAME="tex2html2832"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2826"
+  HREF="node102.html">Simplificando el AST</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

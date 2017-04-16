@@ -1,0 +1,610 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Las Fases de un Compilador</TITLE>
+<META NAME="description" CONTENT="Las Fases de un Compilador">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node112.html">
+<LINK REL="previous" HREF="node106.html">
+<LINK REL="up" HREF="node105.html">
+<LINK REL="next" HREF="node110.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2991"
+  HREF="node110.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2985"
+  HREF="node105.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2979"
+  HREF="node108.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2987"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2989"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2992"
+  HREF="node110.html">Repaso: Fases de un</A>
+<B>Sup:</B> <A NAME="tex2html2986"
+  HREF="node105.html">La Estructura de los</A>
+<B> Ant:</B> <A NAME="tex2html2980"
+  HREF="node108.html">Práctica: Crear y documentar</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00920000000000000000"></A>
+<A NAME="section:fases"></A>
+<BR>
+Las Fases de un Compilador
+</H1>
+La estructura del compilador, descompuesto en fases, queda explicitada 
+en el código de la subrutina <code>compile</code>:
+
+<P>
+
+<H4><A NAME="SECTION00920010000000000000">
+Esquema del Compilador</A>
+</H4>
+  
+
+<P>
+<PRE>
+ 1 package PL::Tutu;
+ 2 use 5.008004;   # Versión mínima de Perl 5.84
+ 3 use strict;     # Variables deben ser declaradas, etc.
+ 4 use warnings;   # Enviar warnings
+ 5 use IO::File;
+ 6 use Carp;       # Provee alternativas a "die" and "warn" 
+ 7 
+ 8 require Exporter;
+ 9 
+10 our @ISA = qw(Exporter);   # Heredamos los métodos de la clase Exporter
+11 our @EXPORT = qw( compile compile_from_file); # Estas funciones serán exportadas
+12 our $VERSION = '0.01';     # Variable que define la versión del módulo
+13 
+14 our %symbol_table;         # La tabla de símbolos $symbol_table{x} contiene
+15 our $data;                 # la información asociada con el objeto 'x'
+16 our $target;               # tipo, dirección, etc.
+17 our @tokens;               # La lista de terminales
+18 our $errorflag;
+19 our ($lookahead, $value);  # Token actual y su atributo
+20 our $tree;                 # referencia al objeto que contiene
+21 our $global_address;       # el árbol sintáctico
+22 
+23 # Lexical analyzer 
+24 package Lexical::Analysis;
+25 sub scanner {
+26 }
+27 
+28 package Syntax::Analysis;
+29 sub parser {
+30 }
+31 
+32 package Machine::Independent::Optimization;
+33 sub Optimize {
+34 }
+35 
+36 package Code::Generation;
+37 sub code_generator {
+38 }
+39   
+40 package Peephole::Optimization;
+41 sub transform {
+42 }
+43 
+44 package PL::Tutu;
+45 sub compile {
+46   my ($input) = @_; # Observe el contexto!
+47   local %symbol_table = (); 
+48   local $data = ""; # Contiene todas las cadenas en el programa fuente
+49   local $target = ""; # target code
+50   local @tokens =();    # "local" salva el valor que serÃ¡ recuperado al finalizar
+51   local $errorflag = 0; # el Ã¡mbito
+52   local ($lookahead, $value) = ();
+53   local $tree = undef; # Referencia al Ã¡rbol sintÃctico abstracto 
+54   local $global_address = 0; # Usado para guardar la Ãltima direcciÃn ocupada
+55   
+56   ########lexical analysis
+57   &amp;Lexical::Analysis::scanner($input);
+58 
+59   ########syntax (and semantic) analysis
+60   $tree = &amp;Syntax::Analysis::parser;
+61 
+62   ########machine independent optimizations
+63   &amp;Machine::Independent::Optimization::Optimize;
+64 
+65   ########code generation
+66   &amp;Code::Generation::code_generator;
+67 
+68   ########peephole optimization
+69   &amp;Peephole::Optimization::transform($target);
+70 
+71   return \$target; #retornamos una referencia a $target
+72 }
+73 
+74 sub compile_from_file {
+75   my ($input_name, $output_name) = @_; # Nombres de ficheros
+76   my $fhi;                             # de entrada y de salida
+77   my $targetref;
+78   
+79   if (defined($input_name) and (-r $input_name)) {
+80     $fhi = IO::File-&gt;new("&lt; $input_name");
+81   }
+82   else { $fhi = 'STDIN'; }
+83   my $input;
+84   { # leer todo el fichero
+85     local $/ = undef; # localizamos para evitar efectos laterales
+86     $input = &lt;$fhi&gt;;
+87   }
+88   $targetref = compile($input);
+89 
+90   ########code output
+91   my $fh = defined($output_name)? IO::File-&gt;new("&gt; $output_name") : 'STDOUT';
+92   $fh-&gt;print($$targetref);
+93   $fh-&gt;close;
+94   1; # El Ãºltimo valor evaluado es el valor retornado
+95 }
+96 
+97 1;  # El 1 indica que la fase de carga termina con éxito
+98 # Sigue la documentación ...
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00920020000000000000">
+Añadiendo Ejecutables</A>
+</H4>
+  
+
+<P>
+Vamos a añadir un <B>script</B> que use el módulo
+<code>PL::Tutu</code> para asi poder ejecutar nuestro compilador:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu/$ mkdir scripts
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu$ cd scripts/
+</PRE>
+A continuación creamos dos versiones del compilador <code>tutu.pl</code>
+y <code>tutu</code> y un programa de prueba <code>test01.tutu</code>:
+
+<P>
+<PRE>
+... # despues de crear los ficheros
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu/scripts$ ls
+test01.tutu  tutu  tutu.pl
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu/scripts$ cat tutu.pl
+#!/usr/bin/perl -w -I../lib/
+use PL::Tutu;
+
+PL::Tutu::compile_from_file(@ARGV);
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00920030000000000000">
+Búsqueda de Librerías en Tiempo de Desarrollo</A>
+</H4>
+  
+
+<P>
+El programa <code>tutu</code> ilustra otra forma de conseguir que el intérprete
+Perl busque por la librería que está siendo desarrollada, mediante el
+uso de <code>use lib</code>:
+
+<P>
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu/scripts$ cat tutu
+#!/usr/bin/perl -w
+use lib ('../lib');
+use PL::Tutu;
+
+&amp;PL::Tutu::compile_from_file(@ARGV);
+</PRE>
+
+<P>
+Una tercera forma (la que recomiendo):
+<PRE>
+$ export PERL5LIB=~/Lperl/src/topdown/PL0506/02fases/PL-Tutu/lib
+$ perl -MPL::Tutu -e 'PL::Tutu::compile_from_file("test01.tutu")'
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00920040000000000000">
+Añadiendo Los Ejecutables al <TT>MANIFEST</TT></A>
+</H4>
+  
+
+<P>
+Ahora tenemos que añadir estos ficheros en <code>MANIFEST</code> para que formen
+parte del proyecto. En vez de eso lo que podemos hacer es crear un fichero
+<code>MANIFEST.SKIP</code>:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu$ cat MANIFEST.SKIP
+\.o$
+^\.cvsignore$
+/\.cvsignore$
+\.cvsignore$
+CVS/[^/]+$
+\.svn\b
+^Makefile$
+/Makefile$
+^blib/
+\.swp$
+\.bak$
+\.pdf$
+\.ps$
+\.sal$
+pm_to_blib
+\.pdf$
+\.tar.gz$
+\.tgz$
+^META.yml$
+</PRE>
+Ahora al hacer
+<PRE>
+make manifest
+</PRE>
+se crea un fichero <code>MANIFEST</code> que contiene los caminos 
+relativos de todos los ficheros
+en la jerarquía cuyos nombres no casan con una de las expresiones
+regulares en <code>MANIFEST.SKIP</code>.
+
+<P>
+Para saber mas sobre <code>MANIFEST</code> léa 
+<A HREF="#subsection:MANIFEST">
+<IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> [<A
+ HREF="node323.html#CasianoIntroAPerl">4</A>].
+
+<P>
+No recomiendo el uso de <code>MANIFEST.SKIP</code>. Prefiero un control manual de los
+ficheros que integran la aplicacion.
+
+<P>
+
+<H4><A NAME="SECTION00920050000000000000">
+Indicando al Sistema de Distribución que los Ficheros son Ejecutables</A>
+</H4>
+  
+
+<P>
+Es necesario indicarle a Perl que los ficheros añadidos son ejecutables.
+Esto se hace mediante el par&#225;metro <code>EXE_FILES</code> de <code>WriteMakefile</code>:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu$ cat Makefile.PL
+use 5.008004;
+use ExtUtils::MakeMaker;
+# See lib/ExtUtils/MakeMaker.pm for details of how to influence
+# the contents of the Makefile that is written.
+WriteMakefile(
+    NAME              =&gt; 'PL::Tutu',
+    VERSION_FROM      =&gt; 'lib/PL/Tutu.pm', # finds $VERSION
+    PREREQ_PM         =&gt; {}, # e.g., Module::Name =&gt; 1.1
+    EXE_FILES         =&gt; [ 'scripts/tutu.pl', 'scripts/tutu' ],
+    ($] &gt;= 5.005 ?     ## Add these new keywords supported since 5.005
+      (ABSTRACT_FROM  =&gt; 'lib/PL/Tutu.pm', # retrieve abstract from module
+       AUTHOR         =&gt; 'Lenguajes y Herramientas de Programacion &lt;lhp@&gt;') : ()),
+);
+</PRE>
+Perl utilizará esa información durante la fase de instalación
+para instalar los ejecutables en el <B>path</B> de búsqueda.
+
+<P>
+
+<H4><A NAME="SECTION00920060000000000000">
+Reconstrucci&#243;n de la aplicación</A>
+</H4>
+  
+
+<P>
+A continuación hay que rehacer el <code>Makefile</code>:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu$ perl Makefile.PL
+Writing Makefile for PL::Tutu
+</PRE>
+
+<P>
+Para crear una versión funcional hacemos <code>make</code>:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu$ make
+cp scripts/tutu blib/script/tutu
+/usr/bin/perl "-MExtUtils::MY" -e "MY-&gt;fixin(shift)" blib/script/tutu
+cp scripts/tutu.pl blib/script/tutu.pl
+/usr/bin/perl "-MExtUtils::MY" -e "MY-&gt;fixin(shift)" blib/script/tutu.pl
+Manifying blib/man3/PL::Tutu.3pm
+</PRE>
+
+<P>
+Para crear el <code>MANIFEST</code> hacemos <code>make manifest</code>:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu$ make manifest
+/usr/bin/perl "-MExtUtils::Manifest=mkmanifest" -e mkmanifest
+Added to MANIFEST: scripts/tutu
+</PRE>
+
+<P>
+Comprobemos que el test de prueba generado automáticamente por
+<code>h2xs</code> se pasa correctamente:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu$ make test
+PERL_DL_NONLAZY=1 /usr/bin/perl "-MExtUtils::Command::MM" "-e" "test_harness(0, 'blib/lib', 'blib/arch')" t/*.t
+t/PL-Tutu....ok
+All tests successful.
+Files=1, Tests=1,  0 wallclock secs ( 0.08 cusr +  0.00 csys =  0.08 CPU)
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00920070000000000000">
+Ejecución</A>
+</H4>
+  
+
+<P>
+Podemos ahora ejecutar los guiones:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu$ cd scripts/
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu/scripts$ ls -l
+total 12
+-rw-r--r--  1 lhp lhp 15 2005-09-29 12:56 test01.tutu
+-rwxr-xr-x  1 lhp lhp 92 2005-09-29 13:29 tutu
+-rwxr-xr-x  1 lhp lhp 80 2005-09-29 12:58 tutu.pl
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu/scripts$ tutu test01.tutu test01.sal
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu/scripts$ ls -l
+total 12
+-rw-r--r--  1 lhp lhp  0 2005-09-29 13:53 test01.sal
+-rw-r--r--  1 lhp lhp 15 2005-09-29 12:56 test01.tutu
+-rwxr-xr-x  1 lhp lhp 92 2005-09-29 13:29 tutu
+-rwxr-xr-x  1 lhp lhp 80 2005-09-29 12:58 tutu.pl
+</PRE>
+
+<P>
+Veamos los contenidos del programa fuente <code>test01.tutu</code>
+que usaremos para hacer una prueba:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu/scripts$ cat test01.tutu
+int a,b;
+a = 4
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00920080000000000000">
+Construcción de una Distribución</A>
+</H4>
+  
+
+<P>
+Para hacer una distribución instalable hacemos <code>make dist</code>:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu$ make dist
+rm -rf PL-Tutu-0.01
+/usr/bin/perl "-MExtUtils::Manifest=manicopy,maniread" \
+        -e "manicopy(maniread(),'PL-Tutu-0.01', 'best');"
+mkdir PL-Tutu-0.01
+mkdir PL-Tutu-0.01/scripts
+mkdir PL-Tutu-0.01/lib
+mkdir PL-Tutu-0.01/lib/PL
+mkdir PL-Tutu-0.01/t
+tar cvf PL-Tutu-0.01.tar PL-Tutu-0.01
+PL-Tutu-0.01/
+PL-Tutu-0.01/scripts/
+PL-Tutu-0.01/scripts/test01.tutu
+PL-Tutu-0.01/scripts/tutu
+PL-Tutu-0.01/scripts/tutu.pl
+PL-Tutu-0.01/META.yml
+PL-Tutu-0.01/Changes
+PL-Tutu-0.01/MANIFEST
+PL-Tutu-0.01/lib/
+PL-Tutu-0.01/lib/PL/
+PL-Tutu-0.01/lib/PL/Tutu.pm
+PL-Tutu-0.01/MANIFEST.SKIP
+PL-Tutu-0.01/t/
+PL-Tutu-0.01/t/PL-Tutu.t
+PL-Tutu-0.01/Makefile.PL
+PL-Tutu-0.01/README
+rm -rf PL-Tutu-0.01
+gzip --best PL-Tutu-0.01.tar
+</PRE>
+Después de esto tenemos en el directorio de trabajo
+el fichero  <code>PL-Tutu-0.01.tar.gz</code> con la distribución:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/02fases/PL-Tutu$ ls -ltr
+total 72
+drwxr-xr-x  2 lhp lhp  4096 2005-09-29 12:01 t
+-rw-r--r--  1 lhp lhp  1196 2005-09-29 12:01 README
+drwxr-xr-x  3 lhp lhp  4096 2005-09-29 12:01 lib
+-rw-r--r--  1 lhp lhp   152 2005-09-29 12:01 Changes
+-rw-r--r--  1 lhp lhp   167 2005-09-29 13:23 MANIFEST.SKIP
+-rw-r--r--  1 lhp lhp     0 2005-09-29 13:23 pm_to_blib
+drwxr-xr-x  6 lhp lhp  4096 2005-09-29 13:23 blib
+-rw-r--r--  1 lhp lhp   113 2005-09-29 13:23 MANIFEST.bak
+drwxr-xr-x  2 lhp lhp  4096 2005-09-29 13:29 scripts
+-rw-r--r--  1 lhp lhp   616 2005-09-29 13:49 Makefile.PL
+-rw-r--r--  1 lhp lhp 20509 2005-09-29 13:51 Makefile
+-rw-r--r--  1 lhp lhp  3654 2005-09-29 16:34 PL-Tutu-0.01.tar.gz
+-rw-r--r--  1 lhp lhp   298 2005-09-29 16:34 META.yml
+-rw-r--r--  1 lhp lhp   205 2005-09-29 16:34 MANIFEST
+</PRE>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html2993"
+  HREF="node109.html#SECTION00920010000000000000">Esquema del Compilador</A>
+<LI><A NAME="tex2html2994"
+  HREF="node109.html#SECTION00920020000000000000">Añadiendo Ejecutables</A>
+<LI><A NAME="tex2html2995"
+  HREF="node109.html#SECTION00920030000000000000">Búsqueda de Librerías en Tiempo de Desarrollo</A>
+<LI><A NAME="tex2html2996"
+  HREF="node109.html#SECTION00920040000000000000">Añadiendo Los Ejecutables al <TT>MANIFEST</TT></A>
+<LI><A NAME="tex2html2997"
+  HREF="node109.html#SECTION00920050000000000000">Indicando al Sistema de Distribución que los Ficheros son Ejecutables</A>
+<LI><A NAME="tex2html2998"
+  HREF="node109.html#SECTION00920060000000000000">Reconstrucci&#243;n de la aplicación</A>
+<LI><A NAME="tex2html2999"
+  HREF="node109.html#SECTION00920070000000000000">Ejecución</A>
+<LI><A NAME="tex2html3000"
+  HREF="node109.html#SECTION00920080000000000000">Construcción de una Distribución</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html3001"
+  HREF="node110.html">Repaso: Fases de un Compilador</A>
+<LI><A NAME="tex2html3002"
+  HREF="node111.html">Práctica: Fases de un Compilador</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html2991"
+  HREF="node110.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2985"
+  HREF="node105.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2979"
+  HREF="node108.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2987"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2989"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2992"
+  HREF="node110.html">Repaso: Fases de un</A>
+<B>Sup:</B> <A NAME="tex2html2986"
+  HREF="node105.html">La Estructura de los</A>
+<B> Ant:</B> <A NAME="tex2html2980"
+  HREF="node108.html">Práctica: Crear y documentar</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

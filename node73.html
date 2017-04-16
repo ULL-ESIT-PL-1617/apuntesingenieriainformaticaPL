@@ -1,0 +1,323 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Análisis de cadenas con datos separados por comas</TITLE>
+<META NAME="description" CONTENT="Análisis de cadenas con datos separados por comas">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node74.html">
+<LINK REL="previous" HREF="node72.html">
+<LINK REL="up" HREF="node70.html">
+<LINK REL="next" HREF="node74.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2299"
+  HREF="node74.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2293"
+  HREF="node70.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2287"
+  HREF="node72.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2295"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2297"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2300"
+  HREF="node74.html">Las Expresiones Regulares como</A>
+<B>Sup:</B> <A NAME="tex2html2294"
+  HREF="node70.html">Casos de Estudio</A>
+<B> Ant:</B> <A NAME="tex2html2288"
+  HREF="node72.html">Palabras Repetidas</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00853000000000000000"></A>
+<A NAME="section:csv"></A>
+<BR>
+Análisis de cadenas con datos separados por comas
+</H2>
+Supongamos que tenemos cierto texto en <code>$text</code> proveniente
+de un fichero <code>CSV</code> (<B>Comma Separated Values</B>). Esto es
+el fichero contiene líneas con el formato:
+
+<P>
+<PRE>
+"earth",1,"moon",9.374
+</PRE>
+
+<P>
+Esta línea representa cinco campos.
+Es razonable querer guardar esta información en un <B>array</B>,
+digamos <code>@field</code>, de manera que <code>$field[0] == 'earth'</code>,
+<code>$field[1] == '1'</code>, etc.
+Esto no sólo implica descomponer la cadena en campos sino
+también quitar las comillas de los campos entrecomillados.
+La primera solución que se nos ocurre es hacer uso de la
+función <code>split</code>:
+
+<P>
+<PRE>
+@fields = split(/,/,$text);
+</PRE>
+
+<P>
+Pero esta solución deja las comillas dobles en  los campos
+entrecomillados.  Peor aún, los campos entrecomillados pueden contener
+comas, en cuyo caso  la división proporcionada por <code>split</code> sería
+errónea. 
+
+<P>
+<PRE>
+   1 #!/usr/bin/perl -w
+   2 use Text::ParseWords;
+   3 
+   4 sub parse_csv {
+   5   my $text = shift;
+   6   my @fields = (); # initialize @fields to be empty
+   7 
+   8   while ($text =~ 
+   9     m/"(([^"\\]|\\.)*)",? # quoted fields
+  10       | 
+  11       ([^,]+),?           # $3 = non quoted fields
+  12       | 
+  13       ,                   # allows empty fields
+  14     /gx 
+  15     )
+  16   {
+  17     push(@fields, defined($1)? $1:$3); # add the just matched field
+  18   }
+  19   push(@fields, undef) if $text =~ m/,$/; #account for an empty last field
+  20   return @fields;
+  21 }
+  22        
+  23 $test = '"earth",1,"a1, a2","moon",9.374';
+  24 print "string = \'$test\'\n";
+  25 print "Using parse_csv\n:";
+  26 @fields = parse_csv($test);
+  27 foreach $i (@fields) {
+  28   print "$i\n";
+  29 }
+  30 
+  31 print "Using Text::ParseWords\n:";
+  32 #  @words = &amp;quotewords($delim, $keep, @lines);  
+  33 #The $keep argument is a boolean flag.  If true, then the
+  34 #tokens are split on the specified delimiter, but all other
+  35 #characters (quotes, backslashes, etc.) are kept in the
+  36 #tokens.  If $keep is false then the &amp;*quotewords()
+  37 #functions remove all quotes and backslashes that are not
+  38 #themselves backslash-escaped or inside of single quotes
+  39 #(i.e., &amp;quotewords() tries to interpret these characters
+  40 #just like the Bourne shell). 
+  41 
+  42 @fields = quotewords(',',0,$test);
+  43 foreach $i (@fields) {
+  44   print "$i\n";
+  45 }
+</PRE>
+
+<P>
+Las subrutinas  en Perl reciben sus argumentos en el <B>array</B>
+<code>@_</code>. Si la lista de argumentos contiene listas, estas 
+son ``aplanadas'' en una única lista. Si, como es el caso, la subrutina
+ha sido declarada antes de la llamada, los argumentos pueden
+escribirse sin paréntesis que les rodeen:
+<PRE>
+@fields = parse_csv $test;
+</PRE>
+
+<P>
+Otro modo de llamar una subrutina es usando el prefijo <code>&amp;</code>,
+pero sin proporcionar lista de argumentos.
+<PRE>
+@fields = &amp;parse_csv;
+</PRE>
+En este caso se le pasa a la rutina el valor actual del  <B>array</B> <code>@_</code>.
+
+<P>
+Los operadores <code>push</code> (usado en la línea 17) y <code>pop</code> trabajan
+sobre el final del <B>array</B>. De manera análoga los operadores
+<code>shift</code> y <code>unshift</code> lo hacen sobre el comienzo.
+El operador ternario <code>?</code> trabaja de manera análoga como lo hace en C.
+
+<P>
+El código del <code>push</code> podría sustituirse por este otro:
+<PRE>
+push(@fields, $+);
+</PRE>
+Puesto que la variable <code>$+</code> contiene la cadena que ha casado
+con el último paréntesis que haya casado en el ultimo ``matching''.
+
+<P>
+La segunda parte del código muestra que existe un 
+módulo en Perl, el módulo <code>Text::Parsewords</code> que proporciona la rutina <code>quotewords</code> que hace la misma función que nuestra subrutina.
+
+<P>
+Sigue un ejemplo de ejecución:
+<PRE>
+&gt; csv.pl
+string = '"earth",1,"a1, a2","moon",9.374'
+Using parse_csv
+:earth
+1
+a1, a2
+moon
+9.374
+Using Text::ParseWords
+:earth
+1
+a1, a2
+moon
+9.374
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html2299"
+  HREF="node74.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2293"
+  HREF="node70.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2287"
+  HREF="node72.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2295"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2297"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2300"
+  HREF="node74.html">Las Expresiones Regulares como</A>
+<B>Sup:</B> <A NAME="tex2html2294"
+  HREF="node70.html">Casos de Estudio</A>
+<B> Ant:</B> <A NAME="tex2html2288"
+  HREF="node72.html">Palabras Repetidas</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

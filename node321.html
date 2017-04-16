@@ -1,0 +1,507 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Usando Subversion</TITLE>
+<META NAME="description" CONTENT="Usando Subversion">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node322.html">
+<LINK REL="previous" HREF="node320.html">
+<LINK REL="up" HREF="perlexamples.html">
+<LINK REL="next" HREF="node322.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html6410"
+  HREF="node322.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6404"
+  HREF="perlexamples.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6398"
+  HREF="node320.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6406"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6408"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6411"
+  HREF="node322.html">&#205;ndice de Materias</A>
+<B>Sup:</B> <A NAME="tex2html6405"
+  HREF="perlexamples.html">Análisis Léxico y Sintáctico</A>
+<B> Ant:</B> <A NAME="tex2html6399"
+  HREF="node320.html">Instrucciones Para la Carga</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002000000000000000000">
+Usando Subversion</A>
+</H1>
+En esta sección indicamos los pasos para utilizar subversión bajo el protocolo
+SSH. Se asume que ha configurado sub conexión SSH con el servidor de subversion
+para que admita autentificación automática.
+Véase 
+<A NAME="tex2html283"
+  HREF="
+http://nereida.deioc.ull.es/~pp2/perlexamples/chapter_ssh.html
+">El capítulo sobre la SSH en los apuntes de Programación en Paralelo II
+(http://nereida.deioc.ull.es/&nbsp;pp2/perlexamples/chapter_ssh.html)
+</A>
+para aprender a establecer autentificación automática vía SSH.
+
+<P>
+
+<H4><A NAME="SECTION002000010000000000000">
+Use Subversion: Creación de un Repositorio</A>
+</H4>
+  
+
+Parece que en <code>banot</code> esta instalado subversion. 
+Para crear un repositorio emita el comando <code>svnadmin create</code>:
+
+<P>
+<PRE>
+-bash-3.1$ uname -a
+Linux banot.etsii.ull.es 2.6.24.2 #3 SMP Fri Feb 15 10:39:28 WET 2008 i686 i686 i386 GNU/Linux
+-bash-3.1$ svnadmin create /home/loginname/repository/
+-bash-3.1$ ls -l repository/
+total 28
+drwxr-xr-x 2 loginname apache 4096 feb 28 11:58 conf
+drwxr-xr-x 2 loginname apache 4096 feb 28 11:58 dav
+drwxr-sr-x 5 loginname apache 4096 feb 28 12:09 db
+-r--r--r-- 1 loginname apache    2 feb 28 11:58 format
+drwxr-xr-x 2 loginname apache 4096 feb 28 11:58 hooks
+drwxr-xr-x 2 loginname apache 4096 feb 28 11:58 locks
+-rw-r--r-- 1 loginname apache  229 feb 28 11:58 README.txt
+</PRE>
+
+<P>
+Una alternativa a considerar es ubicar el repositorio 
+en un dispositivo de almacenamiento portable (pendriver)
+
+<P>
+
+<H4><A NAME="SECTION002000020000000000000">
+Añadiendo Proyectos</A>
+</H4>
+  
+
+<P>
+Ahora esta en condiciones de añadir proyectos 
+al repositorio creado usando <code>svn import</code>:
+<PRE>
+[loginname@tonga]~/src/perl/&gt; uname -a
+Linux tonga 2.6.24.2 #1 SMP Thu Feb 14 15:37:31 WET 2008 i686 i686 i386 GNU/Linux
+[loginname@tonga]~/src/perl/&gt; pwd
+/home/loginname/src/perl
+[loginname@tonga]~/src/perl/&gt; ls -ld /home/loginname/src/perl/Grammar-0.02
+drwxr-xr-x 5 loginname Profesor 4096 feb 28  2008 /home/loginname/src/perl/Grammar-0.02
+[loginname@tonga]~/src/perl/&gt; svn import -m 'Grammar Extended Module' \
+                                        Grammar-0.02/ \
+                                        svn+ssh://banot/home/loginname/repository/Grammar
+Añadiendo      Grammar-0.02/t
+Añadiendo      Grammar-0.02/t/Grammar.t
+Añadiendo      Grammar-0.02/lib
+Añadiendo      Grammar-0.02/lib/Grammar.pm
+Añadiendo      Grammar-0.02/MANIFEST
+Añadiendo      Grammar-0.02/META.yml
+Añadiendo      Grammar-0.02/Makefile.PL
+Añadiendo      Grammar-0.02/scripts
+Añadiendo      Grammar-0.02/scripts/grammar.pl
+Añadiendo      Grammar-0.02/scripts/Precedencia.yp
+Añadiendo      Grammar-0.02/scripts/Calc.yp
+Añadiendo      Grammar-0.02/scripts/aSb.yp
+Añadiendo      Grammar-0.02/scripts/g1.yp
+Añadiendo      Grammar-0.02/Changes
+Añadiendo      Grammar-0.02/README
+
+Commit de la revisión 2.
+</PRE>
+
+<P>
+En general, los pasos para crear un nuevo proyecto son:
+
+<P>
+<PRE>
+* mkdir /tmp/nombreProyecto
+* mkdir /tmp/nombreProyecto/branches
+* mkdir /tmp/nombreProyecto/tags
+* mkdir /tmp/nombreProyecto/trunk
+* svn mkdir file:///var/svn/nombreRepositorio/nombreProyecto -m 'Crear el proyecto nombreProyecto'
+* svn import /tmp/nombreProyecto \
+            file:///var/svn/nombreRepositorio/nombreProyecto \
+            -m "Primera versión del proyecto nombreProyecto"
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION002000030000000000000">
+Obtener una Copia de Trabajo</A>
+</H4>
+  
+
+<P>
+La copia en <code>Grammar-0.02</code> ha sido usada para la creación del proyecto, 
+pero no pertenece aún al proyecto. Es necesario descargar la copia del
+proyecto que existe en el repositorio. Para ello usamos
+<code> svn checkout</code>:
+<PRE>
+[loginname@tonga]~/src/perl/&gt; rm -fR Grammar-0.02
+[loginname@tonga]~/src/perl/&gt; svn checkout svn+ssh://banot/home/loginname/repository/Grammar Grammar
+A    Grammar/t
+A    Grammar/t/Grammar.t
+A    Grammar/MANIFEST
+A    Grammar/META.yml
+A    Grammar/lib
+A    Grammar/lib/Grammar.pm
+A    Grammar/Makefile.PL
+A    Grammar/scripts
+A    Grammar/scripts/grammar.pl
+A    Grammar/scripts/Calc.yp
+A    Grammar/scripts/Precedencia.yp
+A    Grammar/scripts/aSb.yp
+A    Grammar/scripts/g1.yp
+A    Grammar/Changes
+A    Grammar/README
+Revisión obtenida: 2
+</PRE>
+Ahora disponemos de una copia de trabajo del proyecto en
+nuestra máquina local:
+<PRE>
+[loginname@tonga]~/src/perl/&gt; tree Grammar
+Grammar
+|-- Changes
+|-- MANIFEST
+|-- META.yml
+|-- Makefile.PL
+|-- README
+|-- lib
+|   `-- Grammar.pm
+|-- scripts
+|   |-- Calc.yp
+|   |-- Precedencia.yp
+|   |-- aSb.yp
+|   |-- g1.yp
+|   `-- grammar.pl
+`-- t
+    `-- Grammar.t
+
+3 directories, 12 files
+[loginname@tonga]~/src/perl/&gt;       
+[loginname@tonga]~/src/perl/&gt; cd Grammar
+[loginname@tonga]~/src/perl/Grammar/&gt; ls -la
+total 44
+drwxr-xr-x 6 loginname Profesor 4096 feb 28  2008 .
+drwxr-xr-x 5 loginname Profesor 4096 feb 28  2008 ..
+-rw-r--r-- 1 loginname Profesor  150 feb 28  2008 Changes
+drwxr-xr-x 3 loginname Profesor 4096 feb 28  2008 lib
+-rw-r--r-- 1 loginname Profesor  614 feb 28  2008 Makefile.PL
+-rw-r--r-- 1 loginname Profesor  229 feb 28  2008 MANIFEST
+-rw-r--r-- 1 loginname Profesor  335 feb 28  2008 META.yml
+-rw-r--r-- 1 loginname Profesor 1196 feb 28  2008 README
+drwxr-xr-x 3 loginname Profesor 4096 feb 28  2008 scripts
+drwxr-xr-x 6 loginname Profesor 4096 feb 28  2008 .svn
+drwxr-xr-x 3 loginname Profesor 4096 feb 28  2008 t
+</PRE>
+Observe la presencia de los subdirectorios de control <code>.svn</code>.
+
+<P>
+
+<H4><A NAME="SECTION002000040000000000000">
+Actualización del Proyecto</A>
+</H4>
+  
+
+<P>
+Ahora podemos modificar el proyecto y hacer públicos los cambios 
+mediante <code>svn commit</code>:
+<PRE>
+loginname@tonga]~/src/perl/Grammar/&gt; svn rm META.yml
+D         META.yml
+[loginname@tonga]~/src/perl/Grammar/&gt; ls -la
+total 40
+drwxr-xr-x 6 loginname Profesor 4096 feb 28  2008 .
+drwxr-xr-x 5 loginname Profesor 4096 feb 28 12:34 ..
+-rw-r--r-- 1 loginname Profesor  150 feb 28 12:34 Changes
+drwxr-xr-x 3 loginname Profesor 4096 feb 28 12:34 lib
+-rw-r--r-- 1 loginname Profesor  614 feb 28 12:34 Makefile.PL
+-rw-r--r-- 1 loginname Profesor  229 feb 28 12:34 MANIFEST
+-rw-r--r-- 1 loginname Profesor 1196 feb 28 12:34 README
+drwxr-xr-x 3 loginname Profesor 4096 feb 28 12:34 scripts
+drwxr-xr-x 6 loginname Profesor 4096 feb 28  2008 .svn
+drwxr-xr-x 3 loginname Profesor 4096 feb 28 12:34 t
+[loginname@tonga]~/src/perl/Grammar/&gt; echo "Modifico README" &gt;&gt; README
+[loginname@tonga]~/src/perl/Grammar/&gt; svn commit -m 'Just testing ...'
+Eliminando     META.yml
+Enviando       README
+Transmitiendo contenido de archivos .
+Commit de la revisión 3.
+</PRE>
+Observe que ya no es necesario especificar el lugar en el que se encuentra
+el repositorio: esa información esta guardada en los subdirectorios
+de administración de subversion <code>.svn</code>
+
+<P>
+El servicio de subversion parece funcionar desde fuera de la red del centro.
+Véase la conexión desde una maquina exterior:
+
+<P>
+<PRE>
+pp2@nereida:/tmp$  svn checkout svn+ssh://loginname@banot.etsii.ull.es/home/loginname/repository/Grammar Grammar
+loginname@banot.etsii.ull.es's password:
+loginname@banot.etsii.ull.es's password:
+A    Grammar/t
+A    Grammar/t/Grammar.t
+A    Grammar/MANIFEST
+A    Grammar/lib
+A    Grammar/lib/Grammar.pm
+A    Grammar/Makefile.PL
+A    Grammar/scripts
+A    Grammar/scripts/grammar.pl
+A    Grammar/scripts/Calc.yp
+A    Grammar/scripts/Precedencia.yp
+A    Grammar/scripts/aSb.yp
+A    Grammar/scripts/g1.yp
+A    Grammar/Changes
+A    Grammar/README
+Revisión obtenida: 3
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION002000050000000000000">
+Comandos Básicos</A>
+</H4>
+  
+
+<P>
+
+<UL>
+<LI>Añadir y eliminar directorios o ficheros individuales al proyecto
+<PRE>
+      svn add directorio_o_fichero
+      svn remove directorio_o_fichero
+</PRE>
+</LI>
+<LI>Guardar los cambios
+<PRE>
+      svn commit -m "Nueva version"
+</PRE>
+</LI>
+<LI>Actualizar el proyecto
+<PRE>
+      svn update
+</PRE>
+</LI>
+<LI>Ver el estado de los ficheros
+<PRE>
+      svn status -vu
+</PRE>
+</LI>
+<LI>Crear un tag
+
+<P>
+<PRE>
+      svn copy svn+ssh://banot/home/logname/repository/PL-Tutu/trunk \
+               svn+ssh://banot/home/casiano/repository/PL-Tutu/tags/practica-entregada \
+	       -m 'Distribución como fué entregada en la UDV'
+</PRE>
+</LI>
+</UL>
+
+<P>
+
+<H4><A NAME="SECTION002000060000000000000">
+Referencias</A>
+</H4>
+  
+
+<P>
+Consulte
+<A NAME="tex2html284"
+  HREF="
+http://svnbook.red-bean.com/
+">http://svnbook.red-bean.com/
+</A>.
+Vea la página de la ETSII
+<A NAME="tex2html285"
+  HREF="
+http://www.etsii.ull.es/svn
+">http://www.etsii.ull.es/svn
+</A>.
+
+<P>
+En KDE puede instalar el cliente gráfico KDEsvn.
+
+<P>
+
+<H4><A NAME="SECTION002000070000000000000">
+Autentificación Automática</A>
+</H4>
+  
+
+<P>
+Para evitar la solicitud de claves cada vez que se comunica 
+con el repositorio establezca autentificación SSH automática.
+Para ver como hacerlo puede consultar las instrucciones en:
+
+<P>
+<A NAME="tex2html286"
+  HREF="
+http://search.cpan.org/~casiano/GRID-Machine/lib/GRID/Machine.pod#INSTALLATION
+">http://search.cpan.org/~casiano/GRID-Machine/lib/GRID/Machine.pod#INSTALLATION
+</A>
+<P>
+Consulte también las páginas del manual Unix de
+<code>ssh</code>, <code>ssh-key-gen</code>, <code>ssh_config</code>, <code>scp</code>, <code>ssh-agent</code>, <code>ssh-add</code>, <code>sshd</code>
+
+<P>
+
+<P>
+<HR>
+<A NAME="tex2html6410"
+  HREF="node322.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6404"
+  HREF="perlexamples.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6398"
+  HREF="node320.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6406"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6408"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6411"
+  HREF="node322.html">&#205;ndice de Materias</A>
+<B>Sup:</B> <A NAME="tex2html6405"
+  HREF="perlexamples.html">Análisis Léxico y Sintáctico</A>
+<B> Ant:</B> <A NAME="tex2html6399"
+  HREF="node320.html">Instrucciones Para la Carga</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

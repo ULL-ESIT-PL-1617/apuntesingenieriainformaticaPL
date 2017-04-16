@@ -1,0 +1,1130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Parse::Eyapp: Un Generador de Analizadores Sintácticos</TITLE>
+<META NAME="description" CONTENT="Parse::Eyapp: Un Generador de Analizadores Sintácticos">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node232.html">
+<LINK REL="previous" HREF="node230.html">
+<LINK REL="up" HREF="node229.html">
+<LINK REL="next" HREF="node232.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html4848"
+  HREF="node232.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4842"
+  HREF="node229.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4836"
+  HREF="node230.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4844"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4846"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4849"
+  HREF="node232.html">Depuración de Errores</A>
+<B>Sup:</B> <A NAME="tex2html4843"
+  HREF="node229.html">Análisis Sintáctico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html4837"
+  HREF="node230.html">Conceptos Básicos para el</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001320000000000000000"></A>
+<A NAME="section:ungeneradordeanalizadoressintacticos"></A>
+<BR>
+<TT>Parse::Eyapp</TT>: Un Generador de Analizadores Sintácticos
+</H1>
+El generador de analizadores sintácticos  Parse::Eyapp  es un
+analizador LALR inspirado en  yacc . 
+<A NAME="tex2html253"
+  HREF="http://search.cpan.org/~casiano/Parse-Eyapp/">Parse::Eyapp</A>
+es una extensión de 
+<A NAME="tex2html254"
+  HREF="http://search.cpan.org/~fdesarmenien/Parse-Yapp/">Parse::Yapp</A>
+escrita por Casiano
+Rodriguez-Leon. Puede descargarlo desde CPAN e instalarlo en su máquina siguiendo
+el procedimiento habitual.
+
+<P>
+El generador de analizadores sintácticos  Parse::Eyapp  que
+estudiaremos en las siguientes secciones funciona de manera similar
+a un esquema de traducción. Las reglas de producción de la gramática
+son aumentadas con reglas semánticas. Los símbolos que aparecen en la regla
+de producción tienen <B>atributos</B> asociados y las reglas semánticas
+dicen como deben ser computados dichos atributos.
+Consideremos, por ejemplo, el siguiente fragmento de programa <code>eyapp</code>:
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=340><PRE>
+exp:  exp '+' exp         { $_[1] + $_[3] }
+</PRE></TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+que dice que asociado con el símbolo <IMG
+ WIDTH="32" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img497.png"
+ ALT="$ exp$">
+ de la regla de producción  <!-- MATH
+ $exp \rightarrow exp '+' exp$
+ -->
+<IMG
+ WIDTH="143" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img498.png"
+ ALT="$ exp \rightarrow exp '+' exp$">
+ 
+tenemos el atributo  <U>valor</U> numérico y que para computar el atributo 
+<U>valor</U> de la variable sintáctica <IMG
+ WIDTH="32" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img497.png"
+ ALT="$ exp$">
+ en la parte izquierda tenemos
+que sumar los atributos asociados con los símbolos primero y tercero de la parte derecha.
+
+<P>
+Por defecto <code>Parse::Eyapp</code> no provee un esquema de traducción ya que - aunque el orden de
+ejecucíon de las acciones es de abajo-arriba y de izquierda a derecha como en un esquema -
+no es posible acceder a atributos de nodos que aún no han sido visitados.
+
+<P>
+Para ilustrar el uso de <code>Parse::Eyapp</code> veamos
+un ejemplo en el que se implanta una gramática
+cuyas frases son secuencias (separadas por retornos de carro)
+de expresiones aritméticas.
+
+<P>
+Los contenidos del programa  eyapp  los hemos guardado
+en un fichero denominado <code>CalcSyntax.eyp</code>
+
+<P>
+
+<H4><A NAME="SECTION001320010000000000000">
+Partes de un Programa <TT>Eyapp</TT></A>
+</H4>
+  
+
+<P>
+Un programa <code>eyapp</code> consta de tres partes: 
+
+<P>
+
+<UL>
+<LI>la cabeza, 
+</LI>
+<LI>el cuerpo
+</LI>
+<LI>y la cola. 
+</LI>
+</UL>
+
+<P>
+Cada una de las partes va separada de las otras por el
+símbolo <code>%%</code> en una línea aparte. 
+
+<P>
+Así, el <code>%%</code> de la línea 8
+separa la cabeza del cuerpo y el de la línea 31 el cuerpo de la cola. 
+
+<P>
+
+<UL>
+<LI>En la cabecera se colocan el
+código de inicialización, las declaraciones de terminales, las reglas
+de precedencia, etc.  
+
+<P>
+</LI>
+<LI>El cuerpo contiene las reglas de la gramática y
+las acciones asociadas. 
+
+<P>
+</LI>
+<LI>Por último, la cola de un program <code>eyapp</code>
+contiene las rutinas de soporte al código que aparece en las acciones 
+asi como, posiblemente, rutinas para el análisis léxico 
+y el tratamiento de errores.
+</LI>
+</UL>
+
+<P>
+<PRE>
+pl@nereida:~/LEyapp/examples$ cat -n CalcSyntax.eyp
+ 1  # CalcSyntax.eyp
+ 2  %right  '='
+ 3  %left   '-' '+'
+ 4  %left   '*' '/'
+ 5  %left   NEG
+ 6  %right  '^'
+ 7
+ 8  %%
+ 9
+10  input:  line *  { print "input -&gt; line *\n" }
+11  ;
+12
+13  line:
+14    '\n'         { print "line -&gt; \\n\n" }
+15    | exp '\n'   { print "line -&gt; exp \\n\n"}
+16  ;
+17
+18  exp:
+19      NUM                { print "exp -&gt; NUM ($_[1])\n"; }
+20    | VAR                { print "exp -&gt; VAR ($_[1])\n"; }
+21    | VAR '=' exp        { print "exp -&gt; VAR '=' exp\n"; }
+22    | exp '+' exp        { print "exp -&gt; exp '+' exp\n"; }
+..    . ....................................................
+29  ;
+30
+31  %%
+32
+33  sub _Error {
+..    ....................................
+41  }
+42
+..  ......................................
+44
+45  sub _Lexer {
+46      my($parser)=shift;
+..      .................
+58  }
+59
+60  sub Run {
+61      my($self)=shift;
+62
+63      $input = shift;
+64      return $self-&gt;YYParse( yylex =&gt; \&amp;_Lexer, yyerror =&gt; \&amp;_Error );
+65  }
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION001320020000000000000">
+Las Reglas</A>
+</H4>
+  
+
+<P>
+Todas las partes derechas de las reglas de producción de una misma variable sintáctica se escriben
+juntas separadas mediante la barra vertical <code>|</code>.
+
+<P>
+<PRE>
+10  input:  line *  { print "input -&gt; line *\n" }
+11  ;
+12
+13  line:
+14    '\n'         { print "line -&gt; \\n\n" }
+15    | exp '\n'   { print "line -&gt; exp \\n\n"}
+16  ;
+</PRE>
+
+<P>
+En este ejemplo hemos simplificado las acciones semánticas 
+reduciéndolas a mostrar la regla de producción encontrada.
+
+<P>
+
+<H4><A NAME="SECTION001320030000000000000">
+Reglas de Producción Vacías</A>
+</H4>
+  
+
+<A NAME="parrafo:reglasvacias"></A>
+<P>
+Un asterisco (como en la línea 10) indica repetición cero o mas veces
+de la expresión a la que se aplica.
+De hecho la línea 10 es casi equivalente a:
+
+<P>
+<PRE>
+input:  temp   
+;
+temp: 
+    /* vacio */
+  | temp line
+;
+</PRE>
+
+<P>
+Observe como en el código anterior
+hemos codificado la regla de producción <!-- MATH
+ $temp \rightarrow \epsilon$
+ -->
+<IMG
+ WIDTH="77" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img499.png"
+ ALT="$ temp \rightarrow \epsilon$">
+
+como:
+
+<P>
+<PRE>
+temp: 
+    /* vacio */
+</PRE>
+
+<P>
+Es buena costumbre de programación
+cuando se tiene una regla de producción que produce vacío 
+ponerla la primera del grupo y añadir un comentario como este.
+Dado que vacío se representa en <code>Eyapp</code> mediante la cadena vacía
+es fácil que pase desapercibida. Es por ello que se recomienda
+que <B>una regla vacía sea siempre la primera y que este comentada</B>
+como en el ejemplo.
+
+<P>
+
+<H4><A NAME="SECTION001320040000000000000">
+Tratamiento de las Ambiguedades</A>
+</H4>
+  
+
+<P>
+Hay numerosas ambiguedades en esta gramática. 
+Observe las reglas para los diferentes tipos de expresiones:
+
+<P>
+<PRE>
+18 exp:
+19     NUM                { print "exp -&gt; NUM ($_[1])\n"; }
+20   | VAR                { print "exp -&gt; VAR ($_[1])\n"; }
+21   | VAR '=' exp        { print "exp -&gt; VAR '=' exp\n"; }
+22   | exp '+' exp        { print "exp -&gt; exp '+' exp\n"; }
+23   | exp '-' exp        { print "exp -&gt; exp '-' exp\n"; }
+24   | exp '*' exp        { print "exp -&gt; exp '*' exp\n"; }
+25   | exp '/' exp        { print "exp -&gt; exp '/' exp\n"; }
+26   | '-' exp %prec NEG  { print "exp -&gt; '-' exp\n"; }
+27   | exp '^' exp        { print "exp -&gt; exp '^' exp\n"; }
+28   | '(' exp ')'        { print "exp -&gt; '(' exp ')'\n"; }
+29 ;
+</PRE>
+
+<P>
+Surgen preguntas como:
+
+<P>
+
+<UL>
+<LI>¿Como debo interpretar la expresión <code>4 - 5 - 2</code>?
+¿Como <code>(4 - 5) - 2</code>? ¿o bien <code>4 - (5 - 2)</code>?
+La respuesta la da la asignación de asociatividad a los operadores
+que hicimos en la cabecera:
+<PRE>
+1 # CalcSyntax.eyp
+2 %right  '='
+3 %left   '-' '+'
+4 %left   '*' '/'
+5 %left   NEG
+6 %right  '^'
+7
+8 %%
+</PRE>
+
+<P>
+</LI>
+</UL>
+<H4><A NAME="SECTION001320050000000000000">
+La Asociatividad de Terminales y la Ambiguedad</A>
+</H4>
+  
+
+<P>
+Las declaraciones  %left  y  %right  expresan la asociatividad
+y precedencia de los terminales, permitiendo decidir que árbol construir 
+en caso de  ambiguedad. 
+
+<P>
+<B> Los terminales declarados en líneas 
+posteriores tienen mas prioridad que los declarados en las líneas anteriores</B>.
+
+<P>
+Por defecto, <B>una regla de producción
+tiene la prioridad del último terminal que aparece
+en su parte derecha</B>.
+
+<P>
+Al declarar como asociativo a izquierdas al terminal <code>-</code> 
+hemos 
+resuelto la ambiguedad en <code>4 -5 -2</code>. Lo que estamos haciendo es
+indicarle al analizador que a la hora de elegir entre 
+los árboles abstractos 
+<!-- MATH
+ $-(-(4,5),2)$
+ -->
+<IMG
+ WIDTH="101" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img369.png"
+ ALT="$ -(-(4,5),2)$">
+ y <!-- MATH
+ $-(4, -(5,2))$
+ -->
+<IMG
+ WIDTH="101" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img370.png"
+ ALT="$ -(4, -(5,2))$">
+ elija siempre
+el árbol que se hunde a izquierdas.
+
+¿Como debo interpretar la expresión <code>4 - 5 * 2</code>?
+¿Como <code>(4 - 5) * 2</code>? ¿o bien <code>4 - (5 * 2)</code>?
+Al declarar que <code>*</code> tiene mayor prioridad que <code>-</code> estamos
+resolviendo esta otra fuente de ambiguedad. Esto es así pues
+<code>*</code> fué declarado en la línea 11 y <code>-</code> en la 10.
+Por tanto el árbol será <code>-(4, *(5,2))</code>.
+
+<P>
+La declaración de <code>^</code> como asociativo a derechas y con un nivel
+de prioridad alto resuelve las ambiguedades relacionadas 
+con este operador:
+
+<P>
+<PRE>
+  18  exp:
+  ..    ......................................................
+  28    | '(' exp ')'        { print "exp -&gt; '(' exp ')'\n"; }
+</PRE>
+
+<P>
+<P>
+<DIV><B>Ejercicio  8.2.1</B> &nbsp; 
+<I>¿Como se esta interpretando la expresión <code>-2^2</code>?
+¿Cómo <code>(-2)^2</code>? ¿o bien  <code>-(2^2)</code>? </I></DIV><P></P>
+
+<P>
+
+<H4><A NAME="SECTION001320060000000000000">
+Modificación de la Prioridad Implícita de una Regla</A>
+</H4>
+  
+
+<P>
+Una regla de producción puede ir seguida de una directiva
+<code>%prec</code> la cual le da una prioridad explícita.  
+Esto puede ser de gran ayuda en ciertos casos de 
+ambiguedad.
+
+<P>
+<PRE>
+26    | '-' exp %prec NEG  { print "exp -&gt; '-' exp\n"; }
+</PRE>
+
+<P>
+¿Cual es la ambiguedad que surge con esta regla? 
+La ambiguedad de esta regla 
+esta relacionada con el doble significado
+del menos como operador unario y binario: hay frases
+como <code>-y-z</code> que tiene dos posibles interpretaciones:
+Podemos verla como <code>(-y)-z</code> o bien como <code>-(y-z)</code>.
+Hay dos árboles posibles. El analizador, cuando este analizando
+la entrada <code>-y-z</code> y vea el
+segundo <code>-</code> (después de haber leído <code>-y</code>)
+deberá escoger uno de los dos árboles. 
+¿Cuál?. El conflicto puede verse como una ``lucha'' entre
+la regla <code>exp: '-' exp</code> la cual interpreta la frase como
+<code>(-y)-z</code> y la segunda aparición del terminal <code>-</code> 
+el cuál ``quiere entrar'' para que gane la regla <code>exp: exp '-' exp</code>
+y dar lugar a la interpretación <code>-(y-z)</code>.
+En este caso, las dos reglas 
+<!-- MATH
+ $E \rightarrow - E$
+ -->
+<IMG
+ WIDTH="73" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img371.png"
+ ALT="$ E \rightarrow - E$">
+ y <!-- MATH
+ $E \rightarrow E - E$
+ -->
+<IMG
+ WIDTH="95" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img372.png"
+ ALT="$ E \rightarrow E - E$">
+ tienen, en principio
+la prioridad del terminal <code>-</code>, el cual fué declarado en la
+zona de cabecera:
+<PRE>
+1 # CalcSyntax.eyp
+2 %right  '='
+3 %left   '-' '+'
+4 %left   '*' '/'
+5 %left   NEG
+6 %right  '^'
+7
+8 %%
+</PRE>
+
+<P>
+La prioridad expresada explícitamente
+para la regla por la declaración <code>%prec NEG</code> de la línea
+41 hace que la regla tenga la prioridad
+del terminal <code>NEG</code> y por tanto mas prioridad
+que el terminal <code>-</code>. Esto hará que <code>eyapp</code> finalmente opte
+por la regla <code>exp: '-' exp</code> dando lugar a la interpretación
+<code>(-y)-z</code>.
+
+<P>
+
+<H4><A NAME="SECTION001320070000000000000">
+La Cola</A>
+</H4>
+  
+
+<P>
+Después de la parte de la gramática, y separada de la anterior
+por el símbolo <code>%%</code>, sigue la parte en la que se 
+suelen poner las rutinas de apoyo. Hay al menos dos rutinas de apoyo que 
+el analizador sintáctico requiere le sean pasados como argumentos: 
+la de manejo de errores y la de análisis léxico. 
+
+<P>
+<PRE>
+31  %%
+32
+33  sub _Error {
+34          exists $_[0]-&gt;YYData-&gt;{ERRMSG}
+35      and do {
+36          print $_[0]-&gt;YYData-&gt;{ERRMSG};
+37          delete $_[0]-&gt;YYData-&gt;{ERRMSG};
+38          return;
+39      };
+40      print "Syntax error.\n";
+41  }
+42
+43  my $input;
+44
+45  sub _Lexer {
+46      my($parser)=shift;
+47
+48      # topicalize $input
+49      for ($input) {
+50        s/^[ \t]+//;      # skip whites
+51        return('',undef) unless $input;
+52
+53        return('NUM',$1) if s{^([0-9]+(?:\.[0-9]+)?)}{};
+54        return('VAR',$1) if s/^([A-Za-z][A-Za-z0-9_]*)//;
+55        return($1,$1)    if s/^(.)//s;
+56      }
+57  }
+58
+59  sub Run {
+60      my($self)=shift;
+61
+62      $input = shift;
+63      return $self-&gt;YYParse( yylex =&gt; \&amp;_Lexer, yyerror =&gt; \&amp;_Error );
+64  }
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION001320080000000000000">
+El Método <TT>Run</TT></A>
+</H4>
+  
+
+<P>
+El método <code>Run</code>
+ilustra como se hace la llamada al método de análisis sintáctico 
+generado, utilizando la técnica de llamada con argumentos con nombre 
+y pasándole las referencias a las dos subrutinas (en Perl,
+es un convenio que si el nombre de una subrutina comienza
+por un guión bajo es que el autor la considera privada):
+<PRE>
+78  sub Run {
+79      my($self)=shift;
+80
+81      $input = shift;
+82      return $self-&gt;YYParse( yylex =&gt; \&amp;_Lexer, yyerror =&gt; \&amp;_Error );
+83  }
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION001320090000000000000">
+El Atributo <TT>YYData</TT> y el Método <TT>_Error</TT></A>
+</H4>
+  
+
+<P>
+El método <code>YYData</code> provee acceso a un hash que contiene los datos 
+que están siendo analizados. 
+
+<P>
+La subrutina de manejo de errores <code>_Error</code> imprime 
+el mensaje de error proveído por el usuario, el cual, si existe, fué guardado en
+<code>$_[0]-&gt;YYData-&gt;{ERRMSG}</code>.
+<PRE>
+51  sub _Error {
+52          exists $_[0]-&gt;YYData-&gt;{ERRMSG}
+53      and do {
+54          print $_[0]-&gt;YYData-&gt;{ERRMSG};
+55          delete $_[0]-&gt;YYData-&gt;{ERRMSG};
+56          return;
+57      };
+58      print "Syntax error.\n";
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0013200100000000000000">
+El Método <TT>_Lexer</TT></A>
+</H4>
+  
+
+<A NAME="parrafo:lexerparaeyapp"></A>
+<P>
+A continuación sigue el método que implanta
+el  análisis léxico <code>_Lexer</code>.
+
+<P>
+<PRE>
+45  sub _Lexer {
+46      my($parser)=shift;
+47
+48      # topicalize $input
+49      for ($input) {
+50        s/^[ \t]+//;      # skip whites
+51        return('',undef) unless $input;
+52
+53        return('NUM',$1) if s{^([0-9]+(?:\.[0-9]+)?)}{};
+54        return('VAR',$1) if s/^([A-Za-z][A-Za-z0-9_]*)//;
+55        return($1,$1)    if s/^(.)//s;
+56      }
+</PRE>
+
+<P>
+El bucle <code>for</code> constituye
+en este caso una ''frase hecha'': el efecto es hacer que <code>$_</code> sea un 
+alias de <code>$input</code>. Se simplifica la escritura (obsérvese que no es
+necesario explicitar el operador de binding en las líneas 50-55,
+no teniendo que escribir <code>$input =~ s{^([0-9]+(?:\.[0-9]+)?)}{}</code>)
+y que la computación será mas eficiente al acceder a través de <code>$_</code> en vez de <code>$input</code>.
+
+<P>
+El bucle <code>for ($input)</code>
+se ejecutará mientras la cadena
+en <code>$input</code> no sea vacía, lo que ocurrirá cuando todos 
+los terminales hayan sido consumidos. sin embargo es un ''falso for'':
+no hay iteración. El interior del bucle es ejecutado una sola vez en cada
+llamada.
+
+<P>
+Eliminamos los blancos iniciales (lo que en inglés se conoce por
+<A NAME="18286"></A><B>trimming</B>) y a
+continuación vamos detectando los números, identificadores
+y los símbolos individuales. 
+
+<P>
+En primer lugar se comprueba la existencia de
+datos. Si no es el caso, estamos ante el
+final de la entrada.
+Cuando el analizador léxico alcanza el final de la entrada
+debe devolver la pareja <code>('',undef)</code>.
+
+<P>
+<P>
+<DIV><B>Ejercicio  8.2.2</B> &nbsp; 
+<OL>
+<LI>¿Quién es la variable índice en la línea 49? 
+</LI>
+<LI>¿Sobre quién ocurre el binding en las líneas 50-54? 
+</LI>
+<LI>¿Cual es la razón por la que <code>$input</code> se 
+ve modificado aún cuando no aparece como variable para el binding en las líneas 50-54?
+</LI>
+<LI>Dada la entrada '<code>4 * 3  </code>' con blancos al final:
+como termina el analizador léxico. ¿Funciona correctamente en ese caso?
+</LI>
+</OL></DIV><P></P>
+
+<P>
+
+<H4><A NAME="SECTION0013200110000000000000">
+Compilación con <TT>eyapp</TT></A>
+</H4>
+  
+
+<P>
+Construimos el módulo <code>CalcSyntax.pm</code> a partir del fichero <code>CalcSyntax.eyp</code>
+especificando la gramática, usando elejecutable <code>eyapp</code>:
+<PRE>
+pl@nereida:~/LEyapp/examples$ eyapp -m CalcSyntax CalcSyntax.eyp
+pl@nereida:~/LEyapp/examples$ ls -ltr | tail -3
+-rw-r--r-- 1 pl users   1545 2007-10-24 09:03 CalcSyntax.eyp
+-rwxr-xr-x 1 pl users    329 2007-10-24 09:05 usecalcsyntax.pl
+-rw-r--r-- 1 pl users   7848 2007-10-24 09:36 CalcSyntax.pm
+</PRE>
+Esta compilación genera el fichero <code>CalcSyntax.pm</code> conteniendo el
+analizador.
+
+<P>
+El script <code>eyapp</code> es un <B>frontend</B> al módulo <code>Parse::Eyapp</code>.
+Admite diversas formas de uso:
+
+<P>
+
+<UL>
+<LI><TT>eyapp [options] <I>grammar</I>[.eyp]</TT>
+
+<P>
+Los sufijos <TT>.eyp</TT> io <TT>.yp</TT> son opcionales.
+</LI>
+<LI><TT>eyapp <I>-V</I></TT>
+
+<P>
+Nos muestra la versión:
+<PRE>
+pl@nereida:~/LEyapp/examples$ eyapp -V
+This is Parse::Eyapp version 1.081.
+</PRE>
+
+<P>
+</LI>
+<LI><TT>eyapp <I>-h</I></TT>
+
+<P>
+Nos muestra la ayuda:
+
+<P>
+<PRE>
+pl@nereida:~/LEyapp/examples$ eyapp -h
+
+Usage:  eyapp [options] grammar[.yp]
+  or    eyapp -V
+  or    eyapp -h
+
+    -m module   Give your parser module the name &lt;module&gt;
+                default is &lt;grammar&gt;
+    -v          Create a file &lt;grammar&gt;.output describing your parser
+    -s          Create a standalone module in which the driver is included
+    -n          Disable source file line numbering embedded in your parser
+    -o outfile  Create the file &lt;outfile&gt; for your parser module
+                Default is &lt;grammar&gt;.pm or, if -m A::Module::Name is
+                specified, Name.pm
+    -t filename Uses the file &lt;filename&gt; as a template for creating the parser
+                module file.  Default is to use internal template defined
+                in Parse::Eyapp::Output
+    -b shebang  Adds '#!&lt;shebang&gt;' as the very first line of the output file
+
+    grammar     The grammar file. If no suffix is given, and the file
+                does not exists, .yp is added
+
+    -V          Display current version of Parse::Eyapp and gracefully exits
+    -h          Display this help screen
+</PRE>
+
+<P>
+</LI>
+</UL>
+
+<P>
+La opción <I>-o outfile</I> 
+da el nombre del fichero de salida. Por defecto toma el nombre de la gramática,
+seguido del sufijo <code>.pm</code>. sin embargo, si hemos especificado la opción
+<I>-m A::Module::Name</I> el valor por defecto será  <B>Name.pm</B>.
+
+<P>
+
+<H4><A NAME="SECTION0013200120000000000000">
+La Jerarquía de un Módulo y La Opción <I>-m module</I></A>
+</H4>
+  
+
+<P>
+La opción <I>-m module</I> 
+da el nombre  al paquete o espacio de nombres o clase encapsulando el
+analizador. Por defecto toma el nombre de la gramática.  En el ejemplo anterior
+podría haberse omitido. Sin embargo es necesaria cuando se esta desarrollando 
+un módulo con un nombre complejo. Construyamos una distribución con
+<code>h2xs</code>:
+
+<P>
+<PRE>
+$ h2xs -XA -n Calc::Syntax
+Writing Calc-Syntax/lib/Calc/Syntax.pm
+Writing Calc-Syntax/Makefile.PL
+Writing Calc-Syntax/README
+Writing Calc-Syntax/t/Calc-Syntax.t
+Writing Calc-Syntax/Changes
+Writing Calc-Syntax/MANIFEST
+</PRE>
+Ahora añadimos el fichero <code>.eyp</code> en el directorio de
+la librería y producimos el módulo <code>Syntax.pm</code>
+al compilarlo. Para darle al paquete el nombre
+<code>Calc::Syntax</code> usamos la opción <code>-m</code>:
+<PRE>
+$ cd Calc-Syntax/lib/Calc/
+$ cp ~/LEyapp/examples/CalcSyntax.eyp .
+$ eyapp -m Calc::Syntax  CalcSyntax.eyp
+$  head -12 Syntax.pm | cat -n
+     1  ###################################################################################
+     2  #
+     3  #    This file was generated using Parse::Eyapp version 1.081.
+     4  #
+     5  # (c) Parse::Yapp Copyright 1998-2001 Francois Desarmenien.
+     6  # (c) Parse::Eyapp Copyright 2006 Casiano Rodriguez-Leon. Universidad de La Laguna.
+     7  #        Don't edit this file, use source file "CalcSyntax.eyp" instead.
+     8  #
+     9  #             ANY CHANGE MADE HERE WILL BE LOST !
+    10  #
+    11  ###################################################################################
+    12  package Calc::Syntax;
+</PRE>
+La opción que recomiendo para documentar el módulo  es escribir
+la documentación en un fichero aparte
+<code>Calc/Syntax.pod</code>.
+
+<P>
+
+<H4><A NAME="SECTION0013200130000000000000">
+El Programa Cliente</A>
+</H4>
+  
+
+<P>
+A continuación escribimos el programa cliente:
+<PRE>
+$ cd ../..
+$ mkdir scripts
+$ cd scripts/
+$ vi usecalcsyntax.pl
+$ cat -n usecalcsyntax.pl
+ 1  #!/usr/bin/perl -w -I../lib
+ 2  use strict;
+ 3  use Calc::Syntax;
+ 4  use Carp;
+ 5
+ 6  sub slurp_file {
+ 7    my $fn = shift;
+ 8    my $f;
+ 9
+10    local $/ = undef;
+11    if (defined($fn)) {
+12      open $f, $fn
+13    }
+14    else {
+15      $f = \*STDIN;
+16    }
+17    my $input = &lt;$f&gt;;
+18    return $input;
+19  }
+20
+21  my $parser = Calc::Syntax-&gt;new();
+22
+23  my $input = slurp_file( shift() );
+24  $parser-&gt;Run($input);
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0013200140000000000000">
+Ejecución</A>
+</H4>
+  
+
+<P>
+La ejecución muestra la <B>antiderivación a derechas construida por <TT>eyapp</TT></B>:
+<PRE>
+$ cat prueba.exp
+a=2*3
+
+$ usecalcsyntax.pl prueba.exp
+exp -&gt; NUM (2)
+exp -&gt; NUM (3)
+exp -&gt; exp '*' exp
+exp -&gt; VAR '=' exp
+line -&gt; exp \n
+input -&gt; line *
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0013200150000000000000">
+Orden de Ejecución de las Acciones Semánticas</A>
+</H4>
+  
+
+<P>
+¿En que orden ejecuta <code>YYParse</code> las acciones? 
+La respuesta es que el analizador generado por 
+<code>eyapp</code> construye una derivación a derechas 
+inversa y ejecuta las acciones asociadas a las reglas de producción
+que se han aplicado. Así, para la frase <code>2*3</code> la antiderivación es:
+
+<P>
+<DIV ALIGN="CENTER">
+</DIV><!-- MATH
+ \begin{math}
+NUM + NUM \stackrel{NUM \leftarrow E}{\Longleftarrow} E + NUM \stackrel{NUM \leftarrow E}{\Longleftarrow} E + E \stackrel{E +E \leftarrow E}{\Longleftarrow} E
+\end{math}
+ -->
+ <IMG
+ WIDTH="477" HEIGHT="49" ALIGN="MIDDLE" BORDER="0"
+ SRC="img373.png"
+ ALT="$ NUM + NUM \stackrel{NUM \leftarrow E}{\Longleftarrow} E + NUM \stackrel{NUM \leftarrow E}{\Longleftarrow} E + E \stackrel{E +E \leftarrow E}{\Longleftarrow} E
+$">
+<DIV ALIGN="CENTER">
+</DIV>
+
+<P>
+por tanto las acciones ejecutadas son las asociadas con las correspondientes reglas 
+de producción:
+
+<OL>
+<LI>La acción asociada con <!-- MATH
+ $E \rightarrow NUM$
+ -->
+<IMG
+ WIDTH="94" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img500.png"
+ ALT="$ E \rightarrow NUM$">
+:
+<PRE>
+ NUM                { print "exp -&gt; NUM ($_[1])\n"; }
+</PRE>
+Esta instancia de <code>exp</code> tiene ahora como atributo <code>2</code> (pasado por el analizador léxico).
+</LI>
+<LI>De nuevo la acción asociada con <!-- MATH
+ $E \rightarrow NUM$
+ -->
+<IMG
+ WIDTH="94" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img500.png"
+ ALT="$ E \rightarrow NUM$">
+:
+<PRE>
+ NUM                { print "exp -&gt; NUM ($_[1])\n"; }
+</PRE>
+Esta nueva instancia de <code>exp</code> tiene como atributo <code>3</code>.
+</LI>
+<LI>La acción asociada con <!-- MATH
+ $E \rightarrow E * E$
+ -->
+<IMG
+ WIDTH="90" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img501.png"
+ ALT="$ E \rightarrow E * E$">
+:
+<PRE>
+  | exp '*' exp        { print "exp -&gt; exp '*' exp\n"; }
+</PRE>
+</LI>
+</OL>
+Obsérvese que la antiderivación a derechas da lugar a un
+recorrido ascendente y a izquierdas del árbol:
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER"><!-- MATH
+ \begin{equation*}
+E_3(E_1(NUM[2]), *, E_2(NUM[2]))
+\end{equation*}
+ -->
+<TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><IMG
+ WIDTH="265" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img502.png"
+ ALT="$\displaystyle E_3(E_1(NUM[2]), *, E_2(NUM[2]))$"></TD>
+<TD NOWRAP WIDTH="10" ALIGN="RIGHT">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+Los subíndices indican el orden de visita de las nodos/producciones.
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html4850"
+  HREF="node231.html#SECTION001320010000000000000">Partes de un Programa <TT>Eyapp</TT></A>
+<LI><A NAME="tex2html4851"
+  HREF="node231.html#SECTION001320020000000000000">Las Reglas</A>
+<LI><A NAME="tex2html4852"
+  HREF="node231.html#SECTION001320030000000000000">Reglas de Producción Vacías</A>
+<LI><A NAME="tex2html4853"
+  HREF="node231.html#SECTION001320040000000000000">Tratamiento de las Ambiguedades</A>
+<LI><A NAME="tex2html4854"
+  HREF="node231.html#SECTION001320050000000000000">La Asociatividad de Terminales y la Ambiguedad</A>
+<LI><A NAME="tex2html4855"
+  HREF="node231.html#SECTION001320060000000000000">Modificación de la Prioridad Implícita de una Regla</A>
+<LI><A NAME="tex2html4856"
+  HREF="node231.html#SECTION001320070000000000000">La Cola</A>
+<LI><A NAME="tex2html4857"
+  HREF="node231.html#SECTION001320080000000000000">El Método <TT>Run</TT></A>
+<LI><A NAME="tex2html4858"
+  HREF="node231.html#SECTION001320090000000000000">El Atributo <TT>YYData</TT> y el Método <TT>_Error</TT></A>
+<LI><A NAME="tex2html4859"
+  HREF="node231.html#SECTION0013200100000000000000">El Método <TT>_Lexer</TT></A>
+<LI><A NAME="tex2html4860"
+  HREF="node231.html#SECTION0013200110000000000000">Compilación con <TT>eyapp</TT></A>
+<LI><A NAME="tex2html4861"
+  HREF="node231.html#SECTION0013200120000000000000">La Jerarquía de un Módulo y La Opción <I>-m module</I></A>
+<LI><A NAME="tex2html4862"
+  HREF="node231.html#SECTION0013200130000000000000">El Programa Cliente</A>
+<LI><A NAME="tex2html4863"
+  HREF="node231.html#SECTION0013200140000000000000">Ejecución</A>
+<LI><A NAME="tex2html4864"
+  HREF="node231.html#SECTION0013200150000000000000">Orden de Ejecución de las Acciones Semánticas</A>
+</UL></UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html4848"
+  HREF="node232.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4842"
+  HREF="node229.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4836"
+  HREF="node230.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4844"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4846"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4849"
+  HREF="node232.html">Depuración de Errores</A>
+<B>Sup:</B> <A NAME="tex2html4843"
+  HREF="node229.html">Análisis Sintáctico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html4837"
+  HREF="node230.html">Conceptos Básicos para el</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

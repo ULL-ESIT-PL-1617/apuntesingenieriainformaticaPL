@@ -1,0 +1,290 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Condiciones de arranque</TITLE>
+<META NAME="description" CONTENT="Condiciones de arranque">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="previous" HREF="node170.html">
+<LINK REL="up" HREF="node170.html">
+<LINK REL="next" HREF="node172.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3926"
+  HREF="node172.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3920"
+  HREF="node170.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3916"
+  HREF="node170.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3922"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3924"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3927"
+  HREF="node172.html">La Clase Parse::CLex</A>
+<B>Sup:</B> <A NAME="tex2html3921"
+  HREF="node170.html">La clase Parse::Lex</A>
+<B> Ant:</B> <A NAME="tex2html3917"
+  HREF="node170.html">La clase Parse::Lex</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION001031000000000000000">
+Condiciones de arranque</A>
+</H2>
+Los <B>tokens</B> pueden ser prefijados por ``condiciones de arranque'' o ``estados''.
+Por ejemplo:
+<PRE>
+  qw(C1:T1 er1), sub { # acción },
+  qw(T2 er2), sub { # acción },
+</PRE>
+el símbolo <code>T1</code> será reconocido únicamente si el estado <code>T1</code> está activo. Las
+condiciones de arranque se activan utilizando 
+el método <code>start(condicion)</code> y se desactivan mediante <code>end(condicion)</code>.
+La llamada  <code>start('INITIAL')</code> nos devuelve a la condición inicial.
+<PRE>
+&gt; cat -n expectfloats.pl
+ 1  #!/usr/bin/perl -w
+ 2   use Parse::Lex;
+ 3   @token = (
+ 4            'EXPECT', 'expect-floats', sub {
+ 5              $lexer-&gt;start('expect');
+ 6              $_[1]
+ 7            },
+ 8            'expect:FLOAT', '\d+\.\d+',
+ 9            'expect:NEWLINE', '\n', sub { $lexer-&gt;end('expect') ; $_[1] },
+10            'expect:SIGN','[+-]',
+11            'NEWLINE2', '\n',
+12            'INT', '\d+',
+13            'DOT', '\.',
+14            'SIGN2','[+-]'
+15           );
+16
+17   Parse::Lex-&gt;exclusive('expect');
+18   $lexer = Parse::Lex-&gt;new(@token);
+19
+20   $lexer-&gt;from(\*DATA);
+21
+22   TOKEN:while (1) {
+23     $token = $lexer-&gt;next;
+24     if (not $lexer-&gt;eoi) {
+25       print $token-&gt;name," ";
+26       print "\n" if ($token-&gt;text eq "\n");
+27     } else {
+28       last TOKEN;
+29     }
+30   }
+31
+32  __END__
+33  1.4+2-5
+34  expect-floats 1.4+2.3-5.9
+35  1.5
+</PRE>
+Ejecución:
+<PRE>
+&gt; expectfloats.pl
+INT DOT INT SIGN2 INT SIGN2 INT NEWLINE2
+EXPECT FLOAT SIGN FLOAT SIGN FLOAT NEWLINE
+INT DOT INT NEWLINE2
+</PRE>
+El siguiente ejemplo elimina los comentarios anidados en un programa C:
+<PRE>
+&gt; cat -n nestedcom.pl
+ 1  #!/usr/local/bin/perl  -w
+ 2
+ 3  require 5.004;
+ 4  #BEGIN {  unshift @INC, "../lib"; }
+ 5
+ 6  $^W = 0;
+ 7  use Parse::Lex;
+ 8
+ 9  @token = (
+10               'STRING',         '"([^\"]|\\.)*"', sub { print "$_[1]"; $_[1]; },
+11               'CI',             '\/\*', sub { $lexer-&gt;start('comment'); $c++; $_[1]; },
+12               'CF',             '\*\/', sub { die "Error, comentario no finalizado!"; },
+13               'OTHER',          '(.|\n)', sub { print "$_[1]"; $_[1]; },
+14               'comment:CCI',    '\/\*', sub { $c++; $_[1]; },
+15               'comment:CCF',    '\*\/', sub { $c--; $lexer-&gt;end('comment') if ($c == 0); $_[1]; },
+16               'comment:COTHER',       '(.|\n)'
+17           );
+18
+19   #Parse::Lex-&gt;trace;
+20   Parse::Lex-&gt;exclusive('comment');
+21   Parse::Lex-&gt;skip('');
+22
+23   $lexer = Parse::Lex-&gt;new(@token);
+24
+25   $lexer-&gt;from(\*DATA);
+26
+27   $lexer = Parse::Lex-&gt;new(@token);
+28
+29   $lexer-&gt;from(\*DATA);
+30
+31   TOKEN:while (1) {
+32     $token = $lexer-&gt;next;
+33     last TOKEN if ($lexer-&gt;eoi);
+34   }
+35
+36  __END__
+37  main()  {  /* comment */
+38    printf("hi! /* \"this\" is not a comment */"); /* another /*nested*/
+39                      comment */
+40  }
+</PRE>
+Al ejecutarlo, produce la salida: 
+<PRE>
+&gt; nestedcom.pl
+main()  {
+  printf("hi! /* \"this\" is not a comment */");
+}
+</PRE><HR>
+<A NAME="tex2html3926"
+  HREF="node172.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3920"
+  HREF="node170.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3916"
+  HREF="node170.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3922"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3924"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3927"
+  HREF="node172.html">La Clase Parse::CLex</A>
+<B>Sup:</B> <A NAME="tex2html3921"
+  HREF="node170.html">La clase Parse::Lex</A>
+<B> Ant:</B> <A NAME="tex2html3917"
+  HREF="node170.html">La clase Parse::Lex</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

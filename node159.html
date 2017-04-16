@@ -1,0 +1,336 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Práctica: Casando y Transformando Árboles</TITLE>
+<META NAME="description" CONTENT="Práctica: Casando y Transformando Árboles">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="previous" HREF="node158.html">
+<LINK REL="up" HREF="node158.html">
+<LINK REL="next" HREF="node160.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3757"
+  HREF="node160.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3751"
+  HREF="node158.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3747"
+  HREF="node158.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3753"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3755"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3758"
+  HREF="node160.html">Asignación de Direcciones</A>
+<B>Sup:</B> <A NAME="tex2html3752"
+  HREF="node158.html">Patrones Árbol y Transformaciones</A>
+<B> Ant:</B> <A NAME="tex2html3748"
+  HREF="node158.html">Patrones Árbol y Transformaciones</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION009121000000000000000"></A>
+   <A NAME="10140"></A>
+  
+<A NAME="practica:casandoytransformando"></A>
+<BR>
+Práctica: Casando y Transformando Árboles
+</H2>
+Complete su proyecto para el compilador de Tutu completando
+las subrutinas <code>match_and_transform</code> tal y como se explicó en la sección
+<A HREF="node158.html#section:patronesarbol">4.12</A>.
+
+<P>
+Ademas del plegado
+de constantes use las nuevas subrutinas 
+para aplicar simultáneamente 
+las siguientes transformaciones algebraicas:
+
+<P>
+<BR>
+<BR>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $PLUS(NUM, x)$
+ -->
+<IMG
+ WIDTH="135" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img329.png"
+ ALT="$ PLUS(NUM, x)$">
+</TD>
+<TD ALIGN="LEFT"><IMG
+ WIDTH="16" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img330.png"
+ ALT="$ \wedge$">
+ <code>{ $NUM{VAL} == 0 }</code></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $\Longrightarrow x$
+ -->
+<IMG
+ WIDTH="48" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img331.png"
+ ALT="$ \Longrightarrow x$">
+</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $PLUS(x, NUM)$
+ -->
+<IMG
+ WIDTH="136" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img332.png"
+ ALT="$ PLUS(x, NUM)$">
+</TD>
+<TD ALIGN="LEFT"><IMG
+ WIDTH="16" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img330.png"
+ ALT="$ \wedge$">
+ <code>{ $NUM{VAL} == 0 }</code></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $\Longrightarrow x$
+ -->
+<IMG
+ WIDTH="48" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img331.png"
+ ALT="$ \Longrightarrow x$">
+</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $TIMES(NUM, x)$
+ -->
+<IMG
+ WIDTH="150" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img333.png"
+ ALT="$ TIMES(NUM, x)$">
+</TD>
+<TD ALIGN="LEFT"><IMG
+ WIDTH="16" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img330.png"
+ ALT="$ \wedge$">
+ <code>{ $NUM{VAL} == 1 }</code></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $\Longrightarrow x$
+ -->
+<IMG
+ WIDTH="48" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img331.png"
+ ALT="$ \Longrightarrow x$">
+</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $TIMES(x, NUM)$
+ -->
+<IMG
+ WIDTH="151" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img334.png"
+ ALT="$ TIMES(x, NUM)$">
+</TD>
+<TD ALIGN="LEFT"><IMG
+ WIDTH="16" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img330.png"
+ ALT="$ \wedge$">
+ <code>{ $NUM{VAL} == 1 }</code></TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $\Longrightarrow x$
+ -->
+<IMG
+ WIDTH="48" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img331.png"
+ ALT="$ \Longrightarrow x$">
+</TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+
+<P>
+
+<OL>
+<LI>Dado un programa como
+
+<P>
+<PRE>
+int a; a = a * 4 * 5;
+</PRE>
+¿Será plegado el <code>4 * 5</code>?
+Sin embargo si que se pliega si el programa es de la forma:
+<PRE>
+int a; a = a * (4 * 5);
+</PRE>
+No intente en esta práctica que programas como el primero  o como
+<code>4*a*5*b</code> sean plegados.
+Para lograrlo sería necesario introducir transformaciones adicionales
+y esto no se requiere en esta práctica.
+</LI>
+<LI>¿Existe un orden óptimo en el que ejecutar las transformaciones?
+</LI>
+<LI>Ponga un ejemplo en el que sea beneficioso ejecutar el plegado primero.
+</LI>
+<LI>Ponga otro ejemplo en el que sea beneficioso ejecutar el plegado después.
+</LI>
+<LI>¿Es necesario  aplicar las transformaciones reiteradamente? 
+</LI>
+<LI><A NAME="item:parada"></A>¿Cuál es la condición de parada?
+</LI>
+<LI>Como es habitual la pregunta 
+<A HREF="#item:parada">6</A> tiene 
+una respuesta TIMTOWTDI: 
+una posibilidad la da el módulo 
+<A NAME="tex2html239"
+  HREF="http://search.cpan.org/~dcantrell/Data-Compare-0.13/lib/Data/Compare.pm">Data::Compare</A>
+el cual puede obtenerse desde CPAN y que permite comparar estructuras de datos, 
+pero existe una solución mas sencilla. ¿Cuál?
+</LI>
+</OL>
+
+<P>
+<HR>
+<A NAME="tex2html3757"
+  HREF="node160.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3751"
+  HREF="node158.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3747"
+  HREF="node158.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3753"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3755"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3758"
+  HREF="node160.html">Asignación de Direcciones</A>
+<B>Sup:</B> <A NAME="tex2html3752"
+  HREF="node158.html">Patrones Árbol y Transformaciones</A>
+<B> Ant:</B> <A NAME="tex2html3748"
+  HREF="node158.html">Patrones Árbol y Transformaciones</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

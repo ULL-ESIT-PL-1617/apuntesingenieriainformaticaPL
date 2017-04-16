@@ -1,0 +1,757 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Práctica: Pruebas en el Análisis Léxico</TITLE>
+<META NAME="description" CONTENT="Práctica: Pruebas en el Análisis Léxico">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node122.html">
+<LINK REL="previous" HREF="node120.html">
+<LINK REL="up" HREF="node119.html">
+<LINK REL="next" HREF="node122.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3196"
+  HREF="node122.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3190"
+  HREF="node119.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3184"
+  HREF="node120.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3192"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3194"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3197"
+  HREF="node122.html">Repaso: Pruebas en el</A>
+<B>Sup:</B> <A NAME="tex2html3191"
+  HREF="node119.html">Pruebas para el Analizador</A>
+<B> Ant:</B> <A NAME="tex2html3185"
+  HREF="node120.html">Comprobando el Analizador Léxico</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00942000000000000000"></A>
+   <A NAME="10000"></A>
+  
+<A NAME="practica:pruebaslexico"></A>
+<BR>
+Práctica: Pruebas en el Análisis Léxico
+</H2>
+Extienda su compilador para modularizar el analizador léxico
+tal y como se explicó en la sección
+<A HREF="node119.html#section:lexicomodular">4.4</A>.
+
+<OL>
+<LI>Lea  los siguientes documentos
+
+<UL>
+<LI>Test::Tutorial  
+(<A NAME="tex2html218"
+  HREF="http://search.cpan.org/~nwclark/perl-5.8.8/lib/Test/Tutorial.pod">Test::Tutorial - A tutorial about writing really basic tests</A>)
+por Michael Schwern. 
+
+<P>
+</LI>
+<LI><A NAME="tex2html219"
+  HREF="http://nereida.deioc.ull.es/~pl/cgi-bin/test_now_test_forever.pdf">Test Now, test Forever</A>
+'' del libro de Scott [<A
+ HREF="node323.html#scott">5</A>].
+
+<P>
+</LI>
+<LI><A NAME="tex2html220"
+  HREF="perl_test_refcard.pdf">Perl Testing Reference Card</A>
+por Ian Langworth. 
+
+<P>
+</LI>
+<LI><A NAME="tex2html221"
+  HREF="http://www.oreilly.com/catalog/perltestingadn/chapter/ch04.pdf">Chapter 4: Distributing Your Tests (and Code)</A>
+del libro 
+<A NAME="tex2html222"
+  HREF="http://www.oreilly.com/catalog/perltestingadn/index.html">Perl Testing: A Developer's Notebook</A>
+<P>
+</LI>
+</UL>
+
+<P>
+</LI>
+<LI>Incluya la estrategia de pruebas de no regresión explicada en las secciones previas.
+Dado que ahora la estructura del terminal es una estructura de datos mas compleja
+<code>(token, [value, line_number])</code> no podrá usar <code>is</code>, ya que este último sólo 
+comprueba la igualdad entre escalares.
+Use <code>is_deeply</code> para comprobar que la estructura de datos devuelta por el
+analizador léxico es igual a la esperada. Sigue un ejemplo:
+
+<P>
+<PRE>
+nereida:~/src/perl/YappWithDefaultAction/t&gt; cat -n  15treeregswith2arrays.t
+ 1  #!/usr/bin/perl -w
+ 2  use strict;
+ 3  #use Test::More qw(no_plan);
+ 4  use Test::More tests =&gt; 3;
+ 5  use_ok qw(Parse::Eyapp) or exit;
+
+..  ..... etc., etc.
+
+84  my $expected_tree = bless( {
+85    'children' =&gt; [
+86      bless( { 'children' =&gt; [
+87          bless( { 'children' =&gt; [], 'attr' =&gt; 'a', 'token' =&gt; 'a' }, 'TERMINAL' )
+88        ]
+89      }, 'A' ),
+90      bless( { 'children' =&gt; [
+91          bless( { 'children' =&gt; [], 'attr' =&gt; 'c', 'token' =&gt; 'c' }, 'TERMINAL' )
+92        ]
+93      }, 'C' )
+94    ]
+95  }, 'ABC' );
+96  is_deeply($t, $expected_tree, "deleting node between arrays");
+</PRE>
+
+<P>
+</LI>
+<LI>Extienda los tests con una prueba en la que la entrada contenga un carácter ilegal.
+Obsérve que, tal y como esta escrito la rutina <code>scanner</code>,
+si la entrada tiene un carácter ilegal se ejecutarán las líneas 
+<PRE>
+26     elsif (/\G\s*(.)/gc) {
+27       Error::fatal "Caracter invalido: $1\n";
+28     }
+</PRE>
+lo que causa la parada del programa 
+de prueba,
+al ejecutarse <code>fatal</code> el cuál llama a <code>croak</code>.
+<PRE>
+  sub fatal {
+    my $msg = join " ", @_;
+    croak("Error: $msg\n");
+  }
+</PRE>
+El objetivo es lograr que el programa de pruebas continúe ejecutando las subsiguientes 
+pruebas.
+
+<P>
+Para ello puede usar <code>Test::Exception</code> 
+o bien <code>eval</code> y la variable especial <code>$@</code> para controlar que el
+programa <code>.t</code> no termine prematuramente.
+Repase la sección <A HREF="#subsection:controldeerrores">
+<IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> [<A
+ HREF="node323.html#CasianoIntroAPerl">4</A>],
+el capítulo 
+<A HREF="#section:knappruebas">
+<IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> y mas específicamente la sección
+<A HREF="#subsection:laspruebas">
+<IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> del capítulo sobre construcción de módulos.
+</LI>
+<LI>Pruebe a dar como entrada un fichero vacío
+</LI>
+<LI>Pruebe a dar como entrada un fichero que no existe
+</LI>
+<LI>Pruebe a dar como entrada un fichero binario
+</LI>
+<LI>Si tiene sentido en su caso, llame a las subrutinas con mas argumentos (y también con menos) de los que esperan.
+</LI>
+<LI>Si tiene sentido en su caso, llame a las subrutinas con argumentos cuyo tipo no es el que se espera.
+
+<P>
+No use prototipos para lograrlo. No es una buena idea. Los prototipos en Perl
+a menudo producen un preprocesado del parámetro. Escriba código que controle que 
+la naturaleza del parámetro es la que se espera. Por ejemplo:
+
+<P>
+<PRE>
+sub tutu {
+  my $refhash = shift;
+  croak "Error" unless UNIVERSAL::isa($refhash, 'HASH');
+  ...
+}
+</PRE>
+</LI>
+<LI>Cambie los argumentos de orden (si es que se aplica a su código)
+</LI>
+<LI>Comentarios: pruebe con <code>/* * */ a = 4; /* * / */</code>. Tambien con
+comentarios anidados (debería producirse un error)
+</LI>
+<LI>Flotantes: compruebe su expresión regular con 0.0 0e0 .0 0 1.e-5 1.0e2 -2.0  . (un punto sólo)
+</LI>
+<LI>Cadenas. Pruebe con las cadenas
+<PRE>
+"" 
+"h\"a\"h" 
+"\""
+</PRE>
+Pruebe también con una cadena con varias líneas y
+otra que contenga un carácter de control en su interior.
+</LI>
+<LI>Convierta los fallos (bugs) que encontró durante el desarrollo en pruebas
+</LI>
+<LI>Compruebe la documentación usando el módulo
+<A NAME="tex2html223"
+  HREF="http://search.cpan.org/~petdance/Test-Pod-1.26/Pod.pm">Test::Pod</A>
+de Andy Lester. Instálelo si es necesario.
+
+<P>
+</LI>
+<LI>Utilice el módulo 
+<A NAME="tex2html224"
+  HREF="http://search.cpan.org/~bigj/Test-Warn-0.08/Warn.pm">Test::Warn</A>
+para comprobar que los mensajes de warning (uso de <code>warn</code> and <code>carp</code>)
+se muestran correctamente.
+
+<P>
+</LI>
+<LI>Una prueba  SKIP  declara un bloque de pruebas
+que - bajo ciertas circustancias - puede saltarse.
+Puede ser que sepamos que ciertas pruebas 
+sólo funcionan en ciertos sistemas operativos 
+o que la prueba requiera que ciertos paquetes están instalados 
+o que la máquina
+disponga de ciertos recursos (por ejemplo, acceso a internet).
+En tal caso queremos que los tests se consideren si se dan las circustancias
+favorables pero que en otro caso se descarten sin protestas.
+Consulte la documentación de los módulos <code>Test::More</code> y <code>Test::Harness</code>
+sobre pruebas tipo <TT>SKIP</TT>. El ejemplo que sigue
+declara un bloque de pruebas que pueden saltarse.
+La llamada a <code>skip</code> indica cuantos tests hay,
+bajo que condición saltarselos.
+<PRE>
+ 1  SKIP: {
+ 2      eval { require HTML::Lint };
+ 3 
+ 4      skip "HTML::Lint not installed", 2 if $@;
+ 5 
+ 6      my $lint = new HTML::Lint;
+ 7      isa_ok( $lint, "HTML::Lint" );
+ 8 
+ 9      $lint-&gt;parse( $html );
+10      is( $lint-&gt;errors, 0, "No errors found in HTML" );
+11  }
+</PRE>
+Si el usuario no dispone del módulo <code>HTML::Lint</code> 
+el bloque no será ejecutado.
+El módulo <code>Test::More</code> producirá <code>ok</code>s que serán
+interpretados por  <code>Test::Harness</code> como tests <B>skipped</B>
+pero <code>ok</code>.
+
+<P>
+Otra razón para usar una prueba <code>SKIP</code> es disponer de la posibilidad
+de saltarse ciertos grupos de pruebas. Por ejemplo, aquellas que llevan
+demasiado tiempo de ejecución y no son tan significativas que no se 
+pueda prescindir de ellas cuando se introducen pequeños cambios en el código.
+El siguiente código muestra como usando una variable de entorno <code>TEST_FAST</code>
+podemos controlar que pruebas se ejecutan. 
+<PRE>
+nereida:~/src/perl/YappWithDefaultAction/t&gt; cat 02Cparser.t | head -n 56 -
+#!/usr/bin/perl -w
+use strict;
+#use Test::More qw(no_plan);
+use Test::More tests =&gt; 6;
+
+use_ok qw(Parse::Eyapp) or exit;
+
+SKIP: {
+  skip "You decided to skip C grammar test (env var TEST_FAST)", 5 if $ENV{TEST_FAST} ;
+  my ($grammar, $parser);
+  $grammar=join('',&lt;DATA&gt;);
+  $parser=new Parse::Eyapp(input =&gt; $grammar, inputfile =&gt; 'DATA', firstline =&gt; 52);
+
+  #is($@, undef, "Grammar module created");
+
+  # Does not work. May I have done s.t. wrong?
+  #is(keys(%{$parser-&gt;{GRAMMAR}{NULLABLE}}), 43, "43 nullable productions");
+
+  is(keys(%{$parser-&gt;{GRAMMAR}{NTERM}}), 233, "233 syntactic variables");
+
+  is(scalar(@{$parser-&gt;{GRAMMAR}{UUTERM}}), 3, "3 UUTERM");
+
+  is(scalar(keys(%{$parser-&gt;{GRAMMAR}{TERM}})), 108, "108 terminals");
+
+  is(scalar(@{$parser-&gt;{GRAMMAR}{RULES}}), 825, "825 rules");
+
+  is(scalar(@{$parser-&gt;{STATES}}), 1611, "1611 states");
+}
+
+__DATA__
+/*
+   This grammar is a stripped form of the original C++ grammar
+   from the GNU CC compiler :
+
+   YACC parser for C++ syntax.
+   Copyright (C) 1988, 89, 93-98, 1999 Free Software Foundation, Inc.
+   Hacked by Michael Tiemann (tiemann@cygnus.com)
+
+   The full gcc compiler an the original grammar file are freely
+   available under the GPL license at :
+
+   ftp://ftp.gnu.org/gnu/gcc/
+   ...................... etc. etc.
+*/
+nereida:~/src/perl/YappWithDefaultAction&gt; echo $TEST_FAST
+1
+nereida:~/src/perl/YappWithDefaultAction&gt; make test
+PERL_DL_NONLAZY=1 /usr/bin/perl "-MExtUtils::Command::MM" "-e" "test_harness(0, 'blib/lib', 'blib/arch')" t/*.t
+t/01calc....................................ok
+t/02Cparser.................................ok
+        5/6 skipped: various reasons
+t/03newgrammar..............................ok
+t/04foldandzero.............................ok
+t/05treewithvars............................ok
+t/06meta....................................ok
+t/07translationschemetype...................ok
+t/08tschemetypestar.........................ok
+t/09ts_with_defaultaction...................ok
+t/10ts_with_treereg.........................ok
+
+etc., etc...................................ok
+
+t/28unshifttwoitems.........................ok
+t/29foldinglistsofexpressions...............ok
+t/30complextreereg..........................ok
+t/32deletenodewithwarn......................ok
+t/33moveinvariantoutofloop..................ok
+t/34moveinvariantoutofloopcomplexformula....ok
+All tests successful, 5 subtests skipped.
+Files=33, Tests=113,  5 wallclock secs ( 4.52 cusr +  0.30 csys =  4.82 CPU)
+</PRE>
+Introduzca una prueba <code>SKIP</code> similar a la anterior y otra que 
+si el módulo
+<code>Test::Pod</code> esta instalado comprueba
+que la documentación esta bien escrita.
+Estudie la documentación del módulo <code>Test::Pod</code>.
+
+<P>
+</LI>
+<LI>Introduzca pruebas 
+<code>TODO</code> (que, por tanto, deben fallar) para las funciones que están por escribir
+(<code>parser</code>, <code>Optimize</code>, <code>code_generator</code>, <code>transform</code>).
+Repáse <A HREF="#subsection:laspruebas">
+<IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> [<A
+ HREF="node323.html#CasianoIntroAPerl">4</A>]. Sigue un ejemplo:
+
+<P>
+<PRE>
+42 TODO: {
+43   local $TODO = "Randomly generated problem";
+44   can_ok('Algorithm::Knap01DP', 'GenKnap'); # sub GenKnap no ha sido escrita aún
+45 }
+</PRE>
+
+<P>
+</LI>
+<LI>Cuando compruebe el funcionamiento de su módulo 
+<B>nunca descarte que el error pueda estar en
+el código de la prueba</B>. En palabras de Schwern
+
+<P>
+<BLOCKQUOTE>
+<BLOCKQUOTE>
+Code has bugs. Tests are code. Ergo, tests have bugs.
+<BR></BLOCKQUOTE></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><BLOCKQUOTE>
+<DIV ALIGN="RIGHT">Michael Schwern
+
+</BLOCKQUOTE>
+</BLOCKQUOTE>
+
+<P>
+</LI>
+<LI>Instale el módulo 
+<A NAME="tex2html225"
+  HREF="http://search.cpan.org/~pjcj/Devel-Cover-0.59/lib/Devel/Cover.pm">Devel::Cover</A>.
+El módulo   Devel::Cover  ha sido
+escrito por
+<A NAME="tex2html226"
+  HREF="http://search.cpan.org/~pjcj/">Paul Johnson</A>
+y proporciona 
+estadísticas del cubrimiento alcanzado por una ejecución.
+Para usarlo siga estos pasos:
+<PRE>
+pl@nereida:~/src/perl/YappWithDefaultAction$ cover -delete
+Deleting database /home/pl/src/perl/YappWithDefaultAction/cover_db
+pl@nereida:~/src/perl/YappWithDefaultAction$ HARNESS_PERL_SWITCHES=-MDevel::Cover make test
+PERL_DL_NONLAZY=1 /usr/bin/perl "-MExtUtils::Command::MM" "-e" "test_harness(0, 'blib/lib', 'blib/arch')" t/*.t
+t/01calc....................................ok 
+t/01calc....................................ok
+t/02Cparser.................................ok
+        5/6 skipped: various reasons
+t/03newgrammar..............................ok 
+t/03newgrammar..............................ok
+t/04foldandzero.............................ok
+etc., etc. .................................ok
+t/34moveinvariantoutofloopcomplexformula....ok
+All tests successful, 5 subtests skipped.
+Files=33, Tests=113, 181 wallclock secs (177.95 cusr +  2.94 csys = 180.89 CPU)
+</PRE>
+La ejecución toma ahora mucho mas tiempo: ¡181 segundos frente a los 5 que toma la ejecución sin  cover !.
+Al ejecutar <code>cover</code> de nuevo obtenemos una tabla con las estadísticas
+de cubrimiento:
+
+<P>
+<PRE>
+pl@nereida:~/src/perl/YappWithDefaultAction$ cover
+Reading database from /home/pl/src/perl/YappWithDefaultAction/cover_db
+
+---------------------------- ------ ------ ------ ------ ------ ------ ------
+File                           stmt   bran   cond    sub    pod   time  total
+---------------------------- ------ ------ ------ ------ ------ ------ ------
+blib/lib/Parse/Eyapp.pm       100.0    n/a    n/a  100.0    n/a    0.2  100.0
+...lib/Parse/Eyapp/Driver.pm   72.4   63.2   50.0   64.3    0.0   21.3   64.4
+...ib/Parse/Eyapp/Grammar.pm   90.9   77.8   66.7  100.0    0.0   16.6   84.3
+blib/lib/Parse/Eyapp/Lalr.pm   91.4   72.6   78.6  100.0    0.0   48.3   85.6
+blib/lib/Parse/Eyapp/Node.pm   74.4   58.3   29.2   88.2    0.0    1.6   64.7
+...ib/Parse/Eyapp/Options.pm   86.4   50.0    n/a  100.0    0.0    2.7   72.8
+...lib/Parse/Eyapp/Output.pm   82.3   47.4   60.0   70.6    0.0    3.7   70.0
+.../lib/Parse/Eyapp/Parse.pm  100.0    n/a    n/a  100.0    n/a    0.2  100.0
+...Parse/Eyapp/Treeregexp.pm  100.0    n/a    n/a  100.0    n/a    0.1  100.0
+blib/lib/Parse/Eyapp/YATW.pm   89.4   63.9   66.7   85.7    0.0    4.8   77.6
+...app/_TreeregexpSupport.pm   73.1   33.3   50.0  100.0    0.0    0.4   60.8
+main.pm                        52.2    0.0    n/a   80.0    0.0    0.0   45.7
+Total                          83.8   64.7   60.0   84.5    0.0  100.0   75.5
+---------------------------- ------ ------ ------ ------ ------ ------ ------
+
+Writing HTML output to /home/pl/src/perl/YappWithDefaultAction/cover_db/coverage.html ...
+pl@nereida:~/src/perl/YappWithDefaultAction$
+</PRE>
+El 
+<A NAME="tex2html227"
+  HREF="cover_db/coverage.html">HTML generado</A>
+nos permite tener una visión mas detallada de los niveles
+de cubrimiento.
+
+<P>
+Para mejorar el cubrimiento de tu código comienza por el informe de
+cubrimiento de subrutinas. Cualquier subrutina marcada como
+no probada es un candidato a contener errores o incluso a ser <I>código
+muerto</I>.
+
+<P>
+Para poder hacer el cubrimiento del código usando Devel::Cover, si se usa una <code>csh</code> 
+o <code>tcsh</code> se debe escribir:
+
+<P>
+<PRE>
+nereida:~/src/perl/YappWithDefaultAction&gt; setenv HARNESS_PERL_SWITCHES -MDevel::Cover
+nereida:~/src/perl/YappWithDefaultAction&gt; make test
+PERL_DL_NONLAZY=1 /usr/bin/perl "-MExtUtils::Command::MM" "-e" "test_harness(0, 'blib/lib', 'blib/arch')" t/*.t
+t/01calc....................................ok 
+t/01calc....................................ok
+t/02Cparser.................................ok
+        5/6 skipped: various reasons
+t/03newgrammar..............................ok 
+t/03newgrammar..............................ok
+t/04foldandzero.............................ok
+t/05treewithvars............................ok
+t/06meta....................................ok 
+t/06meta....................................ok
+t/07translationschemetype...................ok
+............................................ok
+t/38tspostfix_resultisarray.................ok
+t/39tspostfix...............................ok 
+All tests successful, 5 subtests skipped.
+Files=38, Tests=135, 210 wallclock secs (206.28 cusr +  3.27 csys = 209.55 CPU)
+nereida:~/src/perl/YappWithDefaultAction&gt;
+</PRE>
+Aún mas robusto - más independiente de la shell que usemos - es pasar las opciones en
+<code>HARNESS_PERL_SWITCHES</code> como parámetro a <code>make</code>:
+<PRE>
+make HARNESS_PERL_SWITCHES=-MDevel::Cover test
+</PRE>
+
+<P>
+Añade el informe de cubrimiento al <code>MANIFEST</code> para que se incluya en la distribución 
+que subas. Si lo consideras conveniente añade un directorio informes en los que vayan los informes asociados
+a esta práctica. Incluye en el <code>README</code> o en la documentación una breve descripción
+de donde están los informes.
+
+<P>
+</LI>
+<LI>Se conoce con el nombre de <A NAME="10005"></A><B>perfilado</B> o <A NAME="10007"></A><B>profiling</B> de
+un programa al estudio de su rendimiento mediante un programa
+(conocido como <A NAME="10009"></A><B>profiler</B>) que monitoriza la ejecución del mismo
+mediante una técnica que interrumpe cada cierto tiempo el programa
+para comprobar en que punto de la ejecución se encuentra.
+Las estadísticas acumuladas se vuelcan al final de la ejecución 
+en un fichero que puede ser visualizado mediante la aplicación apropiada.
+
+<P>
+En Perl hay dos módulos que permiten realizar profiling. El mas antiguo es
+ Devel::DProf . La aplicación para visualizar los resultados
+se llama  dprofpp .
+Sigue un ejemplo de uso:
+
+<P>
+<PRE>
+nereida:~/src/perl/YappWithDefaultAction/t&gt; perl -d:DProf 02Cparser.t
+1..6
+ok 1 - use Parse::Eyapp;
+ok 2 - 233 syntactic variables
+ok 3 - 3 UUTERM
+ok 4 - 108 terminals
+ok 5 - 825 rules
+ok 6 - 1611 states
+nereida:~/src/perl/YappWithDefaultAction/t&gt; dprofpp tmon.out
+Total Elapsed Time = 3.028396 Seconds
+  User+System Time = 3.008396 Seconds
+Exclusive Times
+%Time ExclSec CumulS #Calls sec/call Csec/c  Name
+ 31.4   0.945  1.473   1611   0.0006 0.0009  Parse::Eyapp::Lalr::_Transitions
+ 17.5   0.528  0.528   1611   0.0003 0.0003  Parse::Eyapp::Lalr::_Closures
+ 16.1   0.486  0.892      1   0.4861 0.8918  Parse::Eyapp::Lalr::_ComputeFollows
+ 8.04   0.242  0.391      1   0.2419 0.3906  Parse::Yapp::Driver::_Parse
+ 8.04   0.242  0.242  11111   0.0000 0.0000  Parse::Eyapp::Lalr::__ANON__
+ 4.59   0.138  0.138   8104   0.0000 0.0000  Parse::Eyapp::Lalr::_Preds
+ 2.66   0.080  0.080      1   0.0800 0.0800  Parse::Eyapp::Lalr::_SetDefaults
+ 2.66   0.080  0.972      1   0.0800 0.9718  Parse::Eyapp::Lalr::_ComputeLA
+ 2.46   0.074  0.074   3741   0.0000 0.0000  Parse::Eyapp::Parse::_Lexer
+ 1.89   0.057  0.074   8310   0.0000 0.0000  Parse::Eyapp::Parse::__ANON__
+ 0.96   0.029  0.028      1   0.0288 0.0276  Parse::Eyapp::Lalr::_SolveConflict
+                                             s
+ 0.66   0.020  0.050      6   0.0033 0.0083  Parse::Eyapp::Output::BEGIN
+ 0.60   0.018  1.500      1   0.0176 1.4997  Parse::Eyapp::Lalr::_LR0
+ 0.53   0.016  0.259      3   0.0054 0.0863  Parse::Eyapp::Lalr::_Digraph
+ 0.33   0.010  0.010      1   0.0100 0.0100  Parse::Eyapp::Grammar::_SetNullable
+</PRE>         
+
+<P>
+Tambien es posible usar el módulo  -MDevel::Profiler :
+<PRE>
+nereida:~/src/perl/YappWithDefaultAction/examples&gt; perl -MDevel::Profiler eyapp 02Cparser.yp
+Unused terminals:
+
+        END_OF_LINE, declared line 128
+        ALL, declared line 119
+        PRE_PARSED_CLASS_DECL, declared line 120
+
+27 shift/reduce conflicts and 22 reduce/reduce conflicts
+nereida:~/src/perl/YappWithDefaultAction/examples&gt; dprofpp tmon.out
+Total Elapsed Time = 3.914144 Seconds
+  User+System Time = 3.917144 Seconds
+Exclusive Times
+%Time ExclSec CumulS #Calls sec/call Csec/c  Name
+ 22.3   0.877  1.577   1611   0.0005 0.0010  Parse::Eyapp::Lalr::_Transitions
+ 17.8   0.700  0.700   1611   0.0004 0.0004  Parse::Eyapp::Lalr::_Closures
+ 15.6   0.614  1.185      1   0.6142 1.1854  Parse::Eyapp::Lalr::_ComputeFollow
+                                             s
+ 9.60   0.376  0.545      1   0.3758 0.5453  Parse::Yapp::Driver::_Parse
+ 7.99   0.313  0.313   8104   0.0000 0.0000  Parse::Eyapp::Lalr::_Preds
+ 5.85   0.229  0.229      3   0.0763 0.0763  Parse::Eyapp::Lalr::_Digraph
+ 4.06   0.159  0.159   3741   0.0000 0.0000  Parse::Eyapp::Parse::_Lexer
+ 3.32   0.130  0.130      1   0.1300 0.1300  Parse::Eyapp::Lalr::DfaTable
+ 2.27   0.089  0.089      1   0.0890 0.0890  Parse::Eyapp::Lalr::_SetDefaults
+ 2.04   0.080  1.265      1   0.0800 1.2654  Parse::Eyapp::Lalr::_ComputeLA
+ 1.17   0.046  0.057      1   0.0464 0.0567  Parse::Eyapp::Grammar::Rules
+ 1.02   0.040  1.617      1   0.0397 1.6169  Parse::Eyapp::Lalr::_LR0
+ 0.77   0.030  0.030   1185   0.0000 0.0000  Parse::Eyapp::Lalr::_FirstSfx
+ 0.71   0.028  0.039      1   0.0284 0.0387  Parse::Eyapp::Grammar::RulesTable
+ 0.54   0.021  0.021   1650   0.0000 0.0000  Parse::Eyapp::Grammar::classname
+</PRE>
+
+<P>
+Presente un informe del perfil de su compilador. 
+Añade el informe del perfil al <code>MANIFEST</code> para que se incluya en la distribución 
+que subas.
+
+<P>
+</LI>
+<LI>El módulo  Devel::Size  proporciona la posibilidad de
+conocer cuanto ocupa una estructura de datos. Considere el siguiente
+ejemplo:
+<PRE>
+ 71 .................................... codigo omitido
+ 72
+ 73 use Devel::Size qw(size total_size);
+ 74 use Perl6::Form;
+ 75
+ 76 sub sizes {
+ 77   my $d = shift;
+ 78   my ($ps, $ts) = (size($d), total_size($d));
+ 79   my $ds = $ts-$ps;
+ 80   return ($ps, $ds, $ts);
+ 81 }
+ 82
+ 83 print form(
+ 84 ' ==============================================================',
+ 85 '| VARIABLE | SOLO ESTRUCTURA |     SOLO DATOS |          TOTAL |',
+ 86 '|----------+-----------------+----------------+----------------|',
+ 87 '| $parser  | {&gt;&gt;&gt;&gt;&gt;&gt;} bytes  | {&gt;&gt;&gt;&gt;&gt;&gt;} bytes | {&gt;&gt;&gt;&gt;&gt;&gt;} bytes |', sizes($parser),
+ 88 '| $t       | {&gt;&gt;&gt;&gt;&gt;&gt;} bytes  | {&gt;&gt;&gt;&gt;&gt;&gt;} bytes | {&gt;&gt;&gt;&gt;&gt;&gt;} bytes |', sizes($t),
+ 89 ' ==============================================================',
+ 90 );
+</PRE>
+Al ejecutarlo se obtiene esta salida:
+
+<P>
+<PRE>
+ ....... salida previa omitida
+
+ ==============================================================
+| VARIABLE | SOLO ESTRUCTURA |     SOLO DATOS |          TOTAL |
+|----------+-----------------+----------------+----------------|
+| $parser  |      748 bytes  |      991 bytes |     1739 bytes |
+| $t       |       60 bytes  |     1237 bytes |     1297 bytes |
+ ==============================================================
+</PRE>
+Elabore un informe con el consumo de memoria de las variables mas importantes
+de su programa.
+Añadelo el informe al <code>MANIFEST</code> para que se incluya en la distribución 
+que subas. Explica en el <code>README</code> o en la documentación el significado 
+de los ficheros de informe.
+
+<P>
+</LI>
+</OL>
+
+<P>
+<HR>
+<A NAME="tex2html3196"
+  HREF="node122.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3190"
+  HREF="node119.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3184"
+  HREF="node120.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3192"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3194"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3197"
+  HREF="node122.html">Repaso: Pruebas en el</A>
+<B>Sup:</B> <A NAME="tex2html3191"
+  HREF="node119.html">Pruebas para el Analizador</A>
+<B> Ant:</B> <A NAME="tex2html3185"
+  HREF="node120.html">Comprobando el Analizador Léxico</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

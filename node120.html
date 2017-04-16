@@ -1,0 +1,516 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Comprobando el Analizador Léxico</TITLE>
+<META NAME="description" CONTENT="Comprobando el Analizador Léxico">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node121.html">
+<LINK REL="previous" HREF="node119.html">
+<LINK REL="up" HREF="node119.html">
+<LINK REL="next" HREF="node121.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3177"
+  HREF="node121.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3171"
+  HREF="node119.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3165"
+  HREF="node119.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3173"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3175"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3178"
+  HREF="node121.html">Práctica: Pruebas en el</A>
+<B>Sup:</B> <A NAME="tex2html3172"
+  HREF="node119.html">Pruebas para el Analizador</A>
+<B> Ant:</B> <A NAME="tex2html3166"
+  HREF="node119.html">Pruebas para el Analizador</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html3179"
+  HREF="node120.html#SECTION00941010000000000000">Principios Básicos del Desarrollo de Pruebas</A>
+<LI><A NAME="tex2html3180"
+  HREF="node120.html#SECTION00941020000000000000">La Jerarquía de Una Aplicación</A>
+<LI><A NAME="tex2html3181"
+  HREF="node120.html#SECTION00941030000000000000">Un Ejemplo de Programa de Prueba</A>
+<LI><A NAME="tex2html3182"
+  HREF="node120.html#SECTION00941040000000000000">Ejecución de Las Pruebas</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html3183"
+  HREF="node120.html#SECTION00941100000000000000">Versiones anteriores a la 5.8</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION00941000000000000000"></A>
+<A NAME="subsection:tests"></A>
+<BR>
+Comprobando el Analizador Léxico
+</H2>
+Queremos comprobar si nuestro código funciona. ¿Cómo hacerlo?.
+Lo adecuado es llevar una aproximación sistemática que permita validar
+el código. 
+
+<P>
+
+<H4><A NAME="SECTION00941010000000000000">
+Principios Básicos del Desarrollo de Pruebas</A>
+</H4>
+  
+
+<P>
+En general, la filosofía aconsejable para realizar un banco
+de pruebas de nuestro módulo es la que se articula en la metodología denominada
+<A NAME="9983"></A><B>Extreme Programming</B>, descrita en múltiples textos, en concreto en el 
+libro de Scott [<A
+ HREF="node323.html#scott">5</A>]:
+
+<UL>
+<LI>Todas las pruebas deben automatizarse
+</LI>
+<LI>Todos los fallos que se detecten deberían quedar traducidos en pruebas
+</LI>
+<LI>La aplicación debería pasar todas las pruebas después de cualquier modificación
+importante y también al final del día
+</LI>
+<LI>El desarrollo de las pruebas debe preceder el desarrollo 
+del código
+</LI>
+<LI>Todos los requerimientos deben ser expresados en forma de pruebas
+</LI>
+</UL>
+
+<P>
+
+<H4><A NAME="SECTION00941020000000000000">
+La Jerarquía de Una Aplicación</A>
+</H4>
+  
+
+<P>
+Pueden haber algunas diferencias entre el esquema que se describe aqui y su versión de Perl.
+Lea detenidamente el capítulo 
+<A NAME="tex2html217"
+  HREF="http://nereida.deioc.ull.es/~pl/cgi-bin/test_now_test_forever.pdf">Test Now, test Forever</A>
+del libro de Scott [<A
+ HREF="node323.html#scott">5</A>] y el libro [<A
+ HREF="node323.html#perltesting">6</A>] de Ian Langworth y chromatic.
+
+<P>
+Si usas una versión de Perl posterior  la 5.8.0, entonces tu versión del programa
+<code>h2xs</code> 
+creará un subdirectorio <code>/t</code> en el que guardar los ficheros de prueba
+Estos ficheros deberán 
+ser programas Perl de prueba con el tipo <code>.t</code>. La utilidad
+<code>h2xs</code> incluso deja un programa de prueba <code>PL-Tutu.t</code> en ese directorio.
+La jerarquía de ficheros con la que trabajamos actualmente es:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/03lexico/PL-Tutu$ make veryclean
+rm -f blib/script/tutu blib/script/tutu.pl
+rm -rf ./blib Makefile.aperl ...
+mv Makefile Makefile.old &gt; /dev/null 2&gt;&amp;1
+rm -rf blib/lib/auto/PL/Tutu blib/arch/auto/PL/Tutu
+rm -rf PL-Tutu-0.01
+rm -f  blib/lib/PL/.Tutu.pm.swp ...
+rm -f *~ *.orig */*~ */*.orig
+lhp@nereida:~/Lperl/src/topdown/PL0506/03lexico/PL-Tutu$ tree
+.
+|-- .svn                # use siempre un sistema de control de versiones
+|-- Changes             # la historia de cambios
+|-- MANIFEST            # lista de ficheros que componen la distribución
+|-- MANIFEST.SKIP       # regexps para determinar que ficheros no pertenecen
+|-- META.yml            # YML no es XML
+|-- Makefile.PL         # generador del Makefle independiente de la plataforma
+|-- PL-Tutu-0.01.tar.gz
+|-- README              # instrucciones de instalacion
+|-- lib
+|   `-- PL
+|       |-- Error.pm            # rutinas de manejo de errores
+|       |-- Lexical
+|       |   `-- Analysis.pm     # modulo con el analizador lexico
+|       `-- Tutu.pm             # modulo principal
+|-- scripts
+|   |-- test01.sal   # salida del programa de prueba
+|   |-- test01.tutu  # programa de prueba
+|   |-- tutu         # compilador
+|   `-- tutu.pl      # compilador
+`-- t
+    `-- 01Lexical.t  # prueba consolidada
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00941030000000000000">
+Un Ejemplo de Programa de Prueba</A>
+</H4>
+  
+
+<P>
+Estos son los contenidos de nuestro primer test:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/03lexico/PL-Tutu$ cd t
+lhp@nereida:~/Lperl/src/topdown/PL0506/03lexico/PL-Tutu/t$ ls -l
+total 4
+-rw-r--r--  1 lhp lhp 767 2005-10-10 11:27 01Lexical.t
+lhp@nereida:~/Lperl/src/topdown/PL0506/03lexico/PL-Tutu/t$ cat -n 01Lexical.t
+ 1  # Before `make install' is performed this script should be runnable with
+ 2  # `make test'. After `make install' it should work as `perl PL-Tutu.t'
+ 3
+ 4  #########################
+ 5
+ 6  # change 'tests =&gt; 1' to 'tests =&gt; last_test_to_print';
+ 7
+ 8  use Test::More tests =&gt; 5;
+ 9  use Test::Exception;
+10
+11  BEGIN { use_ok('PL::Lexical::Analysis') };
+12  BEGIN { use_ok('PL::Tutu') };
+13
+14  #########################
+15
+16  # Insert your test code below, the Test::More module is use()ed here so read
+17  # its man page ( perldoc Test::More ) for help writing this test script.
+18
+19  can_ok('PL::Lexical::Analysis', 'scanner');
+20
+21  # Test result of call
+22  my $a = 'int a,b; string c; c = "hello"; a = 4; b = a +1; p b';
+23  my @tokens = scanner($a);
+24  my @expected_tokens = qw{
+25  INT INT
+26  ID a
+27  PUN ,
+28  ID b
+29  PUN ;
+30  STRING STRING
+31  ID c
+32  PUN ;
+33  ID c
+34  PUN =
+35  STR "hello"
+36  PUN ;
+37  ID a
+38  PUN =
+39  NUM 4
+40  PUN ;
+41  ID b
+42  PUN =
+43  ID a
+44  PUN +
+45  NUM 1
+46  PUN ;
+47  P P
+48  ID b
+49  };
+50  is(@tokens, @expected_tokens, "lexical analysis");
+51
+52  # test a lexically  erroneous program
+53  $a = 'int a,b; string c[2]; c = "hello"; a = 4; b = a +1; p b';
+54  throws_ok { scanner($a) } qr{Error: Caracter invalido:}, 'erroneous program';
+</PRE>
+
+<P>
+El nombre del fichero de prueba debe cumplir que:
+
+<UL>
+<LI>Sea significativo del tipo de prueba
+</LI>
+<LI>Que los prefijos de los nombres <code>01</code>, <code>02</code>, ...nos garanticen
+el orden de ejecución
+</LI>
+</UL>
+
+<P>
+
+<H4><A NAME="SECTION00941040000000000000">
+Ejecución de Las Pruebas</A>
+</H4>
+  
+
+<P>
+Ahora ejecutamos las pruebas:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/03lexico/PL-Tutu$ make test
+PERL_DL_NONLAZY=1 /usr/bin/perl "-MExtUtils::Command::MM" "-e" "test_harness(0, 'blib/lib', 'blib/arch')" t/*.t
+t/01Lexical....ok 1/5Possible attempt to separate words with commas at t/01Lexical.t line 49.
+t/01Lexical....ok
+All tests successful.
+Files=1, Tests=5,  0 wallclock secs ( 0.08 cusr +  0.00 csys =  0.08 CPU)
+</PRE>
+O bien usamos <code>prove</code>:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/03lexico/PL-Tutu/t$ prove -I../lib 01Lexical.t
+01Lexical....ok
+All tests successful.
+Files=1, Tests=2,  0 wallclock secs ( 0.03 cusr +  0.01 csys =  0.04 CPU)
+</PRE>
+También podemos añadir la opción <code>verbose</code> a <code>prove</code>:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/03lexico/PL-Tutu/t$ prove -v 01Lexical.t
+01Lexical....1..5
+ok 1 - use PL::Lexical::Analysis;
+ok 2 - use PL::Tutu;
+ok 3 - PL::Lexical::Analysis-&gt;can('scanner')
+ok 4 - lexical analysis
+ok 5 - erroneous program
+ok
+All tests successful.
+Files=1, Tests=5,  0 wallclock secs ( 0.07 cusr +  0.01 csys =  0.08 CPU)
+</PRE>
+
+<P>
+Repáse 
+<A HREF="#subsection:laspruebas">
+<IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> [<A
+ HREF="node323.html#CasianoIntroAPerl">4</A>] para un mejor conocimiento
+de la metodología de pruebas en Perl.
+
+<P>
+
+<H3><A NAME="SECTION00941100000000000000">
+Versiones anteriores a la 5.8</A>
+</H3>
+En esta sección he usado la versión 5.6.1 de Perl.  
+Creeemos un subdirectorio <code>tutu_src/</code> y en él un programa de prueba
+<code>pruebalex.pl</code>:
+<PRE>
+$ pwd
+/home/lhp/projects/perl/src/tmp/PL/Tutu/tutu_src
+$ cat pruebalex.pl
+#!/usr/bin/perl -w -I..
+#use PL::Tutu;
+use Tutu;
+
+my $a = 'int a,b; string c; c = "hello"; a = 4; b = a +1; p b';
+Lexical::Analysis::scanner($a);
+print "prog = $a\ntokens = @PL::Tutu::tokens\n";
+</PRE>
+Observa como la opción <code>-I..</code> hace que se busque por las librerías en el directorio
+padre del actual.
+Cuando ejecutamos <code>pruebalex.pl</code> obtenemos la lista de terminales:
+<PRE>
+$ ./pruebalex.pl
+prog = int a,b; string c; c = "hello"; a = 4; b = a +1; p b
+tokens = INT INT ID a PUN , ID b PUN ; STRING STRING ID c PUN ; 
+ID c PUN = STR hello PUN ; ID a PUN = NUM 4 PUN ; ID b PUN = 
+ID a PUN + NUM 1 PUN ; P P ID b
+</PRE>
+La última línea ha sido partida por razones de legibilidad, pero consituye 
+una sóla línea.
+Editemos el fichero <code>test.pl</code> en el directorio del módulo.
+Sus contenidos son como sigue:
+<PRE>
+$ cat -n test.pl
+ 1  # Before `make install' is performed this script should be runnable with
+ 2  # `make test'. After `make install' it should work as `perl test.pl'
+ 3
+ 4  #########################
+ 5
+ 6  # change 'tests =&gt; 1' to 'tests =&gt; last_test_to_print';
+ 7
+ 8  use Test;
+ 9  BEGIN { plan tests =&gt; 1 };
+10  use PL::Tutu;
+11  ok(1); # If we made it this far, we're ok.
+12
+13  #########################
+14
+15  # Insert your test code below, the Test module is use()ed here so read
+16  # its man page ( perldoc Test ) for help writing this test script.
+17
+</PRE>
+En la línea 9 se establece el número de pruebas a realizar. 
+La primera prueba aparece en la línea 11. Puede parecer que no es una prueba,
+¡pero lo es!. Si se ha alcanzado la línea 11 es que se pudo cargar
+el módulo <code>PL::Tutu</code> y eso ¡tiene algún mérito!.
+
+<P>
+Seguiremos el consejo de la línea 15 y escribiremos nuestra segunda
+prueba al final del fichero <code>test.pl</code>:
+<PRE>
+$ cat -n test.pl | tail -7
+16  # its man page ( perldoc Test ) for help writing this test script.
+17
+18  my $a = 'int a,b; string c; c = "hello"; a = 4; b = a +1; p b';
+19  local @PL::Tutu::tokens = ();
+20  Lexical::Analysis::scanner($a);
+21  ok("@PL::Tutu::tokens" eq
+22  'INT INT ID a PUN , ID b PUN ; STRING STRING ID c PUN ; ID c 
+     PUN = STR hello PUN ; ID a PUN = NUM 4 PUN ; ID b PUN = 
+     ID a PUN + NUM 1 PUN ; P P ID b');
+</PRE>
+La línea 22 ha sido partida por razones de legibilidad, pero constituye 
+una sóla línea.
+Ahora podemos ejecutar <code>make test</code> y comprobar que las dos
+pruebas funcionan:
+<PRE>
+$ make test
+PERL_DL_NONLAZY=1 /usr/bin/perl -Iblib/arch -Iblib/lib -I/usr/lib/perl/5.6.1 \
+                                -I/usr/share/perl/5.6.1 test.pl
+1..2
+ok 1
+ok 2
+</PRE>
+¿Recordaste cambiar la línea 9 de <code>test.pl</code>?
+¿Añadiste los nuevos ficheros a la lista en <code>MANIFEST</code>?
+
+<P>
+<HR>
+<A NAME="tex2html3177"
+  HREF="node121.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3171"
+  HREF="node119.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3165"
+  HREF="node119.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3173"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3175"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3178"
+  HREF="node121.html">Práctica: Pruebas en el</A>
+<B>Sup:</B> <A NAME="tex2html3172"
+  HREF="node119.html">Pruebas para el Analizador</A>
+<B> Ant:</B> <A NAME="tex2html3166"
+  HREF="node119.html">Pruebas para el Analizador</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

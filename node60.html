@@ -1,0 +1,414 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Definición de Nombres de Patrones</TITLE>
+<META NAME="description" CONTENT="Definición de Nombres de Patrones">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node61.html">
+<LINK REL="previous" HREF="node59.html">
+<LINK REL="up" HREF="node56.html">
+<LINK REL="next" HREF="node61.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2044"
+  HREF="node61.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2038"
+  HREF="node56.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2032"
+  HREF="node59.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2040"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2042"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2045"
+  HREF="node61.html">Patrones Recursivos</A>
+<B>Sup:</B> <A NAME="tex2html2039"
+  HREF="node56.html">Algunas Extensiones</A>
+<B> Ant:</B> <A NAME="tex2html2033"
+  HREF="node59.html">Mirando hacia adetrás y</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html2046"
+  HREF="node60.html#SECTION00824010000000000000">Lo que dice <TT>perlretut</TT> sobre la definición de nombres de patrones</A>
+<LI><A NAME="tex2html2047"
+  HREF="node60.html#SECTION00824020000000000000">Lo que dice <TT>perlre</TT> sobre la definición de patrones</A>
+<LI><A NAME="tex2html2048"
+  HREF="node60.html#SECTION00824030000000000000">Lo que dice <TT>perlvar</TT> sobre patrones con nombre</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION00824000000000000000">
+Definición de Nombres de Patrones</A>
+</H2>
+Perl 5.10 introduce la posibilidad de definir 
+subpatrones en una sección del patrón. 
+
+<P>
+
+<H4><A NAME="SECTION00824010000000000000">
+Lo que dice <TT>perlretut</TT> sobre la definición de nombres de patrones</A>
+</H4>
+  
+
+<P>
+Citando la sección <I>Defining named patterns</I>
+en el documento la sección 'Defining-named-patterns' en <A NAME="tex2html76"
+  HREF="http://perldoc.perl.org/perlretut.html#Defining-named-patterns"><TT>perlretut</TT></A>
+para
+perl5.10:
+
+<P>
+<BLOCKQUOTE><I>Some regular expressions use identical subpatterns in several
+places. Starting with Perl 5.10, it is possible to define named
+subpatterns in a section of the pattern so that they can be called up by
+name anywhere in the pattern. 
+This syntactic pattern for this definition group is
+<code>"(?(DEFINE)(?&lt;name&gt;pattern)...)"</code>  
+An
+insertion of a named pattern is written as <code>(?&amp;name)</code>.
+</I></BLOCKQUOTE>
+
+<P>
+Veamos un ejemplo que define el lenguaje de los números en punto flotante:
+<PRE>
+pl@nereida:~/Lperltesting$ cat -n definingnamedpatterns.pl
+ 1  #!/usr/local/lib/perl/5.10.1/bin//perl5.10.1 -w
+ 2  use v5.10;
+ 3
+ 4  my $regexp = qr{
+ 5     ^ (?&lt;num&gt;
+ 6               (?&amp;osg)[\t\ ]* (?: (?&amp;int)(?&amp;dec)? | (?&amp;dec) )
+ 7       )
+ 8       (?: [eE]
+ 9       (?&lt;exp&gt; (?&amp;osg)(?&amp;int)) )?
+10     $
+11        (?(DEFINE)
+12         (?&lt;osg&gt;[-+]?)         # optional sign
+13         (?&lt;int&gt;\d++)          # integer
+14         (?&lt;dec&gt;\.(?&amp;int))     # decimal fraction
+15        )
+16  }x;
+17
+18  my $input = &lt;&gt;;
+19  chomp($input);
+20  my @r;
+21  if (@r = $input =~ $regexp) {
+22    my $exp = $+{exp} || '';
+23    say "$input matches: (num =&gt; '$+{num}', exp =&gt; '$exp')";
+24  }
+25  else {
+26    say "does not match";
+27  }
+</PRE>
+<A NAME="tex2html77"
+  HREF="http://search.cpan.org/perldoc/?perlretut"><TT>perlretut</TT></A>
+comenta sobre este ejemplo:
+<BLOCKQUOTE><I>The example above illustrates this feature.
+The three subpatterns that
+are used more than once are the optional sign, 
+the digit sequence for
+an integer 
+and the decimal fraction. The <code>DEFINE</code> 
+group at the end of
+the pattern contains their definition. Notice that the decimal fraction
+pattern is the first place where we can reuse the integer pattern.
+</I></BLOCKQUOTE>
+
+<P>
+
+<H4><A NAME="SECTION00824020000000000000">
+Lo que dice <TT>perlre</TT> sobre la definición de patrones</A>
+</H4>
+  
+
+<P>
+Curiosamente, <code>(DEFINE)</code> se considera un caso particular de 
+las expresiones regulares condicionales de la forma <code>(?(condition)yes-pattern)</code>
+(véase la sección <A HREF="node66.html#subsection:regexpcondicionales">3.2.10</A>).
+Esto es lo que dice la sección 'Extended-Patterns' en <A NAME="tex2html78"
+  HREF="http://perldoc.perl.org/perlre.html#Extended-Patterns"><TT>perlre</TT></A>
+al respecto:
+<BLOCKQUOTE><I>A special form is the <code>(DEFINE)</code>  predicate, which never executes
+directly its yes-pattern, and does not allow a no-pattern. This allows
+to define subpatterns which will be executed only by using the recursion
+mechanism. This way, you can define a set of regular expression rules
+that can be bundled into any pattern you choose.
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>It is recommended that for this usage you put the <code>DEFINE</code> block at the
+end of the pattern, and that you name any subpatterns defined within it.
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>Also, it's worth noting that patterns defined this way probably will not
+be as efficient, as the optimiser is not very clever about handling them.
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>An example of how this might be used is as follows:
+</I></BLOCKQUOTE>
+<P><PRE>
+   1. /(?&lt;NAME&gt;(?&amp;NAME_PAT))(?&lt;ADDR&gt;(?&amp;ADDRESS_PAT))
+   2.        (?(DEFINE)
+   3.          (?&lt;NAME_PAT&gt;....)
+   4.          (?&lt;ADRESS_PAT&gt;....)
+   5. )/x
+</PRE>
+<P>
+<BLOCKQUOTE><I>Note that <B>capture buffers matched inside of recursion are not accessible
+after the recursion returns</B>, so the extra layer of capturing buffers is
+necessary. Thus <code>$+{NAME_PAT}</code> would not be defined even though 
+<code>$+{NAME}</code>
+would be.
+</I></BLOCKQUOTE>
+
+<P>
+
+<H4><A NAME="SECTION00824030000000000000">
+Lo que dice <TT>perlvar</TT> sobre patrones con nombre</A>
+</H4>
+  
+
+Esto es lo que dice <A NAME="tex2html80"
+  HREF="http://search.cpan.org/perldoc/?perlvar"><TT>perlvar</TT></A>
+respecto a las variables implicadas <code>%+</code>
+y <code>%-</code>. Con respecto a el hash <code>%+</code>:
+
+<P>
+<UL>
+<LI><code>%LAST_PAREN_MATCH</code>, <code>%+</code>
+
+<P>
+Similar to <code>@+</code> , the <code>%+</code> hash allows access to the named capture buffers,
+should they exist, in the last successful match in the currently active
+dynamic scope.
+
+<P>
+For example, <code>$+{foo}</code> is equivalent to <code>$1</code> after the following match:
+
+<P>
+<PRE>
+   1. 'foo' =~ /(?&lt;foo&gt;foo)/;
+</PRE>
+
+<P>
+The keys of the <code>%+</code> hash list only the names of buffers that have
+captured (and that are thus associated to defined values).
+
+<P>
+The underlying behaviour of <code>%+</code> is provided by the <A NAME="tex2html79"
+  HREF="http://search.cpan.org/perldoc?Tie::Hash::NamedCapture">Tie::Hash::NamedCapture</A>
+module.
+
+<P>
+Note: <code>%-</code> and <code>%+</code> are tied views into a common internal
+hash associated with the last successful regular expression. Therefore
+mixing iterative access to them via <code>each</code> may have unpredictable
+results. Likewise, if the last successful match changes, then the results
+may be surprising.
+
+<P>
+</LI>
+<LI><code>%-</code>
+
+<P>
+Similar to <code>%+</code> , this variable allows access to the named capture
+buffers in the last successful match in the currently active dynamic
+scope. <B>To each capture buffer name found in the regular expression,
+it associates a reference to an array containing the list of values
+captured by all buffers with that name (should there be several of them),
+in the order where they appear</B>.
+
+<P>
+Here's an example:
+
+<P>
+<PRE>
+   1. if ('1234' =~ /(?&lt;A&gt;1)(?&lt;B&gt;2)(?&lt;A&gt;3)(?&lt;B&gt;4)/) {
+   2.   foreach my $bufname (sort keys %-) {
+   3.     my $ary = $-{$bufname};
+   4.     foreach my $idx (0..$#$ary) {
+   5.       print "\$-{$bufname}[$idx] : ",
+   6.             (defined($ary-&gt;[$idx]) ? "'$ary-&gt;[$idx]'" : "undef"),
+   7.             "\n";
+   8.     }
+   9.   }
+  10. }
+</PRE>
+
+<P>
+would print out:
+
+<P>
+<PRE>
+   1. $-{A}[0] : '1'
+   2. $-{A}[1] : '3'
+   3. $-{B}[0] : '2'
+   4. $-{B}[1] : '4'
+</PRE>
+
+<P>
+The keys of the <code>%-</code> hash correspond to all buffer names found in
+the regular expression.
+
+<P>
+</LI>
+</UL>
+
+<P>
+<HR>
+<A NAME="tex2html2044"
+  HREF="node61.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2038"
+  HREF="node56.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2032"
+  HREF="node59.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2040"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2042"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2045"
+  HREF="node61.html">Patrones Recursivos</A>
+<B>Sup:</B> <A NAME="tex2html2039"
+  HREF="node56.html">Algunas Extensiones</A>
+<B> Ant:</B> <A NAME="tex2html2033"
+  HREF="node59.html">Mirando hacia adetrás y</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,638 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Un Lenguaje con Funciones Polimorfas</TITLE>
+<META NAME="description" CONTENT="Un Lenguaje con Funciones Polimorfas">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node316.html">
+<LINK REL="previous" HREF="node314.html">
+<LINK REL="up" HREF="node314.html">
+<LINK REL="next" HREF="node316.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html6318"
+  HREF="node316.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6312"
+  HREF="node314.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6306"
+  HREF="node314.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6314"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6316"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6319"
+  HREF="node316.html">La Comprobación de Tipos</A>
+<B>Sup:</B> <A NAME="tex2html6313"
+  HREF="node314.html">Análisis de Tipos de</A>
+<B> Ant:</B> <A NAME="tex2html6307"
+  HREF="node314.html">Análisis de Tipos de</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html6320"
+  HREF="node315.html#SECTION0018201010000000000000">El Cuerpo</A>
+<LI><A NAME="tex2html6321"
+  HREF="node315.html#SECTION0018201020000000000000">La Cola</A>
+<LI><A NAME="tex2html6322"
+  HREF="node315.html#SECTION0018201030000000000000">La Cabecera</A>
+<LI><A NAME="tex2html6323"
+  HREF="node315.html#SECTION0018201040000000000000">La directiva <TT>%strict</TT></A>
+<LI><A NAME="tex2html6324"
+  HREF="node315.html#SECTION0018201050000000000000">Ambiguedades</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION0018201000000000000000">
+Un Lenguaje con Funciones Polimorfas</A>
+</H2>
+
+<P>
+En esta sección introducimos un pequeño lenguaje que permite el polimorfismo paramétrico.
+
+<P>
+
+<H4><A NAME="SECTION0018201010000000000000">
+El Cuerpo</A>
+</H4>
+  
+
+<P>
+Los programas generados por esta gramática consisten en secuencias de declaraciones 
+seguidas de secuencias de las expresiones cuyos tipos vamos a inferir. Por ejemplo:
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Aho-Polymorphism/lib/Aho/script$ \
+                                                         cat -n prueba01.ply
+     1  first :  list(ALPHA) -&gt; ALPHA;
+     2  q : list(list(int))
+     3  {
+     4    first(first(q))
+     5  }
+</PRE>
+Las declaraciones admiten variables de tipo. Las variables de tipo son identificadores
+formados por letras en mayúsculas. Los identificadores estan formados por minúsculas.
+La gramática que define el lenguaje es:
+
+<P>
+<PRE>
+  p: d &lt;+ ';'&gt; '{' e &lt;%name EXPS + ';'&gt; '}'
+  ;
+
+  d: id ':' t
+  ;
+
+  t:  INT
+    | STRING
+    | TYPEVAR
+    | LIST '(' t ')'
+    | t '*' t
+    | t '-&gt;' t
+    | '(' t ')'
+  ;
+
+  e:  id '(' optargs ')'
+    | id
+  ;
+
+  optargs:
+      /* empty */
+    | args
+  ;
+
+  args: e
+     | args ',' e
+  ;
+
+  id: ID
+  ;
+</PRE>
+
+<P>
+Para las expresiones nos limitamos a construir el árbol usando bypass
+automático. Las expresiones se reducen al uso de identificadores
+y llamadas a función:
+
+<P>
+<PRE>
+ 47  p:
+ 48      d &lt;+ ';'&gt; '{' e &lt;%name EXPS + ';'&gt;.expressions '}'
+ 49        {
+ 50          $expressions-&gt;{symboltable} = \%st;
+ 51          $expressions
+ 52        }
+ 53  ;
+ 54
+ 55  d:
+ 56    $id ':' $t
+ 57      {
+ 58        $st{$id-&gt;key} = { ts =&gt; $t };
+ 59      }
+ 60  ;
+ 61
+ 62  t:
+ 63      INT
+ 64        {
+ 65          'INT';
+ 66        }
+ 67    | STRING
+ 68        {
+ 69          'STRING';
+ 70        }
+ 71    | TYPEVAR
+ 72        {
+ 73          "Parse::Eyapp::Node::TYPEVAR::$_[1]-&gt;[0]"
+ 74        }
+ 75    | LIST '(' $t ')'
+ 76        {
+ 77          "LIST($t)"
+ 78        }
+ 79    | t.left '*' t.right
+ 80        {
+ 81          "X($left,$right)"
+ 82        }
+ 83    | t.domain '-&gt;' t.image
+ 84        {
+ 85          "F($domain,$image)"
+ 86        }
+ 87    | '(' $t ')'
+ 88        {
+ 89          $t;
+ 90        }
+ 91  ;
+ 92
+ 93  e:
+ 94      %name FUNCTIONCALL
+ 95        id '(' optargs ')'
+ 96    | id
+ 97  ;
+ 98
+ 99  optargs:
+100        /* empty */
+101      | args
+102  ;
+103
+104  args:
+105        e
+106    | %name ARGS
+107        args ',' e
+108  ;
+109
+110  id:
+111      %name ID
+112        ID
+113  ;
+</PRE>
+
+<P>
+Para cada declaración se construye un término que describe el tipo y se almacena en
+la tabla de símbolos <code>%st</code>.  Por ejemplo, las expresiones de tipo construidas
+a partir de las declaraciones del programa anterior son:
+
+<P>
+<PRE>
+first type: F(LIST(Parse::Eyapp::Node::TYPEVAR::ALPHA),Parse::Eyapp::Node::TYPEVAR::ALPHA)
+q type: LIST(LIST(INT))
+</PRE>
+
+<P>
+Usaremos el espacio de nombres <code>Parse::Eyapp::Node::TYPEVAR</code> para 
+representar los nodos variable.
+El árbol resultante para el programa anterior es:
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=227><PRE>
+     1  first :  list(ALPHA) -&gt; ALPHA;
+     2  q : list(list(int))
+     3  {
+     4    first(first(q))
+     5  }
+</PRE></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142><PRE>
+EXPS(
+  FUNCTIONCALL(
+    ID[first],
+    FUNCTIONCALL(
+      ID[first],
+      ID[q]
+    )
+  ) # FUNCTIONCALL
+) # EXPS
+</PRE></TD>
+</TR>
+</TABLE>
+
+<P>
+Obsérvese que no hay asignación ni operaciones binarias en el lenguaje (aunque estas últimas
+pueden ser emuladas mediante funciones <code>add</code>, <code>times</code>, etc.). Por ello la comprobación
+de tipos se centra en las llamadas a función.
+
+<P>
+
+<H4><A NAME="SECTION0018201020000000000000">
+La Cola</A>
+</H4>
+  
+
+<P>
+En la cola figuran la subrutina de análisis léxico y la 
+de tratamiento de errores. Son una adaptación de las presentadas 
+en las secciones anteriores para <code>Simple::Types</code>.
+
+<P>
+El análisis de tipo para este lenguaje con variables de tipo
+lo haremos usando expresiones regulares árbol (fichero <code>Trans.trg</code>)
+asi como un módulo que implanta el algoritmo de unificación
+y que hemos llamado <code>Aho::Unify</code>.
+En concreto tenemos los siguientes ficheros en la 
+librería:
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Aho-Polymorphism/lib/Aho$ ls -l
+total 112
+-rw-r--r-- 1 pl users   639 2008-01-07 13:01 Makefile
+-rw-r--r-- 1 pl users  3837 2008-01-11 16:47 Polymorphism.eyp
+-rw-r--r-- 1 pl users   945 2008-01-11 12:20 Trans.trg
+-rw-r--r-- 1 pl users  3212 2008-01-11 12:57 Unify.pm
+</PRE>
+Los ficheros son compilados con los comandos:
+<PRE>
+treereg -nonumbers -m Aho::Polymorphism Trans.trg
+eyapp -m Aho::Polymorphism Polymorphism.eyp
+</PRE>
+
+<P>
+La llamada  <code>$t = $self-&gt;YYParse</code> de la
+línea 192 realiza el análisis sintáctico y el análisis de ámbito. 
+El análisis
+de ámbito es trivial ya que hay un sólo ámbito.
+
+<P>
+<PRE>
+115  %%
+...  ...................................
+186  sub compile {
+187   my($self)=shift;
+188
+189   my ($t);
+190
+191   $self-&gt;YYData-&gt;{INPUT} = $_[0];
+192
+193   $t = $self-&gt;YYParse( yylex =&gt; \&amp;_Lexer, yyerror =&gt; \&amp;_Error,
+194                        #yydebug =&gt; 0x1F
+195       );
+196
+197   my @typecheck = (
+198     our $functioncall,
+199     our $tuple,
+200     our $id,
+201   );
+202
+203   Aho::Unify-&gt;set(
+204     key    =&gt; 'set',
+205     isvar  =&gt; sub { $_[0] =~ /^Parse::Eyapp::Node::TYPEVAR/ },
+206     samebasic =&gt; sub {
+207       my ($s, $t) = @_;
+208
+209       return (((ref($s) eq 'INT') || (ref($s) eq'STRING')) &amp;&amp; (ref($s) eq ref($t)));
+210     },
+211     debug =&gt; $debug,
+212   );
+213
+214   $t-&gt;bud(@typecheck);
+215
+216   return $t;
+217  }
+218
+219  sub ID::key {
+220    return $_[0]-&gt;{attr}[0]
+221  }
+222
+223  insert_method('ID', 'info', \&amp;ID::key);
+</PRE>
+
+<P>
+Las líneas de la 197 a la 212 se encargan de la inferencia de tipos. Volveremos
+sobre ellas mas adelante. Por ahora observe que hay tres transformaciones:
+
+<UL>
+<LI><code>$functioncall</code> se encarga de la inferencia y comprobación para las llamadas,
+</LI>
+<LI><code>$tuple</code> del cálculo de tipos para las expresiones <code>args, exp</code> 
+que aparecen en los argumentos.  Estas expresiones dan lugar
+a árboles de la forma <code>ARGS($x, $y)</code>. Por ejemplo,  en el siguiente programa:
+
+<P>
+<PRE>
+f :  ALPHA * BETA * GAMMA -&gt; ALPHA;
+q : int;
+r : int;
+s : list(int)
+{
+  f(q,r,s)
+}
+</PRE>
+El árbol construido para la expresión es:
+<PRE>
+EXPS(FUNCTIONCALL(ID[f],ARGS(ARGS(ID[q],ID[r]),ID[s])))
+</PRE>
+mientras que los tipos son:
+<PRE>
+r type: INT
+q type: INT
+s type: LIST(INT)
+f type: F(
+          X(
+            X(
+              Parse::Eyapp::Node::TYPEVAR::ALPHA, 
+              Parse::Eyapp::Node::TYPEVAR::BETA
+            ),
+            Parse::Eyapp::Node::TYPEVAR::GAMMA
+          ),
+          Parse::Eyapp::Node::TYPEVAR::ALPHA
+        )
+</PRE>
+
+<P>
+</LI>
+<LI>La tercera transformación en <code>Trans.trg</code> es <code>$id</code>, 
+la cual se encarga del cálculo de los tipos para los nodos <code>ID</code>.
+Como las anteriores, esta transformación decorará el nodo con un atributo <code>t</code>
+denotando el DAG que describe al tipo. En este caso se tomará el tipo 
+de la tabla de símbolos
+y se crearán nuevas instancias de las variables de tipo si las hubiera.
+</LI>
+</UL>
+
+<P>
+El comportamiento del algoritmo de unificación depende de un conjunto
+de parámetros que es inicializado mediante la llamada a la función 
+<code>set</code> del módulo <code>Aho::Unify</code>.
+
+<P>
+La llamada <code>$t-&gt;bud(@typecheck)</code> aplica las transformaciones
+en un recorrido abajo-arriba infiriendo los tipos y decorando los nodos.
+
+<P>
+
+<H4><A NAME="SECTION0018201030000000000000">
+La Cabecera</A>
+</H4>
+  
+
+<P>
+La cabecera muestra la carga de los módulos 
+para la unificación (<code>Aho::Unify</code>) y para la 
+inferencia y comprobación de tipos (<code>Aho::Trans</code>).
+
+<P>
+
+<H4><A NAME="SECTION0018201040000000000000">
+La directiva <TT>%strict</TT></A>
+</H4>
+  
+
+<P>
+Por defecto <code>Parse::Eyapp</code> decide que aquellos símbolos que no figuran
+en la parte izquierda de una regla son terminales (tokens).
+La directiva <code>%strict</code> utilizada en la línea 7 fuerza la declaración
+de todos los terminales. Cuando se usa la directiva <code>%strict</code>
+el compilador <code>eyapp</code> emite un mensaje 
+de advertencia si detecta algún símbolo que no figura
+en la parte izquierda de alguna regla y no ha sido explícitamente 
+declarado como terminal (mediante directivas como
+<code>%token</code>, <code>%left</code>, etc.).
+
+<P>
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Aho-Polymorphism/lib/Aho$ \
+                                             cat -n Polymorphism.eyp
+  1  /*
+  2  File: Aho/Polymorphism.eyp
+  3  To build it, Do make or:
+  4    eyapp -m Aho::Polymorphism  Polymorphism.eyp;
+  5    treereg -m Aho::Polymorphism Trans.trg
+  6  */
+  7  %strict
+  8  %{
+  9  use strict;
+ 10  use Carp;
+ 11  use warnings;
+ 12  use Aho::Unify qw(:all);
+ 13  use Aho::Trans;
+ 14  use Data::Dumper;
+ 15  our $VERSION = "0.3";
+ 16
+ 17  my $debug = 1;
+ 18  my %reserved = (
+ 19    int =&gt; "INT",
+ 20    string =&gt; "STRING",
+ 21    list =&gt; "LIST",
+ 22  );
+ 23
+ 24  my %lexeme = (
+ 25    ','  =&gt; "COMMA",
+ 26    ';'  =&gt; "SEMICOLON",
+ 27    ':'  =&gt; "COLON",
+ 28    '*'  =&gt; "TIMES",
+ 29    '('  =&gt; "LEFTPARENTHESIS",
+ 30    ')'  =&gt; "RIGHTPARENTHESIS",
+ 31    '{'  =&gt; "LEFTCURLY",
+ 32    '}'  =&gt; "RIGHTCURLY",
+ 33    '-&gt;' =&gt; "FUNCTION",
+ 34  );
+ 35  my ($tokenbegin, $tokenend) = (1, 1);
+ 36  our %st; # Symbol table
+ 37  %}
+ 38
+ 39  %tree bypass
+ 40
+ 41  %token ID TYPEVAR STRING INT LIST
+ 42
+ 43  %right '-&gt;'
+ 44  %left '*'
+ 45 
+ 46  %% 
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0018201050000000000000">
+Ambiguedades</A>
+</H4>
+  
+
+<P>
+La regla de producción <code>t -&gt; t '*' t</code> es obviamente ambigua. La directiva
+<code>%left '*'</code> permite deshacer la ambiguedad. Lo mismo ocurre con la regla
+para las funciones <code>t -&gt; t '-&gt;' t</code>. En este caso nos decidimos por una asociatividad
+a derechas, de modo que una declaración como <code>int -&gt; int -&gt; int</code> es interpretado como una función
+que recibe enteros y devuelve funciones. Una tercera fuente de ambiguedad se
+produce en expresiones como:
+
+<P>
+<PRE>
+                             int * int -&gt; int
+</PRE>
+
+<P>
+que puede ser interpretado como <code>int * (int -&gt; int)</code> o bien
+<code>(int * int) -&gt; int</code>. Al darle mayor prioridad al <code>*</code> nos decidimos
+por la segunda interpretación.
+
+<P>
+<HR>
+<A NAME="tex2html6318"
+  HREF="node316.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6312"
+  HREF="node314.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6306"
+  HREF="node314.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6314"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6316"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6319"
+  HREF="node316.html">La Comprobación de Tipos</A>
+<B>Sup:</B> <A NAME="tex2html6313"
+  HREF="node314.html">Análisis de Tipos de</A>
+<B> Ant:</B> <A NAME="tex2html6307"
+  HREF="node314.html">Análisis de Tipos de</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Inicio de los Tipos Básicos</TITLE>
+<META NAME="description" CONTENT="Inicio de los Tipos Básicos">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node300.html">
+<LINK REL="previous" HREF="node298.html">
+<LINK REL="up" HREF="node294.html">
+<LINK REL="next" HREF="node300.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html6055"
+  HREF="node300.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6049"
+  HREF="node294.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6043"
+  HREF="node298.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6051"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6053"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6056"
+  HREF="node300.html">Comprobación Ascendente de los</A>
+<B>Sup:</B> <A NAME="tex2html6050"
+  HREF="node294.html">Análisis de Tipos</A>
+<B> Ant:</B> <A NAME="tex2html6044"
+  HREF="node298.html">Construcción de las Declaraciones</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001850000000000000000"></A>
+<A NAME="section:tiposbasicos"></A>
+<BR>
+Inicio de los Tipos Básicos
+</H1>
+Al comienzo  y al final del análisis del programa fuente 
+se inician mediante la llamada a <code>reset_file_scope_vars</code>
+los tipos básicos <code>INT</code>, <code>CHAR</code> y <code>VOID</code>. 
+Este último se utilizará en las expresiones de tipo
+para representar la ausencia de tipo.
+
+<P>
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/lib/Simple$ \
+                     sed -ne '/^program:/,/^;/p' Types.eyp | cat -n
+ 1  program:
+ 2        {
+ 3          reset_file_scope_vars();
+ 4        }
+ 5      definition&lt;%name PROGRAM +&gt;.program
+ 6        {
+ 7          $program-&gt;{symboltable} = { %st };  # creates a copy of the s.t.
+ 8          $program-&gt;{depth} = 0;
+ 9          $program-&gt;{line}  = 1;
+10          $program-&gt;{types} = { %type };
+11          $program-&gt;{lines} = $tokenend;
+12
+13          my ($nondec, $declared) = $ids-&gt;end_scope($program-&gt;{symboltable}, $program, 'type');
+14
+15          if (@$nondec) {
+16            warn "Identifier ".$_-&gt;key." not declared at line ".$_-&gt;line."\n" for @$nondec;
+17            die "\n";
+18          }
+19
+20          # Type checking: add a direct pointer to the data-structure
+21          # describing the type
+22          $_-&gt;{t} = $type{$_-&gt;{type}} for @$declared;
+23
+24          my $out_of_loops = $loops-&gt;end_scope($program);
+25          if (@$out_of_loops) {
+26            warn "Error: ".ref($_)." outside of loop at line $_-&gt;{line}\n" for @$out_of_loops;
+27            die "\n";
+28          }
+29
+30          # Check that are not dangling breaks
+31          reset_file_scope_vars();
+32
+33          $program;
+34        }
+35  ;
+</PRE>
+
+<P>
+Se procede a establecer el atributo <code>t</code>
+como enlace directo a la expresión de tipo. Lo mismo se hace en las funciones
+y en los bloques.
+
+<P>
+Sigue el código de <code>reset_file_scope_vars</code>:
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/lib/Simple$ \
+                  sed -ne '/^sub re.*vars/,/^}/p' Types.eyp | cat -n
+ 1  sub reset_file_scope_vars {
+ 2    %st = (); # reset symbol table
+ 3    ($tokenbegin, $tokenend) = (1, 1);
+ 4    %type = ( INT  =&gt; Parse::Eyapp::Node-&gt;hnew('INT'),
+ 5              CHAR =&gt; Parse::Eyapp::Node-&gt;hnew('CHAR'),
+ 6              VOID =&gt; Parse::Eyapp::Node-&gt;hnew('VOID'),
+ 7            );
+ 8    $depth = 0;
+ 9    $ids = Parse::Eyapp::Scope-&gt;new(
+10             SCOPE_NAME =&gt; 'block',
+11             ENTRY_NAME =&gt; 'info',
+12             SCOPE_DEPTH =&gt; 'depth',
+13    );
+14    $loops = Parse::Eyapp::Scope-&gt;new(
+15             SCOPE_NAME =&gt; 'exits',
+16    );
+17    $ids-&gt;begin_scope();
+18    $loops-&gt;begin_scope(); # just for checking
+19  }
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html6055"
+  HREF="node300.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6049"
+  HREF="node294.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6043"
+  HREF="node298.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6051"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6053"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6056"
+  HREF="node300.html">Comprobación Ascendente de los</A>
+<B>Sup:</B> <A NAME="tex2html6050"
+  HREF="node294.html">Análisis de Tipos</A>
+<B> Ant:</B> <A NAME="tex2html6044"
+  HREF="node298.html">Construcción de las Declaraciones</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,321 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Estados</TITLE>
+<META NAME="description" CONTENT="Estados">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node34.html">
+<LINK REL="previous" HREF="node32.html">
+<LINK REL="up" HREF="node19.html">
+<LINK REL="next" HREF="node34.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html1440"
+  HREF="node34.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1434"
+  HREF="node19.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1428"
+  HREF="node32.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1436"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html1438"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html1441"
+  HREF="node34.html">La pila de estados</A>
+<B>Sup:</B> <A NAME="tex2html1435"
+  HREF="node19.html">Expresiones Regulares en Flex</A>
+<B> Ant:</B> <A NAME="tex2html1429"
+  HREF="node32.html">yyless()</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION007140000000000000000">
+Estados</A>
+</H1>
+Las expresiones regulares pueden ser prefijadas mediante <I>estados</I>.
+Los estados o condiciones de arranque, se denotan mediante un
+identificador entre &#225;ngulos y se declaran
+en la parte de las definiciones. Las declaraciones se hacen mediante 
+<code>%s</code> para los estados ``inclusivos'' o bien <code>%x</code> para los estados ``exclusivos'',
+seguidos de los nombres de los estados. No pueden haber caracteres en blanco antes de la declaración.
+Un <I>estado</I> se activa mediante la 
+acci&#243;n BEGIN <I>estado</I>. A partir de ese momento, las reglas que esten
+prefijadas con el estado pasan a estar activas. En el caso de que el estado
+sea inclusivo, las reglas no prefijadas tambi&#233;n permanecen activas.
+Los estados exclusivos son especialmente útiles para especificar ``sub analizadores''
+que analizan porciones de la entrada cuya estructura ``sintáctica'' es diferente
+de la del resto de la entrada.
+
+<P>
+El ejemplo ``absorbe'' los comentarios, conservando el numero de
+l&#237;neas del fichero en la variable <code>linenum</code>
+
+<P>
+<PRE>
+$ cat comments.l
+%option noyywrap
+%{
+  int linenum = 0;
+%}
+%x comment
+%%
+ 
+"/*" BEGIN(comment); printf("comment=%d, YY_START = %d, YYSTATE = %d",comment,YY_START,YYSTATE);
+&lt;comment&gt;[^*\n]* /* eat anything that is not a star * /
+&lt;comment&gt;"*"+[^*/\n]* /* eat up starts not followed by / */
+&lt;comment&gt;\n ++linenum; /* update number of lines */
+&lt;comment&gt;"*"+"/" BEGIN(0);
+ 
+\n ECHO; linenum++;
+.  ECHO;
+%%
+main() {
+  yylex();
+  printf("\n%d lines\n",linenum);
+}
+</PRE>
+La opción <code>noyywrap</code> hace que <code>yylex()</code> no llame a la función <code>yywrap()</code>
+al final del fichero y que asuma que no hay mas entrada por procesar.
+
+<P>
+Los estados se traducen por enteros, pudiendo ser manipulados como tales.
+La macro <code>INITIAL</code> puede utilizarse para referirse al estado 0.
+Las macros <code>YY_START</code> y <code>YYSTATE</code> contienen el valor del estado actual.
+<PRE>
+$ flex comments.l ; gcc lex.yy.c ; a.out &lt; hello.c
+main() &lt;%
+int a&lt;:1:&gt;; comment=1, YY_START = 1, YYSTATE = 1
+  a&lt;:0:&gt; = 4; comment=1, YY_START = 1, YYSTATE = 1
+  printf("hello world! a(0) is %d\n",a&lt;:0:&gt;);
+%&gt;
+ 
+6 lines     
+$ cat hello.c
+main() &lt;%
+int a&lt;:1:&gt;; /* a comment */
+  a&lt;:0:&gt; = 4; /* a comment in
+                 two lines */
+  printf("hello world! a(0) is %d\n",a&lt;:0:&gt;);
+%&gt;                                  
+</PRE>
+En <I>flex</I> es posible asociar un &#225;mbito con los estados o 
+condiciones iniciales. Basta con colocar entre llaves las 
+parejas <I>patr&#243;n acci&#243;n</I> gobernadas por ese estado.
+El siguiente ejemplo procesa las cadenas <I>C</I>:
+<PRE>
+$ cat ststring.l
+%option main
+%x str
+%{
+#define MAX_STR_CONST 256
+ 
+  char string_buffer[MAX_STR_CONST];
+  char *string_buf_ptr;
+%}
+ 
+%%
+\"  string_buf_ptr  = string_buffer; BEGIN(str);
+&lt;str&gt;{
+\"             {BEGIN (INITIAL); *string_buf_ptr = '\0'; printf("%s",string_buffer); }
+\n             { printf("Error: non terminated string\n"); exit(1); }
+\\[0-7]{1,3}   { int result; /* octal escape sequence */
+                        (void) sscanf(yytext+1,"%o",&amp;result);
+                         if (result &gt; 0xff) {printf("Error: constant out of bounds\n"); exit(2); }
+                         *string_buf_ptr++ = result;
+                    }
+\\[0-9]+       { printf("Error: bad escape sequence\n"); exit(2); }
+\\n            {*string_buf_ptr++ = '\n';}
+\\t            {*string_buf_ptr++ = '\t';}
+\\b            {*string_buf_ptr++ = '\b';}
+\\r            {*string_buf_ptr++ = '\r';}
+\\f            {*string_buf_ptr++ = '\f';}
+\\(.|\n)       {*string_buf_ptr++ = yytext[1];}
+[^\\\n\"]+     {char *yptr = yytext; while(*yptr) *string_buf_ptr++ = *yptr++; }
+}
+(.|\n)
+%%                            
+$ flex ststring.l ; gcc lex.yy.c ; a.out &lt; hello.c
+        hello
+world! a(0) is %d
+$ cat hello.c
+main() &lt;%
+int a&lt;:1:&gt;; /* a comment */
+  a&lt;:0:&gt; = 4; /* a comment in
+                 two lines */
+  printf("\thell\157\nworld! a(0) is %d\n",a&lt;:0:&gt;);
+%&gt;                                   
+</PRE>
+Obsérve la conducta del programa ante las siguientes entradas:
+
+<UL>
+<LI>Entrada:
+<PRE>
+"hello \
+dolly"
+</PRE>
+¿Cuál será la salida? ¿Que patrón del programa anterior es el que casa aqui?
+</LI>
+<LI>Entrada:
+<code>"hello\ndolly"</code>.
+¿Cuál será la salida? ¿Que patrón del programa anterior es el que casa aqui?
+</LI>
+<LI><PRE>|
+"hello
+</PRE>
+Donde hay un retorno del carro después de <code>hello</code>.
+¿Cuál será la salida? </LI>
+</UL>
+
+<P>
+<HR>
+<A NAME="tex2html1440"
+  HREF="node34.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1434"
+  HREF="node19.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1428"
+  HREF="node32.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1436"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html1438"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html1441"
+  HREF="node34.html">La pila de estados</A>
+<B>Sup:</B> <A NAME="tex2html1435"
+  HREF="node19.html">Expresiones Regulares en Flex</A>
+<B> Ant:</B> <A NAME="tex2html1429"
+  HREF="node32.html">yyless()</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

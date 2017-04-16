@@ -1,0 +1,457 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Pseudo sub-reglas</TITLE>
+<META NAME="description" CONTENT="Pseudo sub-reglas">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node91.html">
+<LINK REL="previous" HREF="node89.html">
+<LINK REL="up" HREF="node85.html">
+<LINK REL="next" HREF="node91.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2638"
+  HREF="node91.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2632"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2626"
+  HREF="node89.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2634"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2636"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2639"
+  HREF="node91.html">Llamadas a subreglas desmemoriadas</A>
+<B>Sup:</B> <A NAME="tex2html2633"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2627"
+  HREF="node89.html">Listas</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html2640"
+  HREF="node90.html#SECTION008115010000000000000">Subpatrones</A>
+<LI><A NAME="tex2html2641"
+  HREF="node90.html#SECTION008115020000000000000">Bloques de código</A>
+<LI><A NAME="tex2html2642"
+  HREF="node90.html#SECTION008115030000000000000">Pseudo subreglas y depuración</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION008115000000000000000">
+Pseudo sub-reglas</A>
+</H2>
+
+<P>
+
+<H4><A NAME="SECTION008115010000000000000">
+Subpatrones</A>
+</H4>
+  
+
+<P>
+<BLOCKQUOTE><I>Aliases can also be given to standard Perl subpatterns, as well as to
+code blocks within a regex. The syntax for subpatterns is:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;ALIAS= (SUBPATTERN) &gt;
+</PRE>
+<P>
+<BLOCKQUOTE><I>In other words, the syntax is exactly like an aliased subrule call, except
+that the rule name is replaced with a set of parentheses containing the
+subpattern. Any parentheses-capturing or non-capturing-will do.
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>The effect of aliasing a standard subpattern is to cause whatever that
+subpattern matches to be saved in the result-hash, using the alias as
+its key. For example:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: file_command&gt;
+
+        &lt;cmd=(mv|cp|ln)&gt;  &lt;from=file&gt;  &lt;to=file&gt;
+</PRE>
+<P>
+<BLOCKQUOTE><I>Here, the <code>&lt;cmd=(mv|cp|ln)&gt;</code> is treated exactly like a regular <code>(mv|cp|ln)</code>,
+but whatever substring it matches is saved in the result-hash under the
+key <code>'cmd'</code>.
+</I></BLOCKQUOTE>
+Sigue un ejemplo:
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ cat -n subpattern.pl
+ 1  use strict;
+ 2  use warnings;
+ 3  use 5.010;
+ 4  use Data::Dumper;
+ 5
+ 6  my $rbb = do {
+ 7      use Regexp::Grammars;
+ 8
+ 9      qr{
+10          &lt;file_command&gt;
+11
+12          &lt;rule: file_command&gt;
+13
+14          &lt;cmd=(mv|cp|ln)&gt;  &lt;from=([\w./]+)&gt;  &lt;to=([\w./]+)&gt;
+15
+16      }x;
+17  };
+18
+19  while (my $input = &lt;&gt;) {
+20      while ($input =~ m{$rbb}g) {
+21          say("matches: &lt;$&amp;&gt;");
+22          say Dumper \%/;
+23      }
+24  }
+</PRE>
+y una ejecución:
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ perl5.10.1 subpattern.pl
+mv a b
+matches: &lt;mv a b&gt;
+$VAR1 = {
+          '' =&gt; 'mv a b',
+          'file_command' =&gt; {
+                              '' =&gt; 'mv a b',
+                              'to' =&gt; 'b',
+                              'cmd' =&gt; 'mv',
+                              'from' =&gt; 'a'
+                            }
+        };
+
+cp c d
+matches: &lt;cp c d&gt;
+$VAR1 = {
+          '' =&gt; 'cp c d',
+          'file_command' =&gt; {
+                              '' =&gt; 'cp c d',
+                              'to' =&gt; 'd',
+                              'cmd' =&gt; 'cp',
+                              'from' =&gt; 'c'
+                            }
+        }
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION008115020000000000000">
+Bloques de código</A>
+</H4>
+  
+
+<P>
+<BLOCKQUOTE><I>The syntax for aliasing code blocks is:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;ALIAS= (?{ your($code-&gt;here) }) &gt;
+</PRE>
+<P>
+<BLOCKQUOTE><I>Note, however, that the code block must be specified in the standard
+Perl 5.10 regex notation: <code>(?{...})</code>. A common mistake is to write:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;ALIAS= { your($code-&gt;here } &gt;
+</PRE>
+<P>
+<BLOCKQUOTE><I>instead, which will attempt to interpolate <code>$code</code> before the
+regex is even compiled, as such variables are only <B>protected</B> from
+interpolation inside a <code>(?{...})</code>.
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>When correctly specified, this construct executes the code in the block
+and saves the result of that execution in the result-hash, using the
+alias as its key. Aliased code blocks are useful for adding semantic
+information based on which branch of a rule is executed. For example,
+consider the <code>copy_cmd</code> alternatives shown earlier:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: copy_cmd&gt;
+        copy &lt;from=file&gt;        &lt;to=file&gt;
+      | dup    &lt;to=file&gt;  as  &lt;from=file&gt;
+      |      &lt;from=file&gt;  -&gt;    &lt;to=file&gt;
+      |        &lt;to=file&gt;  &lt;-  &lt;from=file&gt;
+</PRE>
+<P>
+<BLOCKQUOTE><I>Using aliased code blocks, you could add an extra field to the result-
+hash to describe which form of the command was detected, like so:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: copy_cmd&gt;
+        copy &lt;from=file&gt;        &lt;to=file&gt;  &lt;type=(?{ 'std' })&gt; 
+      | dup    &lt;to=file&gt;  as  &lt;from=file&gt;  &lt;type=(?{ 'rev' })&gt; 
+      |      &lt;from=file&gt;  -&gt;    &lt;to=file&gt;  &lt;type=(?{ 'fwd' })&gt; 
+      |        &lt;to=file&gt;  &lt;-  &lt;from=file&gt;  &lt;type=(?{ 'bwd' })&gt;
+</PRE>
+<P>
+<BLOCKQUOTE><I>Now, if the rule matched, the result-hash would contain something like:
+</I></BLOCKQUOTE>
+<P><PRE>
+    copy_cmd =&gt; {
+        from =&gt; 'oldfile',
+          to =&gt; 'newfile',
+        type =&gt; 'fwd',
+    }
+</PRE>
+
+<P>
+El siguiente ejemplo ilustra lo dicho en la documentación.
+En la línea 15 hemos introducido una regla para el control de 
+errores<A NAME="tex2html195"
+  HREF="footnode.html#foot6288"><SUP>3.8</SUP></A>:
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ cat -n aliasedcodeblock2.pl
+ 1  use strict;
+ 2  use warnings;
+ 3  use 5.010;
+ 4  use Data::Dumper;
+ 5
+ 6  my $rbb = do {
+ 7      use Regexp::Grammars;
+ 8      qr{
+ 9        &lt;copy_cmd&gt;
+10
+11        &lt;rule: copy_cmd&gt;
+12              copy (&lt;from=file&gt;) (&lt;to=file&gt;) &lt;type=(?{ 'std' })&gt;
+13          |   &lt;from=file&gt; -&gt;   &lt;to=file&gt; &lt;type=(?{ 'fwd' })&gt;
+14          |   &lt;to=file&gt;   &lt;- &lt;from=file&gt; &lt;type=(?{ 'bwd' })&gt;
+15          |   .+ (?{ die "Syntax error!\n" })
+16
+17        &lt;token: file&gt; [\w./\\]+
+18      }x;
+19  };
+20
+21  while (my $input = &lt;&gt;) {
+22      while ($input =~ m{$rbb}g) {
+23          say("matches: &lt;$&amp;&gt;");
+24          say Dumper \%/;
+25      }
+26  }
+</PRE>
+
+<P>
+La ejecución muestra el comportamiento del programa con tres entradas válidas
+y una errónea:
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ perl5.10.1 aliasedcodeblock2.pl
+copy a b
+matches: &lt;copy a b
+&gt;
+$VAR1 = {
+          '' =&gt; 'copy a b
+',
+          'copy_cmd' =&gt; {
+                          '' =&gt; 'copy a b
+',
+                          'to' =&gt; 'b',
+                          'from' =&gt; 'a',
+                          'type' =&gt; 'std'
+                        }
+        };
+
+b &lt;- a
+matches: &lt;b &lt;- a
+&gt;
+$VAR1 = {
+          '' =&gt; 'b &lt;- a
+',
+          'copy_cmd' =&gt; {
+                          '' =&gt; 'b &lt;- a
+',
+                          'to' =&gt; 'b',
+                          'from' =&gt; 'a',
+                          'type' =&gt; 'bwd'
+                        }
+        };
+
+a -&gt; b
+matches: &lt;a -&gt; b
+&gt;
+$VAR1 = {
+          '' =&gt; 'a -&gt; b
+',
+          'copy_cmd' =&gt; {
+                          '' =&gt; 'a -&gt; b
+',
+                          'to' =&gt; 'b',
+                          'from' =&gt; 'a',
+                          'type' =&gt; 'fwd'
+                        }
+        };
+
+cp a b
+Syntax error!
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION008115030000000000000">
+Pseudo subreglas y depuración</A>
+</H4>
+  
+
+<P>
+<BLOCKQUOTE><I>Note that, in addition to the semantics described above, aliased
+subpatterns and code blocks also become visible to <A NAME="tex2html196"
+  HREF="http://search.cpan.org/perldoc?Regexp::Grammars">Regexp::Grammars</A>
+integrated debugger (see <A NAME="tex2html197"
+  HREF="http://search.cpan.org/~dconway/Regexp-Grammars/lib/Regexp/Grammars.pm#Debugging">Debugging</A>).
+</I></BLOCKQUOTE>
+
+<P>
+<HR>
+<A NAME="tex2html2638"
+  HREF="node91.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2632"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2626"
+  HREF="node89.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2634"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2636"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2639"
+  HREF="node91.html">Llamadas a subreglas desmemoriadas</A>
+<B>Sup:</B> <A NAME="tex2html2633"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2627"
+  HREF="node89.html">Listas</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,511 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Construcción de los conjuntos de Primeros y Siguientes</TITLE>
+<META NAME="description" CONTENT="Construcción de los conjuntos de Primeros y Siguientes">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node131.html">
+<LINK REL="previous" HREF="node129.html">
+<LINK REL="up" HREF="node125.html">
+<LINK REL="next" HREF="node131.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3340"
+  HREF="node131.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3334"
+  HREF="node125.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3328"
+  HREF="node129.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3336"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3338"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3341"
+  HREF="node131.html">Ejercicio: Construir los</A>
+<B>Sup:</B> <A NAME="tex2html3335"
+  HREF="node125.html">Análisis Sintáctico Predictivo Recursivo</A>
+<B> Ant:</B> <A NAME="tex2html3329"
+  HREF="node129.html">Derivaciones a vacío</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00965000000000000000">
+Construcción de los conjuntos de Primeros y Siguientes</A>
+</H2>
+
+<P>
+<P>
+<DIV><B>Algoritmo  4.6.1</B> &nbsp; 
+<I>Construcción de los conjuntos <IMG
+ WIDTH="94" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img83.png"
+ ALT="$ FIRST(X)$">
+
+</I>
+<P>
+<I>Repita el siguiente conjunto de reglas hasta que no se puedan añadir mas símbolos terminales o  a ningún conjunto <IMG
+ WIDTH="94" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img83.png"
+ ALT="$ FIRST(X)$">
+:
+</I>
+<OL>
+<LI><!-- MATH
+ $Si\ X \in \Sigma\ entonces\ FIRST(X) = {X}$
+ -->
+<IMG
+ WIDTH="286" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img84.png"
+ ALT="$ Si X \in \Sigma entonces FIRST(X) = {X}$">
+
+</LI>
+<LI><!-- MATH
+ $Si\ X \rightarrow \epsilon\ entonces\ FIRST(X) =  FIRST(X) \cup \{ \epsilon \}$
+ -->
+<IMG
+ WIDTH="404" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img85.png"
+ ALT="$ Si X \rightarrow \epsilon entonces FIRST(X) = FIRST(X) \cup \{ \epsilon \}$">
+
+</LI>
+<LI><!-- MATH
+ $Si X \in V \ y\ X \rightarrow Y_1 Y_2 \cdots Y_k \in P\ entonces$
+ -->
+<IMG
+ WIDTH="325" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img86.png"
+ ALT="$ Si X \in V  y X \rightarrow Y_1 Y_2 \cdots Y_k \in P entonces$">
+
+<BR>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{eqnarray}
+&&i = 1; \nonumber\\
+&&hacer \nonumber\\
+&&\ \ FIRST(X) = FIRST(X) \cup FIRST^*(Y_i); \nonumber\\
+&&\ \ i++; \nonumber\\
+&&mientras\ (i \leq k\ y\ \epsilon \in FIRST(Y_i)) \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="48" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img87.png"
+ ALT="$\displaystyle i = 1;$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="48" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img88.png"
+ ALT="$\displaystyle hacer$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="340" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img89.png"
+ ALT="$\displaystyle   FIRST(X) = FIRST(X) \cup FIRST^*(Y_i);$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="62" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img90.png"
+ ALT="$\displaystyle   i++;$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="273" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.png"
+ ALT="$\displaystyle mientras (i \leq k y \epsilon \in FIRST(Y_i))$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+</LI>
+<LI>Añadir <IMG
+ WIDTH="12" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img19.png"
+ ALT="$ \epsilon$">
+ a <IMG
+ WIDTH="94" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img83.png"
+ ALT="$ FIRST(X)$">
+ si <IMG
+ WIDTH="44" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img92.png"
+ ALT="$ i \geq k$">
+ y <!-- MATH
+ $\epsilon \in FIRST(Y_k)$
+ -->
+<IMG
+ WIDTH="125" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img93.png"
+ ALT="$ \epsilon \in FIRST(Y_k)$">
+
+</LI>
+</OL></DIV><P></P>
+Aqui <!-- MATH
+ $FIRST^*(Y)$
+ -->
+<IMG
+ WIDTH="100" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img94.png"
+ ALT="$ FIRST^*(Y)$">
+ denota al conjunto <!-- MATH
+ $FIRST(Y) - \{ \epsilon \}$
+ -->
+<IMG
+ WIDTH="138" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img95.png"
+ ALT="$ FIRST(Y) - \{ \epsilon \}$">
+.
+
+<P>
+Este algoritmo puede ser extendido para calcular 
+<!-- MATH
+ $FIRST(\alpha)$
+ -->
+<IMG
+ WIDTH="90" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img61.png"
+ ALT="$ FIRST(\alpha)$">
+ para <!-- MATH
+ $\alpha = X_1 X_2 \cdots X_n \in (V \cup \Sigma)^*$
+ -->
+<IMG
+ WIDTH="221" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img96.png"
+ ALT="$ \alpha = X_1 X_2 \cdots X_n \in (V \cup \Sigma)^*$">
+.
+El esquema es anólogo al de un símbolo individual.
+
+<P>
+<P>
+<DIV><B>Algoritmo  4.6.2</B> &nbsp; 
+<I>Construcción del conjunto <!-- MATH
+ $FIRST(\alpha)$
+ -->
+<IMG
+ WIDTH="90" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img61.png"
+ ALT="$ FIRST(\alpha)$">
+ 
+</I>
+<P>
+<I>Repita siguiente conjunto de reglas hasta que no se puedan añadir mas
+símbolos terminales o  a ningún conjunto <!-- MATH
+ $FIRST(\alpha)$
+ -->
+<IMG
+ WIDTH="90" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img61.png"
+ ALT="$ FIRST(\alpha)$">
+:
+</I>
+<BR>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{eqnarray}
+&&i = 1; \nonumber\\
+&&FIRST(\alpha) = \emptyset; \nonumber\\
+&&hacer \nonumber\\
+&&\ \ FIRST(\alpha) = FIRST(\alpha) \cup FIRST^*(X_i); \nonumber\\
+&&\ \ i++; \nonumber\\
+&&mientras\ (i \leq n\ y\ \epsilon \in FIRST(X_i)) \nonumber
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="48" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img87.png"
+ ALT="$\displaystyle i = 1;$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="127" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img97.png"
+ ALT="$\displaystyle FIRST(\alpha) = \emptyset;$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="48" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img88.png"
+ ALT="$\displaystyle hacer$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="335" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img98.png"
+ ALT="$\displaystyle   FIRST(\alpha) = FIRST(\alpha) \cup FIRST^*(X_i);$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="62" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img90.png"
+ ALT="$\displaystyle   i++;$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="279" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img99.png"
+ ALT="$\displaystyle mientras (i \leq n y \epsilon \in FIRST(X_i))$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+<P>
+<DIV><B>Algoritmo  4.6.3</B> &nbsp; 
+<I>Construcción de los conjuntos <!-- MATH
+ $FOLLOW(A)\ \forall A \in V$
+ -->
+<IMG
+ WIDTH="179" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img100.png"
+ ALT="$ FOLLOW(A) \forall A \in V$">
+: 
+</I>
+<P>
+<I>Repetir los siguientes pasos hasta que ninguno de los conjuntos <IMG
+ WIDTH="89" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img4.png"
+ ALT="$ FOLLOW$">
+ cambie:
+</I>
+ 
+<OL>
+<LI><!-- MATH
+ $FOLLOW(S) = \{\$\}$
+ -->
+<IMG
+ WIDTH="163" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img101.png"
+ ALT="$ FOLLOW(S) = \{\$\} $">
+ (<IMG
+ WIDTH="14" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img79.png"
+ ALT="$ \$$">
+ representa el final de la entrada)
+</LI>
+<LI><!-- MATH
+ $Si\ A \rightarrow \alpha B \beta\ entonces$
+ -->
+<IMG
+ WIDTH="178" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img102.png"
+ ALT="$ Si A \rightarrow \alpha B \beta entonces$">
+
+<P><!-- MATH
+ \begin{displaymath}
+FOLLOW(B) =  FOLLOW(B) \cup (FIRST(\beta) - \{\epsilon\})
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="414" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img103.png"
+ ALT="$\displaystyle FOLLOW(B) = FOLLOW(B) \cup (FIRST(\beta) - \{\epsilon\})$">
+</DIV><P>
+</P>
+</LI>
+<LI><!-- MATH
+ $Si\ A \rightarrow \alpha B\ o\ A \rightarrow \alpha B \beta\ y\ \epsilon \in FIRST(\beta)\  entonces$
+ -->
+<IMG
+ WIDTH="397" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img104.png"
+ ALT="$ Si A \rightarrow \alpha B o A \rightarrow \alpha B \beta y \epsilon \in FIRST(\beta) entonces$">
+
+<P><!-- MATH
+ \begin{displaymath}
+FOLLOW(B) = FOLLOW(B) \cup FOLLOW(A)
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="381" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img105.png"
+ ALT="$\displaystyle FOLLOW(B) = FOLLOW(B) \cup FOLLOW(A)$">
+</DIV><P>
+</P>
+</LI>
+</OL></DIV><P></P>
+
+<P>
+<HR>
+<A NAME="tex2html3340"
+  HREF="node131.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3334"
+  HREF="node125.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3328"
+  HREF="node129.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3336"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3338"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3341"
+  HREF="node131.html">Ejercicio: Construir los</A>
+<B>Sup:</B> <A NAME="tex2html3335"
+  HREF="node125.html">Análisis Sintáctico Predictivo Recursivo</A>
+<B> Ant:</B> <A NAME="tex2html3329"
+  HREF="node129.html">Derivaciones a vacío</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

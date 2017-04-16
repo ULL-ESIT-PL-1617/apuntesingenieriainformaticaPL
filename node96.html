@@ -1,0 +1,336 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Casando con las claves de un hash</TITLE>
+<META NAME="description" CONTENT="Casando con las claves de un hash">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node97.html">
+<LINK REL="previous" HREF="node95.html">
+<LINK REL="up" HREF="node85.html">
+<LINK REL="next" HREF="node97.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2736"
+  HREF="node97.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2730"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2724"
+  HREF="node95.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2732"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2734"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2737"
+  HREF="node97.html">Depuración</A>
+<B>Sup:</B> <A NAME="tex2html2731"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2725"
+  HREF="node95.html">La directiva require</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html2738"
+  HREF="node96.html#SECTION0081111010000000000000">Ejemplo de uso de la directiva hash</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION0081111000000000000000">
+Casando con las claves de un hash</A>
+</H2>
+
+<P>
+<BLOCKQUOTE><I>In some situations a grammar may need a rule that matches dozens,
+hundreds, or even thousands of one-word alternatives. For example, when
+matching command names, or valid userids, or English words. In such
+cases it is often impractical (and always inefficient) to list all the
+alternatives between <code>|</code> alterators:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: shell_cmd&gt;
+        a2p | ac | apply | ar | automake | awk | ...
+        # ...and 400 lines later
+        ... | zdiff | zgrep | zip | zmore | zsh
+
+    &lt;rule: valid_word&gt;
+        a | aa | aal | aalii | aam | aardvark | aardwolf | aba | ...
+        # ...and 40,000 lines later... 
+        ... | zymotize | zymotoxic | zymurgy | zythem | zythum
+</PRE>
+<P>
+<BLOCKQUOTE><I>To simplify such cases, <A NAME="tex2html202"
+  HREF="http://search.cpan.org/perldoc?Regexp::Grammars">Regexp::Grammars</A>
+provides a special construct
+that allows you to specify all the alternatives as the keys of a normal
+hash. The syntax for that construct is simply to put the hash name inside
+angle brackets (with no space between the angles and the hash name).
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>Which means that the rules in the previous example could also be written:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: shell_cmd&gt;
+        &lt;%cmds&gt;
+
+    &lt;rule: valid_word&gt;
+        &lt;%dict&gt;
+</PRE>
+<P>
+<BLOCKQUOTE><I>provided that the two hashes (<code>%cmds</code> and <code>%dict</code>) 
+are visible in the scope where the grammar is created.
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>Internally, the construct is converted to something equivalent to:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: shell_cmd&gt;
+        (&lt;.hk&gt;)  &lt;require: exists $cmds{$CAPTURE}&gt;
+
+    &lt;rule: valid_word&gt;
+        (&lt;.hk&gt;)  &lt;require: exists $dict{$CAPTURE}&gt;
+</PRE>
+<P>
+<BLOCKQUOTE><I>The special <code>&lt;hk&gt;</code> rule is created automatically, and defaults to <code>\S+</code>,
+but you can also define it explicitly to handle other kinds of keys. For
+example:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: hk&gt;
+        .+            # Key may be any number of chars on a single line
+
+    &lt;rule: hk&gt;
+        [ACGT]{10,}   # Key is a base sequence of at least 10 pairs
+</PRE>
+<P>
+<BLOCKQUOTE><I>Matching a hash key in this way is typically significantly faster than
+matching a full set of alternations. Specifically, it is O(length of
+longest potential key), instead of O(number of keys).
+</I></BLOCKQUOTE>
+
+<P>
+
+<H4><A NAME="SECTION0081111010000000000000">
+Ejemplo de uso de la directiva hash</A>
+</H4>
+  
+
+<P>
+Sigue un ejemplo:
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ cat -n hash.pl
+ 1  #!/usr/bin/env perl5.10.1
+ 2  use strict;
+ 3  use warnings;
+ 4  use 5.010;
+ 5  use Data::Dumper;
+ 6  $Data::Dumper::Deparse = 1;
+ 7
+ 8  my %cmd = map { ($_ =&gt; undef ) } qw( uname pwd date );
+ 9
+10  my $rbb = do {
+11      use Regexp::Grammars;
+12
+13      qr{
+14        ^&lt;command&gt;$
+15
+16        &lt;rule: command&gt;
+17          &lt;cmd=%cmd&gt; (?: &lt;[arg]&gt; )*
+18
+19        &lt;token: arg&gt; [^\s&lt;&gt;`&amp;]+
+20      }xms;
+21  };
+22
+23  while (my $input = &lt;&gt;) {
+24      chomp($input);
+25      if ($input =~ m{$rbb}) {
+26          say("matches: &lt;$&amp;&gt;");
+27          say Dumper \%/;
+28          system $/{''}
+29      }
+30      else {
+31          say("does not match");
+32      }
+33  }
+</PRE>
+
+<P>
+Sigue un ejemplo de ejecución:
+
+<P>
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ perl5.10.1 hash.pl
+a2p f1 f2
+matches: &lt;a2p f1 f2&gt;
+$VAR1 = {
+          '' =&gt; 'a2p f1 f2',
+          'command' =&gt; {
+                         '' =&gt; 'a2p f1 f2',
+                         'cmd' =&gt; 'a2p',
+                         'arg' =&gt; [
+                                    'f1',
+                                    'f2'
+                                  ]
+                       }
+        };
+
+pocho 2 5
+does not match
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html2736"
+  HREF="node97.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2730"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2724"
+  HREF="node95.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2732"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2734"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2737"
+  HREF="node97.html">Depuración</A>
+<B>Sup:</B> <A NAME="tex2html2731"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2725"
+  HREF="node95.html">La directiva require</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,462 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Salvando la Información en los Terminales Sintácticos</TITLE>
+<META NAME="description" CONTENT="Salvando la Información en los Terminales Sintácticos">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node241.html">
+<LINK REL="previous" HREF="node239.html">
+<LINK REL="up" HREF="node229.html">
+<LINK REL="next" HREF="node241.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html5009"
+  HREF="node241.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5003"
+  HREF="node229.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4997"
+  HREF="node239.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5005"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5007"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5010"
+  HREF="node241.html">Práctica: Análisis Sintáctico</A>
+<B>Sup:</B> <A NAME="tex2html5004"
+  HREF="node229.html">Análisis Sintáctico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html4998"
+  HREF="node239.html">La Maniobra de bypass</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0013110000000000000000"></A>
+<A NAME="section:treedirective"></A>
+<BR>
+Salvando la Información en los Terminales Sintácticos
+</H1>
+
+<H4><A NAME="SECTION0013110010000000000000">
+La directiva <TT>%tree</TT></A>
+</H4>
+  
+
+<P>
+La directiva  %tree  permite que <TT>Parse::Eyapp</TT>
+genere al árbol sintáctico. Haciendo uso de las directivas
+adecuadas podemos controlar la forma del árbol. La directiva
+<code>%tree</code> es una alternativa a la directiva <code>%metatree</code>
+y es incompatible con esta última. El objetivo es lograr
+una representación adecuada del árbol sintáctico y dejar
+para fases posteriores la decoración del mismo.
+
+<P>
+<A NAME="code:eyapprule6"></A><PRE>
+nereida:~/src/perl/YappWithDefaultAction/examples&gt; cat -n Rule6.yp
+ 1  %{
+ 2  use Data::Dumper;
+ 3  %}
+ 4  %right  '='
+ 5  %left   '-' '+'
+ 6  %left   '*' '/'
+ 7  %left   NEG
+ 8  %tree
+ 9
+10  %%
+11  line: exp  { $_[1] }
+12  ;
+13
+14  exp:      %name NUM
+15              NUM
+16          | %name VAR
+17            VAR
+18          | %name ASSIGN
+19            VAR '=' exp
+20          | %name PLUS
+21            exp '+' exp
+22          | %name MINUS
+23            exp '-' exp
+24          | %name TIMES
+25            exp '*' exp
+26          | %name DIV
+27            exp '/' exp
+28          | %name UMINUS
+29            '-' exp %prec NEG
+30          |   '(' exp ')'  { $_[2] } /* Let us simplify a bit the tree */
+31  ;
+32
+33  %%
+34
+35  sub _Error {
+..    ..........
+43  }
+44
+45  sub _Lexer {
+..    ..........
+62  }
+63
+64  sub Run {
+65      my($self)=shift;
+66      $self-&gt;YYParse( yylex =&gt; \&amp;_Lexer, yyerror =&gt; \&amp;_Error,
+67                      #yyprefix =&gt; "Rule6::",
+68                      #yydebug =&gt;0xFF
+69                    );
+70  }
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0013110020000000000000">
+Compilación Separada</A>
+</H4>
+  
+
+<P>
+Para compilar un programa separado  Parse::Eyapp  usamos el guión  eyapp :
+<PRE>
+nereida:~/src/perl/YappWithDefaultAction/examples&gt; eyapp Rule6
+nereida:~/src/perl/YappWithDefaultAction/examples&gt; ls -ltr | tail -1
+-rw-rw----  1 pl users   5475 2006-11-06 13:53 Rule6.pm
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0013110030000000000000">
+Terminales sintácticos y Terminales Semánticos</A>
+</H4>
+  
+
+<P>
+A diferencia de lo que ocurre cuando se usa la directiva  %metatree 
+la construcción del árbol solicitado mediante la directiva  %tree 
+implícitamente considera token sintácticos aquellos terminales que aparecen en 
+definidos en el programa <code>eyapp</code> mediante el uso de apóstrofes.
+Los token sintácticos no forman parte del árbol construido.
+Asi pues -en el ejemplo que nos ocupa - los terminales <code>'='</code>,
+<code>'-'</code>,
+<code>'+'</code>,
+<code>'*'</code> y
+<code>'/'</code>
+serán -por defecto - eliminados del árbol sintáctico. 
+Por ejemplo, para la entrada <code>a=b*32</code> el siguiente árbol es construido:
+<PRE>
+nereida:~/src/perl/YappWithDefaultAction/examples&gt; useruleandshift.pl
+a=b*32
+$VAR1 = bless( { 'children' =&gt; [
+    bless( { 'children' =&gt; [], 'attr' =&gt; 'a', 'token' =&gt; 'VAR' }, 'TERMINAL' ),
+    bless( { 'children' =&gt; [
+        bless( { 'children' =&gt; [
+            bless( { 'children' =&gt; [], 'attr' =&gt; 'b', 'token' =&gt; 'VAR' }, 'TERMINAL' )
+          ]
+        }, 'VAR' ),
+        bless( { 'children' =&gt; [
+            bless( { 'children' =&gt; [], 'attr' =&gt; '32', 'token' =&gt; 'NUM' }, 'TERMINAL' )
+          ]
+        }, 'NUM' )
+      ]
+    }, 'TIMES' )
+  ]
+}, 'ASSIGN' );
+</PRE>
+Esta conducta puede cambiarse usando la directiva  %semantic token 
+la cual declara una lista de terminales como semánticos. En tal caso 
+dichos terminales formarán parte del árbol construido. Si por el contrario
+lo que queremos es cambiar el estatus de un terminal
+- por ejemplo <code>NUM</code> o <code>ID</code> - a sintáctico usaremos
+la directiva  %syntactic token .
+
+<P>
+
+<H4><A NAME="SECTION0013110040000000000000">
+Salvando la Información de los <TT>%syntactic token</TT></A>
+</H4>
+  
+
+<P>
+Si bien la funcionalidad de un  %syntactic token 
+es determinar la forma del AST, en ocasiones la diferencia 
+entre terminal sintáctico y semántico es difusa. Un terminal 
+fundamentalmente sintáctico 
+pueden acarrear alguna información útil para las restantes fases de 
+procesado.
+
+<P>
+Por ejemplo, el atributo número de línea asociado con
+el terminal sintáctico <code>'+'</code> puede ser útil posteriormente:
+Si en la fase de comprobación de tipos se observa un error
+de tipos incompatibles con el operador, disponer de la línea
+asociada con <code>'+'</code> nos permitirá emitir mensajes de error 
+mas precisos.
+
+<P>
+En <code>Parse::Eyapp</code> el programador puede proveer a la clase 
+ TERMINAL  de un método 
+
+<P>
+<DIV ALIGN="CENTER">
+TERMINAL::save_attributes 
+
+</DIV>
+
+<P>
+el cuál será ejecutado durante la construcción del AST cada vez
+que un <code>syntaxtic token</code> es eliminado. El método
+recibe como argumento - además de la  referencia al nodo terminal -
+una referencia al nodo padre del terminal. Sigue un ejemplo:
+
+<P>
+<PRE>
+sub TERMINAL::save_attributes {
+  # $_[0] is a syntactic terminal
+  # $_[1] is the father.
+  push @{$_[1]-&gt;{lines}}, $_[0]-&gt;[1]; # save the line!
+}
+</PRE>
+
+<P>
+La tabla <A HREF="#table:saveattributes">8.1</A> muestra como el nodo <TT>PLUS</TT> 
+recoge la información del número de línea del terminal <TT>+</TT>.
+
+<P>
+El árbol fué generado usando el método <code>str</code>. La información 
+sobre los atributos se hizo mediante la siguiente subrutina:
+
+<P>
+<PRE>
+sub generic_info {
+  my $info;
+
+  $info = "";
+  $info .= $_[0]-&gt;type_info if $_[0]-&gt;can('type_info');
+
+  my $sep = $info?":":"";
+
+  $info .= $sep.$_[0]-&gt;{line} if (defined $_[0]-&gt;{line});
+  local $" = ',';
+  $info .= "$sep@{$_[0]-&gt;{lines}}" if (defined $_[0]-&gt;{lines});
+  return $info;
+}
+
+*PLUS::info = =\&amp;generic_info;
+</PRE>
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER">
+
+<A NAME="table:saveattributes"></A>
+<DIV ALIGN="CENTER">
+<A NAME="18120"></A>
+<TABLE CELLPADDING=3 BORDER="1">
+<CAPTION><STRONG>Tabla:</STRONG>
+El nodo <TT>PLUS</TT> recoge el número de línea del terminal<TT>+</TT></CAPTION>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=213>Programa y Footnotes</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=184>AST generado por <code>$t-&gt;str</code></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=213><PRE>
+int f(int a, int b) {
+ return a+b;
+}
+-------footnotes-----------
+0)
+Symbol Table:
+$VAR1 = {
+  'f' =&gt; {
+    'type' =&gt; 'F(X_2(INT,INT),INT)',
+    'line' =&gt; 1
+  }
+};
+---------------------------
+1) etc.
+</PRE></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=184><PRE>
+PROGRAM^{0}(
+  FUNCTION[f]^{1}(
+    RETURN[2,2](
+      PLUS[INT:2](
+        VAR[INT](
+          TERMINAL[a:2]
+        ),
+        VAR[INT](
+          TERMINAL[b:2]
+        )
+      ) # PLUS
+    ) # RETURN
+  ) # FUNCTION
+) # PROGRAM
+</PRE></TD>
+</TR>
+</TABLE>
+</DIV>
+</DIV>
+<BR>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html5011"
+  HREF="node240.html#SECTION0013110010000000000000">La directiva <TT>%tree</TT></A>
+<LI><A NAME="tex2html5012"
+  HREF="node240.html#SECTION0013110020000000000000">Compilación Separada</A>
+<LI><A NAME="tex2html5013"
+  HREF="node240.html#SECTION0013110030000000000000">Terminales sintácticos y Terminales Semánticos</A>
+<LI><A NAME="tex2html5014"
+  HREF="node240.html#SECTION0013110040000000000000">Salvando la Información de los <TT>%syntactic token</TT></A>
+</UL></UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html5009"
+  HREF="node241.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5003"
+  HREF="node229.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4997"
+  HREF="node239.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5005"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5007"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5010"
+  HREF="node241.html">Práctica: Análisis Sintáctico</A>
+<B>Sup:</B> <A NAME="tex2html5004"
+  HREF="node229.html">Análisis Sintáctico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html4998"
+  HREF="node239.html">La Maniobra de bypass</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

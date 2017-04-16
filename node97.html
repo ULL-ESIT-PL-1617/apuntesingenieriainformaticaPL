@@ -1,0 +1,576 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Depuración</TITLE>
+<META NAME="description" CONTENT="Depuración">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node98.html">
+<LINK REL="previous" HREF="node96.html">
+<LINK REL="up" HREF="node85.html">
+<LINK REL="next" HREF="node98.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2751"
+  HREF="node98.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2745"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2739"
+  HREF="node96.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2747"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2749"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2752"
+  HREF="node98.html">Mensajes de log del</A>
+<B>Sup:</B> <A NAME="tex2html2746"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2740"
+  HREF="node96.html">Casando con las claves</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html2753"
+  HREF="node97.html#SECTION0081112010000000000000">Debugging grammar creation</A>
+<LI><A NAME="tex2html2754"
+  HREF="node97.html#SECTION0081112020000000000000">Debugging grammar execution</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION0081112000000000000000">
+Depuración</A>
+</H2>
+
+<P>
+<BLOCKQUOTE><I><A NAME="tex2html204"
+  HREF="http://search.cpan.org/perldoc?Regexp::Grammars">Regexp::Grammars</A>
+provides a number of features specifically designed to
+help debug both grammars and the data they parse.
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>All debugging messages are written to a log file (which, by default, is
+    just <code>STDERR</code>). However, you can specify a disk file explicitly by placing
+    a <code>"&lt;logfile:...&gt;"</code> directive <B>at the start of your grammar</B><A NAME="tex2html203"
+  HREF="footnode.html#foot6129"><SUP>3.10</SUP></A>:
+</I></BLOCKQUOTE>
+<P><PRE>
+        $grammar = qr{
+
+            &lt;logfile: LaTeX_parser_log &gt;
+
+            \A &lt;LaTeX_file&gt; \Z    # Pattern to match
+
+            &lt;rule: LaTeX_file&gt;
+                # etc.
+        }x;
+</PRE>
+<P>
+<BLOCKQUOTE><I>You can also explicitly specify that messages go to the terminal:
+</I></BLOCKQUOTE>
+<P><PRE>
+            &lt;logfile: - &gt;
+</PRE>
+<P>
+<H4><A NAME="SECTION0081112010000000000000">
+Debugging grammar creation</A>
+</H4>
+  
+
+<P>
+Whenever a log file has been directly specified, <A NAME="tex2html206"
+  HREF="http://search.cpan.org/perldoc?Regexp::Grammars">Regexp::Grammars</A>
+automatically does verbose static analysis of your grammar. That is,
+whenever it compiles a grammar containing an explicit <code>"&lt;logfile:...&gt;"</code>
+directive it logs a series of messages explaining how it has interpreted
+the various components of that grammar. For example, the following
+grammar:
+
+<P>
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ cat -n log.pl
+     1  #!/usr/bin/env perl5.10.1
+     2  use strict;
+     3  use warnings;
+     4  use 5.010;
+     5  use Data::Dumper;
+     6
+     7  my $rbb = do {
+     8      use Regexp::Grammars;
+     9
+    10      qr{
+    11        &lt;logfile: -&gt;
+    12
+    13        &lt;numbers&gt;
+    14
+    15        &lt;rule: numbers&gt;
+    16          &lt;number&gt; ** &lt;.comma&gt;
+    17
+    18        &lt;token: number&gt; \d+
+    19
+    20        &lt;token: comma&gt;   ,
+    21      }xms;
+    22  };
+    23
+    24  while (my $input = &lt;&gt;) {
+    25      if ($input =~ m{$rbb}) {
+    26          say("matches: &lt;$&amp;&gt;");
+    27          say Dumper \%/;
+    28      }
+    29  }
+</PRE>
+
+<P>
+would produce the following analysis in the terminal:
+
+<P>
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ ./log.pl
+  warn | Repeated subrule &lt;number&gt;* will only capture its final match
+       | (Did you mean &lt;[number]&gt;* instead?)
+       |
+  info | Processing the main regex before any rule definitions
+       |    |
+       |    |...Treating &lt;numbers&gt; as:
+       |    |      |  match the subrule &lt;numbers&gt;
+       |    |       \ saving the match in $MATCH{'numbers'}
+       |    |
+       |     \___End of main regex
+       |
+       | Defining a rule: &lt;numbers&gt;
+       |    |...Returns: a hash
+       |    |
+       |    |...Treating &lt;number&gt; as:
+       |    |      |  match the subrule &lt;number&gt;
+       |    |       \ saving the match in $MATCH{'number'}
+       |    |
+       |    |...Treating &lt;.comma&gt; as:
+       |    |      |  match the subrule &lt;comma&gt;
+       |    |       \ but don't save anything
+       |    |
+       |    |...Treating &lt;number&gt; ** &lt;.comma&gt; as:
+       |    |      |  repeatedly match the subrule &lt;number&gt;
+       |    |       \ as long as the matches are separated by matches of &lt;.comma&gt;
+       |    |
+       |     \___End of rule definition
+       |
+       | Defining a rule: &lt;number&gt;
+       |    |...Returns: a hash
+       |    |
+       |    |...Treating '\d' as:
+       |    |       \ normal Perl regex syntax
+       |    |
+       |    |...Treating '+ ' as:
+       |    |       \ normal Perl regex syntax
+       |    |
+       |     \___End of rule definition
+       |
+       | Defining a rule: &lt;comma&gt;
+       |    |...Returns: a hash
+       |    |
+       |    |...Treating ', ' as:
+       |    |       \ normal Perl regex syntax
+       |    |
+       |     \___End of rule definition
+       |
+2, 3, 4
+matches: &lt;2, 3, 4&gt;
+$VAR1 = {
+          '' =&gt; '2, 3, 4',
+          'numbers' =&gt; {
+                         '' =&gt; '2, 3, 4',
+                         'number' =&gt; '4'
+                       }
+        };
+</PRE>
+
+<P>
+This kind of static analysis is a useful starting point in debugging a
+<A NAME="6810"></A><B>miscreant grammar</B><A NAME="tex2html205"
+  HREF="footnode.html#foot6291"><SUP>3.11</SUP></A>, because it enables you to see what you actually
+specified (as opposed to what you <B>thought</B> you'd specified).
+
+<P>
+
+<H4><A NAME="SECTION0081112020000000000000">
+Debugging grammar execution</A>
+</H4>
+  
+
+<P>
+<A NAME="tex2html207"
+  HREF="http://search.cpan.org/perldoc?Regexp::Grammars">Regexp::Grammars</A>
+also provides a simple interactive debugger, with which
+you can observe the process of parsing and the data being collected in
+any result-hash.
+
+<P>
+To initiate debugging, place a <code>&lt;debug:...&gt;</code> directive anywhere in your
+grammar. When parsing reaches that directive the debugger will be
+activated, and the command specified in the directive immediately
+executed. The available commands are:
+
+<P>
+<PRE>
+        &lt;debug: on&gt;    - Enable debugging, stop when entire grammar matches
+        &lt;debug: match&gt; - Enable debugging, stope when a rule matches
+        &lt;debug: try&gt;   - Enable debugging, stope when a rule is tried
+        &lt;debug: off&gt;   - Disable debugging and continue parsing silently
+
+        &lt;debug: continue&gt; - Synonym for &lt;debug: on&gt;
+        &lt;debug: run&gt;      - Synonym for &lt;debug: on&gt;
+        &lt;debug: step&gt;     - Synonym for &lt;debug: try&gt;
+</PRE>
+
+<P>
+These directives can be placed anywhere within a grammar and take effect
+    when that point is reached in the parsing. Hence, adding a
+    <code>&lt;debug:step&gt;</code> directive is very much like setting a breakpoint at that
+    point in the grammar. Indeed, a common debugging strategy is to turn
+    debugging on and off only around a suspect part of the grammar:
+
+<P>
+<PRE>
+        &lt;rule: tricky&gt;   # This is where we think the problem is...
+            &lt;debug:step&gt;
+            &lt;preamble&gt; &lt;text&gt; &lt;postscript&gt;
+            &lt;debug:off&gt;
+</PRE>
+
+<P>
+Once the debugger is active, it steps through the parse, reporting rules
+that are tried, matches and failures, backtracking and restarts, and the
+parser's location within both the grammar and the text being matched.
+That report looks like this:
+
+<P>
+<PRE>
+        ===============&gt; Trying &lt;grammar&gt; from position 0
+        &gt; cp file1 file2 |...Trying &lt;cmd&gt;
+                         |   |...Trying &lt;cmd=(cp)&gt;
+                         |   |    \FAIL &lt;cmd=(cp)&gt;
+                         |    \FAIL &lt;cmd&gt;
+                          \FAIL &lt;grammar&gt;
+        ===============&gt; Trying &lt;grammar&gt; from position 1
+         cp file1 file2  |...Trying &lt;cmd&gt;
+                         |   |...Trying &lt;cmd=(cp)&gt;
+         file1 file2     |   |    \_____&lt;cmd=(cp)&gt; matched 'cp'
+        file1 file2      |   |...Trying &lt;[file]&gt;+
+         file2           |   |    \_____&lt;[file]&gt;+ matched 'file1'
+                         |   |...Trying &lt;[file]&gt;+
+        [eos]            |   |    \_____&lt;[file]&gt;+ matched ' file2'
+                         |   |...Trying &lt;[file]&gt;+
+                         |   |    \FAIL &lt;[file]&gt;+
+                         |   |...Trying &lt;target&gt;
+                         |   |   |...Trying &lt;file&gt;
+                         |   |   |    \FAIL &lt;file&gt;
+                         |   |    \FAIL &lt;target&gt;
+         &lt;~~~~~~~~~~~~~~ |   |...Backtracking 5 chars and trying new match
+        file2            |   |...Trying &lt;target&gt;
+                         |   |   |...Trying &lt;file&gt;
+                         |   |   |    \____ &lt;file&gt; matched 'file2'
+        [eos]            |   |    \_____&lt;target&gt; matched 'file2'
+                         |    \_____&lt;cmd&gt; matched ' cp file1 file2'
+                          \_____&lt;grammar&gt; matched ' cp file1 file2'
+</PRE>
+
+<P>
+The first column indicates the point in the input at which the parser is
+trying to match, as well as any backtracking or forward searching it may
+need to do. The remainder of the columns track the parser's hierarchical
+traversal of the grammar, indicating which rules are tried, which
+succeed, and what they match.
+
+<P>
+Provided the logfile is a terminal (as it is by default), the debugger
+also pauses at various points in the parsing process-before trying a
+rule, after a rule succeeds, or at the end of the parse-according to
+the most recent command issued. When it pauses, you can issue a new
+command by entering a single letter:
+
+<P>
+<PRE>
+        m       - to continue until the next subrule matches
+        t or s  - to continue until the next subrule is tried
+        r or c  - to continue to the end of the grammar
+        o       - to switch off debugging
+</PRE>
+
+<P>
+Note that these are the first letters of the corresponding <code>&lt;debug:...&gt;</code>
+commands, listed earlier. Just hitting ENTER while the debugger is
+paused repeats the previous command.
+
+<P>
+While the debugger is paused you can also type a <code>d</code>, which will display
+the result-hash for the current rule. This can be useful for detecting
+which rule isn't returning the data you expected.
+
+<P>
+Veamos un ejemplo. El siguiente programa activa el depurador:
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ cat -n demo_debug.pl
+     1  #!/usr/bin/env perl5.10.1
+     2  use 5.010;
+     3  use warnings;
+     4
+     5      use Regexp::Grammars;
+     6
+     7      my $balanced_brackets = qr{
+     8          &lt;debug:on&gt;
+     9
+    10          &lt;left_delim=(  \( )&gt;
+    11          (?:
+    12              &lt;[escape=(  \\ )]&gt;
+    13          |   &lt;recurse=( (?R) )&gt;
+    14          |   &lt;[simple=(  .  )]&gt;
+    15          )*
+    16          &lt;right_delim=( \) )&gt;
+    17      }xms;
+    18
+    19      while (&lt;&gt;) {
+    20          if (/$balanced_brackets/) {
+    21              say 'matched:';
+    22              use Data::Dumper 'Dumper';
+    23              warn Dumper \%/;
+    24          }
+    25      }
+</PRE>
+Al ejecutar obtenemos
+
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ ./demo_debug.pl
+<span class="lightblue">(a)</span>
+=====&gt; Trying &lt;grammar&gt; from position 0
+(a)\n  |...Trying &lt;left_delim=(  \( )&gt;
+
+a)\n   |    _____&lt;left_delim=(  \( )&gt; matched '('      <span class="lightblue">c</span>
+       |...Trying &lt;[escape=(  \ )]&gt;
+       |    \FAIL &lt;[escape=(  \ )]&gt;
+       |...Trying &lt;recurse=( (?R) )&gt;
+=====&gt; Trying &lt;grammar&gt; from position 1
+a)\n   |   |...Trying &lt;left_delim=(  \( )&gt;
+
+       |   |    \FAIL &lt;left_delim=(  \( )&gt;
+        \FAIL &lt;grammar&gt;
+       |...Trying &lt;[simple=(  .  )]&gt;
+)\n    |    _____&lt;[simple=(  .  )]&gt; matched 'a'
+       |...Trying &lt;[escape=(  \ )]&gt;
+
+       |    \FAIL &lt;[escape=(  \ )]&gt;
+       |...Trying &lt;recurse=( (?R) )&gt;
+=====&gt; Trying &lt;grammar&gt; from position 2
+)\n    |   |...Trying &lt;left_delim=(  \( )&gt;
+       |   |    \FAIL &lt;left_delim=(  \( )&gt;
+
+        \FAIL &lt;grammar&gt;
+       |...Trying &lt;[simple=(  .  )]&gt;
+\n     |    _____&lt;[simple=(  .  )]&gt; matched ')'
+       |...Trying &lt;[escape=(  \ )]&gt;
+       |    \FAIL &lt;[escape=(  \ )]&gt;
+
+       |...Trying &lt;recurse=( (?R) )&gt;
+=====&gt; Trying &lt;grammar&gt; from position 3
+\n     |   |...Trying &lt;left_delim=(  \( )&gt;
+       |   |    \FAIL &lt;left_delim=(  \( )&gt;
+        \FAIL &lt;grammar&gt;
+
+       |...Trying &lt;[simple=(  .  )]&gt;
+[eos]  |    _____&lt;[simple=(  .  )]&gt; matched ''
+       |...Trying &lt;[escape=(  \ )]&gt;
+       |    \FAIL &lt;[escape=(  \ )]&gt;
+       |...Trying &lt;recurse=( (?R) )&gt;
+
+=====&gt; Trying &lt;grammar&gt; from position 4
+[eos]  |   |...Trying &lt;left_delim=(  \( )&gt;
+       |   |    \FAIL &lt;left_delim=(  \( )&gt;
+        \FAIL &lt;grammar&gt;
+       |...Trying &lt;[simple=(  .  )]&gt;
+
+       |    \FAIL &lt;[simple=(  .  )]&gt;
+       |...Trying &lt;right_delim=( \) )&gt;
+       |    \FAIL &lt;right_delim=( \) )&gt;
+ &lt;~~~~ |...Backtracking 1 char and trying new match
+\n     |...Trying &lt;right_delim=( \) )&gt;
+       |    \FAIL &lt;right_delim=( \) )&gt;
+
+ &lt;~~~~ |...Backtracking 1 char and trying new match
+)\n    |...Trying &lt;right_delim=( \) )&gt;
+\n     |    _____&lt;right_delim=( \) )&gt; matched ')'
+        _____&lt;grammar&gt; matched '(a)'   <span class="lightblue">d</span>
+              :         {
+              :           '' =&gt; '(a)',
+              :           'left_delim' =&gt; '(',
+              :           'simple' =&gt; [
+              :                         'a'
+              :                       ],
+              :           'right_delim' =&gt; ')'
+              :         };      <span class="lightblue">o</span>
+matched:
+$VAR1 = {
+          '' =&gt; '(a)',
+          'left_delim' =&gt; '(',
+          'simple' =&gt; [
+                        'a'
+                      ],
+          'right_delim' =&gt; ')'
+        };
+
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html2751"
+  HREF="node98.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2745"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2739"
+  HREF="node96.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2747"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2749"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2752"
+  HREF="node98.html">Mensajes de log del</A>
+<B>Sup:</B> <A NAME="tex2html2746"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2740"
+  HREF="node96.html">Casando con las claves</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

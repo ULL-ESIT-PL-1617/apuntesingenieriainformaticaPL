@@ -1,0 +1,366 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Secuencias de números de tamaño fijo</TITLE>
+<META NAME="description" CONTENT="Secuencias de números de tamaño fijo">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node72.html">
+<LINK REL="previous" HREF="node70.html">
+<LINK REL="up" HREF="node70.html">
+<LINK REL="next" HREF="node72.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2269"
+  HREF="node72.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2263"
+  HREF="node70.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2257"
+  HREF="node70.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2265"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2267"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2270"
+  HREF="node72.html">Palabras Repetidas</A>
+<B>Sup:</B> <A NAME="tex2html2264"
+  HREF="node70.html">Casos de Estudio</A>
+<B> Ant:</B> <A NAME="tex2html2258"
+  HREF="node70.html">Casos de Estudio</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html2271"
+  HREF="node71.html#SECTION00851010000000000000">Solución usando el ancla <TT><!-- MATH
+ $\backslash$
+ -->
+<IMG
+ WIDTH="14" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img7.png"
+ ALT="$ \backslash$">
+ G</TT></A>
+<LI><A NAME="tex2html2272"
+  HREF="node71.html#SECTION00851020000000000000">Sustitución</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION00851000000000000000"></A>
+<A NAME="section:numeros"></A>
+<BR>
+Secuencias de números de tamaño fijo
+</H2>
+El siguiente problema y sus soluciones se describen en el libro de J.E.F. Friedl
+[<A
+ HREF="node323.html#friedl">3</A>].
+Supongamos que tenemos un texto conteniendo códigos que son 
+números de tamaño fijo, digamos 
+seis dígitos, todos pegados, sin separadores entre ellos, como sigue:
+
+<P>
+<DIV ALIGN="CENTER">
+</DIV>
+<DIV ALIGN="CENTER"><TT>012345678901<B>123334</B>234567890123<B>125934</B>890123345126
+</TT>
+</DIV>
+
+<P>
+El problema es encontrar los códigos que comienzan por <TT>12</TT>. En negrita 
+se han resaltado las soluciones.  Son soluciones sólo aquellas que, comienzan
+por <code>12</code> en una posición múltiplo de seis. 
+Una solución es:
+
+<P>
+<DIV ALIGN="CENTER">
+</DIV><PRE>
+@nums = grep {m/^12/} m/\d{6}/g;
+</PRE>
+<DIV ALIGN="CENTER">
+</DIV>
+
+<P>
+que genera una lista con los números y luego selecciona los que comienzan por
+<code>12</code>.
+Otra solución es:
+
+<P>
+<DIV ALIGN="CENTER">
+</DIV><PRE>
+@nums = grep { defined } m/(12\d{4})|\d{6}/g;
+</PRE>
+<DIV ALIGN="CENTER">
+</DIV>
+
+<P>
+que aprovecha que la expresión regular devolverá una lista vacía cuando
+el número no empieza por <code>12</code>:
+<PRE>
+DB&lt;1&gt; $x = '012345678901123334234567890123125934890123345126'
+DB&lt;2&gt; x  ($x =~ m/(12\d{4})|\d{6}/g)
+0  undef
+1  undef
+2  123334
+3  undef
+4  undef
+5  125934
+6  undef
+7  undef
+</PRE>
+Obsérvese que se esta utilizando también que el operador <code>|</code> no es <B>greedy</B>.
+
+<P>
+¿Se puede resolver el problema usando sólamente una expresión regular?
+Obsérvese que esta solución ``casi funciona'':
+
+<P>
+<DIV ALIGN="CENTER">
+</DIV><PRE>
+ DB&lt;3&gt; x @nums = $x =~ m/(?:\d{6})*?(12\d{4})/g;
+0  123334
+1  125934
+2  123345
+</PRE>
+<DIV ALIGN="CENTER">
+</DIV>
+
+<P>
+recoge la secuencia mas corta de grupos de seis dígitos que no casan, seguida 
+de una secuencia que casa. 
+El problema que tiene esta solución 
+es al final, cuando se han casado todas las soluciones, entonces 
+la búsqueda exhaustiva hará que nos muestre soluciones que no comienzan en posiciones
+múltiplo de seis. Por eso encuentra <code>123345</code>:
+<DIV ALIGN="CENTER">
+</DIV>
+<DIV ALIGN="CENTER"><TT>012345678901<B>123334</B>234567890123<B>125934</B>890<B>123345</B>126
+</TT>
+</DIV>
+Por eso, Friedl propone esta solución:
+
+<P>
+<DIV ALIGN="CENTER">
+</DIV><PRE>
+@nums = m/(?:\d{6})*?(12\d{4})(?:(?!12)\d{6})*/g;
+</PRE>
+<DIV ALIGN="CENTER">
+</DIV>
+
+<P>
+Se asume que existe al menos un éxito en la entrada inicial.
+Que es un extraordinario ejemplo de como el uso de paréntesis de agrupamiento
+simplifica y mejora la legibilidad de la solución. Es fantástico también el uso
+del operador de predicción negativo.
+
+<P>
+
+<H4><A NAME="SECTION00851010000000000000">
+Solución usando el ancla <TT><!-- MATH
+ $\backslash$
+ -->
+<IMG
+ WIDTH="14" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img7.png"
+ ALT="$ \backslash$">
+ G</TT></A>
+</H4>
+  
+
+<P>
+El ancla <code>\G</code> ha sido concebida para su uso con la opción <code>/g</code>.
+Casa con el punto en la cadena en el que terminó el último emparejamiento.
+Cuando se trata del primer intento o no se está usando <code>/g</code>, usar <code>\G</code>
+es lo mismo que usar <code>\A</code>.
+
+<P>
+Mediante el uso de este ancla es posible formular la siguiente solución 
+al problema planteado:
+
+<P>
+<DIV ALIGN="CENTER">
+</DIV><PRE>
+pl@nereida:~/Lperltesting$ perl -wde 0
+main::(-e:1):   0
+DB&lt;1&gt; $_ = '012345678901123334234567890123125934890123345126'
+DB&lt;2&gt; x m/\G(?:\d{6})*?(12\d{4})/g
+0  123334
+1  125934
+</PRE>
+<DIV ALIGN="CENTER">
+</DIV>
+
+<P>
+
+<H4><A NAME="SECTION00851020000000000000">
+Sustitución</A>
+</H4>
+  
+
+<P>
+Si lo que se quiere es sustituir las secuencias deseadas es poisble hacerlo con 
+la siguiente expresión regular:
+<PRE>
+casiano@nereida:~/docs/curriculums/CV_MEC$ perl -wde 0
+DB&lt;1&gt; x $x = '012345678901123334234567890123125934890123345126'
+0  012345678901123334234567890123125934890123345126
+DB&lt;2&gt; x  ($y = $x) =~ s/(12\d{4})|\d{6}/$1? "-$1-":$&amp; /ge
+0  8
+DB&lt;3&gt; p $y
+012345678901-123334-234567890123-125934-890123345126
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html2269"
+  HREF="node72.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2263"
+  HREF="node70.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2257"
+  HREF="node70.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2265"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2267"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2270"
+  HREF="node72.html">Palabras Repetidas</A>
+<B>Sup:</B> <A NAME="tex2html2264"
+  HREF="node70.html">Casos de Estudio</A>
+<B> Ant:</B> <A NAME="tex2html2258"
+  HREF="node70.html">Casos de Estudio</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

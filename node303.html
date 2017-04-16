@@ -1,0 +1,380 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Comprobación de Tipos: Indexados</TITLE>
+<META NAME="description" CONTENT="Comprobación de Tipos: Indexados">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node304.html">
+<LINK REL="previous" HREF="node302.html">
+<LINK REL="up" HREF="node294.html">
+<LINK REL="next" HREF="node304.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html6121"
+  HREF="node304.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6115"
+  HREF="node294.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6109"
+  HREF="node302.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6117"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6119"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6122"
+  HREF="node304.html">Comprobación de Tipos: Sentencias</A>
+<B>Sup:</B> <A NAME="tex2html6116"
+  HREF="node294.html">Análisis de Tipos</A>
+<B> Ant:</B> <A NAME="tex2html6110"
+  HREF="node302.html">Comprobación de Tipos: Las</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001890000000000000000"></A>
+<A NAME="section:tiposenaccesosaarrays"></A>
+<BR>
+Comprobación de Tipos: Indexados
+</H1>
+
+<P>
+
+<H4><A NAME="SECTION001890010000000000000">
+Guía de Ruta en la Comprobación de Tipos para los Accesos a Arrays</A>
+</H4>
+  
+
+<P>
+En la comprobación de tipos de una 
+expresión <code>x[y1][y2]</code> que referencia a un elemento de un array  
+hay que tener en cuenta:
+
+<OL>
+<LI>Que el tipo declarado para la variable <code>x</code> debe ser array (líneas 4-9 del código
+que sigue)
+</LI>
+<LI>Que el número de dimensiones utilizadas en la expresión debe ser menor o igual que
+el declarado para la variable (líneas 11-17). 
+</LI>
+<LI>Si <code>x</code> es un array de tipo <code>t</code> el tipo de <code>x[2]</code> será <code>t</code>.
+Por ejemplo,
+en la llamada <code>g(x[y1][y2])</code> la variable <code>x</code> deberá 
+haber sido declarada con al menos dos dimensiones. Si <code>x</code>
+fué declarada <code>int x[10][20][30]</code> el tipo de  la expresión
+<code>x[y1][y2]</code> será <code>A_30(INT)</code>.
+
+<P>
+</LI>
+<LI>Que los índices usados deben ser de tipo entero. Si fueran de tipo <code>CHAR</code> podrán
+ser ahormados.
+</LI>
+</OL>
+
+<P>
+
+<H4><A NAME="SECTION001890020000000000000">
+Código de Comprobación de Tipos para los Accesos a Arrays</A>
+</H4>
+  
+
+<P>
+Sigue el código para la comprobación de tipos de expresiones 
+de referencias a elementos de un array:
+
+<P>
+<PRE>
+nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/lib/Simple&gt; \
+    sed -ne '97,125p' Trans.trg | cat -n
+ 1  arrays: VARARRAY($x, INDEXSPEC(@y))
+ 2     =&gt; {
+ 3
+ 4      my $t = $VARARRAY-&gt;{t}; # Type declared for VARARRAY
+ 5        type_error(           # Must be an array type
+ 6          " Variable '$x-&gt;{attr}[0]' was not declared as array",
+ 7          $VARARRAY-&gt;line
+ 8        )
+ 9      unless is_array($t);
+10
+11      my ($declared_dim, $used_dim, $ret_type) = compute_dimensionality($t, @y);
+12
+13        type_error(
+14          " Variable '$x-&gt;{attr}[0]' declared with less than $used_dim dimensions",
+15          $VARARRAY-&gt;line
+16        )
+17      unless $declared_dim &gt;= $used_dim;
+18
+19      for (0..$#y) { # check that each index is integer. Coherce it if is $CHAR
+20        my $ch = char2int($INDEXSPEC, $_);
+21
+22          type_error("Indices must be integers",$VARARRAY-&gt;line)
+23        unless ($ch-&gt;{t} == $INT);
+24      }
+25
+26      $VARARRAY-&gt;{t} = $ret_type;
+27
+28      return 1;
+29    }
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION001890030000000000000">
+Funciones de Ayuda</A>
+</H4>
+  
+
+<P>
+La función <code>compute_dimensionality</code> llamada en la línea 11
+se incluye dentro de la sección de  funciones de soporte en <code>Trans.trg</code>:
+<PRE>
+ 96  { # support for arrays
+ 97
+ 98    sub compute_dimensionality {
+ 99      my $t = shift;
+100      my $i = 0;
+101      my $q;
+102      my $used_dim = scalar(@_);
+103      for ($q=$t; is_array($q) and ($i &lt; $used_dim); $q=$q-&gt;child(0)) {
+104        $i++
+105      }
+106
+107      croak "Error checking array type\n" unless defined($q);
+108      return ($i, $used_dim, $q);
+109    }
+110
+111    sub is_array {
+112      my $type = shift;
+113
+114      defined($type) &amp;&amp; $type =~ /^A_\d+/;
+115    }
+116
+117    sub array_compatible {
+118      my ($a1, $a2) = @_;
+119
+120      return 1 if $a1 == $a2;
+121      # int a[10][20] and int b[5][20] are considered compatibles
+122      return (is_array($a1) &amp;&amp; is_array($a2) &amp;&amp; ($a1-&gt;child(0) == $a2-&gt;child(0)));
+123    }
+124  }
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION001890040000000000000">
+Ejemplos</A>
+</H4>
+  
+
+<P>
+El siguiente ejemplo muestra la comprobacion de tipos de arrays en funcionamiento:
+<PRE>
+pl@nereida:~/Lbook/code/Simple-Types/script$ usetypes.pl prueba02.c 2
+ 1 int a,b,e[10];
+ 2
+ 3 g() {}
+ 4
+ 5 int f(char c) {
+ 6 char d;
+ 7  c = 'X';
+ 8  e[d][b] = 'A'+c;
+ 9  {
+10    int d;
+11    d = a + b;
+12  }
+13  c = d * 2;
+14  return c;
+15 }
+16
+Type Error at line 8:  Variable 'e' declared with less than 2 dimensions
+</PRE>
+El siguiente ejemplo muestra la comprobacion de tipos de que los
+índices de arrays deben ser enteros:
+<PRE>
+pl@nereida:~/Lbook/code/Simple-Types/script$ usetypes.pl prueba06.c 2
+ 1 int a,b,e[10][20];
+ 2
+ 3 g() {}
+ 4
+ 5 int f(char c) {
+ 6 char d[20];
+ 7  c = 'X';
+ 8  g(e[d], 'A'+c);
+ 9  {
+10    int d;
+11    d = a + b;
+12  }
+13  c = d * 2;
+14  return c;
+15 }
+16
+Type Error at line 8: Indices must be integers
+</PRE>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html6123"
+  HREF="node303.html#SECTION001890010000000000000">Guía de Ruta en la Comprobación de Tipos para los Accesos a Arrays</A>
+<LI><A NAME="tex2html6124"
+  HREF="node303.html#SECTION001890020000000000000">Código de Comprobación de Tipos para los Accesos a Arrays</A>
+<LI><A NAME="tex2html6125"
+  HREF="node303.html#SECTION001890030000000000000">Funciones de Ayuda</A>
+<LI><A NAME="tex2html6126"
+  HREF="node303.html#SECTION001890040000000000000">Ejemplos</A>
+</UL></UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html6121"
+  HREF="node304.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6115"
+  HREF="node294.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6109"
+  HREF="node302.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6117"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6119"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6122"
+  HREF="node304.html">Comprobación de Tipos: Sentencias</A>
+<B>Sup:</B> <A NAME="tex2html6116"
+  HREF="node294.html">Análisis de Tipos</A>
+<B> Ant:</B> <A NAME="tex2html6110"
+  HREF="node302.html">Comprobación de Tipos: Las</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

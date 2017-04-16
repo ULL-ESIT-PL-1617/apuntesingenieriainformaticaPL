@@ -1,0 +1,339 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Comprobación de Tipos: Sentencias de Asignación</TITLE>
+<META NAME="description" CONTENT="Comprobación de Tipos: Sentencias de Asignación">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node306.html">
+<LINK REL="previous" HREF="node304.html">
+<LINK REL="up" HREF="node294.html">
+<LINK REL="next" HREF="node306.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html6153"
+  HREF="node306.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6147"
+  HREF="node294.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6141"
+  HREF="node304.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6149"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6151"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6154"
+  HREF="node306.html">Comprobación de Tipos: Llamadas</A>
+<B>Sup:</B> <A NAME="tex2html6148"
+  HREF="node294.html">Análisis de Tipos</A>
+<B> Ant:</B> <A NAME="tex2html6142"
+  HREF="node304.html">Comprobación de Tipos: Sentencias</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0018110000000000000000"></A>
+<A NAME="section:sentenciasdeasignacion"></A>
+<BR>
+Comprobación de Tipos: Sentencias de Asignación
+</H1>
+La comprobación de tipos en las asignaciones
+se divide en tres fases:
+
+<OL>
+<LI>Coherción: líneas 10 y 11
+</LI>
+<LI>Comprobación de la igualdad de los tipos (DAGs) de ambos lados
+de la igualdad  (líneas 13 y 14)
+</LI>
+<LI>Comprobación de que el tipo del lado izquierdo de la asignación
+está entre los permitidos por el lenguaje. En ANSI C se permite 
+también la asignación de estructuras pero estas no están presentes
+en Simple C.
+</LI>
+<LI>Si el lenguaje permitiera 
+expresiones mas complejas en el lado izquierdo 
+serían necesarias comprobaciones de que la expresión en la izquierda
+es 'asignable' (es un <code>lvalue</code>). Por ejemplo en Kernighan y Ritchie C (KR C)
+[<A
+ HREF="node323.html#KR">11</A>]
+la asignación <code>f(2,x) = 4</code> no es correcta pero si podría 
+serlo <code>*f(2,x) = 4</code>.
+En KR C las reglas
+de producción que definen la parte izquierda de una asignación 
+(<code>lvalue</code>) son mas complejas que las de SimpleC, especialmente 
+por la presencia de punteros:
+
+<P>
+<DIV ALIGN="CENTER">
+<A NAME="tabular:cgrammar"></A><TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER" COLSPAN=2>Resumen de la Gramática de Kernighan y Ritchie C (KR C) en Parse::Eyapp</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198>Expresiones</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=201>Declaraciones</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198><PRE>
+lvalue:
+    identifier
+  | primary '[' exp ']'
+  | lvalue '.' identifier
+  | primary '-&gt;' identifier
+  | '*' exp
+  | '(' lvalue ')'
+primary:
+    identifier
+  | constant
+  | string
+  | (exp)
+  | primary '(' exp &lt;*, ','&gt; ')'
+  | primary '[' exp ']'
+  | lvalue '.' identifier
+  | primary '-&gt;' identifier
+exp:
+    primary
+  | '*' exp
+  | '&amp;' exp
+  | lvalue ASGNOP exp 
+  ..........................
+</PRE></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=201><PRE>
+fund:
+    t? dec '(' pr &lt;* ','&gt; ')' fb
+declaration:
+   scty * (dec ini) &lt;* ','&gt;
+scty:
+    scope 
+  | t 
+scope:
+     tdef | ...
+t:
+    char
+  | int
+  | double
+  | tdef_name    
+  ...................
+dec:
+    identifier
+  | '(' dec ')'
+  | '*' dec
+  | dec '(' ')'
+  | dec '[' cexp ? ']'
+ini:
+    '=' exp
+  | '=' '{' exp &lt;* ','&gt; ','? '}'
+</PRE></TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+</LI>
+<LI>En la línea 20 modificamos el tipo del nodo: de ser <code>ASSIGN</code> pasa
+a ser <code>ASSIGNINT</code> o <code>ASSIGNCHAR</code> según sea el tipo de la asignación.
+De este modo eliminamos la sobrecarga semántica del nodo y
+hacemos explícito en el nodo el tipo de asignación. Poco a poco nos vamos acercando
+a niveles mas bajos de programación. 
+</LI>
+</OL>
+
+<P>
+Sigue el código de comprobación para las asignaciones:
+
+<P>
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/lib/Simple$ \
+                         sed -ne '/^assign/,180p' Trans.trg | cat -n
+ 1  assign: /ASSIGN
+ 2           |PLUSASSIGN
+ 3           |MINUSASSIGN
+ 4           |TIMESASSIGN
+ 5           |DIVASSIGN
+ 6           |MODASSIGN
+ 7          /:asgn($lvalue, $exp)
+ 8    =&gt; {
+ 9      my $lt =  $lvalue-&gt;{t};
+10      $exp = char2int($asgn, 1) if $lt == $INT;
+11      $exp = int2char($asgn, 1) if $lt == $CHAR;
+12
+13        type_error("Incompatible types in assignment!", $asgn-&gt;line)
+14      unless ($lt == $exp-&gt;{t});
+15
+16        type_error("The C language does not allow assignments to non-scalar types!", $asgn-&gt;line)
+17      unless ($lt == $INT) or ($lt == $CHAR); # Structs will also be allowed
+18
+19      # Assignments are expressions. Its type is the type of the lhs or the rhs
+20      $asgn-&gt;{t} = $lt;
+21
+22      # Make explicit the type of assignment, i.e.  s/PLUSASSIGN/PLUSASSIGNINT/
+23      $asgn-&gt;type(ref($asgn).ref($lt));
+24
+25      return 1;
+26    }
+</PRE>
+
+<P>
+Veamos un ejemplo de comprobación de tipos en asignaciones:
+
+<P>
+<PRE>
+pl@nereida:~/Lbook/code/Simple-Types/script$ usetypes.pl prueba12.c 2
+1 int a,b[10][20],e[10][20];
+2
+3 int f(char c) {
+4   e[5] = b[5];
+5   a = b[1][2];
+6 }
+7
+Type Error at line 4: The C language does not allow assignments to non-scalar types!
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html6153"
+  HREF="node306.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6147"
+  HREF="node294.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6141"
+  HREF="node304.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6149"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6151"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6154"
+  HREF="node306.html">Comprobación de Tipos: Llamadas</A>
+<B>Sup:</B> <A NAME="tex2html6148"
+  HREF="node294.html">Análisis de Tipos</A>
+<B> Ant:</B> <A NAME="tex2html6142"
+  HREF="node304.html">Comprobación de Tipos: Sentencias</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

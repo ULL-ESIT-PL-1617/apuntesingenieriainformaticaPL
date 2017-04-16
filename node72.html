@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Palabras Repetidas</TITLE>
+<META NAME="description" CONTENT="Palabras Repetidas">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node73.html">
+<LINK REL="previous" HREF="node71.html">
+<LINK REL="up" HREF="node70.html">
+<LINK REL="next" HREF="node73.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2285"
+  HREF="node73.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2279"
+  HREF="node70.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2273"
+  HREF="node71.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2281"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2283"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2286"
+  HREF="node73.html">Análisis de cadenas con</A>
+<B>Sup:</B> <A NAME="tex2html2280"
+  HREF="node70.html">Casos de Estudio</A>
+<B> Ant:</B> <A NAME="tex2html2274"
+  HREF="node71.html">Secuencias de números de</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00852000000000000000"></A>
+<A NAME="section:repetidas"></A>
+<BR>
+Palabras Repetidas
+</H2>
+Su jefe le pide una herramienta que compruebe la aparición de
+duplicaciones consecutivas en un texto texto (como esta esta y la anterior anterior).
+La solución debe cumplir las siguientes especificaciones:
+
+<UL>
+<LI>Aceptar cualquier número de ficheros. Resaltar las apariciones
+de duplicaciones. Cada línea del informe debe estar precedida del nombre del fichero.
+</LI>
+<LI>Funcionar no sólo cuando la duplicación ocurre en la misma línea.
+</LI>
+<LI>Funcionar independientemente del <B>case</B> y de los blancos usados en medio
+de ambas palabras.
+</LI>
+<LI>Las palabras en cuestión pueden estar separadas por <B>tags</B> <code>HTML</code>.
+</LI>
+</UL>
+
+<P>
+
+<pre>
+<span class="synLinenum">    1</span> <span class="synPreProc">#!/usr/bin/perl -w</span>
+<span class="synLinenum">    2</span> <span class="synStatement">use strict</span>;
+<span class="synLinenum">    3</span> <span class="synStatement">use </span>Term::ANSIScreen <span class="synConstant">qw/:constants/</span>;
+<span class="synLinenum">    4</span> 
+<span class="synLinenum">    5</span> <span class="synStatement">my</span> <span class="synIdentifier">$bold</span> = BOLD();
+<span class="synLinenum">    6</span> <span class="synStatement">my</span> <span class="synIdentifier">$clear</span> = CLEAR();
+<span class="synLinenum">    7</span> <span class="synStatement">my</span> <span class="synIdentifier">$line</span> = <span class="synConstant">1</span>;
+<span class="synLinenum">    8</span> 
+<span class="synLinenum">    9</span> <span class="synComment"># read paragraph</span>
+<span class="synLinenum">   10</span> <span class="synStatement">local</span> <span class="synIdentifier">$/</span> = <span class="synConstant">".</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+<span class="synLinenum">   11</span> <span class="synStatement">while</span> (<span class="synStatement">my</span> <span class="synIdentifier">$par</span> = &lt;&gt;) {
+<span class="synLinenum">   12</span>   <span class="synStatement">next</span> <span class="synStatement">unless</span> <span class="synIdentifier">$par</span> =~ <span class="synStatement">s{</span>
+<span class="synLinenum">   13</span> <span class="synConstant">        </span><span class="synSpecial">\b</span><span class="synConstant">                 # start word </span><span class="synSpecial">...</span>
+<span class="synLinenum">   14</span> <span class="synConstant">        </span><span class="synSpecial">([a-z]+)</span><span class="synConstant">           # grab word in </span><span class="synIdentifier">$1</span><span class="synConstant"> and </span><span class="synSpecial">\1</span>
+<span class="synLinenum">   15</span> <span class="synConstant">        </span><span class="synSpecial">(</span><span class="synConstant">                  # save the tags and spaces in </span><span class="synIdentifier">$2</span>
+<span class="synLinenum">   16</span> <span class="synConstant">        </span><span class="synSpecial">(\s</span><span class="synConstant">|&lt;</span><span class="synSpecial">[^&gt;]+</span><span class="synConstant">&gt;</span><span class="synSpecial">)+</span><span class="synConstant">      # spaces or HTML tags </span>
+<span class="synLinenum">   17</span> <span class="synConstant">        </span><span class="synSpecial">)</span><span class="synConstant">   </span>
+<span class="synLinenum">   18</span> <span class="synConstant">        </span><span class="synSpecial">(\1\b)</span><span class="synConstant">             # repeated word in </span><span class="synIdentifier">$4</span>
+<span class="synLinenum">   19</span> <span class="synConstant">  </span><span class="synStatement">}</span>!<span class="synIdentifier">$bold$1$clear$2$bold$4$clear</span>!igx;
+<span class="synLinenum">   20</span> 
+<span class="synLinenum">   21</span>   <span class="synIdentifier">$par</span> =~ <span class="synStatement">s/</span><span class="synConstant">^</span><span class="synStatement">/</span><span class="synConstant">"</span><span class="synIdentifier">$ARGV</span><span class="synConstant">(".</span><span class="synIdentifier">$line</span><span class="synConstant">++."): "</span><span class="synStatement">/meg</span>;   <span class="synComment"># insert filename and line number</span>
+<span class="synLinenum">   22</span> 
+<span class="synLinenum">   23</span>   <span class="synStatement">print</span> <span class="synIdentifier">$par</span>;
+<span class="synLinenum">   24</span> }
+</pre>
+<P>
+Sigue un ejemplo de uso:
+<pre>
+pl@nereida:~/Lperltesting$ cat -n t.t
+     1  one one
+     2  nothing rep
+     3  is two three
+     4  three four
+     5
+pl@nereida:~/Lperltesting$ ./repeatedwords2.pl t.t
+t.t(1): <font color="blue">one one</font>
+t.t(2): nothing rep
+t.t(3): is two <font color="blue">three</font>
+t.t(4): <font color="blue">three</font> four
+t.t(5):
+</pre>
+
+<P>
+<HR>
+<A NAME="tex2html2285"
+  HREF="node73.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2279"
+  HREF="node70.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2273"
+  HREF="node71.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2281"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2283"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2286"
+  HREF="node73.html">Análisis de cadenas con</A>
+<B>Sup:</B> <A NAME="tex2html2280"
+  HREF="node70.html">Casos de Estudio</A>
+<B> Ant:</B> <A NAME="tex2html2274"
+  HREF="node71.html">Secuencias de números de</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

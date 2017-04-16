@@ -1,0 +1,338 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>La orden N</TITLE>
+<META NAME="description" CONTENT="La orden N">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node16.html">
+<LINK REL="previous" HREF="node14.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" HREF="node16.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html1156"
+  HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1150"
+  HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1144"
+  HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1152"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html1154"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html1157"
+  HREF="node16.html">Suprimir: El Comando D</A>
+<B>Sup:</B> <A NAME="tex2html1151"
+  HREF="node6.html">Expresiones Regulares en sed</A>
+<B> Ant:</B> <A NAME="tex2html1145"
+  HREF="node14.html">Del espacio de Patrones</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00690000000000000000">
+La orden <I>N</I></A>
+</H1>
+<I>N</I> añade la siguiente línea de entrada al espacio de
+patrones. Las dos líneas se separan mediante un retorno de
+carro. Después de su ejecución, el comando <I>N</I> pasa el control a los
+subsiguientes comandos en el <I>script</I>.
+<BR>
+El siguiente ejemplo propuesto en [<A
+ HREF="node323.html#sedawk">1</A>] muestra una
+búsqueda y sustitución multilínea. Se trata de sustituir la
+cadena ``Owner and Operator Guide'' por ``Installation Guide'', cualquiera que sea su posición en una línea o entre ellas.
+Los autores de [<A
+ HREF="node323.html#sedawk">1</A>] y [<A
+ HREF="node323.html#power">2</A>] proponen la siguiente
+solución:
+<PRE>
+$ cat multiline2.sed
+#Assume the pattern is in no more than two lines
+s/Owner and Operator Guide/Installation Guide/g
+/Owner/{
+  N
+  s/ *\n/ /g
+  s/Owner  *and  *Operator  *Guide/Installation Guide/g
+}
+</PRE>
+Veamos primero los contenidos del fichero de prueba:
+<PRE>
+$ cat multiline.test
+Dear Owner: Consult
+Section 3.1 in the Owner and
+Operator Guide for a description of the tape drives available for the Owner
+of your system.
+ 
+Consult Section 3.1 in the Owner and Operator
+Guide for a description of the tape drives
+available on your system.
+ 
+Look in the Owner and Operator Guide, we mean the Owner
+and Operator Guide shipped with your system.
+ 
+Two manuals are provided including the Owner and
+Operator Guide and the User Guide.
+ 
+The Owner and Operator Guide is shipped with your system.
+ 
+Look in the Owner
+and Operator Guide shipped with your system.
+ 
+The Owner
+and
+Operator
+Guide is shipped with your system.
+</PRE>
+La ejecución del <I>script</I> da la siguiente salida:
+<PRE>
+$ sed -f multiline2.sed multiline.test
+Dear Owner: Consult Section 3.1 in the Owner and
+Operator Guide for a description of the tape drives available for the Owner
+of your system.
+ 
+Consult Section 3.1 in the Installation Guide for a description of the tape
+drives
+available on your system.
+ 
+Look in the Installation Guide, we mean the Installation Guide shipped with
+your system.
+ 
+Two manuals are provided including the Installation Guide and the User Guide.
+ 
+The Installation Guide is shipped with your system.
+ 
+Look in the Installation Guide shipped with your system.
+ 
+The Owner and
+Operator
+Guide is shipped with your system.
+</PRE>
+Uno de los problemas, que aparece en el primer párrafo del
+ejemplo de prueba, es que la segunda línea leída debe ser
+"reciclada"
+para su uso en la siguiente búsqueda. El segundo fallo, 
+que aparece en el último párrafo, es consecuencia de la
+limitación del <I>script</I> para trabajar con  patrones partidos
+en más de dos líneas.
+<BR>
+Consideremos esta otra solución:
+<PRE>
+$ cat multiline.sed
+s/Owner and Operator Guide/Installation Guide/g
+/Owner/{
+:label
+  N
+  s/\n/ /g
+  s/Owner  *and  *Operator  *Guide/Installation Guide/g
+  /Owner *$/b label
+  /Owner  *and *$/b label
+  /Owner  *and  *Operator *$/b label
+  }
+</PRE>
+Este otro <I>script</I> hace que <TT>sed</TT> permanezca en un bucle mientras
+la línea adjuntada en segundo lugar contenga un prefijo estricto 
+de la cadena buscada. 
+
+<P>
+<PRE>
+$sed -f multiline.sed multiline.test
+Dear Owner: Consult Section 3.1 in the Installation Guide for \
+a description of the tape drives available for the Owner  of \
+your system.
+ 
+Consult Section 3.1 in the Installation Guide for a description of the tape drives
+available on your system.
+ 
+Look in the Installation Guide, we mean the Installation Guide \
+shipped with your system.
+ 
+Two manuals are provided including the Installation Guide and the User Guide.
+ 
+The Installation Guide is shipped with your system.
+ 
+Look in the Installation Guide shipped with your system.
+ 
+The Installation Guide is shipped with your system.
+</PRE>
+Un problema que aparece con esta aproximación es la presencia
+de líneas muy largas. Las líneas permanecen en el espacio de trabajo
+mientras terminen en un prefijo de la cadena buscada. Para
+que la salida quepa en la hoja he
+tenido que partir las líneas del fichero de salida, lo que he indicado con los
+símbolos <!-- MATH
+ $\backslash$
+ -->
+<IMG
+ WIDTH="14" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img7.png"
+ ALT="$ \backslash$">
+. Considere esta modificación:
+<PRE>
+#!/bin/sed -f
+s/Owner and Operator Guide/Installation Guide/g
+/Owner/{
+:label
+  N
+  s/Owner\([ \n]*\)and\([ \n]*\)Operator\([ \n]*\)Guide/Installation\1\2Guide\3/g
+  /Owner *$/b label
+  /Owner  *and *$/b label
+  /Owner  *and  *Operator *$/b label
+  }
+</PRE>
+Es indudable la ventaja de disponer de esta
+capacidad de búsqueda multilínea no puede realizarse con 
+otras utilidades como <I>ex</I> o <I>vi</I>.
+
+<P>
+<HR>
+<A NAME="tex2html1156"
+  HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1150"
+  HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1144"
+  HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1152"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html1154"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html1157"
+  HREF="node16.html">Suprimir: El Comando D</A>
+<B>Sup:</B> <A NAME="tex2html1151"
+  HREF="node6.html">Expresiones Regulares en sed</A>
+<B> Ant:</B> <A NAME="tex2html1145"
+  HREF="node14.html">Del espacio de Patrones</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

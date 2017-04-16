@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Expandiendo y comprimiendo tabs</TITLE>
+<META NAME="description" CONTENT="Expandiendo y comprimiendo tabs">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node77.html">
+<LINK REL="previous" HREF="node75.html">
+<LINK REL="up" HREF="node70.html">
+<LINK REL="next" HREF="node77.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2348"
+  HREF="node77.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2342"
+  HREF="node70.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2336"
+  HREF="node75.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2344"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2346"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2349"
+  HREF="node77.html">Modificación de Múltiples Ficheros:</A>
+<B>Sup:</B> <A NAME="tex2html2343"
+  HREF="node70.html">Casos de Estudio</A>
+<B> Ant:</B> <A NAME="tex2html2337"
+  HREF="node75.html">Número de substituciones realizadas</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00856000000000000000">
+Expandiendo y comprimiendo tabs</A>
+</H2>
+Este programa convierte los tabs en el número apropiado de blancos.
+
+<pre>
+pl@nereida:~/Lperltesting$ cat -n expandtabs.pl
+<span class="synLinenum">    1</span> <span class="synPreProc">#!/usr/bin/perl -w</span>
+<span class="synLinenum">    2</span> <span class="synStatement">use strict</span>;
+<span class="synLinenum">    3</span> 
+<span class="synLinenum">    4</span> <span class="synStatement">my</span> <span class="synIdentifier">@string</span> = &lt;&gt;;
+<span class="synLinenum">    5</span> 
+<span class="synLinenum">    6</span> <span class="synStatement">for</span> (<span class="synIdentifier">@string</span>) {
+<span class="synLinenum">    7</span>   <span class="synStatement">while</span> (<span class="synStatement">s/</span><span class="synSpecial">\t+</span><span class="synStatement">/</span><span class="synConstant">' ' x (length(</span><span class="synIdentifier">$&amp;</span><span class="synConstant">)*8 - length(</span><span class="synIdentifier">$`</span><span class="synConstant">)%8)</span><span class="synStatement">/e</span>) {}
+<span class="synLinenum">    8</span>   <span class="synStatement">print</span> <span class="synIdentifier">$_</span>;
+<span class="synLinenum">    9</span> }
+</pre>
+Sigue un ejemplo de ejecución:
+
+<pre>
+pl@nereida:~/Lperltesting$ <span class="dbuser">cat -nt tabs.in</span>
+     1  012345670123456701234567012345670
+     2  one^Itwo^I^Ithree
+     3  four^I^I^I^Ifive
+     4  ^I^Itwo
+pl@nereida:~/Lperltesting$ <span class="dbuser">./expandtabs.pl tabs.in | cat -tn</span>
+     1  012345670123456701234567012345670
+     2  one     two             three
+     3  four                            five
+     4                  two
+</pre>
+
+<P>
+<P>
+<DIV><B>Ejercicio  3.5.3</B> &nbsp; 
+<I>¿Funciona igual si se cambia el bucle <code>while</code> por una opción <code>/g</code>?
+
+<pre>
+pl@nereida:~/Lperltesting$ cat -n ./expandtabs2.pl
+<span class="synLinenum">    1</span>   <span class="synComment">#!/usr/bin/perl -w</span>
+<span class="synLinenum">    2</span>   <span class="synStatement">use strict</span>;
+<span class="synLinenum">    3</span> 
+<span class="synLinenum">    4</span>   <span class="synStatement">my</span> <span class="synIdentifier">@string</span> = &lt;&gt;;
+<span class="synLinenum">    5</span> 
+<span class="synLinenum">    6</span>   <span class="synStatement">for</span> (<span class="synIdentifier">@string</span>) {
+<span class="synLinenum">    7</span>     <span class="synStatement">s/</span><span class="synSpecial">\t+</span><span class="synStatement">/</span><span class="synConstant">' ' x (length(</span><span class="synIdentifier">$&amp;</span><span class="synConstant">)*8 - length(</span><span class="synIdentifier">$`</span><span class="synConstant">)%8)</span><span class="synStatement">/ge</span>;
+<span class="synLinenum">    8</span>     <span class="synStatement">print</span> <span class="synIdentifier">$_</span>;
+<span class="synLinenum">    9</span>   }
+</pre>
+¿Porqué?</I></DIV><P></P>
+
+<P>
+<HR>
+<A NAME="tex2html2348"
+  HREF="node77.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2342"
+  HREF="node70.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2336"
+  HREF="node75.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2344"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2346"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2349"
+  HREF="node77.html">Modificación de Múltiples Ficheros:</A>
+<B>Sup:</B> <A NAME="tex2html2343"
+  HREF="node70.html">Casos de Estudio</A>
+<B> Ant:</B> <A NAME="tex2html2337"
+  HREF="node75.html">Número de substituciones realizadas</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

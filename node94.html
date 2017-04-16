@@ -1,0 +1,846 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Mas sobre listas</TITLE>
+<META NAME="description" CONTENT="Mas sobre listas">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node95.html">
+<LINK REL="previous" HREF="node93.html">
+<LINK REL="up" HREF="node85.html">
+<LINK REL="next" HREF="node95.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2700"
+  HREF="node95.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2694"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2688"
+  HREF="node93.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2696"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2698"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2701"
+  HREF="node95.html">La directiva require</A>
+<B>Sup:</B> <A NAME="tex2html2695"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2689"
+  HREF="node93.html">Llamadas privadas a subreglas</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html2702"
+  HREF="node94.html#SECTION008119010000000000000">Reconocimiento manual de listas</A>
+<LI><A NAME="tex2html2703"
+  HREF="node94.html#SECTION008119020000000000000">Analizando listas manualmente</A>
+<LI><A NAME="tex2html2704"
+  HREF="node94.html#SECTION008119030000000000000">Influencia del orden en el lenguaje reconocido</A>
+<LI><A NAME="tex2html2705"
+  HREF="node94.html#SECTION008119040000000000000">Aplanamiento manual de listas</A>
+<LI><A NAME="tex2html2706"
+  HREF="node94.html#SECTION008119050000000000000">Los operadores de repetición</A>
+<LI><A NAME="tex2html2707"
+  HREF="node94.html#SECTION008119060000000000000">Listas separadas por Algo</A>
+<LI><A NAME="tex2html2708"
+  HREF="node94.html#SECTION008119070000000000000">Ejemplo: Listas de números separados por comas</A>
+<LI><A NAME="tex2html2709"
+  HREF="node94.html#SECTION008119080000000000000">Ejemplo: AST para las expresiones aritméticas</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION008119000000000000000">
+Mas sobre listas</A>
+</H2>
+
+<P>
+
+<H4><A NAME="SECTION008119010000000000000">
+Reconocimiento manual de listas</A>
+</H4>
+  
+
+<P>
+
+<H4><A NAME="SECTION008119020000000000000">
+Analizando listas manualmente</A>
+</H4>
+  
+
+<P>
+El siguiente ejemplo muestra como construir un reconocedor de 
+listas (posiblemente vacías) de números:
+<PRE>
+casiano@millo:~/Lregexp-grammar-examples$ cat -n simple_list.pl
+     1  #!/soft/perl5lib/bin/perl5.10.1
+     2  use v5.10;
+     3
+     4  use Regexp::Grammars;
+     5
+     6  my $list = qr{
+     7      &lt;List&gt;
+     8
+     9      &lt;rule: List&gt;
+    10           &lt;digit&gt; &lt;List&gt;
+    11         | # empty
+    12
+    13      &lt;rule: digit&gt;
+    14          &lt;MATCH=(\d+)&gt;
+    15
+    16  }xms;
+    17
+    18  while (my $input = &lt;&gt;) {
+    19      chomp $input;
+    20      if ($input =~ $list) {
+    21          use Data::Dumper 'Dumper';
+    22          warn Dumper \%/;
+    23      }
+    24      else {
+    25        warn "Does not match\n"
+    26      }
+    27  }
+</PRE>
+Sigue una ejecución:
+<PRE>
+casiano@millo:~/Lregexp-grammar-examples$ ./simple_list.pl
+2 3 4
+$VAR1 = {
+          '' =&gt; '2 3 4',
+          'List' =&gt; {
+                      '' =&gt; '2 3 4',
+                      'digit' =&gt; '2'
+                      'List' =&gt; {
+                                  '' =&gt; '3 4',
+                                  'digit' =&gt; '3'
+                                  'List' =&gt; {
+                                              '' =&gt; '4',
+                                              'digit' =&gt; '4'
+                                              'List' =&gt; '',
+                                            },
+                                },
+                    }
+        };
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION008119030000000000000">
+Influencia del orden en el lenguaje reconocido</A>
+</H4>
+  
+
+<P>
+Tenga en cuenta que el orden de las reglas
+influye en el lenguaje reconocido. Véase lo que ocurre si cambiamos 
+en el ejemplo anterior el orden de las reglas:
+<PRE>
+casiano@millo:~/Lregexp-grammar-examples$ cat -n simple_list_empty_first.pl
+     1  #!/soft/perl5lib/bin/perl5.10.1
+     2  use v5.10;
+     3
+     4  use Regexp::Grammars;
+     5
+     6  my $list = qr{
+     7      &lt;List&gt;
+     8
+     9      &lt;rule: List&gt;
+    10           # empty
+    11         | &lt;digit&gt; &lt;List&gt;
+    12
+    13      &lt;rule: digit&gt;
+    14          &lt;MATCH=(\d+)&gt;
+    15
+    16  }xms;
+    17
+    18  while (my $input = &lt;&gt;) {
+    19      chomp $input;
+    20      if ($input =~ $list) {
+    21          use Data::Dumper 'Dumper';
+    22          warn Dumper \%/;
+    23      }
+    24      else {
+    25        warn "Does not match\n"
+    26      }
+    27  }
+</PRE>
+Al ejecutar se obtiene:
+<PRE>
+casiano@millo:~/Lregexp-grammar-examples$ ./simple_list_empty_first.pl
+2 3 4
+$VAR1 = {
+          '' =&gt; '',
+          'List' =&gt; ''
+        };
+</PRE>
+
+<P>
+Por supuesto basta poner anclas en el patrón a buscar para forzar a que se reconozca
+la lista completa:
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ diff simple_list_empty_first.pl simple_list_empty_first_with_anchors.pl
+7c7
+&lt;     &lt;List&gt;
+---
+&gt;     ^&lt;List&gt;$
+</PRE>
+En efecto, la nueva versión reconoce la lista:
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ perl5.10.1 simple_list_empty_first_with_anchors.pl
+2 3 4
+$VAR1 = {
+          '' =&gt; '2 3 4',
+          'List' =&gt; {
+                      'List' =&gt; {
+                                  'List' =&gt; {
+                                              'List' =&gt; '',
+                                              '' =&gt; '4',
+                                              'digit' =&gt; '4'
+                                            },
+                                  '' =&gt; '3 4',
+                                  'digit' =&gt; '3'
+                                },
+                      '' =&gt; '2 3 4',
+                      'digit' =&gt; '2'
+                    }
+        };
+</PRE>
+
+<P>
+Si se quiere mantener la producción vacía en primer lugar 
+pero forzar el reconocimiento de la lista completa, se puede
+hacer uso de un lookahead negativo:
+
+<P>
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ cat -n simple_list_empty_first_with_lookahead.pl
+     1  #!/soft/perl5lib/bin/perl5.10.1
+     2  use v5.10;
+     3
+     4  use strict;
+     5  use Regexp::Grammars;
+     6
+     7  my $list = qr{
+     8      &lt;List&gt;
+     9
+    10      &lt;rule: List&gt;
+    11           (?! &lt;digit&gt; ) # still empty production
+    12         | &lt;digit&gt; &lt;List&gt;
+    13
+    14      &lt;rule: digit&gt;
+    15          &lt;MATCH=(\d+)&gt;
+    16
+    17  }xms;
+    18
+    19  while (my $input = &lt;&gt;) {
+    20      chomp $input;
+    21      if ($input =~ $list) {
+    22          use Data::Dumper 'Dumper';
+    23          warn Dumper \%/;
+    24      }
+    25      else {
+    26        warn "Does not match\n"
+    27      }
+    28  }
+</PRE>
+Así, sólo se reducirá por la regla vacía si el siguiente token no es un
+número. Sigue un ejemplo de ejecución:
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ perl5.10.1 simple_list_empty_first_with_lookahead.pl
+2 3 4
+$VAR1 = {
+          '' =&gt; '2 3 4',
+          'List' =&gt; {
+                      'List' =&gt; {
+                                  'List' =&gt; {
+                                              'List' =&gt; '',
+                                              '' =&gt; '4',
+                                              'digit' =&gt; '4'
+                                            },
+                                  '' =&gt; '3 4',
+                                  'digit' =&gt; '3'
+                                },
+                      '' =&gt; '2 3 4',
+                      'digit' =&gt; '2'
+                    }
+        };
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION008119040000000000000">
+Aplanamiento manual de listas</A>
+</H4>
+  
+
+<P>
+¿Cómo podemos hacer que la estructura retornada por el reconocedor 
+sea una lista?. Podemos añadir acciones como sigue:
+
+<P>
+<PRE>
+casiano@millo:~/Lregexp-grammar-examples$ cat -n simple_list_action.pl
+     1  #!/soft/perl5lib/bin/perl5.10.1
+     2  use v5.10;
+     3
+     4  use Regexp::Grammars;
+     5
+     6  my $list = qr{
+     7      &lt;List&gt;
+     8
+     9      &lt;rule: List&gt;
+    10           &lt;digit&gt; &lt;X=List&gt; &lt;MATCH= (?{ unshift @{$MATCH{X}}, $MATCH{digit}; $MATCH{X} })&gt;
+    11         | # empty
+    12           &lt;MATCH= (?{ [] })&gt;
+    13
+    14      &lt;rule: digit&gt;
+    15          &lt;MATCH=(\d+)&gt;
+    16
+    17  }xms;
+    18
+    19  while (my $input = &lt;&gt;) {
+    20      chomp $input;
+    21      if ($input =~ $list) {
+    22          use Data::Dumper 'Dumper';
+    23          warn Dumper \%/;
+    24      }
+    25      else {
+    26        warn "Does not match\n"
+    27      }
+    28  }
+</PRE>
+
+<P>
+Al ejecutarse este programa produce una salida como:
+
+<P>
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ perl5.10.1 simple_list_action.pl
+2 3 4
+$VAR1 = {
+          '' =&gt; '2 3 4',
+          'List' =&gt; [ '2', '3', '4' ]
+        };
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION008119050000000000000">
+Los operadores de repetición</A>
+</H4>
+  
+
+<P>
+Los operadores de repetición como <code>*</code>, <code>+</code>, etc. 
+permiten simplificar el análisis de lenguajes de listas:
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ cat -n simple_list_star.pl
+ 1  #!/soft/perl5lib/bin/perl5.10.1
+ 2  use v5.10;
+ 3
+ 4  use Regexp::Grammars;
+ 5
+ 6  my $list = qr{
+ 7      &lt;List&gt;
+ 8
+ 9      &lt;rule: List&gt;
+10          (?: &lt;[digit]&gt;)*
+11
+12      &lt;rule: digit&gt;
+13          &lt;MATCH=(\d+)&gt;
+14
+15  }xms;
+16
+17  while (my $input = &lt;&gt;) {
+18      chomp $input;
+19      if ($input =~ $list) {
+20          use Data::Dumper 'Dumper';
+21          warn Dumper \%/;
+22      }
+23      else {
+24        warn "Does not match\n"
+25      }
+26  }
+</PRE>
+Los corchetes alrededor de <code>digit</code> hacen 
+que el valor asociado con el patrón sea la lista de números.
+Si no los ponemos el valor asociado sería el último valor de la lista.
+
+<P>
+
+<H4><A NAME="SECTION008119060000000000000">
+Listas separadas por Algo</A>
+</H4>
+  
+
+<P>
+<BLOCKQUOTE><I>One of the commonest tasks in text parsing is to match a list of
+unspecified length, in which items are separated by a fixed token. Things
+like:
+</I></BLOCKQUOTE>
+<P><PRE>
+    1, 2, 3 , 4 ,13, 91        # Numbers separated by commas and spaces
+
+    g-c-a-g-t-t-a-c-a          # Bases separated by dashes
+
+    /usr/local/bin             # Names separated by directory markers
+
+    /usr:/usr/local:bin        # Directories separated by colons
+</PRE>
+<P>
+<BLOCKQUOTE><I>The usual construct required to parse these kinds of structures is either:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: list&gt;
+
+        &lt;item&gt; &lt;separator&gt; &lt;list               # recursive definition
+      | &lt;item&gt;                                 # base case
+</PRE>
+<P>
+<BLOCKQUOTE><I>Or, more efficiently, but less prettily:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: list&gt;
+
+        &lt;[item]&gt; (?: &lt;separator&gt; &lt;[item]&gt; )*   # iterative definition
+</PRE>
+<P>
+<BLOCKQUOTE><I>Because this is such a common requirement, <A NAME="tex2html200"
+  HREF="http://search.cpan.org/perldoc?Regexp::Grammars">Regexp::Grammars</A>
+provides a
+cleaner way to specify the iterative version. The syntax is taken from
+Perl 6:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: list&gt;
+
+        &lt;[item]&gt; ** &lt;separator&gt;                # iterative definition
+</PRE>
+<P>
+<BLOCKQUOTE><I>This is a repetition specifier on the first subrule (hence the use of <code>**</code>
+as the marker, to reflect the repetitive behaviour of <code>*</code>). However, the
+number of repetitions is controlled by the second subrule: the first
+subrule will be repeatedly matched for as long as the second subrule
+matches immediately after it.
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>So, for example, you can match a sequence of numbers separated by
+commas with:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;[number]&gt; ** &lt;comma&gt;
+
+    &lt;token: number&gt;  \d+
+    &lt;token: comma&gt;   \s* , \s*
+</PRE>
+<P>
+<BLOCKQUOTE><I>Note that it's important to use the <code>&lt;[...]&gt;</code> form for the items being
+matched, so that all of them are saved in the result hash. You can also
+save all the separators (if that's important):
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;[number]&gt; ** &lt;[comma]&gt;
+</PRE>
+<P>
+<BLOCKQUOTE><I>The repeated item must be specified as a subrule call fo some kind,
+but the separators may be specified either as a subrule or a bracketed
+pattern. For example:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;[number]&gt; ** ( , )
+</PRE>
+<P>
+<BLOCKQUOTE><I>The separator must always be specified in matched delimiters of some kind:
+either matching <code>&lt;...&gt;</code> or matching <code>(...)</code>. 
+A common error is to write:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;[number]&gt; ** ,
+</PRE>
+<P>
+<BLOCKQUOTE><I>You can also use a pattern as the item matcher, but it must be aliased
+into a subrule:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;[item=(\d+)]&gt; ** ( , )
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION008119070000000000000">
+Ejemplo: Listas de números separados por comas</A>
+</H4>
+  
+
+<P>
+Veamos un ejemplo sencillo:
+
+<P>
+<PRE>
+casiano@millo:~/src/perl/regexp-grammar-examples$ cat -n demo_list.pl
+ 1  #!/soft/perl5lib/bin/perl5.10.1
+ 2  use v5.10;
+ 3
+ 4  use Regexp::Grammars;
+ 5
+ 6  my $list_nonempty = qr{
+ 7      &lt;List&gt;
+ 8
+ 9      &lt;rule: List&gt;
+10          \(  &lt;[Value]&gt; ** (,)  \)
+11
+12      &lt;token: Value&gt;
+13          \d+
+14  }xms;
+15
+16  my $list_empty = qr{
+17      &lt;List&gt;
+18
+19      &lt;rule: List&gt;
+20          \(  (?: &lt;[Value]&gt; ** &lt;_Sep=(,)&gt; )?  \)
+21
+22      &lt;token: Value&gt;
+23          \d+
+24  }xms;
+25
+26  use Smart::Comments;
+27
+28
+29  while (my $input = &lt;&gt;) {
+30      my $input2 = $input;
+31      if ($input =~ $list_nonempty) {
+32          ### nonempty: $/{List}
+33      }
+34      if ($input2 =~ $list_empty) {
+35          ### empty: $/{List}
+36      }
+37  }
+</PRE>
+Sigue un ejemplo de ejecución:
+
+<P>
+<PRE>
+casiano@millo:~/src/perl/regexp-grammar-examples$ ./demo_list.pl
+(3,4,5)
+
+### nonempty: {
+###             '' =&gt; '(3,4,5)',
+###             Value =&gt; [
+###                        '3',
+###                        '4',
+###                        '5'
+###                      ]
+###           }
+
+### empty: {
+###          '' =&gt; '(3,4,5)',
+###          Value =&gt; [
+###                     '3',
+###                     '4',
+###                     '5'
+###                   ]
+###        }
+()
+
+### empty: '()'
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION008119080000000000000">
+Ejemplo: AST para las expresiones aritméticas</A>
+</H4>
+  
+
+<P>
+Las expresiones aritméticas
+puede definirse como una jerarquía de listas como
+sigue:
+
+<P>
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ cat -n calcaslist.pl
+ 1  use strict;
+ 2  use warnings;
+ 3  use 5.010;
+ 4  use Data::Dumper;
+ 5  $Data::Dumper::Indent = 1;
+ 6
+ 7  my $rbb = do {
+ 8      use Regexp::Grammars;
+ 9
+10      qr{
+11        \A&lt;expr&gt;\z
+12
+13        &lt;objrule: expr&gt;      &lt;[operands=term]&gt; ** &lt;[operators=addop]&gt;
+14
+15        &lt;objrule: term&gt;      &lt;[operands=uneg]&gt; ** &lt;[operators=mulop]&gt;
+16
+17        &lt;objrule: uneg&gt;      &lt;[operators=minus]&gt;* &lt;[operands=power]&gt;
+18
+19        &lt;objrule: power&gt;     &lt;[operands=factorial]&gt; ** &lt;[operators=powerop]&gt;
+20
+21        &lt;objrule: factorial&gt; &lt;[operands=factor]&gt;  &lt;[operators=(!)]&gt;*
+22
+23        &lt;objrule: factor&gt;    &lt;val=([+-]?\d+(?:\.\d*)?)&gt;
+24                           | \( &lt;MATCH=expr&gt; \)
+25
+26        &lt;token: addop&gt;        [+-]
+27
+28        &lt;token: mulop&gt;        [*/]
+29
+30        &lt;token: powerop&gt;      \*\*|\^
+31
+32        &lt;token: minus&gt;        - &lt;MATCH=(?{ 'NEG' })&gt;
+33
+34      }x;
+35  };
+36
+37  while (my $input = &lt;&gt;) {
+38      chomp($input);
+39      if ($input =~ m{$rbb}) {
+40          my $tree = $/{expr};
+41          say Dumper $tree;
+42
+43      }
+44      else {
+45          say("does not match");
+46      }
+47  }
+</PRE>
+
+<P>
+Obsérvese el árbol generado para la expresión <code>4-2-2</code>:
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ perl5.10.1 calcaslist.pl
+4-2-2
+$VAR1 = bless( {
+  'operands' =&gt; [
+    bless( {
+      'operands' =&gt; [
+        bless( {
+          'operands' =&gt; [
+            bless( {
+              'operands' =&gt; [
+                bless( {
+                  'operands' =&gt; [
+                    bless( { '' =&gt; '4', 'val' =&gt; '4' }, 'factor' )
+                  ],
+                  '' =&gt; '4'
+                }, 'factorial' )
+              ],
+              '' =&gt; '4'
+            }, 'power' )
+          ],
+          '' =&gt; '4'
+        }, 'uneg' )
+      ],
+      '' =&gt; '4'
+    }, 'term' ),
+    bless( {
+      'operands' =&gt; [
+        bless( {
+          'operands' =&gt; [
+            bless( {
+              'operands' =&gt; [
+                bless( {
+                  'operands' =&gt; [
+                    bless( { '' =&gt; '2', 'val' =&gt; '2' }, 'factor' )
+                  ],
+                  '' =&gt; '2'
+                }, 'factorial' )
+              ],
+              '' =&gt; '2'
+            }, 'power' )
+          ],
+          '' =&gt; '2'
+        }, 'uneg' )
+      ],
+      '' =&gt; '2'
+    }, 'term' ),
+    bless( {
+      'operands' =&gt; [
+        bless( {
+          'operands' =&gt; [
+            bless( {
+              'operands' =&gt; [
+                bless( {
+                  'operands' =&gt; [
+                    bless( { '' =&gt; '2', 'val' =&gt; '2' }, 'factor' )
+                  ],
+                  '' =&gt; '2'
+                }, 'factorial' )
+              ],
+              '' =&gt; '2'
+            }, 'power' )
+          ],
+          '' =&gt; '2'
+        }, 'uneg' )
+      ],
+      '' =&gt; '2'
+    }, 'term' )
+  ],
+  '' =&gt; '4-2-2',
+  'operators' =&gt; [
+    '-',
+    '-'
+  ]
+}, 'expr' );
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html2700"
+  HREF="node95.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2694"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2688"
+  HREF="node93.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2696"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2698"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2701"
+  HREF="node95.html">La directiva require</A>
+<B>Sup:</B> <A NAME="tex2html2695"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2689"
+  HREF="node93.html">Llamadas privadas a subreglas</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

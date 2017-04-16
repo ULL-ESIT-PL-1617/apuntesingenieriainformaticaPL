@@ -1,0 +1,403 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>El método m</TITLE>
+<META NAME="description" CONTENT="El método m">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node272.html">
+<LINK REL="previous" HREF="node270.html">
+<LINK REL="up" HREF="node267.html">
+<LINK REL="next" HREF="node272.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html5549"
+  HREF="node272.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5543"
+  HREF="node267.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5537"
+  HREF="node270.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5545"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5547"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5550"
+  HREF="node272.html">Transformaciones Arbol con treereg</A>
+<B>Sup:</B> <A NAME="tex2html5544"
+  HREF="node267.html">Transformaciones Árbol con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5538"
+  HREF="node270.html">Patrones Árbol y Transformaciones</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001540000000000000000"></A>
+<A NAME="section:methodm"></A>
+<BR>
+El método <TT>m</TT>
+</H1>
+El método  <code>$yatw_object-&gt;m($t)</code> permite la búsqueda 
+de los nodos que casan con una expresión regular árbol dada.
+En un contexto de lista devuelve una 
+lista con nodos del
+tipo  Parse::Eyapp::Node::Match  que referencian
+a los nodos que han casado. Los nodos en la lista
+se estructuran según un árbol (atributos <code>children</code> y <code>father</code>)
+de manera que el padre
+de un nodo <code>$n</code> del tipo <code>Parse::Eyapp::Node::Match</code> es el 
+nodo <code>$f</code> que referencia al inmediato antecesor 
+en el árbol que ha casado. 
+
+<P>
+Los nodos <code>Parse::Eyapp::Node::Match</code>
+son a su vez nodos (heredan de) 
+<code>Parse::Eyapp::Node</code> y se estructuran según un árbol.
+
+<P>
+Los nodos 
+aparecen en la lista retornada en orden primero profundo de 
+recorrido del árbol <code>$t</code>.
+
+<P>
+Un nodo <code>$r</code> de la clase 
+<code>Parse::Eyapp::Node::Match</code> dispone de varios atributos
+y métodos:
+
+<UL>
+<LI>El método <code>$r-&gt;node</code> retorna el nódo del árbol <code>$t</code> que ha casado
+</LI>
+<LI>El método <code>$r-&gt;father</code> retorna el nodo padre en el árbol the matching.
+Se cumple que <code>$r-&gt;father-&gt;node</code> es 
+una referencia al antepasado mas cercano en <code>$t</code>
+de  <code>$r-&gt;node</code> que casa con el patrón árbol (<code>$SimpleTrans::blocks</code>
+en el ejemplo que sigue).
+</LI>
+<LI>El método <code>$r-&gt;coord</code> retorna las coordenadas del nódo del árbol que ha casado
+usando una notación con puntos. Por ejemplo la coordenada
+<code>".1.3.2"</code> 
+denota al nodo <code>$t-&gt;child(1)-&gt;child(3)-&gt;child(2)</code>, siendo <code>$t</code>
+la raíz del árbol de búsqueda.
+</LI>
+<LI>El método <code>$r-&gt;depth</code> retorna la profundidad del nódo del árbol que ha casado
+</LI>
+</UL>
+La clase <code>Parse::Eyapp::Node::Match</code> hereda de
+<code>Parse::Eyapp::Node</code>. Dispone además de otros métodos
+para el caso en que se usan varios patrones en la misma búsqueda.
+
+<P>
+Por ejemplo, método <code>$r-&gt;names</code> retorna una referencia a los nombres de los patrones
+que han casado con el nodo.
+
+<P>
+En un contexto escalar <code>m</code> devuelve el primer
+elemento de la lista de nodos <code>Parse::Eyapp::Node::Match</code>.
+
+<P>
+
+<H4><A NAME="SECTION001540010000000000000">
+El método <TT>m</TT>: Ejemplo de uso</A>
+</H4>
+  
+
+<P>
+La siguiente expresión regular árbol casa con los nodos
+<B>bloque</B>:
+<PRE>
+nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/lib/Simple&gt; sed -ne '2p' Trans.trg
+blocks:  /BLOCK|FUNCTION|PROGRAM/
+</PRE>
+
+<P>
+Utilizaremos el siguiente programa de entrada:
+<PRE>
+nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/script&gt; cat -n blocks.c
+ 1  test (int n)
+ 2  {
+ 3    while (1) {
+ 4      if (1&gt;0) {
+ 5        int a;
+ 6        break;
+ 7      }
+ 8      else if (2&gt; 0){
+ 9        char b;
+10        continue;
+11      }
+12    }
+13  }
+</PRE>
+Ejecutamos la versión con análisis de tipos de nuestro compilador de simple C.
+SimpleC es una versión simplificada de C 
+(véase el capítulo 
+<A HREF="node282.html#chapter:simplec">12</A> 
+y las secciones 
+<A HREF="node285.html#practica:esquemadetradsimple">12.3</A> y <A HREF="node286.html#practica:ambitoytipossamplec">12.4</A>),
+bajo el control del depurador:
+<PRE>
+nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/script&gt; perl -wd usetypes.pl blocks.c
+Loading DB routines from perl5db.pl version 1.28
+Editor support available.
+Enter h or `h h' for help, or `man perldebug' for more help.
+main::(usetypes.pl:6):  my $filename = shift || die "Usage:\n$0 file.c\n";
+  DB&lt;1&gt; b Simple::Types::compile
+  DB&lt;2&gt; c
+Simple::Types::compile(Types.eyp:529):
+529:     my($self)=shift;
+  DB&lt;2&gt; l 540,545
+540:     our $blocks;
+541:     my @blocks = $blocks-&gt;m($t);
+542:     $_-&gt;node-&gt;{fatherblock} = $_-&gt;father-&gt;{node} for (@blocks[1..$#blocks]);
+543
+544      # Type checking
+545:     set_types($t);
+  DB&lt;3&gt; c 545
+Simple::Types::compile(Types.eyp:545):
+545:     set_types($t);
+</PRE>
+Nos detenemos en la línea 545 justo después de la llamada a 
+<code>m</code>  (línea 541) y de actualizar el atributo <code>fatherblock</code>
+de los nodos bloque. La línea 542 crea una jerarquía árbol
+con los nodos bloque que se superpone a la jerarquía del árbol 
+sintáctico abstracto.
+En esta línea <code>$_-&gt;father-&gt;{node}</code> es el nodo del AST
+que es un ancestro de <code>$_-&gt;node</code> y que ha casado con la expresión
+regular árbol.
+
+<P>
+Este sub-árbol de bloques puede ayudarnos en la fase de ubicar que declaración
+se aplica a una aparición de un objeto dado en el texto del programa.
+Para cada ocurrencia debemos determinar si fué declarada en el bloque
+en el que ocurre o bien en uno de los nodos bloque antepasados 
+de este.
+<PRE>
+  DB&lt;4&gt; $Parse::Eyapp::Node::INDENT = 2
+  DB&lt;5&gt; x $blocks[0]-&gt;str
+0  '
+Match[[PROGRAM:0:blocks]](
+  Match[[FUNCTION:1:blocks:test]](
+    Match[[BLOCK:6:blocks:8:4:test]],
+    Match[[BLOCK:5:blocks:4:4:test]]
+  )
+) # Parse::Eyapp::Node::Match'
+</PRE>
+La orden <code>x $blocks[0]-&gt;str</code> nos permite visualizar el árbol de 
+casamientos. 
+El método  coord  nos devuelve una cadena 
+con las coordenadas del nodo que ha casado. Las coordenadas
+son una secuencia de puntos y números que describe 
+el camino para llegar al nodo desde la raíz del árbol.
+Veamos las coordenadas de los nodos en el AST del ejemplo:
+<PRE>
+  DB&lt;6&gt; x map {$_-&gt;coord} @blocks
+0  ''
+1  '.0'
+2  '.0.0.1.0.1'
+3  '.0.0.1.0.2.1'
+  DB&lt;7&gt; x $t-&gt;child(0)-&gt;child(0)-&gt;child(1)-&gt;child(0)-&gt;child(2)-&gt;child(1)-&gt;str
+0  '
+BLOCK[8:4:test]^{0}(
+  CONTINUE[10,10]
+)
+  DB&lt;8&gt; x $t-&gt;descendant('.0.0.1.0.2.1')-&gt;str
+0  '
+BLOCK[8:4:test]^{0}(
+  CONTINUE[10,10]
+)
+  DB&lt;9&gt; x $t-&gt;descendant('.0.0.1.0.1')-&gt;str
+0  '
+BLOCK[4:4:test]^{0}(
+  BREAK[6,6]
+)
+</PRE>
+El método  descendant  es un método de los objetos <code>Parse::Eyapp::Node</code>
+y retorna una referencia al nodo descrito por la cadena de coordenadas 
+que se le pasa como argumento. En este sentido el método
+ child  es una especialización de  descendant .
+
+<P>
+La profundidad de los nodos que han casado puede conocerse con el método 
+ depth :
+<PRE>
+  DB&lt;9&gt; x  map {$_-&gt;depth } @blocks
+0  0
+1  1
+2  5
+3  6
+  DB&lt;16&gt; x  map {ref($_-&gt;node) } @blocks
+0  'PROGRAM'
+1  'FUNCTION'
+2  'BLOCK'
+3  'BLOCK'
+  DB&lt;17&gt; x  map {ref($_-&gt;father) } @blocks
+0  ''
+1  'Parse::Eyapp::Node::Match'
+2  'Parse::Eyapp::Node::Match'
+3  'Parse::Eyapp::Node::Match'
+  DB&lt;19&gt; x  map {ref($_-&gt;father-&gt;node) } @blocks[1..3]
+0  'PROGRAM'
+1  'FUNCTION'
+2  'FUNCTION'
+</PRE>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html5551"
+  HREF="node271.html#SECTION001540010000000000000">El método <TT>m</TT>: Ejemplo de uso</A>
+</UL></UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html5549"
+  HREF="node272.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5543"
+  HREF="node267.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5537"
+  HREF="node270.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5545"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5547"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5550"
+  HREF="node272.html">Transformaciones Arbol con treereg</A>
+<B>Sup:</B> <A NAME="tex2html5544"
+  HREF="node267.html">Transformaciones Árbol con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5538"
+  HREF="node270.html">Patrones Árbol y Transformaciones</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

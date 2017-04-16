@@ -1,0 +1,467 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Comprobación de Tipos: Sentencia RETURN</TITLE>
+<META NAME="description" CONTENT="Comprobación de Tipos: Sentencia RETURN">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node308.html">
+<LINK REL="previous" HREF="node306.html">
+<LINK REL="up" HREF="node294.html">
+<LINK REL="next" HREF="node308.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html6186"
+  HREF="node308.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6180"
+  HREF="node294.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6174"
+  HREF="node306.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6182"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6184"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6187"
+  HREF="node308.html">Comprobación de Tipos: Sentencias</A>
+<B>Sup:</B> <A NAME="tex2html6181"
+  HREF="node294.html">Análisis de Tipos</A>
+<B> Ant:</B> <A NAME="tex2html6175"
+  HREF="node306.html">Comprobación de Tipos: Llamadas</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0018130000000000000000"></A>
+<A NAME="section:return"></A>
+<BR>
+Comprobación de Tipos: Sentencia <TT>RETURN</TT>
+</H1>
+
+<P>
+
+<H4><A NAME="SECTION0018130010000000000000">
+La Forma Habitual</A>
+</H4>
+  
+
+<P>
+Veamos la forma del árbol en una sentencia de retorno:
+
+<P>
+<PRE>
+pl@nereida:~/Lbook/code/Simple-Types/script$ perl -wd usetypes.pl prueba16.c 2
+main::(usetypes.pl:5):  my $filename = shift || die "Usage:\n$0 file.c\n";
+  DB&lt;1&gt; f Types.eyp
+1       2       3       4       5       6       7       #line 8 "Types.eyp"
+8
+9:      use strict;
+10:     use Carp;
+  DB&lt;2&gt; c 598
+1 int f() {
+2   int a[30];
+3
+4   return a;
+5 }
+Simple::Types::compile(Types.eyp:598):
+598:     set_types($t);        # Init basic types
+  DB&lt;3&gt; insert_method(qw{PROGRAM FUNCTION}, 'footnote', sub {})
+  DB&lt;4&gt; p $t-&gt;str
+PROGRAM(FUNCTION[f](RETURN(VAR(TERMINAL[a:4]))))
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0018130020000000000000">
+Código de Comprobación de Tipos para Sentencias de Retorno</A>
+</H4>
+  
+
+<P>
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/lib/Simple$ \
+                               sed -ne '267,282p' Trans.trg | cat -n
+     1  returntype: RETURN($ch)
+     2    =&gt; {
+     3        my $rt = $RETURN-&gt;{t};
+     4
+     5        $ch = char2int($RETURN, 0) if $rt == $INT;
+     6        $ch = int2char($RETURN, 0) if $rt == $CHAR;
+     7
+     8          type_error("Type error in return statement", $ch-&gt;line)
+     9        unless ($rt == $ch-&gt;{t});
+    10
+    11        # $RETURN-&gt;{t} has already the correct type
+    12
+    13        $RETURN-&gt;type(ref($RETURN).ref($rt));
+    14
+    15        return 1;
+</PRE>
+
+<P>
+El análisis de ámbito de las sentencias de retorno se hizo de forma ligeramente
+distinta al resto. El siguiente fragmento de código figura en la subrutina <code>compile</code>
+justo despueés del resto del análisis de ámbito::
+
+<P>
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/lib/Simple$ \
+                               sed -ne '585,595p' Types.eyp | cat -n
+     1   # Scope Analysis: Return-Function
+     2   our $retscope; # retscope: /FUNCTION|RETURN/
+     3   my @returns = $retscope-&gt;m($t);
+     4   for (@returns) {
+     5     my $node = $_-&gt;node;
+     6     if (ref($node) eq 'RETURN') {
+     7       my $function = $_-&gt;father-&gt;node;
+     8       $node-&gt;{function}  = $function;
+     9       $node-&gt;{t} = $function-&gt;{t}-&gt;child(1);
+    10     }
+    11   }
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0018130030000000000000">
+Ejemplos</A>
+</H4>
+  
+
+<P>
+<PRE>
+pl@nereida:~/Lbook/code/Simple-Types/script$ usetypes.pl prueba16.c 2
+1 int f() {
+2   int a[30];
+3
+4   return a;
+5 }
+Type Error at line 4: Type error in return statement
+</PRE>
+
+<P>
+El retorno vacío por parte de una función no se considera un error en <code>C</code>:
+<PRE>
+pl@nereida:~/Lbook/code/Simple-Types/script$ usetypes.pl prueba26.c 2 | head -12
+1 int f() {
+2   int a[30];
+3
+4   return;
+5 }
+
+PROGRAM^{0}(
+  FUNCTION[f]^{1}(
+    EMPTYRETURN
+  )
+) # PROGRAM
+---------------------------
+</PRE>
+
+<P>
+Véase la conducta de <code>gcc</code> ante el mismo programa:
+
+<P>
+<PRE>
+pl@nereida:~/Lbook/code/Simple-Types/script$ gcc -c prueba26.c
+pl@nereida:~/Lbook/code/Simple-Types/script$ ls -ltr | tail -1
+-rw-r--r-- 1 pl users  690 2008-01-10 13:32 prueba26.o
+</PRE>
+<H4><A NAME="SECTION0018130040000000000000">
+Usando <TT>m</TT></A>
+</H4>
+  
+
+<P>
+En esta sección seguiremos una aproximación diferente.
+En este caso queremos maximizar nuestro conocimiento 
+
+<P>
+Para comprobar la correción del tipo del valor retornado
+vamos a usar el método <code>m</code>.
+La razón para hacerlo es familiarizarle con el uso de 
+<code>m</code>.  
+
+<P>
+Usaremos una transformación 
+árbol <code>bind_ret2function</code> a la que llamaremos (línea 33) desde <code>compile</code>
+después de haber verificado el resto de la comprobación de tipos (línea 30).
+Podemos postponer este análisis ya que el padre de 
+un nodo <code>RETURN</code> es un nodo <code>FUNCTION</code> y por tanto 
+no hay nodos cuya comprobación de tipos dependa de 
+la computación de tipo de un nodo <code>RETURN</code>.
+
+<P>
+<PRE>
+nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/lib/Simple&gt; \
+    sed -ne '519,554p' Types.eyp | cat -n
+ 1  sub compile {
+ 2   my($self)=shift;
+ 3
+..  ..........................................
+29
+30   $t-&gt;bud(@typecheck);
+31
+32   our $bind_ret2function;
+33   my @FUNCTIONS = $bind_ret2function-&gt;m($t);
+34
+35   return $t;
+36  }
+</PRE>
+
+<P>
+<code>bind_ret2function</code> realiza la comprobación de
+tipos en los siguientes pasos:
+
+<P>
+
+<OL>
+<LI>La expresión regular árbol casa con cualquier
+nodo de definición de función. Para cada uno de esos nodos
+se procede como sigue:
+</LI>
+<LI>Se buscan (línea 4)
+todas las sentencias <code>RETURN</code> en la función.
+Recuerde que  Parse::Eyapp::Node::m  retorna nodos
+Match y que los nodos del AST se obtienen usando el método 
+ node  sobre el nodo Match (línea 5) 
+</LI>
+<LI>Ponemos como atributo de la función las referencias a los nodos
+<code>RETURN</code> encontrados (línea 8)
+</LI>
+<LI>Para cada nodo de tipo <code>RETURN</code> encontrado:
+
+<OL>
+<LI>Ponemos como atributo <code>function</code> del nodo la función
+que le anida (línea 15)
+</LI>
+<LI>Se realizan las coherciones que fueran necesarias (líneas 17-19)
+</LI>
+<LI>Se emite un mensaje de error si el tipo de la expresión
+evaluada (<code>$exp-&gt;{t}</code>) no coincide con el declarado
+en la función (<code>$return_type</code>) (líneas 21-22) 
+</LI>
+<LI>En la línea  25 cambiamos la clase del nodo de <code>RETURN</code>
+a <code>RETURNINT</code> o <code>RETURNCHAR</code> según sea el tipo retornado.
+Al igual que en las asignaciones eliminamos la sobrecarga semántica
+del nodo acercándonos a niveles mas bajos de programación.
+</LI>
+</OL>
+</LI>
+</OL>
+
+<P>
+Sigue el código.
+La línea 1 muestra una simple expresión regular árbol
+que casa  con aquellas sentencias <code>RETURN</code> en las que se ha explicitado
+una expresión de retorno y que es usada por <code>bind_ret2function</code>.
+
+<P>
+<PRE>
+nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/lib/Simple&gt; \
+                              sed -ne '196,225p' Trans.trg | cat -n
+ 1  /* TIMTOWTDI when MOPping */
+ 2  return: RETURN(.)
+ 3  bind_ret2function: FUNCTION
+ 4    =&gt; {
+ 5      my @RETURNS = $return-&gt;m($FUNCTION);
+ 6      @RETURNS = map { $_-&gt;node } @RETURNS;
+ 7
+ 8      # Set "returns" attribute for the FUNCTION node
+ 9      $FUNCTION-&gt;{returns} = \@RETURNS;
+10
+11      my $exp;
+12      my $return_type = $FUNCTION-&gt;{t}-&gt;child(1);
+13      for (@RETURNS) {
+14
+15        # Set "function" attribute for each RETURN node
+16        $_-&gt;{function} = $FUNCTION;
+17
+18        #always char-int conversion
+19        $exp = char2int($_, 0) if $return_type == $INT;
+20        $exp = int2char($_, 0) if $return_type == $CHAR;
+21
+22          type_error("Returned type does not match function declaration",
+23                                                                $_-&gt;line)
+24        unless $exp-&gt;{t} == $return_type;
+25        $_-&gt;type("RETURN".ref($return_type));
+26
+27      }
+28
+29      return 1;
+30    }
+</PRE>
+
+<P>
+Obsérvese que la solución no optimiza la homogeneidad ni la generalidad
+ni el mantenimiento.  Por ello, en condiciones normales de construcción de 
+un compilador - como es el caso de la práctica 
+<A HREF="node310.html#practica:analisisdetiposensimplec">13.16</A> - 
+es aconsejable abordar el análisis de tipos de la sentencia <code>RETURN</code> con
+la misma aproximación seguida para el resto de los nodos. 
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html6188"
+  HREF="node307.html#SECTION0018130010000000000000">La Forma Habitual</A>
+<LI><A NAME="tex2html6189"
+  HREF="node307.html#SECTION0018130020000000000000">Código de Comprobación de Tipos para Sentencias de Retorno</A>
+<LI><A NAME="tex2html6190"
+  HREF="node307.html#SECTION0018130030000000000000">Ejemplos</A>
+<LI><A NAME="tex2html6191"
+  HREF="node307.html#SECTION0018130040000000000000">Usando <TT>m</TT></A>
+</UL></UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html6186"
+  HREF="node308.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6180"
+  HREF="node294.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6174"
+  HREF="node306.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6182"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6184"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6187"
+  HREF="node308.html">Comprobación de Tipos: Sentencias</A>
+<B>Sup:</B> <A NAME="tex2html6181"
+  HREF="node294.html">Análisis de Tipos</A>
+<B> Ant:</B> <A NAME="tex2html6175"
+  HREF="node306.html">Comprobación de Tipos: Llamadas</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

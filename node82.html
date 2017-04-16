@@ -1,0 +1,745 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Introducción al Anaĺisis Sintáctico con Expresiones Regulares</TITLE>
+<META NAME="description" CONTENT="Introducción al Anaĺisis Sintáctico con Expresiones Regulares">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node83.html">
+<LINK REL="previous" HREF="node81.html">
+<LINK REL="up" HREF="node81.html">
+<LINK REL="next" HREF="node83.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2440"
+  HREF="node83.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2434"
+  HREF="node81.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2428"
+  HREF="node81.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2436"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2438"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2441"
+  HREF="node83.html">Construyendo el AST con</A>
+<B>Sup:</B> <A NAME="tex2html2435"
+  HREF="node81.html">Analisis Sintáctico con Expresiones</A>
+<B> Ant:</B> <A NAME="tex2html2429"
+  HREF="node81.html">Analisis Sintáctico con Expresiones</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html2442"
+  HREF="node82.html#SECTION00891010000000000000">Ejemplo: Traducción de expresiones aritméticas en infijo a postfijo</A>
+<LI><A NAME="tex2html2443"
+  HREF="node82.html#SECTION00891020000000000000">Accediendo a los atributos de paréntesis anteriores mediante acciones intermedias</A>
+<LI><A NAME="tex2html2444"
+  HREF="node82.html#SECTION00891030000000000000">Accediendo a los atributos de paréntesis anteriores mediante <TT>@-</TT></A>
+<LI><A NAME="tex2html2445"
+  HREF="node82.html#SECTION00891040000000000000">Accediendo a los atributos de paréntesis anteriores mediante paréntesis 
+con nombre</A>
+<LI><A NAME="tex2html2446"
+  HREF="node82.html#SECTION00891050000000000000">Véase También</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION00891000000000000000">
+Introducción al Anaĺisis Sintáctico con Expresiones Regulares</A>
+</H2>
+
+<P>
+Como se ha comentado en la sección
+<A HREF="node61.html#subsection:regexp510lenrec">3.2.5</A>
+Perl 5.10 permite el reconocimiento de expresiones
+definidas mediante gramáticas recursivas, siempre que 
+estas puedan ser analizadas por un analizador recursivo descendente.
+Sin embargo, las expresiones regulares Perl 5.10 
+hace difícil construir una representación 
+del árbol de análisis sintáctico abstracto. Además, la necesidad
+de explicitar en la regexp los blancos existentes entre los símbolos
+hace que la descripción sea menos robusta y menos legible.
+
+<P>
+
+<H4><A NAME="SECTION00891010000000000000">
+Ejemplo: Traducción de expresiones aritméticas en infijo a postfijo</A>
+</H4>
+  
+
+<P>
+El siguiente ejemplo muestra una expresión regular
+que traduce expresiones de diferencias en infijo
+a postfijo.
+
+<P>
+Se usa una variable <code>$tran</code> 
+para calcular la traducción de
+la subexpresión vista hasta el momento.
+
+<P>
+La gramática original que consideramos
+es recursiva a izquierdas:
+<PRE>
+ exp -&gt;   exp '-' digits
+        | digits
+</PRE>
+aplicando las técnicas explicadas en
+<A HREF="node141.html#subsection:eliminaleftrec">4.8.1</A> y en 
+el nodo de perlmonks
+<A NAME="tex2html163"
+  HREF="http://www.perlmonks.org/?node_id=Operator Associativity and Eliminating Left-Recursion in Parse::RecDescent">553889</A>
+transformamos la gramática en:
+<PRE>
+exp -&gt;   digits rest
+rest -&gt;   '-' rest
+        | # empty
+</PRE>
+
+<P>
+Sigue el código:
+
+<pre>
+pl@nereida:~/Lperltesting$ cat -n infixtopostfix.pl
+<span class="synLinenum">    1</span>   <span class="synComment">#!/usr/local/lib/perl/5.10.1/bin//perl5.10.1</span>
+<span class="synLinenum">    2</span>   <span class="synStatement">use </span>v5.<span class="synConstant">10</span>;
+<span class="synLinenum">    3</span> 
+<span class="synLinenum">    4</span>   <span class="synComment"># Infix to postfix translator using 5.10 regexp</span>
+<span class="synLinenum">    5</span>   <span class="synComment"># original grammar:</span>
+<span class="synLinenum">    6</span>   <span class="synComment">#  exp -&gt;   exp '-' digits</span>
+<span class="synLinenum">    7</span>   <span class="synComment">#         | digits</span>
+<span class="synLinenum">    8</span>   <span class="synComment">#</span>
+<span class="synLinenum">    9</span>   <span class="synComment"># Applying left-recursion elimination we have:</span>
+<span class="synLinenum">   10</span>   <span class="synComment">#  exp -&gt;   digits rest</span>
+<span class="synLinenum">   11</span>   <span class="synComment">#  rest -&gt;   '-' rest</span>
+<span class="synLinenum">   12</span>   <span class="synComment">#          | # empty</span>
+<span class="synLinenum">   13</span>   <span class="synComment">#</span>
+<span class="synLinenum">   14</span>   <span class="synStatement">my</span> <span class="synIdentifier">$input</span>;
+<span class="synLinenum">   15</span>   <span class="synStatement">local</span> <span class="synStatement">our</span> <span class="synIdentifier">$tran</span> = <span class="synConstant">''</span>;
+<span class="synLinenum">   16</span> 
+<span class="synLinenum">   17</span>   <span class="synStatement">my</span> <span class="synIdentifier">$regexp</span> = <span class="synConstant">qr{</span>
+<span class="synLinenum">   18</span> <span class="synConstant">      </span><span class="synSpecial">(?</span><span class="synConstant">&amp;exp</span><span class="synSpecial">)</span>
+<span class="synLinenum">   19</span> 
+<span class="synLinenum">   20</span> <span class="synConstant">      </span><span class="synSpecial">(?(</span><span class="synConstant">DEFINE</span><span class="synSpecial">)</span>
+<span class="synLinenum">   21</span> <span class="synConstant">          </span><span class="synSpecial">(?</span><span class="synConstant">&lt;exp&gt;    </span><span class="synSpecial">((?</span><span class="synConstant">&amp;digits</span><span class="synSpecial">))</span><span class="synConstant"> </span><span class="synSpecial">\s*</span><span class="synConstant"> </span><span class="synSpecial">(?</span><span class="synConstant">{ </span><span class="synIdentifier">$tran</span><span class="synConstant"> </span><span class="synSpecial">.</span><span class="synConstant">= "</span><span class="synIdentifier">$^</span><span class="synConstant">N "; say "tran=</span><span class="synIdentifier">$tran</span><span class="synConstant">"; }</span>) (?<span class="synIdentifier">&amp;rest</span>)
+<span class="synLinenum">   22</span>                         (?{
+<span class="synLinenum">   23</span>                            say <span class="synConstant">"exp -&gt; digits(</span><span class="synIdentifier">$^</span><span class="synConstant">N) rest"</span>;
+<span class="synLinenum">   24</span>                         })
+<span class="synLinenum">   25</span>           )
+<span class="synLinenum">   26</span> 
+<span class="synLinenum">   27</span>           (?<span class="synIdentifier">&lt;rest&gt;</span>     \s* - ((?<span class="synIdentifier">&amp;digits</span>)) (?{ <span class="synIdentifier">$tran</span> .= <span class="synConstant">"</span><span class="synIdentifier">$^</span><span class="synConstant">N - "</span>; say <span class="synConstant">"tran=</span><span class="synIdentifier">$tran</span><span class="synConstant">"</span>; }) (?<span class="synIdentifier">&amp;rest</span>)
+<span class="synLinenum">   28</span>                           (?{
+<span class="synLinenum">   29</span>                              say <span class="synConstant">"rest -&gt; - digits(</span><span class="synIdentifier">$^</span><span class="synConstant">N) rest"</span>;
+<span class="synLinenum">   30</span>                           })
+<span class="synLinenum">   31</span>                     |  <span class="synComment"># empty</span>
+<span class="synLinenum">   32</span>                           (?{
+<span class="synLinenum">   33</span>                              say <span class="synConstant">"rest -&gt; empty"</span>;
+<span class="synLinenum">   34</span>                           })
+<span class="synLinenum">   35</span>           )
+<span class="synLinenum">   36</span> 
+<span class="synLinenum">   37</span>           (?<span class="synIdentifier">&lt;digits&gt;</span>  \s* (\d+)
+<span class="synLinenum">   38</span>           )
+<span class="synLinenum">   39</span>       )
+<span class="synLinenum">   40</span>   }xms;
+<span class="synLinenum">   41</span> 
+<span class="synLinenum">   42</span>   <span class="synIdentifier">$input</span> = &lt;&gt;;
+<span class="synLinenum">   43</span>   <span class="synStatement">chomp</span>(<span class="synIdentifier">$input</span>);
+<span class="synLinenum">   44</span>   <span class="synStatement">if</span> (<span class="synIdentifier">$input</span> =~ <span class="synIdentifier">$regexp</span>) {
+<span class="synLinenum">   45</span>     say <span class="synConstant">"matches: </span><span class="synIdentifier">$&amp;</span><span class="synSpecial">\n</span><span class="synConstant">tran=</span><span class="synIdentifier">$tran</span><span class="synConstant">"</span>;
+<span class="synLinenum">   46</span>   }
+<span class="synLinenum">   47</span>   <span class="synStatement">else</span> {
+<span class="synLinenum">   48</span>     say <span class="synConstant">"does not match"</span>;
+<span class="synLinenum">   49</span>   }
+</pre>
+La variable <code>$^N</code> contiene el valor que casó con el último paréntesis.
+Al ejecutar el código anterior obtenemos:
+
+<P>
+Véase la ejecución:
+<PRE>
+pl@nereida:~/Lperltesting$ ./infixtopostfix.pl
+ab 5 - 3 -2 cd;
+tran= 5
+tran= 5  3 -
+tran= 5  3 - 2 -
+rest -&gt; empty
+rest -&gt; - digits(2) rest
+rest -&gt; - digits( 3) rest
+exp -&gt; digits( 5) rest
+matches:  5 - 3 -2
+tran= 5  3 - 2 -
+</PRE>
+
+<P>
+Como se ve, el recorrido primero profundo se 
+traduce en la reconstrucción de una derivación a derechas.
+
+<P>
+
+<H4><A NAME="SECTION00891020000000000000">
+Accediendo a los atributos de paréntesis anteriores mediante acciones intermedias</A>
+</H4>
+  
+
+<P>
+Es difícil extender el ejemplo anterior a lenguajes mas complejos debido a la 
+limitación de que sólo se dispone de acceso al último paréntesis vía <code>$^N</code>.
+En muchos casos es necesario poder acceder a paréntesis/atributos anteriores.
+
+<P>
+El siguiente código considera el caso de expresiones con sumas, restas, multiplicaciones
+y divisiones. Utiliza la variable <code>op</code> y una acción intermedia (líneas 51-53) 
+para almacenar el segundo paréntesis necesitado:
+
+<pre>
+pl@nereida:~/Lperltesting$ cat -n ./calc510withactions3.pl
+<span class="synLinenum">    1</span>   <span class="synComment">#!/usr/local/lib/perl/5.10.1/bin//perl5.10.1</span>
+<span class="synLinenum">    2</span>   <span class="synStatement">use </span>v5.<span class="synConstant">10</span>;
+<span class="synLinenum">    3</span> 
+<span class="synLinenum">    4</span>   <span class="synComment"># Infix to postfix translator using 5.10 regexp</span>
+<span class="synLinenum">    5</span>   <span class="synComment"># Original grammar:</span>
+<span class="synLinenum">    6</span> 
+<span class="synLinenum">    7</span>   <span class="synComment">#  exp -&gt;   exp [-+] term</span>
+<span class="synLinenum">    8</span>   <span class="synComment">#         | term</span>
+<span class="synLinenum">    9</span>   <span class="synComment">#  term -&gt;   term [*/] digits</span>
+<span class="synLinenum">   10</span>   <span class="synComment">#          | digits</span>
+<span class="synLinenum">   11</span> 
+<span class="synLinenum">   12</span>   <span class="synComment"># Applying left-recursion elimination we have:</span>
+<span class="synLinenum">   13</span> 
+<span class="synLinenum">   14</span>   <span class="synComment">#  exp  -&gt;   term re</span>
+<span class="synLinenum">   15</span>   <span class="synComment">#  re   -&gt;   [+-] term re</span>
+<span class="synLinenum">   16</span>   <span class="synComment">#          | # empty</span>
+<span class="synLinenum">   17</span>   <span class="synComment">#  term -&gt;   digits rt</span>
+<span class="synLinenum">   18</span>   <span class="synComment">#  rt   -&gt;   [*/] rt</span>
+<span class="synLinenum">   19</span>   <span class="synComment">#          | # empty</span>
+<span class="synLinenum">   20</span> 
+<span class="synLinenum">   21</span> 
+<span class="synLinenum">   22</span>   <span class="synStatement">my</span> <span class="synIdentifier">$input</span>;
+<span class="synLinenum">   23</span>   <span class="synStatement">my</span> <span class="synIdentifier">@stack</span>;
+<span class="synLinenum">   24</span> 
+<span class="synLinenum">   25</span>   <span class="synStatement">local</span> <span class="synStatement">our</span> <span class="synIdentifier">$op</span> = <span class="synConstant">''</span>;
+<span class="synLinenum">   26</span>   <span class="synStatement">my</span> <span class="synIdentifier">$regexp</span> = <span class="synConstant">qr{</span>
+<span class="synLinenum">   27</span> <span class="synConstant">      </span><span class="synSpecial">(?</span><span class="synConstant">&amp;exp</span><span class="synSpecial">)</span>
+<span class="synLinenum">   28</span> 
+<span class="synLinenum">   29</span> <span class="synConstant">      </span><span class="synSpecial">(?(</span><span class="synConstant">DEFINE</span><span class="synSpecial">)</span>
+<span class="synLinenum">   30</span> <span class="synConstant">          </span><span class="synSpecial">(?</span><span class="synConstant">&lt;exp&gt;    </span><span class="synSpecial">(?</span><span class="synConstant">&amp;term</span><span class="synSpecial">)</span><span class="synConstant"> </span><span class="synSpecial">(?</span><span class="synConstant">&amp;re</span><span class="synSpecial">)</span>
+<span class="synLinenum">   31</span> <span class="synConstant">                       </span><span class="synSpecial">(?</span><span class="synConstant">{ say "exp -&gt; term re" }</span>)
+<span class="synLinenum">   32</span>           )
+<span class="synLinenum">   33</span> 
+<span class="synLinenum">   34</span>           (?<span class="synIdentifier">&lt;re&gt;</span>     \s* ([+-]) (?<span class="synIdentifier">&amp;term</span>) \s* (?{ <span class="synStatement">push</span> <span class="synIdentifier">@stack</span>, <span class="synIdentifier">$^</span>N }) (?<span class="synIdentifier">&amp;re</span>)
+<span class="synLinenum">   35</span>                        (?{ say <span class="synConstant">"re -&gt; [+-] term re"</span> })
+<span class="synLinenum">   36</span>                    | <span class="synComment"># empty</span>
+<span class="synLinenum">   37</span>                        (?{ say <span class="synConstant">"re -&gt; empty"</span> })
+<span class="synLinenum">   38</span>           )
+<span class="synLinenum">   39</span> 
+<span class="synLinenum">   40</span>           (?<span class="synIdentifier">&lt;term&gt;</span>   ((?<span class="synIdentifier">&amp;digits</span>))
+<span class="synLinenum">   41</span>                         (?{ <span class="synComment"># intermediate action</span>
+<span class="synLinenum">   42</span>                             <span class="synStatement">push</span> <span class="synIdentifier">@stack</span>, <span class="synIdentifier">$^</span>N
+<span class="synLinenum">   43</span>                         })
+<span class="synLinenum">   44</span>                      (?<span class="synIdentifier">&amp;rt</span>)
+<span class="synLinenum">   45</span>                         (?{
+<span class="synLinenum">   46</span>                             say <span class="synConstant">"term-&gt; digits(</span><span class="synIdentifier">$^</span><span class="synConstant">N) rt"</span>;
+<span class="synLinenum">   47</span>                         })
+<span class="synLinenum">   48</span>           )
+<span class="synLinenum">   49</span> 
+<span class="synLinenum">   50</span>           (?<span class="synIdentifier">&lt;rt&gt;</span>     \s*([*/])
+<span class="synLinenum">   51</span>                              (?{ <span class="synComment"># intermediate action</span>
+<span class="synLinenum">   52</span>                                 <span class="synStatement">local</span> <span class="synIdentifier">$op</span> = <span class="synIdentifier">$^</span>N;
+<span class="synLinenum">   53</span>                              })
+<span class="synLinenum">   54</span>                      ((?<span class="synIdentifier">&amp;digits</span>)) \s*
+<span class="synLinenum">   55</span>                              (?{  <span class="synComment"># intermediate action</span>
+<span class="synLinenum">   56</span>                                   <span class="synStatement">push</span> <span class="synIdentifier">@stack</span>, <span class="synIdentifier">$^</span>N, <span class="synIdentifier">$op</span>
+<span class="synLinenum">   57</span>                               })
+<span class="synLinenum">   58</span>                      (?<span class="synIdentifier">&amp;rt</span>) <span class="synComment"># end of &lt;rt&gt; definition</span>
+<span class="synLinenum">   59</span>                              (?{
+<span class="synLinenum">   60</span>                                   say <span class="synConstant">"rt -&gt; [*/] digits(</span><span class="synIdentifier">$^</span><span class="synConstant">N) rt"</span>
+<span class="synLinenum">   61</span>                               })
+<span class="synLinenum">   62</span>                     |  <span class="synComment"># empty</span>
+<span class="synLinenum">   63</span>                        (?{ say <span class="synConstant">"rt -&gt; empty"</span> })
+<span class="synLinenum">   64</span>           )
+<span class="synLinenum">   65</span> 
+<span class="synLinenum">   66</span>           (?<span class="synIdentifier">&lt;digits&gt;</span>  \s* \d+
+<span class="synLinenum">   67</span>           )
+<span class="synLinenum">   68</span>       )
+<span class="synLinenum">   69</span>   }xms;
+<span class="synLinenum">   70</span> 
+<span class="synLinenum">   71</span>   <span class="synIdentifier">$input</span> = &lt;&gt;;
+<span class="synLinenum">   72</span>   <span class="synStatement">chomp</span>(<span class="synIdentifier">$input</span>);
+<span class="synLinenum">   73</span>   <span class="synStatement">if</span> (<span class="synIdentifier">$input</span> =~ <span class="synIdentifier">$regexp</span>) {
+<span class="synLinenum">   74</span>     say <span class="synConstant">"matches: </span><span class="synIdentifier">$&amp;</span><span class="synSpecial">\n</span><span class="synConstant">Stack=(</span><span class="synIdentifier">@stack</span><span class="synConstant">)"</span>;
+<span class="synLinenum">   75</span>   }
+<span class="synLinenum">   76</span>   <span class="synStatement">else</span> {
+<span class="synLinenum">   77</span>     say <span class="synConstant">"does not match"</span>;
+<span class="synLinenum">   78</span>   }
+</pre>
+
+<P>
+Sigue una ejecución:
+<PRE>
+pl@nereida:~/Lperltesting$ ./calc510withactions3.pl
+5-8/4/2-1
+rt -&gt; empty
+term-&gt; digits(5) rt
+rt -&gt; empty
+rt -&gt; [*/] digits(2) rt
+rt -&gt; [*/] digits(4) rt
+term-&gt; digits(8) rt
+rt -&gt; empty
+term-&gt; digits(1) rt
+re -&gt; empty
+re -&gt; [+-] term re
+re -&gt; [+-] term re
+exp -&gt; term re
+matches: 5-8/4/2-1
+Stack=(5 8 4 / 2 / - 1 -)
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00891030000000000000">
+Accediendo a los atributos de paréntesis anteriores mediante <TT>@-</TT></A>
+</H4>
+  
+
+<P>
+Sigue una solución alternativa que obvia la necesidad de introducir
+incómodas acciones intermedias. Utilizamos 
+las variables <code>@-</code> y <code>@+</code>:
+
+<P>
+<BLOCKQUOTE><I>Since Perl 5.6.1 the special variables <code>@-</code> and <code>@+</code> can functionally replace
+<code>$`</code>, <code>$&amp;</code> and <code>$'</code>. These arrays contain pointers to the beginning and end of
+each match (see <A NAME="tex2html164"
+  HREF="http://search.cpan.org/perldoc/?perlvar"><TT>perlvar</TT></A>
+for the full story), so they give you essentially
+the same information, but without the risk of excessive string copying.
+</I></BLOCKQUOTE>
+
+<P>
+Véanse los párrafos en las páginas
+<A HREF="node53.html#parrafo:fincas"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>, <A HREF="node53.html#parrafo:iniciocas"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>) y
+<A HREF="node53.html#parrafo:lastpar"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> para mas información sobre <code>@-</code> y <code>@+</code>.
+
+<P>
+Nótese la función <code>rc</code> en las líneas
+21-28. <code>rc(1)</code> nos retorna lo que casó con el último paréntesis,
+<code>rc(2)</code> lo que casó con el penúltimo, etc.
+
+<P>
+
+<pre>
+pl@nereida:~/Lperltesting$ cat -n calc510withactions4.pl
+<span class="synLinenum">    1</span>   <span class="synComment">#!/usr/local/lib/perl/5.10.1/bin//perl5.10.1</span>
+<span class="synLinenum">    2</span>   <span class="synStatement">use </span>v5.<span class="synConstant">10</span>;
+<span class="synLinenum">    3</span> 
+<span class="synLinenum">    4</span>   <span class="synComment"># Infix to postfix translator using 5.10 regexp</span>
+<span class="synLinenum">    5</span>   <span class="synComment"># Original grammar:</span>
+<span class="synLinenum">    6</span> 
+<span class="synLinenum">    7</span>   <span class="synComment">#  exp -&gt;   exp [-+] term</span>
+<span class="synLinenum">    8</span>   <span class="synComment">#         | term</span>
+<span class="synLinenum">    9</span>   <span class="synComment">#  term -&gt;   term [*/] digits</span>
+<span class="synLinenum">   10</span>   <span class="synComment">#          | digits</span>
+<span class="synLinenum">   11</span> 
+<span class="synLinenum">   12</span>   <span class="synComment"># Applying left-recursion elimination we have:</span>
+<span class="synLinenum">   13</span> 
+<span class="synLinenum">   14</span>   <span class="synComment">#  exp  -&gt;   term re</span>
+<span class="synLinenum">   15</span>   <span class="synComment">#  re   -&gt;   [+-] term re</span>
+<span class="synLinenum">   16</span>   <span class="synComment">#          | # empty</span>
+<span class="synLinenum">   17</span>   <span class="synComment">#  term -&gt;   digits rt</span>
+<span class="synLinenum">   18</span>   <span class="synComment">#  rt   -&gt;   [*/] rt</span>
+<span class="synLinenum">   19</span>   <span class="synComment">#          | # empty</span>
+<span class="synLinenum">   20</span> 
+<span class="synLinenum">   21</span> <span class="synIdentifier">  </span><span class="synStatement">sub</span><span class="synIdentifier"> rc </span>{
+<span class="synLinenum">   22</span>     <span class="synStatement">my</span> <span class="synIdentifier">$ofs</span> = - <span class="synStatement">shift</span>;
+<span class="synLinenum">   23</span> 
+<span class="synLinenum">   24</span>     <span class="synComment"># Number of parenthesis that matched</span>
+<span class="synLinenum">   25</span>     <span class="synStatement">my</span> <span class="synIdentifier">$np</span> = @-;
+<span class="synLinenum">   26</span>     <span class="synComment"># $_ contains the string being matched</span>
+<span class="synLinenum">   27</span>     <span class="synStatement">substr</span>(<span class="synIdentifier">$_</span>, <span class="synIdentifier">$-</span>[<span class="synIdentifier">$ofs</span>], <span class="synIdentifier">$+</span>[<span class="synIdentifier">$np</span>+<span class="synIdentifier">$ofs</span>] - <span class="synIdentifier">$-</span>[<span class="synIdentifier">$ofs</span>])
+<span class="synLinenum">   28</span>   }
+<span class="synLinenum">   29</span> 
+<span class="synLinenum">   30</span>   <span class="synStatement">my</span> <span class="synIdentifier">$input</span>;
+<span class="synLinenum">   31</span>   <span class="synStatement">my</span> <span class="synIdentifier">@stack</span>;
+<span class="synLinenum">   32</span> 
+<span class="synLinenum">   33</span>   <span class="synStatement">my</span> <span class="synIdentifier">$regexp</span> = <span class="synConstant">qr{</span>
+<span class="synLinenum">   34</span> <span class="synConstant">      </span><span class="synSpecial">(?</span><span class="synConstant">&amp;exp</span><span class="synSpecial">)</span>
+<span class="synLinenum">   35</span> 
+<span class="synLinenum">   36</span> <span class="synConstant">      </span><span class="synSpecial">(?(</span><span class="synConstant">DEFINE</span><span class="synSpecial">)</span>
+<span class="synLinenum">   37</span> <span class="synConstant">          </span><span class="synSpecial">(?</span><span class="synConstant">&lt;exp&gt;    </span><span class="synSpecial">(?</span><span class="synConstant">&amp;term</span><span class="synSpecial">)</span><span class="synConstant"> </span><span class="synSpecial">(?</span><span class="synConstant">&amp;re</span><span class="synSpecial">)</span>
+<span class="synLinenum">   38</span> <span class="synConstant">                       </span><span class="synSpecial">(?</span><span class="synConstant">{ say "exp -&gt; term re" }</span>)
+<span class="synLinenum">   39</span>           )
+<span class="synLinenum">   40</span> 
+<span class="synLinenum">   41</span>           (?<span class="synIdentifier">&lt;re&gt;</span>     \s* ([+-]) (?<span class="synIdentifier">&amp;term</span>) \s* (?{ <span class="synStatement">push</span> <span class="synIdentifier">@stack</span>, rc(<span class="synConstant">1</span>) }) (?<span class="synIdentifier">&amp;re</span>)
+<span class="synLinenum">   42</span>                        (?{ say <span class="synConstant">"re -&gt; [+-] term re"</span> })
+<span class="synLinenum">   43</span>                    | <span class="synComment"># empty</span>
+<span class="synLinenum">   44</span>                        (?{ say <span class="synConstant">"re -&gt; empty"</span> })
+<span class="synLinenum">   45</span>           )
+<span class="synLinenum">   46</span> 
+<span class="synLinenum">   47</span>           (?<span class="synIdentifier">&lt;term&gt;</span>   ((?<span class="synIdentifier">&amp;digits</span>))
+<span class="synLinenum">   48</span>                         (?{ <span class="synComment"># intermediate action</span>
+<span class="synLinenum">   49</span>                             <span class="synStatement">push</span> <span class="synIdentifier">@stack</span>, rc(<span class="synConstant">1</span>)
+<span class="synLinenum">   50</span>                         })
+<span class="synLinenum">   51</span>                      (?<span class="synIdentifier">&amp;rt</span>)
+<span class="synLinenum">   52</span>                         (?{
+<span class="synLinenum">   53</span>                             say <span class="synConstant">"term-&gt; digits("</span>.rc(<span class="synConstant">1</span>).<span class="synConstant">") rt"</span>;
+<span class="synLinenum">   54</span>                         })
+<span class="synLinenum">   55</span>           )
+<span class="synLinenum">   56</span> 
+<span class="synLinenum">   57</span>           (?<span class="synIdentifier">&lt;rt&gt;</span>     \s*([*/]) ((?<span class="synIdentifier">&amp;digits</span>)) \s*
+<span class="synLinenum">   58</span>                              (?{  <span class="synComment"># intermediate action</span>
+<span class="synLinenum">   59</span>                                   <span class="synStatement">push</span> <span class="synIdentifier">@stack</span>, rc(<span class="synConstant">1</span>), rc(<span class="synConstant">2</span>)
+<span class="synLinenum">   60</span>                               })
+<span class="synLinenum">   61</span>                      (?<span class="synIdentifier">&amp;rt</span>) <span class="synComment"># end of &lt;rt&gt; definition</span>
+<span class="synLinenum">   62</span>                              (?{
+<span class="synLinenum">   63</span>                                   say <span class="synConstant">"rt -&gt; [*/] digits("</span>.rc(<span class="synConstant">1</span>).<span class="synConstant">") rt"</span>
+<span class="synLinenum">   64</span>                               })
+<span class="synLinenum">   65</span>                     |  <span class="synComment"># empty</span>
+<span class="synLinenum">   66</span>                        (?{ say <span class="synConstant">"rt -&gt; empty"</span> })
+<span class="synLinenum">   67</span>           )
+<span class="synLinenum">   68</span> 
+<span class="synLinenum">   69</span>           (?<span class="synIdentifier">&lt;digits&gt;</span>  \s* \d+
+<span class="synLinenum">   70</span>           )
+<span class="synLinenum">   71</span>       )
+<span class="synLinenum">   72</span>   }xms;
+<span class="synLinenum">   73</span> 
+<span class="synLinenum">   74</span>   <span class="synIdentifier">$input</span> = &lt;&gt;;
+<span class="synLinenum">   75</span>   <span class="synStatement">chomp</span>(<span class="synIdentifier">$input</span>);
+<span class="synLinenum">   76</span>   <span class="synStatement">if</span> (<span class="synIdentifier">$input</span> =~ <span class="synIdentifier">$regexp</span>) {
+<span class="synLinenum">   77</span>     say <span class="synConstant">"matches: </span><span class="synIdentifier">$&amp;</span><span class="synSpecial">\n</span><span class="synConstant">Stack=(</span><span class="synIdentifier">@stack</span><span class="synConstant">)"</span>;
+<span class="synLinenum">   78</span>   }
+<span class="synLinenum">   79</span>   <span class="synStatement">else</span> {
+<span class="synLinenum">   80</span>     say <span class="synConstant">"does not match"</span>;
+<span class="synLinenum">   81</span>   }
+</pre>
+
+<P>
+Ahora accedemos a los atributos asociados con los dos paréntesis,
+en la regla de <code>&lt;rt&gt;</code> usando la función <code>rc</code>:
+
+<P>
+<PRE>
+         (?&lt;rt&gt;     \s*([*/]) ((?&amp;digits)) \s*
+                            (?{  # intermediate action
+                                 push @stack, rc(1), rc(2)
+                             })
+</PRE>
+
+<P>
+Sigue una ejecución del programa:
+
+<P>
+<PRE>
+pl@nereida:~/Lperltesting$ ./calc510withactions4.pl
+5-8/4/2-1
+rt -&gt; empty
+term-&gt; digits(5) rt
+rt -&gt; empty
+rt -&gt; [*/] digits(2) rt
+rt -&gt; [*/] digits(4) rt
+term-&gt; digits(8) rt
+rt -&gt; empty
+term-&gt; digits(1) rt
+re -&gt; empty
+re -&gt; [+-] term re
+re -&gt; [+-] term re
+exp -&gt; term re
+matches: 5-8/4/2-1
+Stack=(5 8 4 / 2 / - 1 -)
+pl@nereida:~/Lperltesting$
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00891040000000000000">
+Accediendo a los atributos de paréntesis anteriores mediante paréntesis 
+con nombre</A>
+</H4>
+  
+
+<P>
+Una nueva solución: dar nombre a los paréntesis y acceder a los mismos:
+<PRE>
+47          (?&lt;rt&gt;     \s*(?&lt;op&gt;[*/]) (?&lt;num&gt;(?&amp;digits)) \s*
+48                             (?{  # intermediate action
+49                                  push @stack, $+{num}, $+{op}
+50                              })
+</PRE>
+
+<P>
+Sigue el código completo:
+
+<P>
+
+<pre>
+pl@nereida:~/Lperltesting$ cat -n ./calc510withnamedpar.pl
+<span class="synLinenum">    1</span>   <span class="synComment">#!/usr/local/lib/perl/5.10.1/bin//perl5.10.1</span>
+<span class="synLinenum">    2</span>   <span class="synStatement">use </span>v5.<span class="synConstant">10</span>;
+<span class="synLinenum">    3</span> 
+<span class="synLinenum">    4</span>   <span class="synComment"># Infix to postfix translator using 5.10 regexp</span>
+<span class="synLinenum">    5</span>   <span class="synComment"># Original grammar:</span>
+<span class="synLinenum">    6</span> 
+<span class="synLinenum">    7</span>   <span class="synComment">#  exp -&gt;   exp [-+] term</span>
+<span class="synLinenum">    8</span>   <span class="synComment">#         | term</span>
+<span class="synLinenum">    9</span>   <span class="synComment">#  term -&gt;   term [*/] digits</span>
+<span class="synLinenum">   10</span>   <span class="synComment">#          | digits</span>
+<span class="synLinenum">   11</span> 
+<span class="synLinenum">   12</span>   <span class="synComment"># Applying left-recursion elimination we have:</span>
+<span class="synLinenum">   13</span> 
+<span class="synLinenum">   14</span>   <span class="synComment">#  exp  -&gt;   term re</span>
+<span class="synLinenum">   15</span>   <span class="synComment">#  re   -&gt;   [+-] term re</span>
+<span class="synLinenum">   16</span>   <span class="synComment">#          | # empty</span>
+<span class="synLinenum">   17</span>   <span class="synComment">#  term -&gt;   digits rt</span>
+<span class="synLinenum">   18</span>   <span class="synComment">#  rt   -&gt;   [*/] rt</span>
+<span class="synLinenum">   19</span>   <span class="synComment">#          | # empty</span>
+<span class="synLinenum">   20</span> 
+<span class="synLinenum">   21</span>   <span class="synStatement">my</span> <span class="synIdentifier">@stack</span>;
+<span class="synLinenum">   22</span> 
+<span class="synLinenum">   23</span>   <span class="synStatement">my</span> <span class="synIdentifier">$regexp</span> = <span class="synConstant">qr{</span>
+<span class="synLinenum">   24</span> <span class="synConstant">      </span><span class="synSpecial">(?</span><span class="synConstant">&amp;exp</span><span class="synSpecial">)</span>
+<span class="synLinenum">   25</span> 
+<span class="synLinenum">   26</span> <span class="synConstant">      </span><span class="synSpecial">(?(</span><span class="synConstant">DEFINE</span><span class="synSpecial">)</span>
+<span class="synLinenum">   27</span> <span class="synConstant">          </span><span class="synSpecial">(?</span><span class="synConstant">&lt;exp&gt;    </span><span class="synSpecial">(?</span><span class="synConstant">&amp;term</span><span class="synSpecial">)</span><span class="synConstant"> </span><span class="synSpecial">(?</span><span class="synConstant">&amp;re</span><span class="synSpecial">)</span>
+<span class="synLinenum">   28</span> <span class="synConstant">                       </span><span class="synSpecial">(?</span><span class="synConstant">{ say "exp -&gt; term re" }</span>)
+<span class="synLinenum">   29</span>           )
+<span class="synLinenum">   30</span> 
+<span class="synLinenum">   31</span>           (?<span class="synIdentifier">&lt;re&gt;</span>     \s* ([+-]) (?<span class="synIdentifier">&amp;term</span>) \s* (?{ <span class="synStatement">push</span> <span class="synIdentifier">@stack</span>, <span class="synIdentifier">$^</span>N }) (?<span class="synIdentifier">&amp;re</span>)
+<span class="synLinenum">   32</span>                        (?{ say <span class="synConstant">"re -&gt; [+-] term re"</span> })
+<span class="synLinenum">   33</span>                    | <span class="synComment"># empty</span>
+<span class="synLinenum">   34</span>                        (?{ say <span class="synConstant">"re -&gt; empty"</span> })
+<span class="synLinenum">   35</span>           )
+<span class="synLinenum">   36</span> 
+<span class="synLinenum">   37</span>           (?<span class="synIdentifier">&lt;term&gt;</span>   ((?<span class="synIdentifier">&amp;digits</span>))
+<span class="synLinenum">   38</span>                         (?{ <span class="synComment"># intermediate action</span>
+<span class="synLinenum">   39</span>                             <span class="synStatement">push</span> <span class="synIdentifier">@stack</span>, <span class="synIdentifier">$^</span>N
+<span class="synLinenum">   40</span>                         })
+<span class="synLinenum">   41</span>                      (?<span class="synIdentifier">&amp;rt</span>)
+<span class="synLinenum">   42</span>                         (?{
+<span class="synLinenum">   43</span>                             say <span class="synConstant">"term-&gt; digits(</span><span class="synIdentifier">$^</span><span class="synConstant">N) rt"</span>;
+<span class="synLinenum">   44</span>                         })
+<span class="synLinenum">   45</span>           )
+<span class="synLinenum">   46</span> 
+<span class="synLinenum">   47</span>           (?<span class="synIdentifier">&lt;rt&gt;</span>     \s*(?<span class="synIdentifier">&lt;op&gt;</span>[*/]) (?<span class="synIdentifier">&lt;num&gt;</span>(?<span class="synIdentifier">&amp;digits</span>)) \s*
+<span class="synLinenum">   48</span>                              (?{  <span class="synComment"># intermediate action</span>
+<span class="synLinenum">   49</span>                                   <span class="synStatement">push</span> <span class="synIdentifier">@stack</span>, <span class="synIdentifier">$+</span>{num}, <span class="synIdentifier">$+</span>{op}
+<span class="synLinenum">   50</span>                               })
+<span class="synLinenum">   51</span>                      (?<span class="synIdentifier">&amp;rt</span>) <span class="synComment"># end of &lt;rt&gt; definition</span>
+<span class="synLinenum">   52</span>                              (?{
+<span class="synLinenum">   53</span>                                   say <span class="synConstant">"rt -&gt; [*/] digits(</span><span class="synIdentifier">$^</span><span class="synConstant">N) rt"</span>
+<span class="synLinenum">   54</span>                               })
+<span class="synLinenum">   55</span>                     |  <span class="synComment"># empty</span>
+<span class="synLinenum">   56</span>                        (?{ say <span class="synConstant">"rt -&gt; empty"</span> })
+<span class="synLinenum">   57</span>           )
+<span class="synLinenum">   58</span> 
+<span class="synLinenum">   59</span>           (?<span class="synIdentifier">&lt;digits&gt;</span>  \s* \d+
+<span class="synLinenum">   60</span>           )
+<span class="synLinenum">   61</span>       )
+<span class="synLinenum">   62</span>   }xms;
+<span class="synLinenum">   63</span> 
+<span class="synLinenum">   64</span>   <span class="synStatement">my</span> <span class="synIdentifier">$input</span> = &lt;&gt;;
+<span class="synLinenum">   65</span>   <span class="synStatement">chomp</span>(<span class="synIdentifier">$input</span>);
+<span class="synLinenum">   66</span>   <span class="synStatement">if</span> (<span class="synIdentifier">$input</span> =~ <span class="synIdentifier">$regexp</span>) {
+<span class="synLinenum">   67</span>     say <span class="synConstant">"matches: </span><span class="synIdentifier">$&amp;</span><span class="synSpecial">\n</span><span class="synConstant">Stack=(</span><span class="synIdentifier">@stack</span><span class="synConstant">)"</span>;
+<span class="synLinenum">   68</span>   }
+<span class="synLinenum">   69</span>   <span class="synStatement">else</span> {
+<span class="synLinenum">   70</span>     say <span class="synConstant">"does not match"</span>;
+<span class="synLinenum">   71</span>   }
+</pre>
+
+<P>
+Ejecución:
+<PRE>
+pl@nereida:~/Lperltesting$ ./calc510withnamedpar.pl
+5-8/4/2-1
+rt -&gt; empty
+term-&gt; digits(5) rt
+rt -&gt; empty
+rt -&gt; [*/] digits(2) rt
+rt -&gt; [*/] digits(4) rt
+term-&gt; digits(8) rt
+rt -&gt; empty
+term-&gt; digits(1) rt
+re -&gt; empty
+re -&gt; [+-] term re
+re -&gt; [+-] term re
+exp -&gt; term re
+matches: 5-8/4/2-1
+Stack=(5 8 4 / 2 / - 1 -)
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00891050000000000000">
+Véase También</A>
+</H4>
+  
+
+<UL>
+<LI>El nodo <I>Backreference variables in code embedded inside Perl 5.10 regexps</I> en 
+<A NAME="tex2html165"
+  HREF="http://www.perlmonks.org/?node_id=794424">PerlMonks</A>
+<P>
+</LI>
+<LI>El nodo <I>Strange behavior of @- and @+ in perl5.10 regexps</I> en 
+<A NAME="tex2html166"
+  HREF="http://www.perlmonks.org/?node_id=794736">PerlMonks</A>
+<P>
+</LI>
+</UL>
+
+<P>
+<HR>
+<A NAME="tex2html2440"
+  HREF="node83.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2434"
+  HREF="node81.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2428"
+  HREF="node81.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2436"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2438"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2441"
+  HREF="node83.html">Construyendo el AST con</A>
+<B>Sup:</B> <A NAME="tex2html2435"
+  HREF="node81.html">Analisis Sintáctico con Expresiones</A>
+<B> Ant:</B> <A NAME="tex2html2429"
+  HREF="node81.html">Analisis Sintáctico con Expresiones</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

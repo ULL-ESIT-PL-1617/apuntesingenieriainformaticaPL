@@ -1,0 +1,367 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Manejo y recuperación de errores</TITLE>
+<META NAME="description" CONTENT="Manejo y recuperación de errores">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node101.html">
+<LINK REL="previous" HREF="node99.html">
+<LINK REL="up" HREF="node85.html">
+<LINK REL="next" HREF="node101.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2795"
+  HREF="node101.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2789"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2783"
+  HREF="node99.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2791"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2793"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2796"
+  HREF="node101.html">Mensajes de Warning</A>
+<B>Sup:</B> <A NAME="tex2html2790"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2784"
+  HREF="node99.html">Depuración de Regexps</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0081115000000000000000">
+Manejo y recuperación de errores</A>
+</H2>
+
+<P>
+En este punto debo decir que no he podido reproducir el comportamiento
+de las directivas <code>&lt;error:&gt;</code> y <code>&lt;warning:&gt;</code> tal y como las describe 
+Conway en el manual de <A NAME="tex2html210"
+  HREF="http://search.cpan.org/perldoc?Regexp::Grammars">Regexp::Grammars</A>. 
+
+<P>
+El siguiente ejemplo ilustra un conjunto de técnicas de gestión de errores
+que son independientes del soprote dado por <A NAME="tex2html211"
+  HREF="http://search.cpan.org/perldoc?Regexp::Grammars">Regexp::Grammars</A>.
+
+<P>
+Se trata de la misma calculadora explicada en la sección
+<A HREF="node103.html#subsection:recicla">3.10.18</A>.
+
+<P>
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo/calculator$ cat -n calculatorwitherrmanagement.pl
+ 1  #!/usr/bin/env perl5.10.1
+ 2  use strict;
+ 3  use warnings;
+ 4  use 5.010;
+ 5  use Lingua::EN::Inflect qw(PL);
+ 6  use Scalar::Util qw{blessed};
+ 7
+ 8  my $rbb = do {
+ 9      my ($warnings, $errors);    # closure
+10      sub warnings { $warnings }  # accessor
+11      sub errors { $errors }      # accessor
+12
+13      use Regexp::Grammars;
+14      qr{
+15        (?{
+16            $warnings = 0;
+17            $errors = 0;
+18        })
+19        \A&lt;expr&gt;
+20        (?:   \z
+21             |
+22               (.*) (?{
+23                        # Accept the string but emit a warning
+24                        $warnings++;
+25                        local our $expr = \$MATCH{expr}{''};
+26                        local our $endlegal = length($$expr) &gt; 4? "... ".substr($$expr, -4) : $$expr;
+27                        warn "Warning: Unexpected '". substr($^N, 0, 10)."' after '$endlegal'\n";
+28                     })
+29        )
+30
+31        &lt;objrule: expr&gt;      &lt;[operands=term]&gt; ** &lt;[operators=addop]&gt;
+32
+33        &lt;objrule: term&gt;      &lt;[operands=uneg]&gt; ** &lt;[operators=mulop]&gt;
+34
+35        &lt;objrule: uneg&gt;      &lt;[operators=minus]&gt;* &lt;[operands=power]&gt;
+36
+37        &lt;objrule: power&gt;     &lt;[operands=factorial]&gt; ** &lt;[operators=powerop]&gt;
+38
+39        &lt;objrule: factorial&gt; &lt;[operands=factor]&gt;  &lt;[operators=(!)]&gt;*
+40
+41        &lt;objrule: factor&gt;    (&lt;val=([+-]?\d+(?:\.\d*)?)&gt;)
+42                           | \( &lt;MATCH=expr&gt; \)
+43                           | ([^-+(0-9]+) (?{
+44                                            # is + and not * to avoid infinite recursion
+45                                            warn "Error: expecting a number or a open parenthesis, found: '". substr($^N, 0, 10)."'\n";
+46                                            $warnings++;
+47                                            $errors++;
+48                                        }) &lt;MATCH=factor&gt;
+49
+50        &lt;token: addop&gt;        [+-]
+51
+52        &lt;token: mulop&gt;        [*/]
+53
+54        &lt;token: powerop&gt;      \*\*|\^
+55
+56        &lt;token: minus&gt;        - &lt;MATCH=(?{ 'NEG' })&gt;
+57
+58      }x;
+59  };
+60
+61  sub test_calc {
+62    my $prompt = shift;
+63
+64    print $prompt;
+65    while (my $input = &lt;&gt;) {
+66        chomp($input);
+67
+68        local %/;
+69        $input =~ m{$rbb};
+70
+71        say warnings." ".PL('warning',warnings) if warnings;
+72        say errors." ".PL('error',errors)       if errors;
+73
+74        my $tree = $/{expr};
+75        if (blessed($tree)) {
+76            do "PostfixCalc.pm";
+77            say "postfix: ".$tree-&gt;ceval;
+78
+79            do "EvalCalc.pm";
+80            say "result: ".$tree-&gt;ceval;
+81        }
+82        print $prompt;
+83    }
+84    say "Bye!"
+85  }
+86
+87  ########## main
+88  test_calc(
+89    'Parsing infix arithmetic expressions (CTRL-D to end in unix) ',
+90  );
+</PRE>
+
+<P>
+Veamos algunas ejecuciones que incluyen entradas erróneas:
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo/calculator$ ./calculatorwitherrmanagement.pl
+Parsing infix arithmetic expressions (CTRL-D to end in unix) 2+3
+postfix: 2 3 +
+result: 5
+Parsing infix arithmetic expressions (CTRL-D to end in unix) 2*(3+#)
+Error: expecting a number or a open parenthesis, found: '#)'
+Error: expecting a number or a open parenthesis, found: '#'
+Error: expecting a number or a open parenthesis, found: ')'
+Warning: Unexpected '*(3+#)' after '2'
+4 warnings
+3 errors
+postfix: 2
+result: 2
+Parsing infix arithmetic expressions (CTRL-D to end in unix) 2+#*4
+Error: expecting a number or a open parenthesis, found: '#*'
+1 warning
+1 error
+postfix: 2 4 +
+result: 6
+Parsing infix arithmetic expressions (CTRL-D to end in unix) Bye!
+</PRE>
+Obsérvese los mensajes de error repetidos para la entrada 
+<code>2*(3+#)</code>. Ellos son debidos a los reiterados intentos de
+casar <code>&lt;factor&gt;</code> en la regla de recuperación de errores:
+<PRE>
+41        &lt;objrule: factor&gt;    (&lt;val=([+-]?\d+(?:\.\d*)?)&gt;)
+42                           | \( &lt;MATCH=expr&gt; \)
+43                           | ([^-+(0-9]+) (?{
+44                                            # is + and not * to avoid infinite recursion
+45                                            warn "Error: expecting a number or a open parenthesis, found: '". substr($^N, 0, 10)."'\n";
+46                                            $warnings++;
+47                                            $errors++;
+48                                        }) &lt;MATCH=factor&gt;
+</PRE>
+en este caso resulta imposible encontrar un factor.
+Se puede cambiar la conducta indicando un <code>(* COMMIT)</code> antes de la
+llamada a <code>&lt;MATCH=factor&gt;</code>:
+<PRE>
+ 41       &lt;objrule: factor&gt;    (&lt;val=([+-]?\d+(?:\.\d*)?)&gt;)
+ 42                          | \( &lt;MATCH=expr&gt; \)
+ 43                          | ([^-+(0-9]+) (?{
+ 44                                           # is + and not * to avoid infinite recursion
+ 45                                           warn "Error: expecting a number or a open parenthesis, found: '". substr($^N, 0, 10)."'\n";
+ 46                                           $warnings++;
+ 47                                           $errors++;
+ 48                                       }) (*COMMIT) &lt;MATCH=factor&gt;
+</PRE>
+
+<P>
+en este caso la conducta es abandonar en el caso de que no se pueda encontrar un <code>&lt;factor&gt;</code>:
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo/calculator$ ./calculatorwitherrmanagement.pl
+Parsing infix arithmetic expressions (CTRL-D to end in unix) 2*(3+#)
+Error: expecting a number or a open parenthesis, found: '#)'
+1 warning
+1 error
+Parsing infix arithmetic expressions (CTRL-D to end in unix) 2*3
+postfix: 2 3 *
+result: 6
+Parsing infix arithmetic expressions (CTRL-D to end in unix) @
+Error: expecting a number or a open parenthesis, found: '@'
+1 warning
+1 error
+Parsing infix arithmetic expressions (CTRL-D to end in unix) Bye!
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html2795"
+  HREF="node101.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2789"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2783"
+  HREF="node99.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2791"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2793"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2796"
+  HREF="node101.html">Mensajes de Warning</A>
+<B>Sup:</B> <A NAME="tex2html2790"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2784"
+  HREF="node99.html">Depuración de Regexps</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

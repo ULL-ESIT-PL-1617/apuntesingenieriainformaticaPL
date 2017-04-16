@@ -1,0 +1,4596 @@
+\batchmode
+
+
+\documentclass[11pt,a4paper,oneside,onecolumn]{book}
+\RequirePackage{ifthen}
+
+
+\usepackage{epsfig} 
+\usepackage{latexsym,amsfonts,amssymb,amstext,amsthm,float,amsmath,dsfont}
+\usepackage[spanish]{babel}    
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{alltt}
+\usepackage{html}
+\usepackage{makeidx}
+
+
+\voffset -10 mm
+\topmargin 0 mm
+\headheight 0 mm
+\headsep 0 mm
+
+
+\textheight 256 mm
+
+
+\oddsidemargin -5.4 mm
+\evensidemargin -5.4 mm
+
+
+\textwidth 17 cm
+\columnsep 10 mm
+
+%
+\providecommand{\infinity}{\infty} 
+
+%
+\providecommand{\ici}[1]{\index{#1}} 
+
+%
+\providecommand{\pci}[1]{\index{Práctica!#1}} 
+
+%
+\providecommand{\ci}[1]{\index{#1}#1} 
+
+%
+\providecommand{\cei}[1]{\index{#1}\emph{#1}} 
+
+%
+\providecommand{\ceis}[2]{\index{#2}\emph{#1}} 
+
+%
+\providecommand{\tei}[1]{ #1 }  %{\index{#1}{{\tt #1}}}
+
+%
+\providecommand{\htei}[1]{ #1 }  %{\index{#1}}
+
+%
+\providecommand{\teis}[2]{\index{#2}{{\tt #1}}} 
+
+%
+\providecommand{\xsub}[1]{\index{XSUB!{\tt #1}}
+   {\tt #1}
+  } 
+
+%
+\providecommand{\typemap}[1]{\index{typemap!{\tt #1}}
+   {\tt #1}
+  } 
+
+%
+\providecommand{\api}[1]{\index{Perl API!{\tt #1}}
+   {\tt #1}
+  } 
+
+%
+\providecommand{\parrafo}[1]{ 
+  \paragraph{#1}
+  \begin{tabular}{c}
+  \end{tabular}
+} 
+
+%
+\providecommand{\sectionpractica}[1]{\section{Práctica: #1}
+   \index{Práctica!#1}
+  } 
+
+%
+\providecommand{\subsectionpractica}[1]{\subsection{Práctica: #1}
+   \index{Práctica!#1}
+  } 
+
+%
+\providecommand{\subsubsectionpractica}[1]{\subsubsection{Práctica: #1}
+   \index{Práctica!#1}
+  } 
+
+%
+\providecommand{\sectionejercicio}[1]{\section{Ejercicio: #1}
+   \index{Ejercicio!#1}
+  } 
+
+%
+\providecommand{\subsectionejercicio}[1]{\subsection{Ejercicio: #1}
+   \index{Ejercicio!#1}
+  } 
+
+%
+\providecommand{\subsubsectionejercicio}[1]{\subsubsection{Ejercicio: #1}
+   \index{Ejercicio!#1}
+  } 
+
+%
+\providecommand{\subsectionrepaso}[1]{\subsection{Repaso: #1}
+   \index{Repaso!#1}
+  } 
+
+%
+\providecommand{\eref}[1]{\externalref{#1} \cite{CasianoIntroAPerl}} 
+
+%
+\providecommand{\regexpg}{\htmladdnormallink{Regexp::Grammars}
+ {http://search.cpan.org/perldoc?Regexp::Grammars}} 
+
+%
+\providecommand{\rgsec}[2]{\htmladdnormallink{#1}
+ {http://search.cpan.org/~dconway/Regexp-Grammars/lib/Regexp/Grammars.pm\##2}} 
+
+
+
+\newtheorem{definition}{Definición}[section] 
+\newtheorem{theorem}{Teorema}[section] 
+\newtheorem{algorithm}{Algoritmo}[section] 
+\newtheorem{program}{Programa}[section] 
+\newtheorem{exercise}{Ejercicio}[section] 
+
+
+\newtheorem{example}{Ejemplo}[section] 
+\newtheorem{execution}{Ejecución}[section] 
+\newtheorem{listing}{Listado}[section] 
+\newtheorem{advice}{Consejo}[section] 
+\newtheorem{scheme}{Esquema}[section] 
+
+
+%
+\newenvironment{unicodeverb}{\begin{verbatim}
+}
+{\end{verbatim}
+} 
+
+%
+\providecommand{\lhp}[2]{\htmladdnormallink{#1}
+{http://nereida.deioc.ull.es/~lhp/perlexamples/node#2.html}} 
+
+%
+\providecommand{\man}[1]{\htmladdnormallink{#1}
+{http://manpages.debian.net/cgi-bin/man.cgi?query=#1}} 
+
+%
+\providecommand{\manuk}[1]{\htmladdnormallink{#1}
+{http://unixhelp.ed.ac.uk/CGI/man-cgi?#1}} 
+
+%
+\providecommand{\mandragonfly}[1]{\htmladdnormallink{#1}
+{http://leaf.dragonflybsd.org/cgi/web-man?command=#1&section=ANY}} 
+
+%
+\providecommand{\manopenbsd}[1]{\htmladdnormallink{#1}
+{http://www.openbsd.org/cgi-bin/man.cgi?query=#1}} 
+
+%
+\providecommand{\link}[2]{\htmladdnormallink{#1}
+{#2}} 
+
+%
+\providecommand{\cpan}[1]{\htmladdnormallink{#1}
+ {http://search.cpan.org/perldoc?#1}} 
+
+%
+\providecommand{\gnereida}[1]{\htmladdnormallink{#1}
+ {http://www.google.es/search?q=site:nereida.deioc.ull.es+#1&ie=UTF-8&hl=es}} 
+
+%
+\providecommand{\gdefine}[1]{\htmladdnormallink{#1}
+ {http://www.google.com/search?q=define:#1}} 
+
+%
+\providecommand{\googlecode}[1]{\htmladdnormallink{#1}
+ {http://code.google.com/p/#1/}} 
+
+%
+\providecommand{\perldocf}[1]{\htmladdnormallink{{\tt #1}}
+{http://www.ayni.com/perldoc/functions/#1.html}} 
+
+%
+\providecommand{\perldoc}[1]{\htmladdnormallink{{\tt #1}}
+{http://search.cpan.org/perldoc/?#1}} 
+
+%
+\providecommand{\vim}{\htmladdnormallink{{\tt vim}}{http://www.vim.org/}} 
+
+%
+\providecommand{\vimdoc}[2]{\htmladdnormallink{{\tt #1}}
+{http://vimdoc.sourceforge.net/htmldoc/#2}} 
+
+%
+\providecommand{\pd}[2]{la sección '#2' en \htmladdnormallink{{\tt #1}}
+{http://perldoc.perl.org/#1.html\##2}} 
+
+%
+\providecommand{\wikipedia}[2]{\htmladdnormallink{#1}
+{http://en.wikipedia.org/wiki/#1}} 
+
+%
+\providecommand{\wikip}[2]{\htmladdnormallink{#1}
+{http://en.wikipedia.org/wiki/#2}} 
+
+%
+\providecommand{\perlmonk}[1]{\htmladdnormallink{PerlMonks}
+{http://www.perlmonks.org/?node_id=#1}} 
+
+%
+\providecommand{\pmm}[2]{\htmladdnormallink{#2}
+{http://www.perlmonks.org/?node_id=#1}} 
+
+%
+\providecommand{\code}[1]{{\tt #1}} 
+
+%
+\providecommand{\perlmarkmail}[1]{\htmladdnormallink{#1}
+{http://perl.markmail.org/search/?q=#1}} 
+
+%
+\providecommand{\cpandist}[1]{\htmladdnormallink{{\tt #1}}
+{http://search.cpan.org/dist/#1}} 
+
+%
+\providecommand{\I}[1]{{\it #1}} 
+
+%
+\providecommand{\svnbook}[2]{\htmladdnormallink{#1}{http://svnbook.red-bean.com/en/1.5/#2.html}}%
+\providecommand{\svnb}[2]{\htmladdnormallink{#1}{http://svnbook.red-bean.com/en/1.5/#2}} 
+
+
+\pagestyle{plain} %each page number
+
+
+\title{Análisis Léxico y Sintáctico}
+\author{Casiano R. León \thanks{DEIOC Universidad de La Laguna}}
+
+
+\makeindex
+
+
+\htmladdtonavigation{\htmladdnormallink{
+     \htmladdimg[
+                 width=35 
+                 alt="PL"
+                ]
+     {PL.jpg}}
+     {http://nereida.deioc.ull.es/~pl/}} 
+
+
+\htmladdtonavigation{\htmladdnormallink{
+     \htmladdimg[
+                 width=50 
+                 alt="PL moodle"
+                ]
+     {hatpl.png}}
+     {http://campusvirtual.ull.es/0910/course/view.php?id=1148}} 
+
+
+\htmladdtonavigation{\htmladdnormallink{
+     \htmladdimg[
+                 width=30 
+                 alt="ps"
+                ]
+     {gv.jpeg}}
+     {pl.ps}} 
+
+
+\htmladdtonavigation{\htmladdnormallink{
+     \htmladdimg[
+                 width=35 
+                 alt="errata"
+                ]
+     {icon_errata.jpg}}
+     {perl_errata_form.html}} 
+
+
+\htmladdtonavigation{\htmladdnormallink{
+     \htmladdimg[
+                 width=60 
+                 alt="modulos"
+                ]
+     {lupa.gif}}
+     {http://search.cpan.org/}} 
+
+
+\htmladdtonavigation{\htmladdnormallink{
+     \htmladdimg[
+                 width=35 
+                 alt="perlmonks"
+                ]
+     {monk.gif}}
+     {http://www.perlmonks.org/?node=Seekers of Perl Wisdom}} 
+
+
+\htmladdtonavigation{\htmladdnormallink{
+     \htmladdimg[
+                 width=30 
+                 alt="perldoc"
+                ]
+     {perlonion.jpeg}}
+     {http://perldoc.perl.org/}} 
+
+
+\htmladdtonavigation{\htmladdnormallink{
+     \htmladdimg[
+                 width=22 
+                 alt="apuntes LHP"
+                ]
+     {logoLHP.jpg}}
+     {http://nereida.deioc.ull.es/~lhp/perlexamples/}} 
+
+
+\htmladdtonavigation{\htmladdnormallink{
+     \htmladdimg[
+                 width=35 
+                 alt="google"
+                ]
+     {ggoogle.gif}}
+     {http://www.google.es/}} 
+
+
+\htmladdtonavigation{\htmladdnormallink{
+     \htmladdimg[
+                 width=35 
+                 alt="etsii"
+                ]
+     {etsii.png}}
+     {http://www.etsii.ull.es/}} 
+
+
+\htmladdtonavigation{\htmladdnormallink{
+     \htmladdimg[
+                 width=35 
+                 alt="ull"
+                ]
+     {ull.gif}}
+     {http://www.ull.es/}} 
+
+
+\htmladdtonavigation{\htmladdnormallink{
+     \htmladdimg[
+                 width=32 
+                 alt="pcgull"
+                ]
+     {logopcgull.gif}}
+     {http://nereida.deioc.ull.es/}} 
+
+
+
+
+\usepackage[dvips]{color}
+
+
+\pagecolor[gray]{.7}
+
+\usepackage[latin1]{inputenc}
+
+
+
+\makeatletter
+
+\makeatletter
+\count@=\the\catcode`\_ \catcode`\_=8 
+\newenvironment{tex2html_wrap}{}{}%
+\catcode`\<=12\catcode`\_=\count@
+\newcommand{\providedcommand}[1]{\expandafter\providecommand\csname #1\endcsname}%
+\newcommand{\renewedcommand}[1]{\expandafter\providecommand\csname #1\endcsname{}%
+  \expandafter\renewcommand\csname #1\endcsname}%
+\newcommand{\newedenvironment}[1]{\newenvironment{#1}{}{}\renewenvironment{#1}}%
+\let\newedcommand\renewedcommand
+\let\renewedenvironment\newedenvironment
+\makeatother
+\let\mathon=$
+\let\mathoff=$
+\ifx\AtBeginDocument\undefined \newcommand{\AtBeginDocument}[1]{}\fi
+\newbox\sizebox
+\setlength{\hoffset}{0pt}\setlength{\voffset}{0pt}
+\addtolength{\textheight}{\footskip}\setlength{\footskip}{0pt}
+\addtolength{\textheight}{\topmargin}\setlength{\topmargin}{0pt}
+\addtolength{\textheight}{\headheight}\setlength{\headheight}{0pt}
+\addtolength{\textheight}{\headsep}\setlength{\headsep}{0pt}
+\setlength{\textwidth}{451pt}
+\setlength{\textheight}{554pt}
+\newwrite\lthtmlwrite
+\makeatletter
+\let\realnormalsize=\normalsize
+\global\topskip=2sp
+\def\preveqno{}\let\real@float=\@float \let\realend@float=\end@float
+\def\@float{\let\@savefreelist\@freelist\real@float}
+\def\liih@math{\ifmmode$\else\bad@math\fi}
+\def\end@float{\realend@float\global\let\@freelist\@savefreelist}
+\let\real@dbflt=\@dbflt \let\end@dblfloat=\end@float
+\let\@largefloatcheck=\relax
+\let\if@boxedmulticols=\iftrue
+\def\@dbflt{\let\@savefreelist\@freelist\real@dbflt}
+\def\adjustnormalsize{\def\normalsize{\mathsurround=0pt \realnormalsize
+ \parindent=0pt\abovedisplayskip=0pt\belowdisplayskip=0pt}%
+ \def\phantompar{\csname par\endcsname}\normalsize}%
+\def\lthtmltypeout#1{{\let\protect\string \immediate\write\lthtmlwrite{#1}}}%
+\newcommand\lthtmlhboxmathA{\adjustnormalsize\setbox\sizebox=\hbox\bgroup\kern.05em }%
+\newcommand\lthtmlhboxmathB{\adjustnormalsize\setbox\sizebox=\hbox to\hsize\bgroup\hfill }%
+\newcommand\lthtmlvboxmathA{\adjustnormalsize\setbox\sizebox=\vbox\bgroup %
+ \let\ifinner=\iffalse \let\)\liih@math }%
+\newcommand\lthtmlboxmathZ{\@next\next\@currlist{}{\def\next{\voidb@x}}%
+ \expandafter\box\next\egroup}%
+\newcommand\lthtmlmathtype[1]{\gdef\lthtmlmathenv{#1}}%
+\newcommand\lthtmllogmath{\dimen0\ht\sizebox \advance\dimen0\dp\sizebox
+  \ifdim\dimen0>.95\vsize
+   \lthtmltypeout{%
+*** image for \lthtmlmathenv\space is too tall at \the\dimen0, reducing to .95 vsize ***}%
+   \ht\sizebox.95\vsize \dp\sizebox\z@ \fi
+  \lthtmltypeout{l2hSize %
+:\lthtmlmathenv:\the\ht\sizebox::\the\dp\sizebox::\the\wd\sizebox.\preveqno}}%
+\newcommand\lthtmlfigureA[1]{\let\@savefreelist\@freelist
+       \lthtmlmathtype{#1}\lthtmlvboxmathA}%
+\newcommand\lthtmlpictureA{\bgroup\catcode`\_=8 \lthtmlpictureB}%
+\newcommand\lthtmlpictureB[1]{\lthtmlmathtype{#1}\egroup
+       \let\@savefreelist\@freelist \lthtmlhboxmathB}%
+\newcommand\lthtmlpictureZ[1]{\hfill\lthtmlfigureZ}%
+\newcommand\lthtmlfigureZ{\lthtmlboxmathZ\lthtmllogmath\copy\sizebox
+       \global\let\@freelist\@savefreelist}%
+\newcommand\lthtmldisplayA{\bgroup\catcode`\_=8 \lthtmldisplayAi}%
+\newcommand\lthtmldisplayAi[1]{\lthtmlmathtype{#1}\egroup\lthtmlvboxmathA}%
+\newcommand\lthtmldisplayB[1]{\edef\preveqno{(\theequation)}%
+  \lthtmldisplayA{#1}\let\@eqnnum\relax}%
+\newcommand\lthtmldisplayZ{\lthtmlboxmathZ\lthtmllogmath\lthtmlsetmath}%
+\newcommand\lthtmlinlinemathA{\bgroup\catcode`\_=8 \lthtmlinlinemathB}
+\newcommand\lthtmlinlinemathB[1]{\lthtmlmathtype{#1}\egroup\lthtmlhboxmathA
+  \vrule height1.5ex width0pt }%
+\newcommand\lthtmlinlineA{\bgroup\catcode`\_=8 \lthtmlinlineB}%
+\newcommand\lthtmlinlineB[1]{\lthtmlmathtype{#1}\egroup\lthtmlhboxmathA}%
+\newcommand\lthtmlinlineZ{\egroup\expandafter\ifdim\dp\sizebox>0pt %
+  \expandafter\centerinlinemath\fi\lthtmllogmath\lthtmlsetinline}
+\newcommand\lthtmlinlinemathZ{\egroup\expandafter\ifdim\dp\sizebox>0pt %
+  \expandafter\centerinlinemath\fi\lthtmllogmath\lthtmlsetmath}
+\newcommand\lthtmlindisplaymathZ{\egroup %
+  \centerinlinemath\lthtmllogmath\lthtmlsetmath}
+\def\lthtmlsetinline{\hbox{\vrule width.1em \vtop{\vbox{%
+  \kern.1em\copy\sizebox}\ifdim\dp\sizebox>0pt\kern.1em\else\kern.3pt\fi
+  \ifdim\hsize>\wd\sizebox \hrule depth1pt\fi}}}
+\def\lthtmlsetmath{\hbox{\vrule width.1em\kern-.05em\vtop{\vbox{%
+  \kern.1em\kern0.8 pt\hbox{\hglue.17em\copy\sizebox\hglue0.8 pt}}\kern.3pt%
+  \ifdim\dp\sizebox>0pt\kern.1em\fi \kern0.8 pt%
+  \ifdim\hsize>\wd\sizebox \hrule depth1pt\fi}}}
+\def\centerinlinemath{%
+  \dimen1=\ifdim\ht\sizebox<\dp\sizebox \dp\sizebox\else\ht\sizebox\fi
+  \advance\dimen1by.5pt \vrule width0pt height\dimen1 depth\dimen1 
+ \dp\sizebox=\dimen1\ht\sizebox=\dimen1\relax}
+
+\def\lthtmlcheckvsize{\ifdim\ht\sizebox<\vsize 
+  \ifdim\wd\sizebox<\hsize\expandafter\hfill\fi \expandafter\vfill
+  \else\expandafter\vss\fi}%
+\providecommand{\selectlanguage}[1]{}%
+\makeatletter \tracingstats = 1 
+\providecommand{\Beta}{\textrm{B}}
+\providecommand{\Mu}{\textrm{M}}
+\providecommand{\Kappa}{\textrm{K}}
+\providecommand{\Rho}{\textrm{R}}
+\providecommand{\Epsilon}{\textrm{E}}
+\providecommand{\Chi}{\textrm{X}}
+\providecommand{\Iota}{\textrm{J}}
+\providecommand{\omicron}{\textrm{o}}
+\providecommand{\Zeta}{\textrm{Z}}
+\providecommand{\Eta}{\textrm{H}}
+\providecommand{\Nu}{\textrm{N}}
+\providecommand{\Omicron}{\textrm{O}}
+\providecommand{\Tau}{\textrm{T}}
+\providecommand{\Alpha}{\textrm{A}}
+
+
+\begin{document}
+\pagestyle{empty}\thispagestyle{empty}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength hsize=\the\hsize}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength vsize=\the\vsize}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength hoffset=\the\hoffset}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength voffset=\the\voffset}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength topmargin=\the\topmargin}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength topskip=\the\topskip}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength headheight=\the\headheight}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength headsep=\the\headsep}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength parskip=\the\parskip}\lthtmltypeout{}%
+\lthtmltypeout{latex2htmlLength oddsidemargin=\the\oddsidemargin}\lthtmltypeout{}%
+\makeatletter
+\if@twoside\lthtmltypeout{latex2htmlLength evensidemargin=\the\evensidemargin}%
+\else\lthtmltypeout{latex2htmlLength evensidemargin=\the\oddsidemargin}\fi%
+\lthtmltypeout{}%
+\makeatother
+\setcounter{page}{1}
+\onecolumn
+
+% !!! IMAGES START HERE !!!
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline37401}%
+$ \delimiter "026E30F $%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline37837}%
+$ \mathsurround \z@ \tmspace  +\thinmuskip {.1667em}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline39175}%
+$ FIRST$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline39187}%
+$ FOLLOW$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline42225}%
+$ >$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlineA{tex2html_nomath_inline44664}%
+\textquestiondown%
+\lthtmlinlineZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{chapter}
+\stepcounter{section}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline46514}%
+$ \backslash$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{chapter}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline46569}%
+$ \{a^n b^n\  /\  n \in N\}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{chapter}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline46616}%
+$ n$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline46618}%
+$ k$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline46620}%
+$ n-k$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline46622}%
+$ m$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline46634}%
+$ \backslash k$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline46636}%
+$ \backslash g$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsubsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{chapter}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsubsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47076}%
+$ A$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47078}%
+$ A^*$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47082}%
+$ A^* = \cup_{n=0}^{\infty} A^n
+$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47084}%
+$ A^0 = \{ \epsilon \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47086}%
+$ \epsilon$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47095}%
+$ G$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47097}%
+$ G =(\Sigma,V,P,S)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47099}%
+$ \Sigma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47101}%
+$ V$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47105}%
+$ V \times (V \cup \Sigma )^*$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47107}%
+$ (A, \alpha) \in P$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47109}%
+$ A \rightarrow \alpha$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47111}%
+$ P$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47113}%
+$ S$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47124}%
+$ \mu = \alpha A \beta \in (V \cup \Sigma)^*$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47126}%
+$ A \rightarrow \gamma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47130}%
+$ \mu$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47132}%
+$ \alpha \gamma \beta$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47134}%
+$ \alpha A \beta$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47140}%
+$ \gamma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47146}%
+$ \delta$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47148}%
+$ n-1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47154}%
+$ \mu  \stackrel{*}{\Longrightarrow}  \delta$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47163}%
+$ L(G)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47167}%
+$ L(G) = \{ x \in \Sigma^* : S \stackrel{*}{\Longrightarrow} x \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47180}%
+$ \alpha A x$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47186}%
+$ x A \alpha$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47195}%
+$ V \cup \Sigma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47201}%
+$ X_1 \ldots X_n$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47203}%
+$ \gamma = X_1 \ldots X_n$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47210}%
+$ x \in L(G)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47212}%
+$ x_1 \ldots x_n$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47214}%
+$ x$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47230}%
+$ \rightarrow$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47232}%
+$ |$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47283}%
+$ S =$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47287}%
+$ A \in V$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47291}%
+$ L_A(G) = \{ x \in \Sigma^* : A \stackrel{*}{\Longrightarrow} x \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47297}%
+$ L(A)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47303}%
+$ a$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47307}%
+$ \alpha$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47313}%
+$ L_{\alpha}(G)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47317}%
+$ \alpha = X_1 \ldots X_n$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47319}%
+$ X_i$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47323}%
+$ X_i = B$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47363}%
+$ A \rightarrow a \alpha$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47371}%
+$ FIRST(\alpha)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47380}%
+$ \alpha \in (V \cup \Sigma)^*$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47384}%
+$ FIRST(\alpha) = \left \{ b \in \Sigma :  \alpha  \stackrel{*}{\Longrightarrow}  b \beta \right \}
+\cup N(\alpha)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47386}%
+$ N(\alpha) = \left \{ \begin{array}{ll}
+\left \{ \epsilon \right \}& \mbox{si $\alpha \stackrel{*}{\Longrightarrow} \epsilon$} \\
+\emptyset & \mbox{en otro caso} 
+\end{array}
+\right. $%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47388}%
+$ A \rightarrow \gamma_1 \mid \ldots \mid \gamma_n$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47390}%
+$ FIRST(\gamma_i)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47394}%
+$ \gamma_j$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47396}%
+$ X_1 \ldots X_k$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47398}%
+$ i = 1 \ldots k$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47427}%
+$ A   \rightarrow \alpha \beta \mid \alpha \gamma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47432}%
+$ FIRST(\beta) \cap FIRST(\gamma) = \emptyset$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47443}%
+$ \epsilon \in FIRST(\gamma)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47445}%
+$ \gamma \stackrel{*}{\Longrightarrow} \epsilon$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47449}%
+$ S \stackrel{*}{\Longrightarrow} \beta A\  a \mu \Longrightarrow \beta \gamma\  a \mu \stackrel{*}{\Longrightarrow} \beta\  a \mu$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47451}%
+$ a \in \Sigma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47461}%
+$ FOLLOW(A)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47476}%
+$ FOLLOW(A) = \left \{ b \in \Sigma :  \exists\  S  \stackrel{*}{\Longrightarrow}  \alpha A b \beta \right \} \cup E(A)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47478}%
+$ E(A) = \left \{ \begin{array}{ll}
+\{ \$  \}& \mbox{si $S \stackrel{*}{\Longrightarrow} \alpha A$} \\
+\emptyset & \mbox{en otro caso} 
+\end{array}
+\right. $%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47480}%
+$ \$$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47488}%
+$ \gamma_n$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47492}%
+$ \gamma_n \stackrel{*}{\Longrightarrow} \epsilon$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47494}%
+$ \gamma_n = \epsilon$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47502}%
+$ FIRST(X)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47506}%
+$ Si\  X \in \Sigma\  entonces\  FIRST(X) = {X}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47508}%
+$ Si\  X \rightarrow \epsilon\  entonces\  FIRST(X) =  FIRST(X) \cup \{ \epsilon \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47510}%
+$ Si X \in V \  y\  X \rightarrow Y_1 Y_2 \cdots Y_k \in P\  entonces$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay47513}%
+$\displaystyle i = 1;$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay47515}%
+$\displaystyle hacer$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay47517}%
+$\displaystyle \  \ FIRST(X) = FIRST(X) \cup FIRST^*(Y_i);$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay47519}%
+$\displaystyle \  \ i++;$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay47521}%
+$\displaystyle mientras\  (i \leq k\  y\  \epsilon \in FIRST(Y_i))$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47527}%
+$ i \geq k$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47529}%
+$ \epsilon \in FIRST(Y_k)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47531}%
+$ FIRST^*(Y)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47533}%
+$ FIRST(Y) - \{ \epsilon \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47537}%
+$ \alpha = X_1 X_2 \cdots X_n \in (V \cup \Sigma)^*$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay47551}%
+$\displaystyle FIRST(\alpha) = \emptyset;$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay47555}%
+$\displaystyle \  \ FIRST(\alpha) = FIRST(\alpha) \cup FIRST^*(X_i);$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay47559}%
+$\displaystyle mientras\  (i \leq n\  y\  \epsilon \in FIRST(X_i))$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47566}%
+$ FOLLOW(A)\  \forall A \in V$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47570}%
+$ FOLLOW(S) = \{\$\} $%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47574}%
+$ Si\  A \rightarrow \alpha B \beta\  entonces$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay47576}%
+$\displaystyle FOLLOW(B) =  FOLLOW(B) \cup (FIRST(\beta) - \{\epsilon\})$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47578}%
+$ Si\  A \rightarrow \alpha B\  o\  A \rightarrow \alpha B \beta\  y\  \epsilon \in FIRST(\beta)\   entonces$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay47580}%
+$\displaystyle FOLLOW(B) = FOLLOW(B) \cup FOLLOW(A)$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47602}%
+$ |\  \epsilon$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47633}%
+$ A \rightarrow \beta$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47637}%
+$ FIRST(\alpha) \cap FIRST(\beta) = \emptyset$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47639}%
+$ \epsilon \in FIRST(\alpha)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47641}%
+$ FIRST(\alpha) \cap FOLLOW(A) = \emptyset$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47654}%
+$ FIRST(\alpha) = \emptyset$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47658}%
+$ FOLLOW(A) = \emptyset$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47718}%
+$ (terminal, atributo)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47734}%
+$ A \rightarrow \alpha \beta $%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47736}%
+$ A \rightarrow \alpha \{ action \} \beta $%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47738}%
+$ \{ action \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47742}%
+$ \beta$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47744}%
+$ expr   \rightarrow expr_1  -  NUM$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47746}%
+$ expr   \rightarrow NUM$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47752}%
+$ NUM$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47754}%
+$ expr$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47771}%
+$ decl   \rightarrow type$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47773}%
+$ list$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47775}%
+$ type   \rightarrow INT$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47777}%
+$ type   \rightarrow STRING$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47779}%
+$ list   \rightarrow ID$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47781}%
+$ list_1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47813}%
+$ A \stackrel{*}{\Longrightarrow} A \alpha$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47815}%
+$ A \rightarrow A \alpha$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47824}%
+$ |\  \beta$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47828}%
+$ \alpha, \beta \in (V \cup \Sigma)^*$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47832}%
+$ A   \rightarrow \beta R$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47834}%
+$ R   \rightarrow  \alpha R$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47854}%
+$ expr   \rightarrow expr  -  NUM$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47865}%
+$ expr   \rightarrow NUM - expr_1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47878}%
+$ e   \rightarrow\  NUM\  r$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47880}%
+$ r   \rightarrow - e$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47882}%
+$ r   \rightarrow \epsilon$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47905}%
+$ A   \rightarrow A \beta$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47915}%
+$ \gamma \beta \alpha$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47919}%
+$ R$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47921}%
+$ R   \rightarrow \beta$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47925}%
+$ R   \rightarrow \alpha$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47929}%
+$ R   \rightarrow \epsilon$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47943}%
+$ r$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47951}%
+$ r   \rightarrow - NUM$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47953}%
+$ r_1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47970}%
+$ A^s$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47972}%
+$ A   \rightarrow A_1 X_1 X_2 X_3$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47974}%
+$ \{ A^s = f_X(A^s_1, X_1^s, X_2^s, X_3^s) \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47976}%
+$ A   \rightarrow A_1 Y_1 Y_2 Y_3$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47978}%
+$ \{ A^s = f_Y(A^s_1, Y_1^s, Y_2^s, Y_3^s) \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47980}%
+$ A   \rightarrow Z_1 Z_2 Z_3$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47982}%
+$ \{ A^s = f_Z(Z_1^s, Z_2^s, Z_3^s) \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47990}%
+$ f_X, f_Y$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline47992}%
+$ f_Z$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48039}%
+$ \rightarrow \epsilon$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48117}%
+$ (\Sigma, \rho)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48121}%
+$ \rho$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48123}%
+$ \rho: \Sigma \rightarrow \mathds{N}_0$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48125}%
+$ \Sigma_k = \{ a \in \Sigma :\  \rho(a) = k \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48127}%
+$ B(\Sigma)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48133}%
+$ a \in  \Sigma_0$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48135}%
+$ a \in B(\Sigma)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48137}%
+$ b_1, \ldots , b_k \in B(\Sigma)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48139}%
+$ f \in \Sigma_k$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48143}%
+$ f(b_1, \ldots , b_k) \in B(\Sigma)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48152}%
+$ \Sigma = \{A, CONS, NIL \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48154}%
+$ \rho(A) = \rho(NIL) = 0, \rho(CONS) = 2$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48156}%
+$ B(\Sigma) = \{ A, NIL, CONS(A,NIL), CONS(NIL, A), CONS(A, A), CONS(NIL,NIL), \ldots \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48163}%
+$ \Sigma = \{ID, NUM, LEFTVALUE, STR, PLUS, TIMES, ASSIGN, PRINT \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48165}%
+$ \rho(ID) = \rho(NUM) = \rho(LEFTVALUE) = \rho(STR) = 0$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48167}%
+$ \rho(PRINT) = 1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48169}%
+$ \rho(PLUS) = \rho(TIMES) = \rho(ASSIGN) = 2$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48177}%
+$ ASSIGN(NUM, PRINT(ID))$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48186}%
+$ ((\Sigma, \rho), N, P, S)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48190}%
+$ \rho: \Sigma \rightarrow \mathds{N}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48192}%
+$ N$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48196}%
+$ X \rightarrow s$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48198}%
+$ X \in N$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48200}%
+$ s \in B(\Sigma \cup N)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48202}%
+$ S \in N$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48209}%
+$ (\Sigma, N, P, S)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48211}%
+$ t \in B(\Sigma \cup N)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48213}%
+$ (X_1, \ldots X_k)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48215}%
+$ j$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48217}%
+$ t$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48219}%
+$ X_j \in N$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48221}%
+$ p = X \rightarrow s$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48223}%
+$ s$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48225}%
+$ (X_1, \ldots X_n)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48227}%
+$ p$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48229}%
+$ (X_1, \ldots X_n) \rightarrow X$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48242}%
+$ X_i \rightarrow s_i \in P$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48244}%
+$ i$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48248}%
+$ t'$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48252}%
+$ s_i$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48254}%
+$ t \Longrightarrow t'$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48256}%
+$ t' = t\{X_i/s_i\}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48258}%
+$ t \stackrel{0}{\Longrightarrow} t$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48266}%
+$ t \stackrel{n}{\Longrightarrow} t'$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48270}%
+$ t''$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48280}%
+$ t \stackrel{*}{\Longrightarrow} t'$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48287}%
+$ G = (\Sigma, N, P, S)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48289}%
+$ L(G) = \{ t \in B(\Sigma): \exists S \stackrel{*}{\Longrightarrow} t \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48302}%
+$ V = \{ E, L \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48306}%
+$ P_1 = \{ L \rightarrow NIL, L \rightarrow CONS(E,L),E \rightarrow a \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48308}%
+$ L \rightarrow CONS(E,L)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48310}%
+$ (E,L) \rightarrow L$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48320}%
+$ L(G) = \{ NIL, CONS(A, NIL), CONS(A, CONS(A,NIL)), \ldots \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48327}%
+$ CONS(A, CONS(A,NIL))$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48329}%
+$ CONS(E, CONS(A, CONS(E,L)))$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48346}%
+$ V = \{ st, expr \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48353}%
+$ P =$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48355}%
+$ \{$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48357}%
+$ st$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48359}%
+$ \rightarrow ASSIGN(LEFTVALUE, expr)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48363}%
+$ \rightarrow PRINT(expr)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48367}%
+$ \rightarrow PLUS(expr, expr)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48371}%
+$ \rightarrow TIMES(expr, expr)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48375}%
+$ \rightarrow NUM$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48379}%
+$ \rightarrow ID$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48383}%
+$ \rightarrow STR$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48385}%
+$ \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48416}%
+$ ASSIGN$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48418}%
+$ ($%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48420}%
+$ LEFTVALUE$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48422}%
+$ PLUS$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48426}%
+$ ID$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48428}%
+$ TIMES$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48436}%
+$ )$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48489}%
+$ T = (\Omega, N, R, U)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48491}%
+$ L(T)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48497}%
+$ \Omega$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48509}%
+$ t \in B(\Sigma)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48513}%
+$ t/\epsilon = t$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48515}%
+$ t = a(t_1, \ldots t_k)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48517}%
+$ j \in \{ 1 \ldots k \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48521}%
+$ t/j.n$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48529}%
+$ t/j.n = t_j/n$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48536}%
+$ t = ASSIGN$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48602}%
+$ t/\epsilon$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48604}%
+$ t/2\ldotp2\ldotp1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48606}%
+$ t/2\ldotp1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48608}%
+$ t/2\ldotp1\ldotp2$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48616}%
+$ prog$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48618}%
+$ \rightarrow PROGRAM(decls, sts)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48620}%
+$ decls$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48624}%
+$ decl$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48626}%
+$ sts$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48634}%
+$ \rightarrow INT(idlist)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48638}%
+$ \rightarrow STRING(idlist)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48640}%
+$ idlist$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48644}%
+$ SIMPLEID$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48719}%
+$ PRINT$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48723}%
+$ e   \rightarrow\  e_1 + f$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48725}%
+$ f   \rightarrow NUM$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48727}%
+$ f   \rightarrow ID$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48738}%
+$ \rightarrow list\  decl$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48746}%
+$ \rightarrow list\  st$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48754}%
+$ \rightarrow list\  SIMPLEID$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48769}%
+$ INT$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline48771}%
+$ STRING$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49023}%
+$ SYMTABLE$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49025}%
+$ BLOCK$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49030}%
+$ (p, e, action)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49034}%
+$ e$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49038}%
+$ action$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49042}%
+$ p \Longrightarrow e$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49044}%
+$ PLUS(NUM_1, NUM_2) \Longrightarrow NUM_3$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49046}%
+$ PLUS(NUM, NUM)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49052}%
+$ ASSIGN(LEFTVALUE, x)\  and$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49054}%
+$ \Longrightarrow NIL$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49058}%
+$ S_1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49060}%
+$ S_2$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49062}%
+$ IFELSE(NUM, S_1, S_2)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49064}%
+$ \Longrightarrow S_1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49068}%
+$ \Longrightarrow S_2$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49070}%
+$ ASSIGN(LEFTVALUE, x)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49083}%
+$ V =\{ x_1, x_2, \ldots \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49085}%
+$ \rho(x) = 0\  \forall x \in V$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49087}%
+$ B(V \cup \Sigma)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49101}%
+$ (x_1, \ldots x_k)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49103}%
+$ x_1, \ldots x_k$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49114}%
+$ V = \{ x \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49118}%
+$ x, CONS(A, x), CONS(A, CONS(x, NIL)), \ldots \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49120}%
+$ CONS(x, CONS(x, NIL))$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49124}%
+$ t/1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49135}%
+$ S \rightarrow S_1(a, S, b)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49137}%
+$ S \rightarrow S_2(NIL)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49139}%
+$ S \rightarrow aSb$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49145}%
+$ S_1(a, X(NIL), b)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49147}%
+$ \{X, Y\}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49149}%
+$ S_1(X, Y, a)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49151}%
+$ S_1(X, Y, Y)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49158}%
+$ x, y, PLUS(x, y), ASSIGN(x, TIMES(y,ID)), PRINT(y) \ldots$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49160}%
+$ V = \{ x, y \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49162}%
+$ ASSIGN(x, TIMES(y,ID))$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49164}%
+$ (x, y)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49171}%
+$ \theta$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49173}%
+$ \theta: V \rightarrow B(V \cup \Sigma)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49175}%
+$ \theta : B(V \cup \Sigma) \rightarrow B(V \cup \Sigma)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49177}%
+$ t \theta = \left \{ \begin{array}{ll}
+x \theta & \mbox{si $t = x \in V$}\\
+a(t_1  \theta, \ldots, t_k \theta) & \mbox{si $t = a(t_1, \ldots, t_k)$} 
+\end{array}
+\right. $%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49183}%
+$ t \theta$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49185}%
+$ t \theta = t\{x_1/x_1 \theta, \ldots x_k/x_k \theta\}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49196}%
+$ \theta = \{x/A, y/CONS(A, NIL)\}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49198}%
+$ CONS(x, y)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49202}%
+$ CONS(x, y)\theta = CONS(x\theta, y\theta) = CONS(A, CONS(A, NIL))$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49209}%
+$ \theta = \{x/PLUS(NUM, x), y/TIMES(ID, NUM)\}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49211}%
+$ PLUS(x, y)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49213}%
+$ PLUS(PLUS(NUM,x), TIMES(ID, NUM))$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49215}%
+$ PLUS(x, y)\theta = PLUS(x\theta, y\theta) = PLUS(PLUS(NUM,x), TIMES(ID, NUM))$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49222}%
+$ \tau \in B(V \cup \Sigma)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49228}%
+$ \tau$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49232}%
+$ t_1, \ldots t_k \in B(\Sigma)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49234}%
+$ t = \tau \{x_1/t_1, \ldots x_k/t_k\}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49238}%
+$ \{x_1/t_1, \ldots x_k/t_k\}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49245}%
+$ \tau = CONS(x, NIL)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49247}%
+$ t = CONS(CONS(A,NIL),NIL)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49249}%
+$ t \ldotp 1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49251}%
+$ t\{x/CONS(A,NIL)\}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49253}%
+$ t \ldotp 1 \{x/A\}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49255}%
+$ t = \tau \{x/CONS(A,NIL)\}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49257}%
+$ t \ldotp 1 = \tau \{x/A\}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49264}%
+$ \tau = PLUS(x, y)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49266}%
+$ t = TIMES(PLUS(NUM, NUM), TIMES(ID, ID))$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49272}%
+$ \{x/t_1, y/t_2\}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49280}%
+$ t = TIMES(PLUS(NUM, NUM), TIMES(ID, ID)) = \tau\{x/t_1, y/t_2\} =
+PLUS(x, y)\{x/t_1, y/t_2\}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49287}%
+$ PLUS(NUM, x)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49289}%
+$ \wedge$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49291}%
+$ \Longrightarrow x$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49293}%
+$ PLUS(x, NUM)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49299}%
+$ TIMES(NUM, x)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49305}%
+$ TIMES(x, NUM)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49324}%
+$ texto\  fuente \rightarrow arbol$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49326}%
+$ arbol \rightarrow texto\  objeto$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+\stepcounter{section}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49333}%
+$ R_0 \ldots R_{k-1}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49335}%
+$ R_i = M_a$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49337}%
+$ R_i = c$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49339}%
+$ M_a = R_i$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49341}%
+$ R_i += R_j$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49343}%
+$ R_i += M_a$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49345}%
+$ R_i += c$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49361}%
+$ OP(t_1, t_2)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49363}%
+$ t_1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49367}%
+$ t_2$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49369}%
+$ r_2$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49371}%
+$ r_1 < r_2 \le k$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49377}%
+$ r_2 = k$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49385}%
+$ r_2 - 1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49387}%
+$ r_2 - 1 \ge r_1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49391}%
+$ r_1 \neq r_2$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49393}%
+$ \max\{r_1, r_2\}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49395}%
+$ r_1 + 1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49397}%
+$ PLUS(a,b)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49399}%
+$ b$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49407}%
+$ r_t$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49411}%
+$ r_t =  \left \{ \begin{array}{ll}
+\max\{r_1, r_2\} & \mbox{si $r_1 \neq r_2$}\\
+r_1 + 1 & \mbox{si $r_1 = r_2$} 
+\end{array}
+\right .$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49419}%
+$ \min \{r_1, r_2 \} < k$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49421}%
+$ \min \{r_1, r_2 \} \ge k$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49442}%
+$ PLUS(ID, t)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49444}%
+$ \{ r_t \ge 1 \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49452}%
+$ \{ r_t \ge 1 \} \Longrightarrow PLUS(t, ID)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49454}%
+$ \max \{2, r_t \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49460}%
+$ 2^n$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49462}%
+$ t = TIMES(TIMES(a,2),3)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{chapter}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{chapter}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49504}%
+$ E_1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49506}%
+$ E_2$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{chapter}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49652}%
+$ -(-(4,5),2)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49654}%
+$ -(4, -(5,2))$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49656}%
+$ E \rightarrow - E$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49658}%
+$ E \rightarrow E - E$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49665}%
+$ NUM + NUM \stackrel{NUM \leftarrow E}{\Longleftarrow} E + NUM \stackrel{NUM \leftarrow E}{\Longleftarrow} E + E \stackrel{E +E \leftarrow E}{\Longleftarrow} E
+$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49667}%
+$ E \rightarrow E + E$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49670}%
+$ FSD$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49681}%
+$ FSD = \left \{ \alpha \in (\Sigma \cup V)* : \exists S \begin{array}{c} *\\\Longrightarrow \\{\scriptstyle RM} \end{array} \alpha \right \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49693}%
+$ S \stackrel{*}{\Longrightarrow} y A z \Longrightarrow y w z = x$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49695}%
+$ A \rightarrow w$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49699}%
+$ \beta \alpha w$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49705}%
+$ S \stackrel{*}{\Longrightarrow} \beta A w \Longrightarrow \beta \alpha w$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49714}%
+$ \alpha = \beta \gamma x$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49716}%
+$ x \in \Sigma^*$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49722}%
+$ S \begin{array}{c} *\\\Longrightarrow  \\{\scriptstyle RM} \end{array} \beta B x \Longrightarrow \beta \gamma x = \alpha$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49724}%
+$ handle(\alpha) = (B \rightarrow \gamma, \beta \gamma)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49726}%
+$ handle$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49728}%
+$ handle_1(\alpha) = B \rightarrow \gamma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49730}%
+$ handle_2(\alpha) =  \beta \gamma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49732}%
+$ \beta \gamma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49739}%
+$ PV = \left \{ \delta \in (\Sigma \cup V)* :  \exists S \begin{array}{c} *\\\Longrightarrow \\{\scriptstyle RM} \end{array} \alpha\   y\  \delta\  es\  un\  prefijo\  de\   handle_2(\alpha) \right \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49741}%
+$ handle_2(\alpha)) =  \beta \gamma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49745}%
+$ \alpha \in FSD$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49747}%
+$ PV$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49764}%
+$ Alfabeto = V \cup \Sigma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49766}%
+$ (E \rightarrow E + E, 2)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49768}%
+$ Q =  \left \{ (A \rightarrow \alpha, n) :  A \rightarrow \alpha \in P,\  n \le |\alpha| \right \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49770}%
+$ \mid \alpha \mid$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49774}%
+$ (A \rightarrow \alpha, n)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49776}%
+$ A \rightarrow \beta _\uparrow \gamma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49778}%
+$ = \alpha$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49780}%
+$ n = \mid \beta \mid$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49782}%
+$ \delta(A \rightarrow \alpha _\uparrow X \beta, X) = A \rightarrow \alpha X _\uparrow \beta\  \forall X \in  V \cup \Sigma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49784}%
+$ \delta(A \rightarrow \alpha _\uparrow B \beta, \epsilon) = B \rightarrow \gamma  \forall B \in  V$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49786}%
+$ S' \rightarrow S$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49790}%
+$ S' \rightarrow _\uparrow S$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49792}%
+$ LR(0)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49794}%
+$ LR(0)-items$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49811}%
+$ L(G) = \{ a^n b^n\  :\  n \ge 0 \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{figure14058}%
+\begin{figure}\centerline{\epsfig{file=figures/nfa.eps, width=17cm}}
+
+\end{figure}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49827}%
+$ aabb$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49829}%
+$ aaSbb$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49831}%
+$ aSb$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay49881}%
+$\displaystyle do$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay49883}%
+$\displaystyle \  \ FIRST(X) = FIRST(X) \cup FIRST(Y_i) - \{ \epsilon \};$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay49887}%
+$\displaystyle mientras\  (\epsilon \in FIRST(Y_i)\  and\  (i \leq k))$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay49889}%
+$\displaystyle si\  (\epsilon \in FIRST(Y_k)\  and\  i > k)\  FIRST(X) = FIRST(X) \cup \{ \epsilon \}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay49909}%
+$\displaystyle \  \ FIRST(\alpha) = FIRST(\alpha) \cup FIRST(X_i) - \{ \epsilon \};$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay49913}%
+$\displaystyle mientras\  (\epsilon \in FIRST(X_i)\  and\  (i \leq n))$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay49915}%
+$\displaystyle si\  (\epsilon \in FIRST(X_n)\  and\  i > n)\  FIRST(\alpha) = FIRST(X) \cup \{ \epsilon \}$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49936}%
+$ Si\  A \rightarrow \alpha B$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49938}%
+$ A \rightarrow \alpha B \beta$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49940}%
+$ \epsilon \in FIRST(\beta)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{subsection}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49945}%
+$ (Q, \Sigma, \delta, q_0)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49947}%
+$ q_0$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49951}%
+$ \overline{\{q_0\}}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49953}%
+$ \overline{\delta(\overline{\{q_0\}},a)}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49955}%
+$ \overline{A}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49967}%
+$ \overline{A} = \{ q \in Q\  /\   \exists q' \in Q\  :\  \hat{\delta}(q, \epsilon) = q \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49969}%
+$ \hat{\delta}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49971}%
+$ \Sigma^*$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay49973}%
+$\displaystyle \hat{\delta}(q, x) = \left \{ \begin{array}{ll}                          \delta(\hat{\delta}(q,y),a) & \mbox{si $x = ya$} \\q & \mbox{si $x = \epsilon$}                        \end{array}              \right.$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlfigureA{figure14139}%
+\begin{figure}\centerline{\epsfig{file=figures/dfa.eps, width=12cm}}
+
+\end{figure}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49988}%
+$ \delta_{| V \times Q} :  V \times Q \rightarrow Q$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49990}%
+$ goto(i, A) = \delta(A,I_i)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49992}%
+$ \delta_{| \Sigma \times Q} :  \Sigma \times Q \rightarrow Q$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline49998}%
+$ action(i, a) = \delta(a,I_i)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50002}%
+$ A \rightarrow \alpha_\uparrow$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50008}%
+$ (s,a)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50022}%
+$ \exists S \begin{array}{c} *\\\Longrightarrow \\{\scriptstyle RM} \end{array} \beta A b x \begin{array}{c} *\\\Longrightarrow \\{\scriptstyle RM} \end{array}  
+\beta \alpha b x = \gamma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50028}%
+$ b \in FOLLOW(A)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50037}%
+$ (Q, V \cup \Sigma, \delta, I_0, F)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50039}%
+$ C = \left \{ I_1, I_2, \cdots I_n \right \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50041}%
+$ I_i$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50047}%
+$ goto(i,A) = \delta(I_i, A)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50053}%
+$ A \rightarrow \alpha _\uparrow a \beta \in I_i$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50055}%
+$ \delta(I_i,a) = I_j$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50059}%
+$ action[i][a] = shift\  j$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50061}%
+$ S' \rightarrow S_\uparrow \in I_i$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50063}%
+$ action[i][\$] = accept$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50065}%
+$ A \rightarrow \alpha _\uparrow \in I_i$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50067}%
+$ \forall a \in\  FOLLOW(A):\  action[i][a] = reduce\  A \rightarrow \alpha$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50069}%
+$ error$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50166}%
+$ |x|$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50198}%
+$ \left \{ action_1\right \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50202}%
+$ A \rightarrow \alpha \left \{ action_1 \right \} \beta \left \{ action_2\right \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50204}%
+$ T$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50206}%
+$ A \rightarrow \alpha T \beta \left \{ action_2\right \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50208}%
+$ T \rightarrow \epsilon \left \{ action_1 \right \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50211}%
+$ A \rightarrow X_1 \ldots X_j$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50213}%
+$ _1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50215}%
+$ \ldots$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50217}%
+$ _n$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50219}%
+$ X_{j+1} \ldots X_n$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50221}%
+$ X_j$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50228}%
+$ G = (V, \Sigma, P, S)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50230}%
+$ S \in V \cup \Sigma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50232}%
+$ A \rightarrow X_1 X_2 \ldots X_n \in P$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50234}%
+$ X \in V \cup \Sigma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50236}%
+$ X$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50240}%
+$ A \rightarrow X_1 \ldots X_n$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50249}%
+$ X_m \ldots X_1 X_0 Y_1 \ldots  Y_n a_1 \ldots a_0$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50251}%
+$ B \rightarrow Y_1 \ldots  Y_n$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50253}%
+$ a_1 \ldots a_0$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50255}%
+$ Y_1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50257}%
+$ Y_n$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50259}%
+$ X_0$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50261}%
+$ X_1$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50263}%
+$ X_m$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50312}%
+$ \Longrightarrow$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50326}%
+$ \Longleftarrow$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50466}%
+$ B \rightarrow \beta_\uparrow \gamma$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50470}%
+$ a \in FOLLOW(A)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50472}%
+$ a \in FIRST(\gamma)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50480}%
+$ a \in FOLLOW(A) \cap FIRST(\gamma)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50482}%
+$ FOLLOW(A) \cap FIRST(\gamma)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50509}%
+$ [$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50511}%
+$ ]$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50565}%
+$ ||$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50577}%
+$ <$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50585}%
+$ <=$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50589}%
+$ >=$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50609}%
+$ ++$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50613}%
+$ --$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlfigureA{figure14700}%
+\begin{figure}\centerline{\epsfig{file=figures/yapp_inheritance.eps, height=7cm}}
+
+\end{figure}%
+\lthtmlfigureZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{chapter}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50894}%
+$ \eta$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50898}%
+$ \mu  \stackrel{n}{\Longrightarrow}  \delta$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline50980}%
+$ A \rightarrow \alpha \{ action \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline51041}%
+$ exp$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline51043}%
+$ exp \rightarrow exp '+' exp$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline51050}%
+$ temp \rightarrow \epsilon$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline51084}%
+$ E \rightarrow NUM$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline51088}%
+$ E \rightarrow E * E$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_indisplay51090}%
+$\displaystyle E_3(E_1(NUM[2]), *, E_2(NUM[2]))$%
+\lthtmlindisplaymathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline51120}%
+$ A \rightarrow X_1 X_2 \ldots X_n $%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline51127}%
+$ X_2$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline51256}%
+$ s \rightarrow \epsilon$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline51270}%
+$ exp \rightarrow exp + exp$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline51313}%
+$ A \rightarrow X_1 X_2 X_3$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline51315}%
+$ A \rightarrow X_1 Y X_2 X_3$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline51330}%
+$ E \rightarrow VAR$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline51332}%
+$ E \rightarrow ( E )$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{chapter}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{chapter}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52515}%
+$ V = \{ exp, list \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52519}%
+$ P_1 = \{ list \rightarrow NIL,\  list \rightarrow CONS(exp,list),\  exp \rightarrow A \}$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52521}%
+$ list \rightarrow CONS(exp,list)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52523}%
+$ (exp,list) \rightarrow list$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52540}%
+$ CONS(exp, CONS(A, CONS(exp,L)))$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{paragraph}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52825}%
+$ M.$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52875}%
+$ P(M,T(N,T(N,M)))$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52877}%
+$ R \Longrightarrow$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52881}%
+$ P(R,R) \Longrightarrow$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52885}%
+$ P(M,R) \Longrightarrow$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52889}%
+$ P(M, T(R, R)) \Longrightarrow$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52893}%
+$ P(M, T(N, R)) \Longrightarrow$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52897}%
+$ P(M, T(N, T(R, R))) \Longrightarrow$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52901}%
+$ P(M, T(N, T(N, R))) \Longrightarrow$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52949}%
+$ P(R,T(N,R)) \Longrightarrow$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52957}%
+$ P(M,T(N,T(R,M))) $%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52997}%
+$ G_M$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline52999}%
+$ M$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline53001}%
+$ G_M = (\Sigma_M, V_M, P_M, S_M)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{chapter}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline53316}%
+$ List \rightarrow \epsilon$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline53318}%
+$ list \rightarrow list\  expr$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline53367}%
+$ |\alpha|$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline53369}%
+$ \rightarrow \alpha$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline53375}%
+$ \cdots$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline53407}%
+$ ABC$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline53409}%
+$ t_1 \rightarrow \epsilon$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline53411}%
+$ t_2 \rightarrow \epsilon$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline53413}%
+$ s \rightarrow x t_1 s$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline53415}%
+$ x \rightarrow A t_2 x$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline53447}%
+$ FOLLOW(\verb|$$2|)$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline53489}%
+$ \uparrow$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmldisplayA{displaymath53497}%
+\begin{displaymath}
+\begin{array}{lll}
+Construct         & EBNF & yacc\  input\\
+\hline
+optional\  sequence & x:\{y\}   & \verb|x : /* null */             |\\
+                   &           & \verb|  | x y  { yyerrok; }      |\\
+                   &           & \verb|  | x error                |\\
+\hline
+sequence          & x:y\{y\}  & \verb|x : y                      |\\
+                  &           & \verb|  | xy   { yyerrok; }      |\\
+                &           & \verb|  | error                  |\\
+                &           & \verb|  | x error                |\\
+\hline
+list              & x:y\{Ty\} & \verb|x : y                       |\\
+                  &           & \verb|  | x T y { yyerrok; }      |\\
+                &           & \verb|  | error                   |\\
+                &           & \verb|  | x error                 |\\
+                &           & \verb|  | x error y { yyerrok; }  |\\
+                &           & \verb|  | x  T error              |\\
+\hline
+\end{array}
+\end{displaymath}%
+\lthtmldisplayZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{chapter}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+{\newpage\clearpage
+\lthtmlinlinemathA{tex2html_wrap_inline53674}%
+$ Variable \rightarrow ID$%
+\lthtmlinlinemathZ
+\lthtmlcheckvsize\clearpage}
+
+\stepcounter{chapter}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{section}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{subsection}
+\stepcounter{subsection}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{section}
+\stepcounter{chapter}
+\stepcounter{chapter}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+\stepcounter{paragraph}
+
+\end{document}

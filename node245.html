@@ -1,0 +1,321 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>La opción alias de %tree</TITLE>
+<META NAME="description" CONTENT="La opción alias de %tree">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node246.html">
+<LINK REL="previous" HREF="node244.html">
+<LINK REL="up" HREF="node229.html">
+<LINK REL="next" HREF="node246.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html5106"
+  HREF="node246.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5100"
+  HREF="node229.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5094"
+  HREF="node244.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5102"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5104"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5107"
+  HREF="node246.html">Diseño de Analizadores con</A>
+<B>Sup:</B> <A NAME="tex2html5101"
+  HREF="node229.html">Análisis Sintáctico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5095"
+  HREF="node244.html">Bypass Automático</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0013160000000000000000"></A>
+<A NAME="section:alias"></A>
+<BR>
+La opción <TT>alias</TT> de <TT>%tree</TT>
+</H1>
+La opción  alias  de la directiva  %tree  da lugar a la construcción de 
+métodos de acceso a los hijos de los nodos para los cuales se haya explicitado
+un nombre a través de la <A NAME="18539"></A><B>notación punto</B> o de la <A NAME="18541"></A><B>notación dolar</B>.
+
+<P>
+Veamos un ejemplo:
+<PRE>
+nereida:~/src/perl/YappWithDefaultAction/examples&gt; cat -n ./alias.pl
+  1  #!/usr/bin/perl -w
+  2  use strict;
+  3  use Parse::Eyapp;
+  4
+  5  my $grammar = q{
+  6  %right  '='
+  7  %left   '-' '+'
+  8  %left   '*' '/'
+  9  %left   NEG
+!10  %tree bypass alias
+ 11
+ 12  %%
+ 13  line: $exp  { $_[1] }
+ 14  ;
+ 15
+ 16  exp:
+ 17      %name NUM
+ 18            $NUM
+ 19          | %name VAR
+ 20            $VAR
+ 21          | %name ASSIGN
+ 22            $VAR '=' $exp
+ 23          | %name PLUS
+ 24            exp.left '+' exp.right
+ 25          | %name MINUS
+ 26            exp.left '-' exp.right
+ 27          | %name TIMES
+ 28            exp.left '*' exp.right
+ 29          | %name DIV
+ 30            exp.left '/' exp.right
+ 31          | %no bypass UMINUS
+ 32            '-' $exp %prec NEG
+ 33    |   '(' exp ')'  { $_[2] } /* Let us simplify a bit the tree */
+ 34  ;
+ 35
+ 36  %%
+ 37
+ 38  sub _Error {
+ 39          exists $_[0]-&gt;YYData-&gt;{ERRMSG}
+ 40      and do {
+ 41          print $_[0]-&gt;YYData-&gt;{ERRMSG};
+ 42          delete $_[0]-&gt;YYData-&gt;{ERRMSG};
+ 43          return;
+ 44      };
+ 45      print "Syntax error.\n";
+ 46  }
+ 47
+ 48  sub _Lexer {
+ 49      my($parser)=shift;
+ 50
+ 51          $parser-&gt;YYData-&gt;{INPUT}
+ 52      or  $parser-&gt;YYData-&gt;{INPUT} = &lt;STDIN&gt;
+ 53      or  return('',undef);
+ 54
+ 55      $parser-&gt;YYData-&gt;{INPUT}=~s/^\s+//;
+ 56
+ 57      for ($parser-&gt;YYData-&gt;{INPUT}) {
+ 58          s/^([0-9]+(?:\.[0-9]+)?)//
+ 59                  and return('NUM',$1);
+ 60          s/^([A-Za-z][A-Za-z0-9_]*)//
+ 61                  and return('VAR',$1);
+ 62          s/^(.)//s
+ 63                  and return($1,$1);
+ 64      }
+ 65  }
+ 66
+ 67  sub Run {
+ 68      my($self)=shift;
+ 69      $self-&gt;YYParse( yylex =&gt; \&amp;_Lexer, yyerror =&gt; \&amp;_Error,
+ 70                      #yydebug =&gt;0xFF
+ 71                    );
+ 72  }
+ 73  }; # end grammar
+ 74
+ 75
+ 76  Parse::Eyapp-&gt;new_grammar(
+ 77    input=&gt;$grammar,
+ 78    classname=&gt;'Alias',
+ 79    firstline =&gt;7,
+ 80  );
+ 81  my $parser = Alias-&gt;new();
+ 82  $parser-&gt;YYData-&gt;{INPUT} = "a = -(2*3+5-1)\n";
+ 83  my $t = $parser-&gt;Run;
+ 84  $Parse::Eyapp::Node::INDENT=0;
+!85  print $t-&gt;VAR-&gt;str."\n";             # a
+ 86  print "***************\n";
+!87  print $t-&gt;exp-&gt;exp-&gt;left-&gt;str."\n";  # 2*3+5
+ 88  print "***************\n";
+!89  print $t-&gt;exp-&gt;exp-&gt;right-&gt;str."\n"; # 1
+</PRE>
+Este programa produce la salida:
+<PRE>
+nereida:~/src/perl/YappWithDefaultAction/examples&gt; ./alias.pl
+TERMINAL
+***************
+PLUS(TIMES(NUM,NUM),NUM)
+***************
+NUM
+</PRE>
+El efecto de la opción  alias  en una regla como:
+<PRE>
+ 27          | %name TIMES
+ 28            exp.left '*' exp.right
+</PRE>
+es crear dos métodos <code>left</code> y <code>right</code> en la clase <code>TIMES</code>.
+El método <code>left</code> permite acceder al hijo izquierdo del nodo en el AST
+y el método <code>right</code> al hijo derecho.
+
+<P>
+El efecto de la opción  alias  en una regla como:
+<PRE>
+ 21          | %name ASSIGN
+ 22            $VAR '=' $exp
+</PRE>
+es crear dos métodos en la clase <code>ASSIGN</code> denominados
+<code>VAR</code> y <code>exp</code> los cuales permiten acceder a los
+correspondientes hijos de uno nodo <code>ASSIGN</code>.
+
+<P>
+Los métodos son construidos durante la compilación de la gramática.
+Por tanto, las modificaciones al AST que el programa introduzca en 
+tiempo de ejecución (por ejemplo la supresión de hijos de ciertos
+nodos) invalidarán el uso de estos métodos.
+
+<P>
+<HR>
+<A NAME="tex2html5106"
+  HREF="node246.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5100"
+  HREF="node229.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5094"
+  HREF="node244.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5102"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5104"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5107"
+  HREF="node246.html">Diseño de Analizadores con</A>
+<B>Sup:</B> <A NAME="tex2html5101"
+  HREF="node229.html">Análisis Sintáctico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5095"
+  HREF="node244.html">Bypass Automático</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

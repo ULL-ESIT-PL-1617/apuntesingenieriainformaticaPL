@@ -1,0 +1,410 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Esquemas de Traducción: Conceptos</TITLE>
+<META NAME="description" CONTENT="Esquemas de Traducción: Conceptos">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node263.html">
+<LINK REL="previous" HREF="node261.html">
+<LINK REL="up" HREF="node261.html">
+<LINK REL="next" HREF="node263.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html5378"
+  HREF="node263.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5372"
+  HREF="node261.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5366"
+  HREF="node261.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5374"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5376"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5379"
+  HREF="node263.html">Esquemas de Traducción con</A>
+<B>Sup:</B> <A NAME="tex2html5373"
+  HREF="node261.html">Análisis Semántico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5367"
+  HREF="node261.html">Análisis Semántico con Parse::Eyapp</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001410000000000000000"></A>
+<A NAME="section:eyappesquemas"></A>
+<BR>
+Esquemas de Traducción: Conceptos
+</H1>
+<P>
+<DIV><B>Definición  9.1.1</B> &nbsp; 
+<I>Un <A NAME="21387"></A><B>esquema de traducción</B> es una gramática independiente del contexto
+en la cual se han insertado fragmentos de código en las partes derechas
+de sus reglas de producción. Los fragmentos de código asi insertados 
+se denominan <A NAME="21389"></A><B>acciones semánticas</B>. Dichos fragmentos actúan, calculan
+y modifican los atributos asociados con los nodos del árbol sintáctico. 
+El orden en que se evalúan los fragmentos
+es el de un recorrido primero-profundo del árbol de análisis sintáctico.</I></DIV><P></P>
+Obsérvese que, en general, para poder aplicar un esquema de traducción hay 
+que construir el árbol sintáctico y después aplicar las acciones empotradas
+en las reglas en el orden de recorrido primero-profundo. Por supuesto, si 
+la gramática es ambigua una frase podría tener dos árboles y la ejecución de las
+acciones para ellos podría dar lugar a diferentes resultados. Si se quiere
+evitar la multiplicidad de resultados (interpretaciones semánticas)
+es necesario precisar de que árbol sintáctico concreto se esta hablando.
+
+<P>
+Por ejemplo, si en la regla <!-- MATH
+ $A \rightarrow \alpha \beta$
+ -->
+<IMG
+ WIDTH="67" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img114.png"
+ ALT="$ A \rightarrow \alpha \beta $">
+
+insertamos un fragmento de código:
+
+<P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ $A \rightarrow \alpha \{ action \} \beta$
+ -->
+<IMG
+ WIDTH="132" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img115.png"
+ ALT="$ A \rightarrow \alpha \{ action \} \beta $">
+
+</DIV>
+
+<P>
+La acción <!-- MATH
+ $\{ action \}$
+ -->
+<IMG
+ WIDTH="70" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img116.png"
+ ALT="$ \{ action \}$">
+ se ejecutará después de todas las acciones
+asociadas con el recorrido del subárbol de <IMG
+ WIDTH="16" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img55.png"
+ ALT="$ \alpha$">
+ y antes que todas
+las acciones asociadas con el recorrido del subárbol <IMG
+ WIDTH="16" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img117.png"
+ ALT="$ \beta$">
+.
+
+<P>
+El siguiente esquema de traducción recibe como entrada una expresión en infijo
+y produce como salida su traducción a postfijo para expresiones aritmeticas con sólo 
+restas de números:
+
+<P>
+<BR>
+<BR>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $expr   \rightarrow expr_1  -  NUM$
+ -->
+<IMG
+ WIDTH="179" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img118.png"
+ ALT="$ expr \rightarrow expr_1 - NUM$">
+</TD>
+<TD ALIGN="LEFT"><code>{ $expr{TRA} = $expr[1]{TRA}." ".$NUM{VAL}." - "}</code></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $expr   \rightarrow NUM$
+ -->
+<IMG
+ WIDTH="116" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img119.png"
+ ALT="$ expr \rightarrow NUM$">
+</TD>
+<TD ALIGN="LEFT"><code>{ $expr{TRA} = $NUM{VAL} }</code></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+
+<P>
+Las apariciones de variables sintácticas en una regla de producción se indexan
+como se ve en el ejemplo, para distinguir de que nodo del árbol de análisis estamos
+hablando. Cuando hablemos del atributo de un nodo utilizaremos una indexación tipo
+<B>hash</B>. Aquí <code>VAL</code> es un atributo de los nodos de tipo <IMG
+ WIDTH="53" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img120.png"
+ ALT="$ NUM$">
+ denotando
+su valor numérico y para accederlo escribiremos <code>$NUM{VAL}</code>.
+Análogamente <code>$expr{TRA}</code> denota el atributo ``traducción'' de
+los nodos de tipo <IMG
+ WIDTH="40" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img121.png"
+ ALT="$ expr$">
+.
+
+<P>
+<P>
+<DIV><B>Ejercicio  9.1.1</B> &nbsp; 
+<I>Muestre la secuencia de acciones a la
+que da lugar el esquema de traducción anterior 
+para la frase 7 -5 -4.</I></DIV><P></P>
+
+<P>
+En este ejemplo, el cómputo del atributo <code>$expr{TRA}</code> depende de los atributos
+en los nodos hijos, o lo que es lo mismo, depende de los atributos de los símbolos
+en la parte derecha de la regla de producción. Esto ocurre a menudo y motiva la siguiente
+definición:
+
+<P>
+<P>
+<DIV><B>Definición  9.1.2</B> &nbsp; 
+<I>Un atributo tal que su valor en un nodo
+puede ser computado en términos de los atributos de los hijos del nodo se dice
+que es un <A NAME="21391"></A><B>atributo sintetizado</B>.</I></DIV><P></P>
+
+<P>
+<P>
+<DIV><A NAME="example:eyapptypesandts"><B>Ejemplo  9.1.1</B></A> &nbsp; 
+<I>Un ejemplo de atributo heredado es el tipo de las variables en las declaraciones:
+</I>
+<P>
+<I>
+<BR>
+<BR>
+</I><TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><I>
+<!-- MATH
+ $decl   \rightarrow type$
+ -->
+<IMG
+ WIDTH="95" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img122.png"
+ ALT="$ decl \rightarrow type$">
+ <code>{ $list{T} = $type{T} }</code> <IMG
+ WIDTH="31" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img123.png"
+ ALT="$ list$">
+</I></TD>
+<TD></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><I> 
+<!-- MATH
+ $type   \rightarrow INT$
+ -->
+<IMG
+ WIDTH="102" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img124.png"
+ ALT="$ type \rightarrow INT$">
+ <code>{ $type{T} = $int }</code></I></TD>
+<TD></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><I> 
+<!-- MATH
+ $type   \rightarrow STRING$
+ -->
+<IMG
+ WIDTH="141" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img125.png"
+ ALT="$ type \rightarrow STRING$">
+ <code>{ $type{T} = $string }</code></I></TD>
+<TD></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><I> 
+<!-- MATH
+ $list   \rightarrow ID$
+ -->
+<IMG
+ WIDTH="82" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img126.png"
+ ALT="$ list \rightarrow ID$">
+ , <code>{ $ID{T} = $list{T}; $list_1{T} = $list{T} }</code> <IMG
+ WIDTH="38" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img127.png"
+ ALT="$ list_1$">
+</I></TD>
+<TD></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><I> 
+<!-- MATH
+ $list   \rightarrow ID$
+ -->
+<IMG
+ WIDTH="82" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img126.png"
+ ALT="$ list \rightarrow ID$">
+ <code>{ $ID{T} = $list{T} }</code>
+</I></TD>
+<TD></TD>
+</TR>
+</TABLE><I>
+<BR>
+<BR></I></DIV><P></P>
+
+<P>
+<P>
+<DIV><B>Definición  9.1.3</B> &nbsp; 
+<I>Un <A NAME="21393"></A><B>atributo heredado</B> es aquel cuyo valor se computa a partir de los
+valores de sus hermanos y de su padre.</I></DIV><P></P>
+
+<P>
+<P>
+<DIV><B>Ejercicio  9.1.2</B> &nbsp; 
+<I>Escriba un esquema de traducción que convierta expresiones en infijo con los 
+operadores <code>+-*/()</code> y números en expresiones en postfijo. Explique el significado
+de los atributos elegidos.</I></DIV><P></P>
+
+<P>
+<HR>
+<A NAME="tex2html5378"
+  HREF="node263.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5372"
+  HREF="node261.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5366"
+  HREF="node261.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5374"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5376"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5379"
+  HREF="node263.html">Esquemas de Traducción con</A>
+<B>Sup:</B> <A NAME="tex2html5373"
+  HREF="node261.html">Análisis Semántico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5367"
+  HREF="node261.html">Análisis Semántico con Parse::Eyapp</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

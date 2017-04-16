@@ -1,0 +1,294 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Las directivas rulevar y reject</TITLE>
+<META NAME="description" CONTENT="Las directivas rulevar y reject">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node182.html">
+<LINK REL="previous" HREF="node180.html">
+<LINK REL="up" HREF="node175.html">
+<LINK REL="next" HREF="node182.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html4078"
+  HREF="node182.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4072"
+  HREF="node175.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4066"
+  HREF="node180.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4074"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4076"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4079"
+  HREF="node182.html">Utilizando score</A>
+<B>Sup:</B> <A NAME="tex2html4073"
+  HREF="node175.html">RecDescent</A>
+<B> Ant:</B> <A NAME="tex2html4067"
+  HREF="node180.html">Las Directivas skip y</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001160000000000000000">
+Las directivas <TT>rulevar</TT> y <TT>reject</TT></A>
+</H1>
+En los apuntes de Conway del ``Advanced Perl Parsing'' realizado durante 
+el Deutscher Perl-Workshop 3.0 en el año 2001 
+se plantea la siguiente variante del problema de los valores
+separados por comas: los campos no están
+delimitados por dobles comillas y el separador es aquél que separa la línea en un mayor número 
+de elementos, o lo que es lo mismo, aquél separador (de entre un grupo fijo
+<code>[:,\t]</code>) que se repite mas veces en la 
+línea. Por ejemplo, la línea:
+<PRE>
+a:1,b:2,c:3,d
+</PRE>
+se separará por comas produciendo la lista <code>["a:1", "b:2","c:3","d"]</code>, 
+pero la línea 
+<PRE>
+a:1,b:2,c:3:d
+</PRE>
+se separará mediante el carácter
+dos puntos produciendo la lista <code>["a","1,b", "2,c","3","d"]</code>. 
+
+<P>
+Para resolver el problema se declaran dos variables <code>max</code>
+y <code>$maxcount</code> locales
+al método asociado con la variable sintáctica <code>line</code> que reconoce la 
+categoría gramatical línea. Para declarar tales variables
+se usa la directiva <code>rulevar</code>.
+
+<P>
+La otra directiva que se usa es <code>reject</code>, la cuál hace
+que la producción falle (exactamente igual que si la acción
+hubiese retornado <code>undef</code>). La estrategia consiste
+en almacenar en, separador por separador llevar en <code>$maxcount</code>
+el máximo número de items en que se descompone la línea
+y en <code>$max</code> la referencia al array anónimo ``ganador''.
+
+<P>
+<PRE>
+ #!/usr/local/bin/perl5.8.0 -w
+ use strict;
+ use Parse::RecDescent;
+ use Data::Dumper;
+ 
+ #$::RD_TRACE = 1;
+ my $grammar = q{
+   line : &lt;rulevar: $max&gt;
+   line : &lt;rulevar: $maxcount = 0&gt;
+   line :  &lt;leftop: value ',' value&gt; 
+            { $maxcount = @{$item[1]}; $max = $item[1]; 
+              print "maxcount[,] = $maxcount\n"; }
+            &lt;reject&gt;
+        | &lt;leftop: datum ':' datum&gt; 
+            { if (@{$item[1]} &gt; $maxcount) { 
+                $maxcount = @{$item[1]}; $max = $item[1]; } 
+              print "maxcount[,:] = $maxcount\n";
+            }
+            &lt;reject&gt;
+        |  &lt;leftop: field ";" field&gt; 
+            { if (@{$item[1]} &gt; $maxcount) { 
+                $maxcount = @{$item[1]}; $max = $item[1]; } 
+              print "maxcount[,:;] = $maxcount\n";
+            }
+            &lt;reject&gt;
+        | { $return = $max; }
+         
+   value: /[^,]*/ 
+   datum: /[^:]*/ 
+   field: /[^;]*/ 
+ };
+ 
+ my $parse = Parse::RecDescent-&gt;new($grammar);
+ my $line;
+ while ($line = &lt;&gt;) {
+   print "$line\n";
+   my $result = $parse-&gt;line($line);
+   if (defined($result)) { print Dumper($result); }
+   else { print "Cadena no válida\n"; }
+ }
+</PRE>
+Probemos el código con el siguiente fichero de entrada:
+<PRE>
+ cat file3.txt
+1:2:3,3:4;44
+1,2:3,3:4;44
+1;2:3;3:4;44
+</PRE>
+He aqui una ejecución:
+<PRE>
+$ ./maxseparator.pl file3.txt
+1:2:3,3:4;44
+
+maxcount[,] = 2
+maxcount[,:] = 4
+maxcount[,:;] = 4
+$VAR1 = [ '1', '2', '3,3', '4;44 ' ];
+1,2:3,3:4;44
+
+maxcount[,] = 3
+maxcount[,:] = 3
+maxcount[,:;] = 3
+$VAR1 = [ '1', '2:3', '3:4;44 ' ];
+1;2:3;3:4;44
+
+maxcount[,] = 1
+maxcount[,:] = 3
+maxcount[,:;] = 4
+$VAR1 = [ '1', '2:3', '3:4', '44 ' ];
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html4078"
+  HREF="node182.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4072"
+  HREF="node175.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4066"
+  HREF="node180.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4074"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4076"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4079"
+  HREF="node182.html">Utilizando score</A>
+<B>Sup:</B> <A NAME="tex2html4073"
+  HREF="node175.html">RecDescent</A>
+<B> Ant:</B> <A NAME="tex2html4067"
+  HREF="node180.html">Las Directivas skip y</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

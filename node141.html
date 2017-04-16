@@ -1,0 +1,467 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Eliminación de la Recursión por la Izquierda en la Gramática</TITLE>
+<META NAME="description" CONTENT="Eliminación de la Recursión por la Izquierda en la Gramática">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node142.html">
+<LINK REL="previous" HREF="node140.html">
+<LINK REL="up" HREF="node140.html">
+<LINK REL="next" HREF="node142.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3506"
+  HREF="node142.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3500"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3494"
+  HREF="node140.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3502"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3504"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3507"
+  HREF="node142.html">Eliminación de la Recursión</A>
+<B>Sup:</B> <A NAME="tex2html3501"
+  HREF="node140.html">Recursión por la Izquierda</A>
+<B> Ant:</B> <A NAME="tex2html3495"
+  HREF="node140.html">Recursión por la Izquierda</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00981000000000000000"></A>
+<A NAME="subsection:eliminaleftrec"></A>
+<BR>
+Eliminación de la Recursión por la Izquierda en la Gramática
+</H2>
+Es posible modificar la gramática para eliminar la recursión por 
+la izquierda. En este apartado nos limitaremos al caso de recursión 
+por la izquierda directa. 
+La generalización al caso de recursión por la izquierda no-directa
+se reduce a la iteración de la solución propuesta 
+para el caso directo.
+
+<P>
+Consideremos una variable <IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ A$">
+ con dos producciones:
+
+<P>
+<BR>
+<BR>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $A   \rightarrow A \alpha$
+ -->
+<IMG
+ WIDTH="69" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img129.png"
+ ALT="$ A \rightarrow A \alpha$">
+</TD>
+<TD ALIGN="LEFT"><IMG
+ WIDTH="26" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img130.png"
+ ALT="$ \vert \beta$">
+</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+donde <!-- MATH
+ $\alpha, \beta \in (V \cup \Sigma)^*$
+ -->
+<IMG
+ WIDTH="123" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img131.png"
+ ALT="$ \alpha, \beta \in (V \cup \Sigma)^*$">
+ no comienzan por <IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ A$">
+.
+Estas dos producciones pueden ser sustituidas por:
+
+<P>
+<BR>
+<BR>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $A   \rightarrow \beta R$
+ -->
+<IMG
+ WIDTH="69" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img132.png"
+ ALT="$ A \rightarrow \beta R$">
+</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><!-- MATH
+ $R   \rightarrow  \alpha R$
+ -->
+<IMG
+ WIDTH="70" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img133.png"
+ ALT="$ R \rightarrow \alpha R$">
+</TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $|\ \epsilon$
+ -->
+<IMG
+ WIDTH="23" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$ \vert \epsilon$">
+</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+eliminando así la recursión por la izquierda.
+
+<P>
+<P>
+<DIV><B>Definición  4.8.2</B> &nbsp; 
+<I>La producción <!-- MATH
+ $R   \rightarrow  \alpha R$
+ -->
+<IMG
+ WIDTH="70" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img133.png"
+ ALT="$ R \rightarrow \alpha R$">
+ se dice <A NAME="10055"></A><B>recursiva por la derecha</B>.</I></DIV><P></P>
+
+<P>
+Las producciones recursivas por la derecha dan lugar a árboles
+que se hunden hacia la derecha. Es mas difícil traducir desde esta clase
+de árboles operadores como el menos, que son asociativos a izquierdas.
+
+<P>
+<P>
+<DIV><B>Ejercicio  4.8.1</B> &nbsp; 
+<I>Elimine la recursión por la izquierda de la gramática 
+</I>
+<P>
+<I>
+<BR>
+<BR>
+</I><TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><I>
+<!-- MATH
+ $expr   \rightarrow expr  -  NUM$
+ -->
+<IMG
+ WIDTH="172" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img134.png"
+ ALT="$ expr \rightarrow expr - NUM$">
+ </I></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><I> 
+<!-- MATH
+ $expr   \rightarrow NUM$
+ -->
+<IMG
+ WIDTH="116" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img119.png"
+ ALT="$ expr \rightarrow NUM$">
+ 
+</I></TD>
+</TR>
+</TABLE><I>
+<BR>
+<BR>
+</I>
+<P></DIV><P></P>
+
+<P>
+<P>
+<DIV><B>Ejercicio  4.8.2</B> &nbsp; 
+<I>¿Que hay de erróneo en este esquema de traducción?
+</I>
+<P>
+<I>
+<BR>
+<BR>
+</I><TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><I>
+<!-- MATH
+ $expr   \rightarrow NUM - expr_1$
+ -->
+<IMG
+ WIDTH="179" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$ expr \rightarrow NUM - expr_1$">
+ </I></TD>
+<TD ALIGN="LEFT"><I> <code>{ $expr{T} = $NUM{VAL}." ".$expr[1]{T}." - "}</code> </I></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><I> 
+<!-- MATH
+ $expr   \rightarrow NUM$
+ -->
+<IMG
+ WIDTH="116" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img119.png"
+ ALT="$ expr \rightarrow NUM$">
+ </I></TD>
+<TD ALIGN="LEFT"><I> <code>{ $expr{T} = $NUM{VAL} }</code>
+</I></TD>
+</TR>
+</TABLE><I>
+<BR>
+<BR></I></DIV><P></P>
+
+<P>
+<P>
+<DIV><B>Ejercicio  4.8.3</B> &nbsp; 
+<I>Dado el esquema de traducción:
+</I>
+<P>
+<I>
+<BR>
+<BR>
+</I><TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><I>
+<!-- MATH
+ $e   \rightarrow\ NUM\ r$
+ -->
+<IMG
+ WIDTH="109" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img136.png"
+ ALT="$ e \rightarrow NUM r$">
+ </I></TD>
+<TD ALIGN="LEFT"><I> <code>{ $e{TRA} = $NUM{VAL}." ".$r{TRA} }</code> </I></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><I> 
+<!-- MATH
+ $r   \rightarrow - e$
+ -->
+<IMG
+ WIDTH="62" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img137.png"
+ ALT="$ r \rightarrow - e$">
+ </I></TD>
+<TD ALIGN="LEFT"><I> <code>{ $r{TRA} = $e{TRA}." - " }</code></I></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><I> 
+<!-- MATH
+ $r   \rightarrow \epsilon$
+ -->
+<IMG
+ WIDTH="47" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img138.png"
+ ALT="$ r \rightarrow \epsilon$">
+ </I></TD>
+<TD ALIGN="LEFT"><I> <code>{ $r{TRA} = "" }</code>
+</I></TD>
+</TR>
+</TABLE><I>
+<BR>
+<BR>
+</I>
+<P>
+<I>¿Cuál es el lenguaje generado por la gramática? ¿Puede el lenguaje
+ser analizado por un APDR?
+¿Cual es la traducción de 4-5-6? ¿Es un esquema de traducción adecuado 
+para traducir de infijo a postfijo?
+¿Cuál es la traducción si cambiamos el anterior esquema por este otro?:
+</I>
+<P>
+<I>
+<BR>
+<BR>
+</I><TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><I>
+<!-- MATH
+ $e   \rightarrow NUM\  r$
+ -->
+<IMG
+ WIDTH="109" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img136.png"
+ ALT="$ e \rightarrow NUM r$">
+ </I></TD>
+<TD ALIGN="LEFT"><I> <code>{ $e{TRA} = $NUM{VAL}." ".$r{TRA} }</code> </I></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><I> 
+<!-- MATH
+ $r   \rightarrow - e$
+ -->
+<IMG
+ WIDTH="62" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img137.png"
+ ALT="$ r \rightarrow - e$">
+ </I></TD>
+<TD ALIGN="LEFT"><I> <code>{ $r{TRA} = " - ".$e{TRA} }</code></I></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><I> 
+<!-- MATH
+ $r   \rightarrow \epsilon$
+ -->
+<IMG
+ WIDTH="47" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img138.png"
+ ALT="$ r \rightarrow \epsilon$">
+ </I></TD>
+<TD ALIGN="LEFT"><I> <code>{ $r{TRA} = "" }</code>
+</I></TD>
+</TR>
+</TABLE><I>
+<BR>
+<BR></I></DIV><P></P>
+
+<P>
+<HR>
+<A NAME="tex2html3506"
+  HREF="node142.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3500"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3494"
+  HREF="node140.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3502"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3504"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3507"
+  HREF="node142.html">Eliminación de la Recursión</A>
+<B>Sup:</B> <A NAME="tex2html3501"
+  HREF="node140.html">Recursión por la Izquierda</A>
+<B> Ant:</B> <A NAME="tex2html3495"
+  HREF="node140.html">Recursión por la Izquierda</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

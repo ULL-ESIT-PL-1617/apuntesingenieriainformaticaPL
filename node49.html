@@ -1,0 +1,406 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Introducción</TITLE>
+<META NAME="description" CONTENT="Introducción">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node56.html">
+<LINK REL="previous" HREF="node48.html">
+<LINK REL="up" HREF="node48.html">
+<LINK REL="next" HREF="node50.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html1718"
+  HREF="node50.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1712"
+  HREF="node48.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1706"
+  HREF="node48.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1714"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html1716"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html1719"
+  HREF="node50.html">Un ejemplo sencillo</A>
+<B>Sup:</B> <A NAME="tex2html1713"
+  HREF="node48.html">Expresiones Regulares en Perl</A>
+<B> Ant:</B> <A NAME="tex2html1707"
+  HREF="node48.html">Expresiones Regulares en Perl</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00810000000000000000">
+Introducción</A>
+</H1>
+Los rudimentos de las expresiones regulares pueden encontrarse
+en los trabajos pioneros de McCullogh y Pitts (1940) sobre redes neuronales.
+El lógico Stephen Kleene definió formalmente el algebra que denominó
+<I>conjuntos regulares</I> y desarrollo una notación para la descripción de dichos conjuntos, las <I>expresiones regulares</I>.
+
+<P>
+Durante las décadas de 1960 y 1970 hubo un desarrollo formal de las expresiones regulares.
+Una de las priemras publicaciones que utilizan las expresiones
+regulares en un marco informático es el artículo de 1968 de Ken
+Thompson <I>Regular Expression Search Algorithm</I> en el que describe
+un compilador de expresiones regulares que produce código objeto para
+un IBM 7094.
+Este compilador dió lugar al editor <I>qed</I>, en el cual se basó el
+editor de Unix
+<I>ed</I>. Aunque las expresiones regulares de este último no eran
+tan sofisticadas como las de <I>qed</I>, fueron las primeras en ser
+utilizadas en un contexto no académico.
+Se dice que el comando global <code>g</code> en su formato <code>g/re/p</code> que utilizaba 
+para imprimir (opción <code>p</code>) las líneas que casan con la expresión regular  <code>re</code>
+dió lugar a un programa separado al que se denomino <A NAME="tex2html14"
+  HREF="http://manpages.debian.net/cgi-bin/man.cgi?query=grep">grep</A>.
+
+<P>
+Las expresiones regulares facilitadas por las primeras versiones de estas herramientas 
+eran limitadas. Por ejemplo, se disponía del cierre de Kleene <code>*</code> pero no del cierre
+positivo <code>+</code> o del operador opcional <code>?</code>. 
+Por eso, posteriormente, se han introducido los metacaracteres <code>\+</code> y <code>\?</code>.
+Existían numerosas limitaciones en dichas versiones, por ej. <code>$</code> sólo significa ``final
+de línea'' al final de la expresión regular. Eso  dificulta expresiones como 
+<PRE>
+grep 'cierre$\|^Las' viq.tex
+</PRE>
+Sin embargo, la mayor parte de las versiones
+actuales resuelven correctamente estos problemas:
+<PRE>
+nereida:~/viq&gt; grep 'cierre$\|^Las' viq.tex
+Las expresiones regulares facilitadas por las primeras versiones de estas herramientas
+eran limitadas. Por ejemplo, se disponía del cierre de Kleene \verb|*| pero no del cierre
+nereida:~/viq&gt;
+</PRE>
+De hecho AT&amp;T Bell  labs añadió numerosas funcionalidades,
+como por ejemplo, el uso de <code>\{min, max\}</code>, tomada de <I>lex</I>.
+Por esa época, Alfred Aho escribió <I>egrep</I> que, no sólo proporciona un conjunto
+mas rico de operadores sino que mejoró la implementación.
+Mientras que el <I>grep</I> de Ken Thompson usaba un autómata finito no determinista
+(NFA), la versión de <I>egrep</I>
+de Aho usa un autómata finito determinista (DFA).
+
+<P>
+En 1986 Henry Spencer desarrolló la librería <I>regex</I> para el lenguaje <code>C</code>, que 
+proporciona un conjunto consistente de funciones que permiten el manejo de expresiones
+regulares. Esta librería ha contribuido a ``homogeneizar'' la sintáxis y semántica 
+de las diferentes herramientas que utilizan expresiones regulares (como <I>awk</I>,
+<I>lex</I>, <I>sed</I>, ...).
+
+<P>
+
+<H4><A NAME="SECTION00810010000000000000">
+Véase También</A>
+</H4>
+  
+
+<P>
+
+<UL>
+<LI>La sección
+<I>Expresiones Regulares en Otros Lenguajes</I>
+<A HREF="node69.html#section:otroslenguajes">3.3</A>
+</LI>
+<LI><A NAME="tex2html15"
+  HREF="http://oreilly.com/catalog/9780596520687/preview.html">Regular Expressions Cookbook. Jan Goyvaerts, Steven Levithan</A>
+</LI>
+<LI><A NAME="tex2html16"
+  HREF="http://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions">PCRE (Perl Compatible Regular Expressions) en la Wikipedia</A>
+</LI>
+<LI><A NAME="tex2html17"
+  HREF="http://www.pcre.org/pcre.txt">PCRE (Perl Compatible Regular Expressions)</A>
+</LI>
+<LI><A NAME="tex2html18"
+  HREF="http://java.sun.com/docs/books/tutorial/essential/regex/">Java Regular Expressions</A>
+</LI>
+<LI><A NAME="tex2html19"
+  HREF="http://oreilly.com/lpt/a/2299">C# Regular Expressions</A>
+</LI>
+<LI><A NAME="tex2html20"
+  HREF="http://msdn.microsoft.com/en-us/library/hs600312(VS.71).aspx">.NET Framework Regular Expressions</A>
+</LI>
+</UL>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html1720"
+  HREF="node49.html#SECTION00810010000000000000">Véase También</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html1721"
+  HREF="node50.html">Un ejemplo sencillo</A>
+<UL>
+<LI><A NAME="tex2html1722"
+  HREF="node50.html#SECTION00811010000000000000">Matching en Contexto Escalar</A>
+<LI><A NAME="tex2html1723"
+  HREF="node50.html#SECTION00811020000000000000">Número de Paréntesis</A>
+<LI><A NAME="tex2html1724"
+  HREF="node50.html#SECTION00811030000000000000">Contexto de Lista</A>
+<LI><A NAME="tex2html1725"
+  HREF="node50.html#SECTION00811040000000000000">El modificador <TT>s</TT></A>
+<LI><A NAME="tex2html1726"
+  HREF="node50.html#SECTION00811050000000000000">El modificador <TT>m</TT></A>
+<LI><A NAME="tex2html1727"
+  HREF="node50.html#SECTION00811060000000000000">El conversor de temperaturas reescrito usando contexto de lista</A>
+<LI><A NAME="tex2html1728"
+  HREF="node50.html#SECTION00811070000000000000">La opción <TT>x</TT></A>
+<LI><A NAME="tex2html1729"
+  HREF="node50.html#SECTION00811080000000000000">Paréntesis sin memoria</A>
+<LI><A NAME="tex2html1730"
+  HREF="node50.html#SECTION00811090000000000000">Interpolación en los patrones: La opción <TT>o</TT></A>
+<LI><A NAME="tex2html1731"
+  HREF="node50.html#SECTION008110100000000000000">Cuantificadores greedy</A>
+<LI><A NAME="tex2html1732"
+  HREF="node50.html#SECTION008110110000000000000">Regexp y Bucles Infinitos</A>
+<LI><A NAME="tex2html1733"
+  HREF="node50.html#SECTION008110120000000000000">Cuantificadores <I>lazy</I></A>
+<LI><A NAME="tex2html1734"
+  HREF="node50.html#SECTION008110130000000000000">Descripción detallada del proceso de matching</A>
+<LI><A NAME="tex2html1735"
+  HREF="node50.html#SECTION008110140000000000000">Rendimiento</A>
+<LI><A NAME="tex2html1736"
+  HREF="node50.html#SECTION008110150000000000000">Eliminación de Comentarios de un Programa C</A>
+<LI><A NAME="tex2html1737"
+  HREF="node50.html#SECTION008110160000000000000">Negaciones y operadores <I>lazy</I></A>
+<LI><A NAME="tex2html1738"
+  HREF="node50.html#SECTION008110170000000000000">Copia y sustitución simultáneas</A>
+<LI><A NAME="tex2html1739"
+  HREF="node50.html#SECTION008110180000000000000">Referencias a Paréntesis Previos</A>
+<LI><A NAME="tex2html1740"
+  HREF="node50.html#SECTION008110190000000000000">Usando Referencias con Nombre (Perl 5.10)</A>
+<LI><A NAME="tex2html1741"
+  HREF="node50.html#SECTION008110200000000000000">Grupos con Nombre y Factorización</A>
+<LI><A NAME="tex2html1742"
+  HREF="node50.html#SECTION008110210000000000000">LLamadas a expresiones regulares via paréntesis con memoria</A>
+<LI><A NAME="tex2html1743"
+  HREF="node50.html#SECTION008110220000000000000">Reutilizando Expresiones Regulares</A>
+<LI><A NAME="tex2html1744"
+  HREF="node50.html#SECTION008110230000000000000">El Módulo Regexp::Common</A>
+<LI><A NAME="tex2html1745"
+  HREF="node50.html#SECTION008110240000000000000">Smart Matching</A>
+<LI><A NAME="tex2html1746"
+  HREF="node50.html#SECTION008110250000000000000">Ejercicios</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1747"
+  HREF="node51.html">Depuración de Expresiones Regulares</A>
+<LI><A NAME="tex2html1748"
+  HREF="node52.html">Tablas de Escapes, Metacarácteres, Cuantificadores, Clases</A>
+<UL>
+<LI><A NAME="tex2html1749"
+  HREF="node52.html#SECTION00813010000000000000">Metacharacters</A>
+<LI><A NAME="tex2html1750"
+  HREF="node52.html#SECTION00813020000000000000">Standard greedy quantifiers</A>
+<LI><A NAME="tex2html1751"
+  HREF="node52.html#SECTION00813030000000000000">Non greedy quantifiers</A>
+<LI><A NAME="tex2html1752"
+  HREF="node52.html#SECTION00813040000000000000">Possesive quantifiers</A>
+<LI><A NAME="tex2html1753"
+  HREF="node52.html#SECTION00813050000000000000">Escape sequences</A>
+<LI><A NAME="tex2html1754"
+  HREF="node52.html#SECTION00813060000000000000">Character Classes and other Special Escapes</A>
+<LI><A NAME="tex2html1755"
+  HREF="node52.html#SECTION00813070000000000000">Zero width assertions</A>
+<LI><A NAME="tex2html1756"
+  HREF="node52.html#SECTION00813100000000000000">The POSIX character class syntax</A>
+<UL>
+<LI><A NAME="tex2html1757"
+  HREF="node52.html#SECTION00813110000000000000">Available classes</A>
+<LI><A NAME="tex2html1758"
+  HREF="node52.html#SECTION00813120000000000000">Equivalences to Unicode</A>
+<LI><A NAME="tex2html1759"
+  HREF="node52.html#SECTION00813130000000000000">Negated character classes</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html1760"
+  HREF="node53.html">Variables especiales después de un emparejamiento</A>
+<UL>
+<LI><A NAME="tex2html1761"
+  HREF="node53.html#SECTION00814010000000000000">Las Variables de match, pre-match y post-mach</A>
+<LI><A NAME="tex2html1762"
+  HREF="node53.html#SECTION00814020000000000000">Texto Asociado con el Último Paréntesis</A>
+<LI><A NAME="tex2html1763"
+  HREF="node53.html#SECTION00814030000000000000">Los Offsets de los Inicios de los Casamientos: <TT>@-</TT></A>
+<LI><A NAME="tex2html1764"
+  HREF="node53.html#SECTION00814040000000000000">Desplazamientos de los Finales de los Emparejamientos: <TT>@+</TT></A>
+<LI><A NAME="tex2html1765"
+  HREF="node53.html#SECTION00814050000000000000">Número de paréntesis en la última regexp con éxito</A>
+<LI><A NAME="tex2html1766"
+  HREF="node53.html#SECTION00814060000000000000">Indice del Ultimo Paréntesis</A>
+<LI><A NAME="tex2html1767"
+  HREF="node53.html#SECTION00814070000000000000"><TT>@-</TT> y <TT>@+</TT> no tienen que tener el mismo tamaño</A>
+<LI><A NAME="tex2html1768"
+  HREF="node53.html#SECTION00814080000000000000">Véase También</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1769"
+  HREF="node54.html">Ambito Automático</A>
+<LI><A NAME="tex2html1770"
+  HREF="node55.html">Opciones</A>
+<UL>
+<LI><A NAME="tex2html1771"
+  HREF="node55.html#SECTION00816010000000000000">El Modificador <TT>/g</TT></A>
+<LI><A NAME="tex2html1772"
+  HREF="node55.html#SECTION00816020000000000000">La opción <TT>e</TT>: Evaluación del remplazo</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html1718"
+  HREF="node50.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1712"
+  HREF="node48.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1706"
+  HREF="node48.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1714"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html1716"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html1719"
+  HREF="node50.html">Un ejemplo sencillo</A>
+<B>Sup:</B> <A NAME="tex2html1713"
+  HREF="node48.html">Expresiones Regulares en Perl</A>
+<B> Ant:</B> <A NAME="tex2html1707"
+  HREF="node48.html">Expresiones Regulares en Perl</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

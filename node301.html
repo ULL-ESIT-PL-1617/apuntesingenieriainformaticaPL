@@ -1,0 +1,453 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Análisis de Tipos: Mensajes de Error</TITLE>
+<META NAME="description" CONTENT="Análisis de Tipos: Mensajes de Error">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node302.html">
+<LINK REL="previous" HREF="node300.html">
+<LINK REL="up" HREF="node294.html">
+<LINK REL="next" HREF="node302.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html6083"
+  HREF="node302.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6077"
+  HREF="node294.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6071"
+  HREF="node300.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6079"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6081"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6084"
+  HREF="node302.html">Comprobación de Tipos: Las</A>
+<B>Sup:</B> <A NAME="tex2html6078"
+  HREF="node294.html">Análisis de Tipos</A>
+<B> Ant:</B> <A NAME="tex2html6072"
+  HREF="node300.html">Comprobación Ascendente de los</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001870000000000000000"></A>
+<A NAME="section:mensajesdeerrorentipos"></A>
+<BR>
+Análisis de Tipos: Mensajes de Error
+</H1>
+
+<P>
+
+<H4><A NAME="SECTION001870010000000000000">
+El Problema</A>
+</H4>
+  
+
+<P>
+Durante esta fase pasamos a asignar un tipo a los  nodos del AST.
+Pueden producirse errores de tipo y es importante que los mensajes de diagnóstico
+sea precisos. Por ejemplo, dado el programa:
+<PRE>
+nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/script&gt; cat -n prueba17.c
+     1  int c[20][30], d;
+     2
+     3  int f(int a, int b) {
+     4    return
+     5       (a+b)*
+     6       d*
+     7       c[5];
+     8  }
+</PRE>
+queremos producir un mensaje de error adecuado como:
+<PRE>
+nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/script&gt; usetypes.pl prueba17.c 
+Type Error at line 6: Incompatible types with operator '*'
+</PRE>
+indicando asi que el error se produce en la multiplicación de la línea 6, ya que
+<code>c[5]</code> es de tipo array.
+
+<P>
+El problema que tenemos a estas alturas de la construcción de nuestro compilador
+es que el número de línea asociado con la multiplicación de la línea 6
+no figura como atributo del nodo <code>TIMES</code>: fue obviado por la directiva  %tree 
+ya que el terminal <code>*</code> fué tratado como un <A NAME="26694"></A><B>syntactic token</B>.
+
+<P>
+
+<H4><A NAME="SECTION001870020000000000000">
+El método <TT>TERMINAL::save_attributes</TT></A>
+</H4>
+  
+
+<P>
+Afortunadamente <code>Parse::Eyapp</code> provee un mecanismo para permitir
+guardar la información 
+residente en un terminal sintáctico 
+en el nodo padre del mismo. Si el programador
+provee a la clase  TERMINAL  de un método
+ save_attributes  dicho método será llamado
+durante la construcción del AST en el momento de la
+eliminación del terminal:
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=198><PRE>
+TERMINAL::save_attributes($terminal, $lhs)
+</PRE></TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+El primer argumento es la referencia al nodo <code>TERMINAL</code>
+y el segundo al node padre del terminal.
+
+<P>
+Por tanto, para resolver el problema de conocer 
+el número de línea en el que ocurre un operador,
+proveeremos a los nodos <code>TERMINAL</code>
+del siguiente método <code>save_attributes</code>:
+<PRE>
+620 sub TERMINAL::save_attributes {
+621   # $_[0] is a syntactic terminal
+622   # $_[1] is the father.
+623   push @{$_[1]-&gt;{lines}}, $_[0]-&gt;[1]; # save the line!
+624 }
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION001870030000000000000">
+La Función <TT>insert_method</TT></A>
+</H4>
+  
+
+<P>
+La subrutina de mensajes de error de tipo <code>type_error</code>
+la llamaremos proporcionando el mensaje y el número de línea. 
+Sigue un ejemplo de llamada:
+<PRE>
+type_error("Incompatible types with operator '".($_[0]-&gt;lexeme)."'", $_[0]-&gt;line);
+</PRE>
+El método <code>line</code> para este tipo de nodos tiene la forma:
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/lib/Simple$ \
+                      sed -ne '/sub P.*ne/,/^)/p' Types.eyp | cat -n
+     1  sub PLUS::line {
+     2    $_[0]-&gt;{lines}[0]
+     3  }
+     4
+     5  insert_method(
+     6    qw{TIMES DIV MINUS ASSIGN GT IF RETURN},
+     7    'line',
+     8    \&amp;PLUS::line
+     9  );
+</PRE>
+
+<P>
+La función  insert_method  es proveída por <code>Parse::Eyapp::Base</code>
+(versiones de Parse::Eyapp posteriores a la 1.099).
+Recibe como argumentos una lista de clases, el nombre del método (<code>'line'</code>
+en el ejemplo) y la referencia a
+la función que la implementa. Dotará a 
+cada una de las clases especificadas
+en la lista (<code>TIMES</code>, <code>DIV</code> etc.) con métodos
+<code>line</code> implantados a través de la función especificada (<code>\&PLUS::line</code>).
+
+<P>
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/lib/Simple$ \
+                            sed -ne '/use/,/^$/p' Types.eyp | cat -n
+     1  use strict;
+     2  use Carp;
+     3  use warnings;
+     4  use Data::Dumper;
+     5  use List::MoreUtils qw(firstval);
+     6  use Simple::Trans;
+     7  use Parse::Eyapp::Scope qw(:all);
+     8  use Parse::Eyapp::Base qw(insert_function insert_method);
+     9  our $VERSION = "0.4";
+    10
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION001870040000000000000">
+El Lexema Asociado con Una Clase</A>
+</H4>
+  
+
+<P>
+El método <code>lexeme</code> que aparece 
+en la llamada a <code>type_error</code> devuelve 
+para un tipo de nodo dado 
+el lexema asociado con ese nodo.
+Por ejemplo, para los nodos <code>TIMES</code> 
+retorna la cadena <code>*</code>. 
+Para implantarlo se usan los hashes <code>lexeme</code> y 
+<code>rlexeme</code>:
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/lib/Simple$ \
+                                 sed -ne '31,64p' Types.eyp | cat -n
+     1  my %lexeme = (
+     2    '='  =&gt; "ASSIGN",
+     3    '+'  =&gt; "PLUS",
+     4    '-'  =&gt; "MINUS",
+     5    '*'  =&gt; "TIMES",
+     6    '/'  =&gt; "DIV",
+     7    '%'  =&gt; "MOD",
+     8    '|'  =&gt; "OR",
+     9    '&amp;'  =&gt; "AND",
+    10    '{'  =&gt; "LEFTKEY",
+    11    '}'  =&gt; "RIGHTKEY",
+    12    ','  =&gt; "COMMA",
+    13    ';'  =&gt; "SEMICOLON",
+    14    '('  =&gt; "LEFTPARENTHESIS",
+    15    ')'  =&gt; "RIGHTPARENTHESIS",
+    16    '['  =&gt; "LEFTBRACKET",
+    17    ']'  =&gt; "RIGHTBRACKET",
+    18    '==' =&gt; "EQ",
+    19    '+=' =&gt; "PLUSASSIGN",
+    20    '-=' =&gt; "MINUSASSIGN",
+    21    '*=' =&gt; "TIMESASSIGN",
+    22    '/=' =&gt; "DIVASSIGN",
+    23    '%=' =&gt; "MODASSIGN",
+    24    '!=' =&gt; "NE",
+    25    '&lt;'  =&gt; "LT",
+    26    '&gt;'  =&gt; "GT",
+    27    '&lt;=' =&gt; "LE",
+    28    '&gt;=' =&gt; "GE",
+    29    '++' =&gt; "INC",
+    30    '--' =&gt; "DEC",
+    31    '**' =&gt; "EXP"
+    32  );
+    33
+    34  my %rlexeme = reverse %lexeme;
+</PRE>
+Cada una de las clases implicadas es dotada de un método <code>lexeme</code> 
+mediante una llamada a <code>insert_method</code>:
+<PRE>
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/lib/Simple$ \
+                      sed -ne '/sub.*xeme/,/^)/p' Types.eyp | cat -n
+ 1  sub lexeme {
+ 2    return $rlexeme{ref($_[0])} if defined($rlexeme{ref($_[0])});
+ 3    return ref($_[0]);
+ 4  }
+ 5
+ 6  insert_method(
+ 7    # Gives the lexeme for a given operator
+ 8    qw{
+ 9      PLUS TIMES DIV MINUS
+10      GT  EQ NE
+11      IF
+12      IFELSE
+13      WHILE
+14      VARARRAY VAR ASSIGN
+15      FUNCTIONCALL
+16    },
+17    'lexeme',
+18    \&amp;lexeme
+19  );
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION001870050000000000000">
+Listas y <TT>save_attributes</TT></A>
+</H4>
+  
+
+<P>
+El método <code>save_attributes</code> no se ejecuta automáticamente en las reglas que usan 
+los operadores de listas <code>+</code>, <code>*</code> y <code>?</code>. En tales casos el programador
+deberá proveer código explícito que salve el número de línea:
+<PRE>
+nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Simple-Types/lib/Simple&gt; \
+    sed -ne '353,363p' Types.eyp  | cat -n
+ 1  Variable:
+ 2      %name VAR
+ 3      ID
+ 4    | %name  VARARRAY
+ 5      $ID ('[' binary ']') &lt;%name INDEXSPEC +&gt;
+ 6        {
+ 7          my $self = shift;
+ 8          my $node =  $self-&gt;YYBuildAST(@_);
+ 9          $node-&gt;{line} = $ID-&gt;[1];
+10          return $node;
+11        }
+</PRE>
+En el ejemplo se pone explícitamente como atributo <code>line</code> del
+nodo <code>VARARRAY</code> el número de línea del terminal <code>ID</code>.
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html6085"
+  HREF="node301.html#SECTION001870010000000000000">El Problema</A>
+<LI><A NAME="tex2html6086"
+  HREF="node301.html#SECTION001870020000000000000">El método <TT>TERMINAL::save_attributes</TT></A>
+<LI><A NAME="tex2html6087"
+  HREF="node301.html#SECTION001870030000000000000">La Función <TT>insert_method</TT></A>
+<LI><A NAME="tex2html6088"
+  HREF="node301.html#SECTION001870040000000000000">El Lexema Asociado con Una Clase</A>
+<LI><A NAME="tex2html6089"
+  HREF="node301.html#SECTION001870050000000000000">Listas y <TT>save_attributes</TT></A>
+</UL></UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html6083"
+  HREF="node302.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html6077"
+  HREF="node294.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html6071"
+  HREF="node300.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html6079"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html6081"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html6084"
+  HREF="node302.html">Comprobación de Tipos: Las</A>
+<B>Sup:</B> <A NAME="tex2html6078"
+  HREF="node294.html">Análisis de Tipos</A>
+<B> Ant:</B> <A NAME="tex2html6072"
+  HREF="node300.html">Comprobación Ascendente de los</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

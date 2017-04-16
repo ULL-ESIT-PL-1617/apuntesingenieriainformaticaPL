@@ -1,0 +1,432 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Definición Dirigida por la Sintáxis y Gramáticas Atribuidas</TITLE>
+<META NAME="description" CONTENT="Definición Dirigida por la Sintáxis y Gramáticas Atribuidas">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node265.html">
+<LINK REL="previous" HREF="node263.html">
+<LINK REL="up" HREF="node261.html">
+<LINK REL="next" HREF="node265.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html5426"
+  HREF="node265.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5420"
+  HREF="node261.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5414"
+  HREF="node263.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5422"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5424"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5427"
+  HREF="node265.html">El módulo Language::AttributeGrammar</A>
+<B>Sup:</B> <A NAME="tex2html5421"
+  HREF="node261.html">Análisis Semántico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5415"
+  HREF="node263.html">Esquemas de Traducción con</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001430000000000000000"></A>
+<A NAME="section:definiciondirigidasintaxis"></A>
+<BR>
+Definición Dirigida por la Sintáxis y Gramáticas Atribuidas
+</H1>
+
+<P>
+
+<H4><A NAME="SECTION001430010000000000000">
+Definición Dirigida por la Sintáxis</A>
+</H4>
+  
+
+<P>
+<P>
+<DIV><B>Definición  9.3.1</B> &nbsp; 
+<I>Una <A NAME="21520"></A><B>definición dirigida por la sintáxis</B> es un pariente cercano
+de los esquemas de traducción. En una definición dirigida por la
+sintáxis una gramática <!-- MATH
+ $G = (V, \Sigma, P, S)$
+ -->
+<IMG
+ WIDTH="126" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img464.png"
+ ALT="$ G = (V, \Sigma, P, S)$">
+ se aumenta 
+con nuevas características:
+</I>
+<UL>
+<LI>A cada símbolo <!-- MATH
+ $S \in V \cup \Sigma$
+ -->
+<IMG
+ WIDTH="84" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img465.png"
+ ALT="$ S \in V \cup \Sigma$">
+ de la gramática se le asocian
+cero o mas atributos. Un atributo queda caracterizado por un identificador
+o nombre y un tipo o clase. A este nivel son <A NAME="21522"></A><B>atributos formales</B>,
+como los parámetros formales, en el sentido de que su realización 
+se produce cuando el nodo del árbol es creado.
+</LI>
+<LI>A cada regla de producción <!-- MATH
+ $A \rightarrow X_1 X_2 \ldots X_n \in P$
+ -->
+<IMG
+ WIDTH="173" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img466.png"
+ ALT="$ A \rightarrow X_1 X_2 \ldots X_n \in P$">
+
+se le asocian un conjunto de <A NAME="21524"></A><B>reglas de evaluación de los atributos</B>
+o <A NAME="21526"></A><B>reglas semánticas</B> que indican que el atributo en la parte
+izquierda de la regla semántica depende de los atributos que aparecen en la parte
+derecha de la regla semántica. El atributo que aparece en la parte izquierda de la regla semántica
+puede estar asociado con un símbolo en la parte derecha de la regla de producción.
+</LI>
+<LI>Los atributos de cada símbolo de la gramática <!-- MATH
+ $X \in V \cup \Sigma$
+ -->
+<IMG
+ WIDTH="88" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img467.png"
+ ALT="$ X \in V \cup \Sigma$">
+
+se dividen en dos grupos disjuntos: <A NAME="21528"></A><B>atributos sintetizados</B>
+y <A NAME="21530"></A><B>atributos heredados</B>. Un atributo de <IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img468.png"
+ ALT="$ X$">
+ es un <A NAME="21532"></A><B>atributo heredado</B> 
+si depende de atributos de su padre y hermános en el árbol.
+Un <A NAME="21534"></A><B>atributo sintetizado</B> es aquél tal que el valor del atributo depende
+de los valores de los atributos de los hijos, 
+es decir en tal caso <IMG
+ WIDTH="21" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img468.png"
+ ALT="$ X$">
+ ha de ser una variable sintáctica
+y los atributos en la parte derecha de la regla semántica deben
+ser atributos de símbolos en la parte derecha de la regla de producción 
+asociada.
+</LI>
+<LI>Los atributos predefinidos se denominán <A NAME="21536"></A><B>atributos intrínsecos</B>.
+Ejemplos de atributos intrínsecos son los atributos 
+sintetizados de los terminales, los cuáles se han
+computado durante la fase de análisis léxico. También
+son atributos intrínsecos los atributos heredados del símbolo
+de arranque, los cuales son pasados como parámetros 
+al comienzo de la computación.
+</LI>
+</UL></DIV><P></P>
+
+<P>
+La diferencia principal con un esquema de traducción está en que
+<B>no se especifica el orden de ejecución de las reglas semánticas</B>.
+Se asume que, bien de forma manual o automática, se resolverán
+las dependencias existentes entre los atributos determinadas
+por la aplicación de las reglas semánticas, de manera
+que serán evaluados primero aquellos atributos que no dependen
+de ningún otro, despues los que dependen de estos, etc. siguiendo
+un esquema de ejecución que viene guiado por las dependencias
+existentes entre los datos.
+
+<P>
+
+<H4><A NAME="SECTION001430020000000000000">
+Evaluación de una Definición Dirigida por la Sintáxis</A>
+</H4>
+  
+
+<P>
+Aunque hay muchas formas de realizar un evaluador de una definición
+dirigida por la sintáxis, conceptualmente, tal evaluador debe:
+
+<P>
+
+<OL>
+<LI>Construir el árbol de análisis sintáctico para la gramática
+y la entrada dadas.
+</LI>
+<LI>Analizar las reglas semánticas para determinar los atributos,
+su clase y las dependencias entre los mismos.
+</LI>
+<LI>Construir explícita o implícitamente 
+el <A NAME="21542"></A><B>grafo de dependencias</B> de los atributos,
+el cual tiene
+un nodo para cada ocurrencia de un atributo en el árbol de análisis
+sintáctico etiquetado con dicho atributo. El grafo tiene una arista entre dos
+nodos si existe una dependencia entre los dos atributos a través de alguna
+regla semántica. 
+</LI>
+<LI>Supuesto que el grafo de dependencias determina un <A NAME="21544"></A><B>orden parcial</B>
+(esto es cumple las propiedades reflexiva, antisimétrica y transitiva) 
+construir un <A NAME="21546"></A><B>orden topológico</B> compatible con el orden parcial.
+</LI>
+<LI>Evaluar las reglas semánticas de acuerdo con el orden topológico.
+</LI>
+</OL>
+
+<P>
+
+<H4><A NAME="SECTION001430030000000000000">
+Gramáticas Atribuídas</A>
+</H4>
+  
+
+<P>
+<P>
+<DIV><B>Definición  9.3.2</B> &nbsp; 
+<I>Una definición dirigida por la sintáxis en la que las reglas semánticas
+no tienen efectos laterales se denomina una <A NAME="21552"></A><B>gramática atribuída</B>.</I></DIV><P></P>
+
+<P>
+
+<H4><A NAME="SECTION001430040000000000000">
+Gramáticas L-Atribuídas</A>
+</H4>
+  
+
+<P>
+<P>
+<DIV><B>Definición  9.3.3</B> &nbsp; 
+<I>Si la definición dirigida por la sintáxis puede ser realizada 
+mediante un esquema de traducción se dice que es <A NAME="21558"></A><B>L-atribuída</B>.</I></DIV><P></P>
+
+<P>
+Para que una definición dirigida por la sintáxis sea L-atribuída
+deben cumplirse que cualquiera que sea la regla de producción
+<!-- MATH
+ $A \rightarrow X_1 \ldots X_n$
+ -->
+<IMG
+ WIDTH="117" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img469.png"
+ ALT="$ A \rightarrow X_1 \ldots X_n$">
+, los atributos heredados de
+<IMG
+ WIDTH="26" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img463.png"
+ ALT="$ X_j$">
+ pueden depender únicamente de:
+
+<OL>
+<LI>Los atributos de los símbolos a la izquierda de <IMG
+ WIDTH="26" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img463.png"
+ ALT="$ X_j$">
+
+</LI>
+<LI>Los atributos heredados de <IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ A$">
+
+</LI>
+</OL>
+
+<P>
+Si la gramática
+es LL(1), resulta fácil realizarla 
+en un analizador descendente recursivo predictivo.
+La implantación de atributos del cálculo de 
+atributos heredados en un programa <code>eyapp</code> requiere un poco 
+mas de habilidad. Véase la sección 
+<A HREF="node259.html#section:heredados">8.28</A>.
+
+<P>
+
+<H4><A NAME="SECTION001430050000000000000">
+Gramáticas S-Atribuídas</A>
+</H4>
+  
+
+<P>
+<P>
+<DIV><B>Definición  9.3.4</B> &nbsp; 
+<I>Si la definición dirigida por la sintáxis sólo utiliza 
+atributos sintetizados se denomina <A NAME="21564"></A><B>S-atribuída</B>.</I></DIV><P></P>
+Una
+definición S-atribuída puede ser fácilmente trasladada a un programa
+<code>eyapp</code>. 
+
+<P>
+Es posible realizar tanto gramáticas L-atribuídas
+como S-atribuídas usando
+un esquema de traducción <code>Parse::Eyapp</code> generado con la
+directiva <code>%metatree</code> (véase la sección 
+<A HREF="node263.html#section:eyappeyappts">9.2</A>) como combinaciones de ambas.
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html5428"
+  HREF="node264.html#SECTION001430010000000000000">Definición Dirigida por la Sintáxis</A>
+<LI><A NAME="tex2html5429"
+  HREF="node264.html#SECTION001430020000000000000">Evaluación de una Definición Dirigida por la Sintáxis</A>
+<LI><A NAME="tex2html5430"
+  HREF="node264.html#SECTION001430030000000000000">Gramáticas Atribuídas</A>
+<LI><A NAME="tex2html5431"
+  HREF="node264.html#SECTION001430040000000000000">Gramáticas L-Atribuídas</A>
+<LI><A NAME="tex2html5432"
+  HREF="node264.html#SECTION001430050000000000000">Gramáticas S-Atribuídas</A>
+</UL></UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html5426"
+  HREF="node265.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5420"
+  HREF="node261.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5414"
+  HREF="node263.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5422"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5424"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5427"
+  HREF="node265.html">El módulo Language::AttributeGrammar</A>
+<B>Sup:</B> <A NAME="tex2html5421"
+  HREF="node261.html">Análisis Semántico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5415"
+  HREF="node263.html">Esquemas de Traducción con</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

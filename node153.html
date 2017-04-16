@@ -1,0 +1,363 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Análisis Semántico</TITLE>
+<META NAME="description" CONTENT="Análisis Semántico">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node156.html">
+<LINK REL="previous" HREF="node147.html">
+<LINK REL="up" HREF="node105.html">
+<LINK REL="next" HREF="node154.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3675"
+  HREF="node154.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3669"
+  HREF="node105.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3663"
+  HREF="node152.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3671"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3673"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3676"
+  HREF="node154.html">Práctica: Declaraciones Automáticas</A>
+<B>Sup:</B> <A NAME="tex2html3670"
+  HREF="node105.html">La Estructura de los</A>
+<B> Ant:</B> <A NAME="tex2html3664"
+  HREF="node152.html">Práctica: Arbol de Análisis</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION009100000000000000000">
+Análisis Semántico</A>
+</H1>
+Hay quien dice que el análisis semántico es la determinación 
+de aquellas propiedades que, siendo dependientes del contexto, pueden ser
+computadas estáticamente en tiempo de compilación para cualquier programa
+correcto. Entre estas propiedades
+están: la comprobación de que las variables son declaradas,
+la compatibilidad de tipos
+en las expresiones, el correcto uso de las llamadas a función asi
+como el ámbito y visibilidad de las variables.
+La fase de análisis semántico puede verse como una fase de ``adornado''
+o ``etiquetado'' del AAA, en la cual los atributos de los nodos
+del AAA son computados.
+
+<P>
+Aunque la veamos como una fase separada del análisis sintáctico, puede
+en numerosas ocasiones llevarse a cabo al mismo tiempo que se construye
+el árbol. Así lo hacemos en este ejemplo: incrustamos la acción semántica
+en la correspondiente rutina de análisis sintáctico. Así, en la rutina <code>term</code>, una vez 
+que hemos obtenido los dos operandos, comprobamos que son de tipo numérico
+llamando (línea 8) a 
+
+<P>
+<DIV ALIGN="CENTER">
+<code>Semantic::Analysis::check_type_numeric_operator</code>:
+
+</DIV>
+
+<P>
+Observe como aparece un nuevo atributo <code>TYPE</code> decorando el nodo
+creado (línea 9):
+
+<P>
+<PRE>
+ 1 sub term() {
+ 2   my ($t, $t2);
+ 3 
+ 4   $t = factor;
+ 5   if ($lookahead eq '*') {
+ 6     match('*');
+ 7     $t2 = term;
+ 8     my $type = Semantic::Analysis::check_type_numeric_operator($t, $t2, '*');
+ 9     $t = TIMES-&gt;new( LEFT =&gt; $t, RIGHT =&gt; $t2, TYPE =&gt; $type);
+10   }
+11   return $t;
+12 }
+</PRE>
+
+<P>
+En el manejo de errores de tipo, un tipo especial <code>$err_type</code>
+es usado para indicar un error de tipo:
+
+<P>
+<PRE>
+  sub check_type_numeric_operator {
+    my ($op1, $op2, $operator) = @_;
+
+    my $type = numeric_compatibility($op1, $op2, $operator);
+    if ($type == $err_type) {
+      Error::fatal("Operandos incompatibles para el operador $operator") 
+    }
+    else {
+      return $type;
+    }
+  }
+</PRE>
+La subrutina <code>numeric_compatibility</code> comprueba que los
+dos operandos son de tipo numérico y devuelve el correspondiente
+tipo. Si ha ocurrido un error de tipo, intenta encontrar 
+un tipo conveniente para el operando:
+
+<P>
+<PRE>
+  sub numeric_compatibility {
+    my ($op1, $op2, $operator) = @_;
+
+    if (($op1-&gt;TYPE == $op2-&gt;TYPE) and is_numeric($op1-&gt;TYPE)) {
+      return $op1-&gt;TYPE; # correct
+    }
+    ... # código de recuperación de errores de tipo
+  }
+
+  sub is_numeric {
+    my $type = shift;
+
+    return ($type == $int_type); # añadir long, float, double, etc.
+  }
+</PRE>
+
+<P>
+Es parte del análisis semántico la declaración de tipos:
+
+<P>
+<PRE>
+sub declaration() {
+  my ($t, $class, @il);
+
+  if (($lookahead eq 'INT') or ($lookahead eq 'STRING')) {
+    $class = $lookahead;
+    $t = &amp;type();
+    @il = &amp;idlist();
+    &amp;Semantic::Analysis::set_types($t, @il);
+    &amp;Address::Assignment::compute_address($t, @il);
+    return $class-&gt;new(TYPE =&gt; $t, IDLIST =&gt; \@il);
+  }
+  else {
+    Error::fatal('Se esperaba un tipo');
+  }
+}
+</PRE>
+Para ello se utiliza una tabla de símbolos que es un hash <code>%symbol_table</code>
+indexado en los identificadores del programa:
+
+<P>
+<PRE>
+sub set_types {
+  my $type = shift;
+  my @vars = @_;
+
+  foreach my $var (@vars) {
+    if (!exists($symbol_table{$id})) { $symbol_table{$var}-&gt;{TYPE} = $type; }
+    else { Error::error("$id declarado dos veces en el mismo ámbito"); }
+  }
+}
+</PRE>
+
+<P>
+Cada vez que aparece una variable en el código, bien en un factor o en 
+una asignación, comprobamos que ha sido declarada:
+
+<P>
+<PRE>
+sub factor() {
+  my ($e, $id, $str, $num);
+
+  if ($lookahead eq 'NUM') { ... }
+  elsif ($lookahead eq 'ID') {
+    $id = $value;
+    match('ID');
+    my $type = Semantic::Analysis::check_declared($id);
+    return ID-&gt;new( VAL =&gt; $id, TYPE =&gt; $type);
+  }
+  elsif ($lookahead eq 'STR') { ... }
+  elsif ($lookahead eq '(') { ... }
+  else { Error::fatal("Se esperaba (, NUM o ID"); }
+}
+</PRE>
+
+<P>
+La función <code>check_declared</code> devuelve el atributo
+<code>TYPE</code> de la correspondiente entrada en la tabla de 
+símbolos.
+
+<P>
+<PRE>
+sub check_declared {
+  my $id = shift;
+
+  if (!exists($symbol_table{$id})) {
+    Error::error("$id no ha sido declarado!");
+    # auto-declaración de la variable a err_type
+    Semantic::Analysis::set_types($err_type, ($id));
+  }
+  return $symbol_table{$id}-&gt;{TYPE};
+}
+</PRE>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html3677"
+  HREF="node154.html">Práctica: Declaraciones Automáticas</A>
+<LI><A NAME="tex2html3678"
+  HREF="node155.html">Práctica: Análisis Semántico</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html3675"
+  HREF="node154.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3669"
+  HREF="node105.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3663"
+  HREF="node152.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3671"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3673"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3676"
+  HREF="node154.html">Práctica: Declaraciones Automáticas</A>
+<B>Sup:</B> <A NAME="tex2html3670"
+  HREF="node105.html">La Estructura de los</A>
+<B> Ant:</B> <A NAME="tex2html3664"
+  HREF="node152.html">Práctica: Arbol de Análisis</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

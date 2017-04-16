@@ -1,0 +1,523 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Destilación del resultado</TITLE>
+<META NAME="description" CONTENT="Destilación del resultado">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node93.html">
+<LINK REL="previous" HREF="node91.html">
+<LINK REL="up" HREF="node85.html">
+<LINK REL="next" HREF="node93.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2670"
+  HREF="node93.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2664"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2658"
+  HREF="node91.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2666"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2668"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2671"
+  HREF="node93.html">Llamadas privadas a subreglas</A>
+<B>Sup:</B> <A NAME="tex2html2665"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2659"
+  HREF="node91.html">Llamadas a subreglas desmemoriadas</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html2672"
+  HREF="node92.html#SECTION008117010000000000000">Destilación manual</A>
+<LI><A NAME="tex2html2673"
+  HREF="node92.html#SECTION008117020000000000000">Destilación en el programa</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION008117000000000000000">
+Destilación del resultado</A>
+</H2>
+
+<P>
+
+<H4><A NAME="SECTION008117010000000000000">
+Destilación manual</A>
+</H4>
+  
+
+<P>
+<BLOCKQUOTE><I><A NAME="tex2html198"
+  HREF="http://search.cpan.org/perldoc?Regexp::Grammars">Regexp::Grammars</A>
+also offers full manual control over the distillation
+process. If you use the reserved word <code>MATCH</code> as the alias for a subrule
+call:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;MATCH=filename&gt;
+</PRE>
+<P>
+<BLOCKQUOTE><I>or a subpattern match:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;MATCH=( \w+ )&gt;
+</PRE>
+<P>
+<BLOCKQUOTE><I>or a code block:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;MATCH=(?{ 42 })&gt;
+</PRE>
+<P>
+<BLOCKQUOTE><I>then the current rule will treat the return value of that subrule,
+pattern, or code block as its complete result, and return that value
+instead of the usual result-hash it constructs. This is the case even
+if the result has other entries that would normally also be returned.
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>For example, in a rule like:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: term&gt;
+          &lt;MATCH=literal&gt;
+        | &lt;left_paren&gt; &lt;MATCH=expr&gt; &lt;right_paren&gt;
+</PRE>
+<P>
+<BLOCKQUOTE><I>The use of <code>MATCH</code> aliases causes the rule to return either whatever
+<code>&lt;literal&gt;</code> returns, or whatever <code>&lt;expr&gt;</code> returns (provided it's between
+left and right parentheses).
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>Note that, in this second case, even though <code>&lt;left_paren&gt;</code> and <code>&lt;right_paren&gt;</code>
+are captured to the result-hash, they are not returned, because the
+<code>MATCH</code> alias overrides the normal <B>return the result-hash</B> semantics and
+returns only what its associated subrule (i.e. <code>&lt;expr&gt;</code>) produces.
+</I></BLOCKQUOTE>
+
+<P>
+El siguiente ejemplo ilustra el uso del alias <code>MATCH</code>:
+
+<P>
+<PRE>
+$ cat -n demo_calc.pl
+ 1  #!/usr/local/lib/perl/5.10.1/bin/perl5.10.1
+ 2  use v5.10;
+ 3  use warnings;
+ 4
+ 5  my $calculator = do{
+ 6      use Regexp::Grammars;
+ 7      qr{
+ 8          &lt;Answer&gt;
+ 9
+10          &lt;rule: Answer&gt;
+11              &lt;X=Mult&gt; &lt;Op=([+-])&gt; &lt;Y=Answer&gt;
+12            | &lt;MATCH=Mult&gt;
+13
+14          &lt;rule: Mult&gt;
+15              &lt;X=Pow&gt; &lt;Op=([*/%])&gt; &lt;Y=Mult&gt;
+16            | &lt;MATCH=Pow&gt;
+17
+18          &lt;rule: Pow&gt;
+19              &lt;X=Term&gt; &lt;Op=(\^)&gt; &lt;Y=Pow&gt;
+20            | &lt;MATCH=Term&gt;
+21
+22          &lt;rule: Term&gt;
+23                 &lt;MATCH=Literal&gt;
+24            | \( &lt;MATCH=Answer&gt; \)
+25
+26          &lt;token: Literal&gt;
+27              &lt;MATCH=( [+-]? \d++ (?: \. \d++ )?+ )&gt;
+28      }xms
+29  };
+30
+31  while (my $input = &lt;&gt;) {
+32      if ($input =~ $calculator) {
+33          use Data::Dumper 'Dumper';
+34          warn Dumper \%/;
+35      }
+36  }
+</PRE>
+
+<P>
+Veamos una ejecución:
+
+<P>
+<PRE>
+$ ./demo_calc.pl
+2+3*5
+$VAR1 = {
+          '' =&gt; '2+3*5',
+          'Answer' =&gt; {
+                        '' =&gt; '2+3*5',
+                        'Op' =&gt; '+',
+                        'X' =&gt; '2',
+                        'Y' =&gt; {
+                                 '' =&gt; '3*5',
+                                 'Op' =&gt; '*',
+                                 'X' =&gt; '3',
+                                 'Y' =&gt; '5'
+                               }
+                      }
+        };
+4-5-2
+$VAR1 = {
+          '' =&gt; '4-5-2',
+          'Answer' =&gt; {
+                        '' =&gt; '4-5-2',
+                        'Op' =&gt; '-',
+                        'X' =&gt; '4',
+                        'Y' =&gt; {
+                                 '' =&gt; '5-2',
+                                 'Op' =&gt; '-',
+                                 'X' =&gt; '5',
+                                 'Y' =&gt; '2'
+                               }
+                      }
+        };
+</PRE>
+Obsérvese como el árbol construido para la expresión <code>4-5-2</code> 
+se hunde a derechas dando lugar a una jerarquía errónea.
+Para arreglar el problema sería necesario eliminar la 
+recursividad por la izquierda en las reglas correspondientes.
+
+<P>
+
+<H4><A NAME="SECTION008117020000000000000">
+Destilación en el programa</A>
+</H4>
+  
+
+<P>
+<BLOCKQUOTE><I>It's also possible to control what a rule returns from within a code
+block. <A NAME="tex2html199"
+  HREF="http://search.cpan.org/perldoc?Regexp::Grammars">Regexp::Grammars</A>
+provides a set of reserved variables that give
+direct access to the result-hash.
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>The result-hash itself can be accessed as <code>%MATCH</code> within any code block
+inside a rule. For example:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: sum&gt; 
+        &lt;X=product&gt; \+ &lt;Y=product&gt;
+            &lt;MATCH=(?{ $MATCH{X} + $MATCH{Y} })&gt;
+</PRE>
+<P>
+<BLOCKQUOTE><I>Here, the rule matches a product (aliased <code>'X'</code> in the result-hash), then a
+literal <code>'+'</code>, then another product (aliased to <code>'Y'</code> in the result-hash). The
+rule then executes the code block, which accesses the two saved values
+(as <code>$MATCH{X}</code> and <code>$MATCH{Y}</code>), adding them together. Because the block
+is itself aliased to <code>MATCH</code>, the sum produced by the block becomes the
+(only) result of the rule.
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>It is also possible to set the rule result from within a code block
+(instead of aliasing it). The special <B>override</B> return value is
+represented by the special variable <code>$MATCH</code>. So the previous example
+could be rewritten:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: sum&gt; 
+        &lt;X=product&gt; \+ &lt;Y=product&gt;
+            (?{ $MATCH = $MATCH{X} + $MATCH{Y} })
+</PRE><BLOCKQUOTE><I>
+Both forms are identical in effect. Any assignment to <code>$MATCH</code> overrides
+the normal <B>return all subrule results</B> behaviour.
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>Assigning to <code>$MATCH</code> directly is particularly handy if the result may
+not always be <B>distillable</B>, for example:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: sum&gt; 
+        &lt;X=product&gt; \+ &lt;Y=product&gt;
+            (?{ if (!ref $MATCH{X} &amp;&amp; !ref $MATCH{Y}) {
+                    # Reduce to sum, if both terms are simple scalars...
+                    $MATCH = $MATCH{X} + $MATCH{Y};
+                }
+                else {
+                    # Return full syntax tree for non-simple case...
+                    $MATCH{op} = '+';
+                }
+            })
+</PRE>
+<P>
+<BLOCKQUOTE><I>Note that you can also partially override the subrule return
+behaviour. Normally, the subrule returns the complete text it matched
+under the <B>empty key</B> of its result-hash. That is, of course, 
+<code>$MATCH{""}</code>,
+so you can override just that behaviour by directly assigning to that
+entry.
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>For example, if you have a rule that matches key/value pairs from a
+configuration file, you might prefer that any trailing comments not
+be included in the <I>matched text</I> entry of the rule's result-hash. You
+could hide such comments like so:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: config_line&gt;
+        &lt;key&gt; : &lt;value&gt;  &lt;comment&gt;?
+            (?{
+                # Edit trailing comments out of "matched text" entry...
+                $MATCH = "$MATCH{key} : $MATCH{value}";
+            })
+</PRE>
+<P>
+<BLOCKQUOTE><I>Some more examples of the uses of <code>$MATCH</code>:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: FuncDecl&gt;
+      # Keyword  Name               Keep return the name (as a string)...
+        func     &lt;Identifier&gt; ;     (?{ $MATCH = $MATCH{'Identifier'} })
+
+
+    &lt;rule: NumList&gt;
+      # Numbers in square brackets...
+        \[ 
+            ( \d+ (?: , \d+)* )
+        \]
+
+      # Return only the numbers...
+        (?{ $MATCH = $CAPTURE })
+
+
+    &lt;token: Cmd&gt;
+      # Match standard variants then standardize the keyword...
+        (?: mv | move | rename )      (?{ $MATCH = 'mv'; })
+</PRE>
+<P>
+<BLOCKQUOTE><I><code>$CAPTURE</code> and <code>$CONTEXT</code>
+    are both aliases for the built-in read-only <code>$^N </code>variable, 
+which always contains the substring matched by 
+the nearest preceding <code>(...)</code> capture. 
+<code>$^N</code> still works perfectly well, but these are provided 
+to improve the readability of code blocks and error messages respectively.
+</I></BLOCKQUOTE>
+
+<P>
+El siguiente código implementa una calculadora
+usando destilación en  el código:
+
+<P>
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ cat -n demo_calc_inline.pl
+ 1  use v5.10;
+ 2  use warnings;
+ 3
+ 4  my $calculator = do{
+ 5      use Regexp::Grammars;
+ 6      qr{
+ 7          &lt;Answer&gt;
+ 8
+ 9          &lt;rule: Answer&gt;
+10              &lt;X=Mult&gt; \+ &lt;Y=Answer&gt;
+11                  (?{ $MATCH = $MATCH{X} + $MATCH{Y}; })
+12            | &lt;X=Mult&gt; - &lt;Y=Answer&gt;
+13                  (?{ $MATCH = $MATCH{X} - $MATCH{Y}; })
+14            | &lt;MATCH=Mult&gt;
+15
+16          &lt;rule: Mult&gt;
+17              &lt;X=Pow&gt; \* &lt;Y=Mult&gt;
+18                  (?{ $MATCH = $MATCH{X} * $MATCH{Y}; })
+19            | &lt;X=Pow&gt;  / &lt;Y=Mult&gt;
+20                  (?{ $MATCH = $MATCH{X} / $MATCH{Y}; })
+21            | &lt;X=Pow&gt;  % &lt;Y=Mult&gt;
+22                  (?{ $MATCH = $MATCH{X} % $MATCH{Y}; })
+23            | &lt;MATCH=Pow&gt;
+24
+25          &lt;rule: Pow&gt;
+26              &lt;X=Term&gt; \^ &lt;Y=Pow&gt;
+27                  (?{ $MATCH = $MATCH{X} ** $MATCH{Y}; })
+28            | &lt;MATCH=Term&gt;
+29
+30          &lt;rule: Term&gt;
+31                 &lt;MATCH=Literal&gt;
+32            | \( &lt;MATCH=Answer&gt; \)
+33
+34          &lt;token: Literal&gt;
+35              &lt;MATCH=( [+-]? \d++ (?: \. \d++ )?+ )&gt;
+36      }xms
+37  };
+38
+39  while (my $input = &lt;&gt;) {
+40      if ($input =~ $calculator) {
+41          say '--&gt; ', $/{Answer};
+42      }
+43  }
+</PRE>
+
+<P>
+<P>
+<DIV><B>Ejercicio  3.11.1</B> &nbsp; 
+<I>Cual es la salida del programa anterior para las entradas:
+</I>
+<UL>
+<LI><code>4-2-2</code>
+</LI>
+<LI><code>8/4/2</code>
+</LI>
+<LI><code>2^2^3</code>
+</LI>
+</UL></DIV><P></P>
+
+<P>
+<HR>
+<A NAME="tex2html2670"
+  HREF="node93.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2664"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2658"
+  HREF="node91.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2666"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2668"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2671"
+  HREF="node93.html">Llamadas privadas a subreglas</A>
+<B>Sup:</B> <A NAME="tex2html2665"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2659"
+  HREF="node91.html">Llamadas a subreglas desmemoriadas</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>La directiva require</TITLE>
+<META NAME="description" CONTENT="La directiva require">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node96.html">
+<LINK REL="previous" HREF="node94.html">
+<LINK REL="up" HREF="node85.html">
+<LINK REL="next" HREF="node96.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2722"
+  HREF="node96.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2716"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2710"
+  HREF="node94.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2718"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2720"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2723"
+  HREF="node96.html">Casando con las claves</A>
+<B>Sup:</B> <A NAME="tex2html2717"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2711"
+  HREF="node94.html">Mas sobre listas</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0081110000000000000000">
+La directiva <TT>require</TT></A>
+</H2>
+
+<P>
+La directiva <code>require</code> es similar 
+en su funcionamiento al paréntesis 5.10 <code>(??{ Código Perl })</code>
+el cuál hace que el <code>Código Perl</code> sea evaluado durante el tiempo de matching.
+El resultado de la evaluación se trata como una expresión regular con la que deberá
+casarse.
+(véase la sección <A HREF="node65.html#subsection:tiempodematching">3.2.9</A>
+para mas detalles).
+
+<P>
+La sintáxis de la directiva <code>&lt;require:&gt;</code> es
+
+<P><PRE>
+                        &lt;require: (?{ CODE }) &gt;
+</PRE>
+<P>
+<BLOCKQUOTE><I>The code block is executed and if its final value is true, matching
+continues from the same position. If the block's final value is false,
+the match fails at that point and starts backtracking.
+</I></BLOCKQUOTE>
+
+<P>
+<BLOCKQUOTE><I>The <code>&lt;require:...&gt;</code> directive is useful for testing conditions that it's
+not easy (or even possible) to check within the syntax of the the regex
+itself. For example:
+</I></BLOCKQUOTE>
+<P><PRE>
+    &lt;rule: IPV4_Octet_Decimal&gt;
+        # Up three digits...
+        &lt;MATCH= ( \d{1,3}+ )&gt;
+        
+        # ...but less that 256...
+        &lt;require: (?{ $MATCH &lt;= 255 })&gt;
+</PRE>
+<P>
+<BLOCKQUOTE><I>A require expects a regex codeblock as its argument and succeeds if
+the final value of that codeblock is true. If the final value is false,
+the directive fails and the rule starts backtracking.
+</I></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><I>Note, in this example that the digits are matched with <code>\d{1,3}+</code> . <B>The
+trailing</B> <code>+</code> prevents the <code>{1,3}</code> repetition from backtracking to a smaller
+number of digits if the <code>&lt;require:...&gt;</code> fails.
+</I></BLOCKQUOTE>
+
+<P>
+El programa <code>demo_IP4.pl</code> ilustra el uso de la directiva:
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ cat -n ./demo_IP4.pl
+ 1  #!/usr//bin/env perl5.10.1
+ 2  use v5.10;
+ 3  use warnings;
+ 4
+ 5  use Regexp::Grammars;
+ 6
+ 7  my $grammar = qr{
+ 8      \A &lt;IP4_addr&gt; \Z
+ 9
+10      &lt;token: quad&gt;
+11          &lt;MATCH=(\d{1,3})&gt;
+12          &lt;require: (?{ $MATCH &lt; 256 })&gt;
+13
+14      &lt;token: IP4_addr&gt;
+15          &lt;[MATCH=quad]&gt;**(\.)
+16          &lt;require: (?{ @$MATCH == 4 })&gt;
+17  }xms;
+18
+19  while (my $line = &lt;&gt;) {
+20      if ($line =~ $grammar) {
+21          use Data::Dumper 'Dumper';
+22          say Dumper \%/;
+23      }
+24      else {
+25          say 'Does not match'
+26      }
+27  }
+</PRE>
+Las condiciones usadas en el <code>require</code> obligan a que cada 
+quad<A NAME="tex2html201"
+  HREF="footnode.html#foot6290"><SUP>3.9</SUP></A> sea menor que 256 y a que existan sólo cuatro quads.
+
+<P>
+Sigue un ejemplo de ejecución:
+<PRE>
+pl@nereida:~/Lregexpgrammars/demo$ ./demo_IP4.pl
+123 . 145 . 105 . 252
+Does not match
+pl@nereida:~/Lregexpgrammars/demo$ ./demo_IP4.pl
+123.145.105.252
+$VAR1 = {
+          '' =&gt; '123.145.105.252',
+          'IP4_addr' =&gt; [
+                          123,
+                          145,
+                          105,
+                          252
+                        ]
+        };
+pl@nereida:~/Lregexpgrammars/demo$ ./demo_IP4.pl
+148.257.128.128
+Does not match
+0.0.0.299
+Does not match
+pl@nereida:~/Lregexpgrammars/demo$  ./demo_IP4.pl
+123.145.105.242.193
+Does not match
+</PRE>
+Obsérvese como no se aceptan blancos entre los puntos en esta versión.
+¿Sabría explicar la causa?
+
+<P>
+<HR>
+<A NAME="tex2html2722"
+  HREF="node96.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2716"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2710"
+  HREF="node94.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2718"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2720"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2723"
+  HREF="node96.html">Casando con las claves</A>
+<B>Sup:</B> <A NAME="tex2html2717"
+  HREF="node85.html">Análisis Sintáctico con Regexp::Grammars</A>
+<B> Ant:</B> <A NAME="tex2html2711"
+  HREF="node94.html">Mas sobre listas</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

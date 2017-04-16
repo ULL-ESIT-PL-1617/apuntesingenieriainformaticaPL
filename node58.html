@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Modificadores locales</TITLE>
+<META NAME="description" CONTENT="Modificadores locales">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node59.html">
+<LINK REL="previous" HREF="node57.html">
+<LINK REL="up" HREF="node56.html">
+<LINK REL="next" HREF="node59.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2003"
+  HREF="node59.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1997"
+  HREF="node56.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1991"
+  HREF="node57.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1999"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2001"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2004"
+  HREF="node59.html">Mirando hacia adetrás y</A>
+<B>Sup:</B> <A NAME="tex2html1998"
+  HREF="node56.html">Algunas Extensiones</A>
+<B> Ant:</B> <A NAME="tex2html1992"
+  HREF="node57.html">Comentarios</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00822000000000000000">
+Modificadores locales</A>
+</H2>
+
+<P>
+Los modificadores de la conducta de una expresión regular pueden ser 
+empotrados en una subexpresión usando el formato <code>(?pimsx-imsx)</code>.
+
+<P>
+Véase el correspondiente texto <I>Extended Patterns</I> de 
+la sección 'Extended-Patterns' en <A NAME="tex2html69"
+  HREF="http://perldoc.perl.org/perlre.html#Extended-Patterns"><TT>perlre</TT></A>:
+<BLOCKQUOTE><I>One or more embedded pattern-match modifiers, to be turned on (or turned
+off, if preceded by '<code>-</code>' ) for the remainder of the pattern or the remainder
+of the enclosing pattern group (if any). This is particularly useful
+for dynamic patterns, such as those read in from a configuration file,
+taken from an argument, or specified in a table somewhere. Consider
+the case where some patterns want to be case sensitive and some do not:
+The case insensitive ones merely need to include (?i) at the front of
+the pattern. For example:
+</I></BLOCKQUOTE>
+<P><PRE>
+   1. $pattern = "foobar";
+   2. if ( /$pattern/i ) { }
+   3.
+   4. # more flexible:
+   5.
+   6. $pattern = "(?i)foobar";
+   7. if ( /$pattern/ ) { }
+</PRE>
+<P>
+<BLOCKQUOTE><I>These modifiers are restored at the end of the enclosing group. For example,
+</I></BLOCKQUOTE>
+<P><PRE>
+   1. ( (?i) blah ) \s+ \1
+</PRE>
+<P>
+<BLOCKQUOTE><I>will match <code>blah</code> in any case, some spaces, and an exact (including the
+case!) repetition of the previous word, assuming the <code>/x</code> modifier, and
+no <code>/i</code> modifier outside this group.
+</I></BLOCKQUOTE>
+
+<P>
+El siguiente ejemplo extiende el ejemplo visto en
+la sección
+<A HREF="node50.html#parrfo:comments">3.1.1</A>
+eliminando los comentarios <code>/* ... */</code> y <code>// ... </code>
+de un programa C. En dicho ejemplo se usaba el modificador <code>s</code> 
+para hacer que el punto casara con cualquier carácter:
+
+<P>
+
+<pre>
+casiano@tonga:~/Lperltesting$ cat -n extendedcomments.pl
+<span class="synLinenum">    1</span>   <span class="synComment">#!/usr/bin/perl -w</span>
+<span class="synLinenum">    2</span>   <span class="synStatement">use strict</span>;
+<span class="synLinenum">    3</span> 
+<span class="synLinenum">    4</span>   <span class="synStatement">my</span> <span class="synIdentifier">$progname</span> = <span class="synStatement">shift</span> <span class="synIdentifier">@ARGV</span> <span class="synStatement">or</span> <span class="synStatement">die</span> <span class="synConstant">"Usage:</span><span class="synSpecial">\n</span><span class="synIdentifier">$0</span><span class="synConstant"> prog.c</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+<span class="synLinenum">    5</span>   <span class="synStatement">open</span>(<span class="synStatement">my</span> <span class="synIdentifier">$PROGRAM</span>,<span class="synConstant">"&lt;</span><span class="synIdentifier">$progname</span><span class="synConstant">"</span>) || <span class="synStatement">die</span> <span class="synConstant">"can't find </span><span class="synIdentifier">$progname</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+<span class="synLinenum">    6</span>   <span class="synStatement">my</span> <span class="synIdentifier">$program</span> = <span class="synConstant">''</span>;
+<span class="synLinenum">    7</span>   {
+<span class="synLinenum">    8</span>     <span class="synStatement">local</span> <span class="synIdentifier">$/</span> = <span class="synStatement">undef</span>;
+<span class="synLinenum">    9</span>     <span class="synIdentifier">$program</span> = &lt;<span class="synIdentifier">$PROGRAM</span>&gt;;
+<span class="synLinenum">   10</span>   }
+<span class="synLinenum">   11</span>   <span class="synIdentifier">$program</span> =~ <span class="synStatement">s{</span><span class="synSpecial">(?xs)</span>
+<span class="synLinenum">   12</span> <span class="synConstant">    /</span><span class="synSpecial">\*</span><span class="synConstant">  # Match the opening delimiter</span>
+<span class="synLinenum">   13</span> <span class="synConstant">    </span><span class="synSpecial">.*?</span><span class="synConstant">  # Match a minimal number of characters</span>
+<span class="synLinenum">   14</span> <span class="synConstant">    </span><span class="synSpecial">\*</span><span class="synConstant">/  # Match the closing delimiter</span>
+<span class="synLinenum">   15</span> <span class="synConstant">    |</span>
+<span class="synLinenum">   16</span> <span class="synConstant">      </span><span class="synSpecial">(?</span><span class="synConstant">-s</span><span class="synSpecial">)</span><span class="synConstant">//</span><span class="synSpecial">.*</span><span class="synConstant"> # C</span><span class="synSpecial">++</span><span class="synConstant"> // comments</span><span class="synSpecial">.</span><span class="synConstant"> No s modifier</span>
+<span class="synLinenum">   17</span> <span class="synConstant">  </span><span class="synStatement">}</span>[]g;
+<span class="synLinenum">   18</span> 
+<span class="synLinenum">   19</span>   <span class="synStatement">print</span> <span class="synIdentifier">$program</span>;
+</pre>
+Sigue un ejemplo de ejecución. Usaremos como entrada el programa C:
+<PRE>
+casiano@tonga:~/Lperltesting$ cat -n ehello.c
+     1  #include &lt;stdio.h&gt;
+     2  /* first
+     3  comment
+     4  */
+     5  main() { // A C++ comment
+     6    printf("hello world!\n"); /* second comment */
+     7  } // final comment
+</PRE>
+Al ejecutar el programa eliminamos los comentarios:
+<PRE>
+casiano@tonga:~/Lperltesting$ extendedcomments.pl ehello.c | cat -n
+     1  #include &lt;stdio.h&gt;
+     2
+     3  main() {
+     4    printf("hello world!\n");
+     5  }
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html2003"
+  HREF="node59.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1997"
+  HREF="node56.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1991"
+  HREF="node57.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1999"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2001"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2004"
+  HREF="node59.html">Mirando hacia adetrás y</A>
+<B>Sup:</B> <A NAME="tex2html1998"
+  HREF="node56.html">Algunas Extensiones</A>
+<B> Ant:</B> <A NAME="tex2html1992"
+  HREF="node57.html">Comentarios</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

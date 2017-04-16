@@ -1,0 +1,531 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Tablas de Escapes, Metacarácteres, Cuantificadores, Clases</TITLE>
+<META NAME="description" CONTENT="Tablas de Escapes, Metacarácteres, Cuantificadores, Clases">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node53.html">
+<LINK REL="previous" HREF="node51.html">
+<LINK REL="up" HREF="node49.html">
+<LINK REL="next" HREF="node53.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html1838"
+  HREF="node53.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1832"
+  HREF="node49.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1826"
+  HREF="node51.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1834"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html1836"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html1839"
+  HREF="node53.html">Variables especiales después de</A>
+<B>Sup:</B> <A NAME="tex2html1833"
+  HREF="node49.html">Introducción</A>
+<B> Ant:</B> <A NAME="tex2html1827"
+  HREF="node51.html">Depuración de Expresiones Regulares</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html1840"
+  HREF="node52.html#SECTION00813010000000000000">Metacharacters</A>
+<LI><A NAME="tex2html1841"
+  HREF="node52.html#SECTION00813020000000000000">Standard greedy quantifiers</A>
+<LI><A NAME="tex2html1842"
+  HREF="node52.html#SECTION00813030000000000000">Non greedy quantifiers</A>
+<LI><A NAME="tex2html1843"
+  HREF="node52.html#SECTION00813040000000000000">Possesive quantifiers</A>
+<LI><A NAME="tex2html1844"
+  HREF="node52.html#SECTION00813050000000000000">Escape sequences</A>
+<LI><A NAME="tex2html1845"
+  HREF="node52.html#SECTION00813060000000000000">Character Classes and other Special Escapes</A>
+<LI><A NAME="tex2html1846"
+  HREF="node52.html#SECTION00813070000000000000">Zero width assertions</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1847"
+  HREF="node52.html#SECTION00813100000000000000">The POSIX character class syntax</A>
+<UL>
+<LI><A NAME="tex2html1848"
+  HREF="node52.html#SECTION00813110000000000000">Available classes</A>
+<LI><A NAME="tex2html1849"
+  HREF="node52.html#SECTION00813120000000000000">Equivalences to Unicode</A>
+<LI><A NAME="tex2html1850"
+  HREF="node52.html#SECTION00813130000000000000">Negated character classes</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION00813000000000000000"></A>
+<A NAME="section:abreviadas"></A>
+<BR>
+Tablas de Escapes, Metacarácteres, Cuantificadores, Clases
+</H2>
+Sigue una sección de tablas con 
+notaciones tomada de <A NAME="tex2html61"
+  HREF="http://search.cpan.org/perldoc/?perlre"><TT>perlre</TT></A>:
+
+<P>
+
+<H4><A NAME="SECTION00813010000000000000">
+Metacharacters</A>
+</H4>
+  
+
+<P>
+The following metacharacters have their standard egrep-ish meanings:
+
+<P>
+<PRE>
+   1. \ Quote the next metacharacter
+   2. ^ Match the beginning of the line
+   3. . Match any character (except newline)
+   4. $ Match the end of the line (or before newline at the end)
+   5. | Alternation
+   6. () Grouping
+   7. [] Character class
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00813020000000000000">
+Standard greedy quantifiers</A>
+</H4>
+  
+
+<P>
+The following standard greedy quantifiers are recognized:
+
+<P>
+<PRE>
+   1. * Match 0 or more times
+   2. + Match 1 or more times
+   3. ? Match 1 or 0 times
+   4. {n} Match exactly n times
+   5. {n,} Match at least n times
+   6. {n,m} Match at least n but not more than m times
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00813030000000000000">
+Non greedy quantifiers</A>
+</H4>
+  
+
+<P>
+The following non greedy quantifiers are recognized:
+
+<P>
+<PRE>
+   1. *? Match 0 or more times, not greedily
+   2. +? Match 1 or more times, not greedily
+   3. ?? Match 0 or 1 time, not greedily
+   4. {n}? Match exactly n times, not greedily
+   5. {n,}? Match at least n times, not greedily
+   6. {n,m}? Match at least n but not more than m times, not greedily
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00813040000000000000">
+Possesive quantifiers</A>
+</H4>
+  
+
+<P>
+The following possesive quantifiers are recognized:
+
+<P>
+<PRE>
+   1. *+ Match 0 or more times and give nothing back
+   2. ++ Match 1 or more times and give nothing back
+   3. ?+ Match 0 or 1 time and give nothing back
+   4. {n}+ Match exactly n times and give nothing back (redundant)
+   5. {n,}+ Match at least n times and give nothing back
+   6. {n,m}+ Match at least n but not more than m times and give nothing back
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00813050000000000000">
+Escape sequences</A>
+</H4>
+  
+
+<P>
+<PRE>
+   1. \t tab (HT, TAB)
+   2. \n newline (LF, NL)
+   3. \r return (CR)
+   4. \f form feed (FF)
+   5. \a alarm (bell) (BEL)
+   6. \e escape (think troff) (ESC)
+   7. \033 octal char (example: ESC)
+   8. \x1B hex char (example: ESC)
+   9. \x{263a} long hex char (example: Unicode SMILEY)
+  10. \cK control char (example: VT)
+  11. \N{name} named Unicode character
+  12. \l lowercase next char (think vi)
+  13. \u uppercase next char (think vi)
+  14. \L lowercase till \E (think vi)
+  15. \U uppercase till \E (think vi)
+  16. \E end case modification (think vi)
+  17. \Q quote (disable) pattern metacharacters till \E
+</PRE>
+
+<P>
+<P>
+<DIV><B>Ejercicio  3.1.5</B> &nbsp; 
+<I>Explique la salida:
+</I><PRE>
+casiano@tonga:~$ perl -wde 0
+main::(-e:1):   0
+  DB&lt;1&gt; $x = '([a-z]+)'
+  DB&lt;2&gt; x 'hola' =~ /$x/
+0  'hola'
+  DB&lt;3&gt; x 'hola' =~ /\Q$x/
+  empty array
+  DB&lt;4&gt; x '([a-z]+)' =~ /\Q$x/
+0  1
+</PRE></DIV><P></P>
+
+<P>
+
+<H4><A NAME="SECTION00813060000000000000">
+Character Classes and other Special Escapes</A>
+</H4>
+  
+
+<P>
+<PRE>
+   1. \w Match a "word" character (alphanumeric plus "_")
+   2. \W Match a non-"word" character
+   3. \s Match a whitespace character
+   4. \S Match a non-whitespace character
+   5. \d Match a digit character
+   6. \D Match a non-digit character
+   7. \pP Match P, named property. Use \p{Prop} for longer names.
+   8. \PP Match non-P
+   9. \X Match eXtended Unicode "combining character sequence",
+  10.    equivalent to (?&gt;\PM\pM*)
+  11. \C Match a single C char (octet) even under Unicode.
+  12.    NOTE: breaks up characters into their UTF-8 bytes,
+  13.    so you may end up with malformed pieces of UTF-8.
+  14.    Unsupported in lookbehind.
+  15. \1 Backreference to a specific group.
+  16. '1' may actually be any positive integer.
+  17. \g1 Backreference to a specific or previous group,
+  18. \g{-1} number may be negative indicating a previous buffer and may
+  19.        optionally be wrapped in curly brackets for safer parsing.
+  20. \g{name} Named backreference
+  21. \k&lt;name&gt; Named backreference
+  22. \K Keep the stuff left of the \K, don't include it in $&amp;
+  23. \v Vertical whitespace
+  24. \V Not vertical whitespace
+  25. \h Horizontal whitespace
+  26. \H Not horizontal whitespace
+  27. \R Linebreak
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00813070000000000000">
+Zero width assertions</A>
+</H4>
+  
+
+<P>
+Perl defines the following zero-width assertions:
+
+<P>
+<PRE>
+   1. \b Match a word boundary
+   2. \B Match except at a word boundary
+   3. \A Match only at beginning of string
+   4. \Z Match only at end of string, or before newline at the end
+   5. \z Match only at end of string
+   6. \G Match only at pos() (e.g. at the end-of-match position
+   7. of prior m//g)
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00813100000000000000">
+The POSIX character class syntax</A>
+</H3>
+
+<P>
+The POSIX character class syntax:
+
+<P>
+<PRE>
+   1. [:class:]
+</PRE>
+
+<P>
+is also available. Note that the <code>[</code> and <code>]</code> brackets are literal; 
+they must always be used within a character class expression.
+
+<P>
+<PRE>
+   1. # this is correct:
+   2. $string =~ /[[:alpha:]]/;
+   3.
+   4. # this is not, and will generate a warning:
+   5. $string =~ /[:alpha:]/;
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00813110000000000000">
+Available classes</A>
+</H4>
+  
+
+<P>
+The available classes and their backslash equivalents (if available) are as follows:
+
+<P>
+<PRE>
+   1. alpha
+   2. alnum
+   3. ascii
+   4. blank
+   5. cntrl
+   6. digit \d
+   7. graph
+   8. lower
+   9. print
+  10. punct
+  11. space \s 
+  12. upper
+  13. word \w 
+  14. xdigit
+</PRE>
+
+<P>
+For example use <code>[:upper:]</code> to match all the uppercase characters. 
+Note that the <code>[]</code> are part of the <code>[::]</code>
+construct, not part of the whole character class. For example:
+
+<P>
+<PRE>
+   1. [01[:alpha:]%]
+</PRE>
+
+<P>
+matches zero, one, any alphabetic character, and the percent sign.
+
+<P>
+
+<H4><A NAME="SECTION00813120000000000000">
+Equivalences to Unicode</A>
+</H4>
+  
+
+<P>
+The following equivalences to Unicode 
+<code>\p{}</code> constructs and equivalent backslash 
+character classes (if available), will hold:
+
+<P>
+<PRE>
+   1. [[:...:]] \p{...} backslash
+   2.
+   3. alpha IsAlpha
+   4. alnum IsAlnum
+   5. ascii IsASCII
+   6. blank
+   7. cntrl IsCntrl
+   8. digit IsDigit \d
+   9. graph IsGraph
+  10. lower IsLower
+  11. print IsPrint 
+  12. punct IsPunct 
+  13. space IsSpace
+  14. IsSpacePerl \s
+  15. upper IsUpper
+  16. word IsWord \w
+  17. xdigit IsXDigit
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00813130000000000000">
+Negated character classes</A>
+</H4>
+  
+
+<P>
+You can negate the <code>[::]</code> character classes by prefixing 
+the class name with a <code>'^'</code>. This is a Perl extension. For example:
+
+<P>
+<PRE>
+   1. POSIX traditional Unicode
+   2.
+   3. [[:^digit:]] \D \P{IsDigit}
+   4. [[:^space:]] \S \P{IsSpace}
+   5. [[:^word:]] \W \P{IsWord}
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html1838"
+  HREF="node53.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1832"
+  HREF="node49.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1826"
+  HREF="node51.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1834"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html1836"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html1839"
+  HREF="node53.html">Variables especiales después de</A>
+<B>Sup:</B> <A NAME="tex2html1833"
+  HREF="node49.html">Introducción</A>
+<B> Ant:</B> <A NAME="tex2html1827"
+  HREF="node51.html">Depuración de Expresiones Regulares</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

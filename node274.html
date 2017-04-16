@@ -1,0 +1,323 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>La opción SEVERITY</TITLE>
+<META NAME="description" CONTENT="La opción SEVERITY">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="previous" HREF="node273.html">
+<LINK REL="up" HREF="node267.html">
+<LINK REL="next" HREF="node275.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html5608"
+  HREF="node275.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5602"
+  HREF="node267.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5598"
+  HREF="node273.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5604"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5606"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5609"
+  HREF="node275.html">Análisis Sintáctico con yacc</A>
+<B>Sup:</B> <A NAME="tex2html5603"
+  HREF="node267.html">Transformaciones Árbol con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5599"
+  HREF="node273.html">Transformaciones de Árboles con</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001570000000000000000">
+La opción <TT>SEVERITY</TT></A>
+</H1>
+La opción  SEVERITY  del constructor  Parse::Eyapp::Treeregexp::new 
+controla la forma en la que se interpreta el éxito de un casamiento
+en lo que se refiere al número de hijos del nodo.
+Para ilustrar su uso consideremos el siguiente ejemplo que 
+hace uso de <code>Rule6</code> la gramática que fue introducida 
+en la sección <A HREF="#code:rule6"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> (página <A HREF="#code:rule6"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>).
+<PRE>
+nereida:~/src/perl/YappWithDefaultAction/examples&gt; cat -n numchildren.pl
+ 1  #!/usr/bin/perl -w
+ 2  use strict;
+ 3  use Rule6;
+ 4  use Data::Dumper;
+ 5  use Parse::Eyapp::Treeregexp;
+ 6  use Parse::Eyapp::Node;
+ 7
+ 8  our @all;
+ 9  my $severity = shift || 0;
+10
+11  my $transform = Parse::Eyapp::Treeregexp-&gt;new( STRING =&gt; q{
+12    zero_times_whatever: TIMES(NUM($x)) and { $x-&gt;{attr} == 0 } =&gt; { $_[0] = $NUM }
+13  },
+14  SEVERITY =&gt; $severity,
+15  );
+16
+17  $transform-&gt;generate;
+18  $Data::Dumper::Indent = 1;
+19  my $parser = new Rule6();
+20  my $t = $parser-&gt;Run;
+21  $t-&gt;s(@all);
+22  print Dumper($t);
+</PRE>
+Este programa obtiene el nivel de severidad a usar desde la línea de comandos
+(línea 9). Nótese que la especificación de <code>TIMES</code> 
+en la transformación <code>zero_times_whatever</code> este aparece con un único hijo.
+Existen varias interpretaciones de la expresión que se corresponden con los
+niveles de  SEVERITY : 
+
+<UL>
+<LI>0: Quiero decir que tiene al menos un hijo. No me importa si tiene mas
+</LI>
+<LI>1: Para que case tiene que tener exactamente un hijo
+</LI>
+<LI>2: Para que case tiene que tener exactamente un hijo. Si aparece un nodo 
+<code>TIMES</code> con un número de hijos diferente quiero ser avisado
+</LI>
+<LI>3: Para que case tiene que tener exactamente un hijo. Si aparece un nodo 
+<code>TIMES</code> con un número de hijos diferente 
+quiero que se considere un error 
+(mis nodos tiene aridad fija)
+</LI>
+</UL>
+En la siguiente ejecución
+el nivel especificado es cero. La expresión <code>0*2</code> casa y es modificada.
+<PRE>
+nereida:~/src/perl/YappWithDefaultAction/examples&gt; numchildren.pl 0
+0*2
+$VAR1 = bless( {
+  'children' =&gt; [
+    bless( {
+      'children' =&gt; [],
+      'attr' =&gt; 0,
+      'token' =&gt; 'NUM'
+    }, 'TERMINAL' )
+  ]
+}, 'NUM' );
+</PRE>
+En la siguiente ejecución el nivel especificado es uno.
+La expresión <code>0*2</code> no casa pero no se avisa ni se considera un 
+error la presencia de un nodo <code>TIMES</code> con una aridad distinta.
+<PRE>
+nereida:~/src/perl/YappWithDefaultAction/examples&gt; numchildren.pl 1
+0*2
+$VAR1 = bless( {
+  'children' =&gt; [
+    bless( {
+      'children' =&gt; [
+        bless( {
+          'children' =&gt; [],
+          'attr' =&gt; '0',
+          'token' =&gt; 'NUM'
+        }, 'TERMINAL' )
+      ]
+    }, 'NUM' ),
+    bless( {
+      'children' =&gt; [
+        bless( {
+          'children' =&gt; [],
+          'attr' =&gt; '2',
+          'token' =&gt; 'NUM'
+        }, 'TERMINAL' )
+      ]
+    }, 'NUM' )
+  ]
+}, 'TIMES' );
+</PRE>
+En la siguiente ejecución el nivel especificado es dos.
+La expresión <code>0*2</code> no casa y se avisa 
+de la presencia de un nodo <code>TIMES</code> con una aridad distinta:
+<PRE>
+nereida:~/src/perl/YappWithDefaultAction/examples&gt; numchildren.pl 2
+0*2
+Warning! found node TIMES with 2 children.
+Expected 1 children (see line 12 of numchildren.pl)"
+$VAR1 = bless( {
+  'children' =&gt; [
+    bless( {
+      'children' =&gt; [
+        bless( {
+          'children' =&gt; [],
+          'attr' =&gt; '0',
+          'token' =&gt; 'NUM'
+        }, 'TERMINAL' )
+      ]
+    }, 'NUM' ),
+    bless( {
+      'children' =&gt; [
+        bless( {
+          'children' =&gt; [],
+          'attr' =&gt; '2',
+          'token' =&gt; 'NUM'
+        }, 'TERMINAL' )
+      ]
+    }, 'NUM' )
+  ]
+}, 'TIMES' );
+</PRE>
+En la última ejecución el nivel especificado es tres.
+El programa se detiene ante
+la presencia de un nodo <code>TIMES</code> con una aridad distinta:
+<PRE>
+nereida:~/src/perl/YappWithDefaultAction/examples&gt; numchildren.pl 3
+0*2
+Error! found node TIMES with 2 children.
+Expected 1 children (see line 12 of numchildren.pl)"
+ at (eval 3) line 28
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html5608"
+  HREF="node275.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5602"
+  HREF="node267.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5598"
+  HREF="node273.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5604"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5606"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5609"
+  HREF="node275.html">Análisis Sintáctico con yacc</A>
+<B>Sup:</B> <A NAME="tex2html5603"
+  HREF="node267.html">Transformaciones Árbol con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5599"
+  HREF="node273.html">Transformaciones de Árboles con</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

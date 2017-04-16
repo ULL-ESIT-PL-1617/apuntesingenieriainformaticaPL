@@ -1,0 +1,280 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>La Clase Parse::CLex</TITLE>
+<META NAME="description" CONTENT="La Clase Parse::CLex">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node173.html">
+<LINK REL="previous" HREF="node170.html">
+<LINK REL="up" HREF="node167.html">
+<LINK REL="next" HREF="node173.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3940"
+  HREF="node173.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3934"
+  HREF="node167.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3928"
+  HREF="node171.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3936"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3938"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3941"
+  HREF="node173.html">El Módulo Parse::Flex</A>
+<B>Sup:</B> <A NAME="tex2html3935"
+  HREF="node167.html">Construcción de Analizadores Léxicos</A>
+<B> Ant:</B> <A NAME="tex2html3929"
+  HREF="node171.html">Condiciones de arranque</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001040000000000000000">
+La Clase <TT>Parse::CLex</TT></A>
+</H1>
+Relacionada con <code>Parse::Lex</code> está la clase <code>Parse::CLex</code>,
+la cual avanza consumiendo la cadena analizada mediante el uso del operador
+de sustitución (<code>s///</code>). Los analizadores producidos mediante esta segunda clase
+no permiten el uso de anclas en las expresiones regulares. Tampoco disponen de acceso a la subclase
+<code>Parse::Token</code>.
+He aqui el mismo ejemplo, usando la clase <code>Parse::CLex</code>:
+<PRE>
+&gt; cat -n ctokenizer.pl
+ 1  #!/usr/local/bin/perl -w
+ 2
+ 3  require 5.000;
+ 4  BEGIN {  unshift @INC, "../lib"; }
+ 5  use Parse::CLex;
+ 6
+ 7  @token = (
+ 8            qw(
+ 9               ADDOP    [-+]
+10               LEFTP    [\(]
+11               RIGHTP   [\)]
+12               INTEGER  [1-9][0-9]*
+13               NEWLINE  \n
+14              ),
+15            qw(STRING),   [qw(" (?:[^"]+|"")* ")],
+16            qw(ERROR  .*), sub {
+17              die qq!can\'t analyze: "$_[1]"!;
+18            }
+19           );
+20
+21  Parse::CLex-&gt;trace;
+22  $lexer = Parse::CLex-&gt;new(@token);
+23
+24  $lexer-&gt;from(\*DATA);
+25  print "Tokenization of DATA:\n";
+26
+27  TOKEN:while (1) {
+28    $token = $lexer-&gt;next;
+29    if (not $lexer-&gt;eoi) {
+30      print "Record number: ", $lexer-&gt;line, "\n";
+31      print "Type: ", $token-&gt;name, "\t";
+32      print "Content:-&gt;", $token-&gt;getText, "&lt;-\n";
+33    } else {
+34      last TOKEN;
+35    }
+36  }
+37
+38  __END__
+39  1+2-5
+40  "This is a multiline
+41  string with an embedded "" in it"
+42  this is an invalid string with a "" in it"
+43
+44
+</PRE>
+
+<P>
+<PRE>
+&gt; ctokenizer.pl
+Trace is ON in class Parse::CLex
+Tokenization of DATA:
+[main::lexer|Parse::CLex] Token read (INTEGER, [1-9][0-9]*): 1
+Record number: 1
+Type: INTEGER   Content:-&gt;1&lt;-
+[main::lexer|Parse::CLex] Token read (ADDOP, [-+]): +
+Record number: 1
+Type: ADDOP     Content:-&gt;+&lt;-
+[main::lexer|Parse::CLex] Token read (INTEGER, [1-9][0-9]*): 2
+Record number: 1
+Type: INTEGER   Content:-&gt;2&lt;-
+[main::lexer|Parse::CLex] Token read (ADDOP, [-+]): -
+Record number: 1
+Type: ADDOP     Content:-&gt;-&lt;-
+[main::lexer|Parse::CLex] Token read (INTEGER, [1-9][0-9]*): 5
+Record number: 1
+Type: INTEGER   Content:-&gt;5&lt;-
+[main::lexer|Parse::CLex] Token read (NEWLINE, \n):
+
+Record number: 1
+Type: NEWLINE   Content:-&gt;
+&lt;-
+[main::lexer|Parse::CLex] Token read (STRING, \"(?:[^\"]+|\"\")*\"): "This is a multiline
+string with an embedded "" in it"
+Record number: 3
+Type: STRING    Content:-&gt;"This is a multiline
+string with an embedded "" in it"&lt;-
+[main::lexer|Parse::CLex] Token read (NEWLINE, \n):
+
+Record number: 3
+Type: NEWLINE   Content:-&gt;
+&lt;-
+[main::lexer|Parse::CLex] Token read (ERROR, .*): this is an invalid string with a "" in it"
+can't analyze: "this is an invalid string with a "" in it"" at ctokenizer.pl line 17, &lt;DATA&gt; line 4.
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html3940"
+  HREF="node173.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3934"
+  HREF="node167.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3928"
+  HREF="node171.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3936"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3938"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3941"
+  HREF="node173.html">El Módulo Parse::Flex</A>
+<B>Sup:</B> <A NAME="tex2html3935"
+  HREF="node167.html">Construcción de Analizadores Léxicos</A>
+<B> Ant:</B> <A NAME="tex2html3929"
+  HREF="node171.html">Condiciones de arranque</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

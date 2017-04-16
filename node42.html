@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>An&#225;lisis Léxico desde una Cadena: yy_scan_string</TITLE>
+<META NAME="description" CONTENT="An&#225;lisis Léxico desde una Cadena: yy_scan_string">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node43.html">
+<LINK REL="previous" HREF="node41.html">
+<LINK REL="up" HREF="node19.html">
+<LINK REL="next" HREF="node43.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html1565"
+  HREF="node43.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1559"
+  HREF="node19.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1553"
+  HREF="node41.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1561"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html1563"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html1566"
+  HREF="node43.html">An&#225;lisis de la L&#237;nea</A>
+<B>Sup:</B> <A NAME="tex2html1560"
+  HREF="node19.html">Expresiones Regulares en Flex</A>
+<B> Ant:</B> <A NAME="tex2html1554"
+  HREF="node41.html">Manejo de directivas include</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION007220000000000000000">
+An&#225;lisis Léxico desde una Cadena: <TT>yy_scan_string</TT></A>
+</H1>
+El objetivo de este ejercicio es mostrar como realizar un
+an&#225;lisis l&#233;xico de los argumentos pasados en la l&#237;nea de
+comandos. Para ello <I>flex</I> provee la funci&#243;n <code>yy_scan_string(const char * str)</code>.
+Esta rutina crea un nuevo <I>buffer</I> de entrada y devuelve el correspondiente
+manejador <code>YY_BUFFER_STATE</code> asociado con la cadena
+<code>str</code>. Esta cadena debe estar terminada por un car&#225;cter <code>\0</code>. 
+Podemos liberar la memoria asociada con
+dicho <I>buffer</I> utilizando <code>yy_delete_buffer(BUFFER)</code>.
+La siguiente llamada a <code>yylex()</code> realizar&#225; el an&#225;lisis l&#233;xico
+de la cadena <code>str</code>.
+
+<P>
+<PRE>
+$ cat scan_str.l
+%%
+[0-9]+     printf("num\n");
+[a-zA-Z]+  printf("Id\n");
+%%
+main(int argc, char ** argv) {
+int i;
+ 
+  for(i=1;i&lt;argc;i++) {
+    yy_scan_string(argv[i]);
+    yylex();
+    yy_delete_buffer(YY_CURRENT_BUFFER);
+  }
+}
+ 
+int yywrap() { return 1; }
+$ flex scan_str.l ; gcc lex.yy.c ; a.out Hello World! 1234
+Id
+Id
+!num
+</PRE>
+Alternativamente, la función <code>main()</code> podría haber sido escrita asi:
+<PRE>
+main(int argc, char ** argv) {
+int i;
+YY_BUFFER_STATE p;
+
+  for(i=1;i&lt;argc;i++) {
+    p = yy_scan_string(argv[i]);
+    yylex();
+    yy_delete_buffer(p);
+  }
+}
+</PRE>
+La funci&#243;n <code>yy_scan_bytes(const char * bytes, int len)</code> hace lo mismo que 
+<code>yy_scan_string</code> pero en vez de una cadena terminada en
+el car&#225;cter nulo, se usa la longitud <code>len</code>.
+Ambas funciones <code>yy_scan_string(const char * str)</code> y
+<code>yy_scan_bytes(const char * bytes, int len)</code> hacen una copia
+de la cadena pasada como argumento.
+
+<P>
+Estas dos funciones crean una copia de la cadena original. Es mejor que sea asi, ya que <code>yylex()</code>
+modifica los contenidos del <I>buffer</I> de trabajo. Si queremos evitar la copia,
+podemos usar 
+
+<P>
+<code>yy_scan_buffer(char *base, yy_size_t size)</code>,
+
+<P>
+la cual trabaja directamente con el <I>buffer</I> que comienza en <code>base</code>, 
+de tamaño <code>size</code> <I>bytes</I>, los últimos dos de los cuáles deben
+ser <code>YY_END_OF_BUFFER_CHAR</code> (ASCII  NUL).   
+Estos dos últimos <I>bytes</I> no son ``escaneados''. El área de rastreo va
+desde <code>base[0]</code> a <code>base[size-2]</code>, inclusive.
+Si nos olvidamos de hacerlo de este modo y no establecemos los dos <I>bytes</I> finales,
+la función <code>yy_scan_buffer()</code> devuelve un puntero nulo
+y no llega a crear el nuevo buffer de entrada.
+El tipo  <code>yy_size_t</code> es un tipo entero.
+Como cabe esperar, <code>size</code> se refiere al tamaño del <I>buffer</I>.
+
+<P>
+<HR>
+<A NAME="tex2html1565"
+  HREF="node43.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1559"
+  HREF="node19.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1553"
+  HREF="node41.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1561"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html1563"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html1566"
+  HREF="node43.html">An&#225;lisis de la L&#237;nea</A>
+<B>Sup:</B> <A NAME="tex2html1560"
+  HREF="node19.html">Expresiones Regulares en Flex</A>
+<B> Ant:</B> <A NAME="tex2html1554"
+  HREF="node41.html">Manejo de directivas include</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

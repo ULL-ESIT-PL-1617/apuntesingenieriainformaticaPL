@@ -1,0 +1,771 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Construyendo un compilador para Parrot</TITLE>
+<META NAME="description" CONTENT="Construyendo un compilador para Parrot">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node188.html">
+<LINK REL="previous" HREF="node186.html">
+<LINK REL="up" HREF="node175.html">
+<LINK REL="next" HREF="node188.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html4162"
+  HREF="node188.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4156"
+  HREF="node175.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4150"
+  HREF="node186.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4158"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4160"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4163"
+  HREF="node188.html">Práctica</A>
+<B>Sup:</B> <A NAME="tex2html4157"
+  HREF="node175.html">RecDescent</A>
+<B> Ant:</B> <A NAME="tex2html4151"
+  HREF="node186.html">Práctica</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0011120000000000000000">
+Construyendo un compilador para Parrot</A>
+</H1>
+Las ideas y el código en esta sección están tomadas del artículo de Dan Sugalski <B>Building a
+parrot Compiler</B> que puede encontrarse en 
+<A NAME="tex2html240"
+  HREF="http://www.onlamp.com/lpt/a/4725">http://www.onlamp.com/lpt/a/4725</A>. 
+<PRE>
+ 1 #!/usr/local/bin/perl5.8.0 -w
+ 2 #
+ 3 # This program created 2004, Dan Sugalski. The code in this file is in
+ 4 # the public domain--go for it, good luck, don't forget to write.
+ 5 use strict;
+ 6 use Parse::RecDescent;
+ 7 use Data::Dumper;
+ 8 
+ 9 # Take the source and destination files as parameters
+10 my ($source, $destination) = @ARGV;
+11 
+12 my %global_vars;
+13 my $tempcount = 0;
+14 my (%temps) = (P =&gt; 0,
+15          I =&gt; 0,
+16          N =&gt; 0,
+17          S =&gt; 0
+18         );
+19 
+20 # AUTOACTION simplifies the creation of a parse tree by specifying an action 
+21 # for each production (ie action is { [@item] })
+22 $::RD_AUTOACTION = q{ [@item] };
+23 
+24 my $grammar = &lt;&lt;'EOG';
+25 field: /\b\w+\b/
+26 
+27 stringconstant: /'[^']*'/ |
+28     /"[^"]*"/ 
+29 #"
+30 float: /[+-]?(?=\d|\.\d)\d*(\.\d*)?([Ee]([+-]?\d+))?/
+31 
+32 constant: float | stringconstant
+33 
+34 addop: '+' | '-'
+35 mulop: '*' | '/'
+36 modop: '%'
+37 cmpop: '&lt;&gt;' | '&gt;='| '&lt;=' | '&lt;' | '&gt;' | '='
+38 logop: 'and' | 'or'
+39 
+40 parenexpr: '(' expr ')'
+41 
+42 simplevalue: parenexpr | constant | field 
+43 
+44 modval: &lt;leftop: simplevalue modop simplevalue&gt;
+45 
+46 mulval: &lt;leftop: modval mulop modval&gt;
+47 
+48 addval: &lt;leftop: mulval addop mulval&gt;
+49 
+50 cmpval: &lt;leftop: addval cmpop addval&gt;
+51 
+52 logval: &lt;leftop: cmpval logop cmpval&gt;
+53 
+54 expr: logval 
+55 
+56 declare: 'declare' field
+57 
+58 assign: field '=' expr
+59 
+60 print: 'print' expr
+61 
+62 statement: assign | print | declare
+63 EOG
+64 
+65 # ?? Makes emacs cperl syntax highlighting mode happier
+66 my $parser = Parse::RecDescent-&gt;new($grammar);
+</PRE>
+La gramatica categoriza las prioridades de cada una de las operaciones:
+categorías próximas al símbolo de arranque tienen menos prioridad
+que aquellas mas lejanas.
+<PRE>
+68  my @nodes;
+69  open SOURCE, "&lt;$source" or die "Can't open source program ($!)";
+70
+71  while (&lt;SOURCE&gt;) {
+72      # Strip the trailing newline and leading spaces. If the line is
+73      # blank, then skip it
+74      chomp;
+75      s/^\s+//;
+76      next unless $_;
+77
+78      # Parse the statement and throw an error if something went wrong
+79      my $node = $parser-&gt;statement($_);
+80      die "Bad statement" if !defined $node;
+81
+82      # put the parsed statement onto our list of nodes for later treatment
+83      push @nodes, $node;
+84  }
+85
+86  print Dumper(\@nodes);
+87  #exit;
+88
+89  # At this point we have parsed the program and have a tree of it
+90  # ready to process. So lets do so. First we set up our node handlers.
+91
+</PRE>
+El programa principal lee una línea del fuente y construye el
+árbol (línea 79). Los árboles se van guardando en la lista 
+<code>@nodes</code>. El paso siguiente es la generación de código:
+<PRE>
+# At this point we have parsed the program and have a tree of it
+# ready to process. So lets do so. First we set up our node handlers.
+
+my (%handlers) = (addval =&gt; \&amp;handle_generic_val,
+      assign =&gt; \&amp;handle_assign,
+      cmpval =&gt; \&amp;handle_generic_val,
+      constant =&gt; \&amp;delegate,
+      declare =&gt; \&amp;handle_declare,
+      expr =&gt; \&amp;delegate,
+      field =&gt; \&amp;handle_field,
+      float =&gt; \&amp;handle_float,
+      logval =&gt; \&amp;handle_generic_val,
+      modval =&gt; \&amp;handle_generic_val,
+      mulval =&gt; \&amp;handle_generic_val,
+      negfield =&gt; \&amp;handle_negfield,
+      parenexpr =&gt; \&amp;handle_paren_expr,
+      print =&gt; \&amp;handle_print,
+      simplevalue =&gt; \&amp;delegate,
+      statement =&gt; \&amp;delegate,
+      stringconstant =&gt; \&amp;handle_stringconstant,
+     );
+</PRE>
+El autor ha optado por escribir un manipulador para cada tipo
+de nodo. Es algo similar a lo que hicimos usando métodos 
+y herencia para el compilador de Tutu. Algunos nodos simplemente 
+delegan y otros recurren a un manipulador genérico.
+
+<P>
+La fase de generación de código comienza por la escritura
+de un preámbulo y termina con la escritura
+de un pie requeridos por el intérprete. 
+En medio se sitúa el código correspondiente a la traducción
+de los nodos provenientes de las diversas líneas del fuente:
+<PRE>
+# Open the output file and emit the preamble
+open PIR, "&gt;$destination" or die "Can't open destination ($!)";
+print PIR &lt;&lt;HEADER;
+.sub __MAIN prototyped
+  .param pmc argv
+HEADER
+
+foreach my $node (@nodes) {
+    my @lines = process_node(@$node);
+    print PIR join("", @lines);
+}
+
+print PIR &lt;&lt;FOOTER;
+  end
+.end
+FOOTER
+</PRE>
+
+<P>
+La subrutina <code>process_node</code> hace un recorrido
+de los árboles de análisis, llamando a los manipuladores de los 
+nodos que están siendo visitados.
+El elemento 0 del array <code>elems</code> identifica 
+la clase de nodo. Así la llamada 
+<code>$handlers{$elems[0]}-&gt;(@elems)</code>
+produce una llamada al manipulador correspondiente,
+pasándole como argumento los hijos
+del nodo.
+
+<P>
+<PRE>
+# The value of the last expression evaluated 
+sub last_expr_val {
+    return $::last_expr;
+}
+
+# Setting the last expression evaluated's value
+sub set_last_expr_val {
+    $::last_expr = $_[0];
+}
+
+sub process_node {
+  my (@elems) = @_;
+  return "\n" unless @elems;
+  return "\n" unless defined($elems[0]);
+  if (ref $elems[0]) {
+    return process_node(@{$elems[0]});
+  } elsif (exists($handlers{$elems[0]})) {
+    return $handlers{$elems[0]}-&gt;(@elems);
+  } else {
+    return "***", $elems[0], "***\n";
+  }
+}
+</PRE>
+
+<P>
+A continuación siguen los diversos manipuladores 
+para los diferentes tipos de nodo:
+
+<P>
+<PRE>
+sub handle_assign {
+    my ($nodetype, $destvar, undef, $expr) = @_;
+    my @nodes;
+    push @nodes, process_node(@$expr);
+    my $rhs = last_expr_val();
+    push @nodes, process_node(@$destvar);
+    my $lhs = last_expr_val();
+    push @nodes, "  $lhs = $rhs\n";
+    return @nodes;
+}
+
+sub handle_declare {
+    my ($nodetype, undef, $var) = @_;
+    my @lines;
+
+    my $varname = $var-&gt;[1];
+
+    # Does it exist?
+    if (defined $global_vars{$varname}) {
+      die "Multiple declaration of $varname";
+    }
+    $global_vars{$varname}++;
+    push @lines, "  .local pmc $varname\n";
+    push @lines, "  new $varname, .PerlInt\n";
+    return @lines;
+}
+
+sub handle_field {
+    my ($nodetype, $fieldname) = @_;
+    if (!exists $global_vars{$fieldname}) {
+      die "undeclared field $fieldname used";
+    }
+    set_last_expr_val($fieldname);
+    return;
+}
+
+sub handle_float {
+    my ($nodetype, $floatval) = @_;
+    set_last_expr_val($floatval);
+    return;
+}
+
+sub handle_generic_val {
+  my (undef, $terms) = @_;
+  my (@terms) = @$terms;
+
+  # Process the LHS
+  my $lhs = shift @terms;
+  my @tokens;
+  push @tokens, process_node(@$lhs);
+
+  my ($op, $rhs);
+
+  # Now keep processing the RHS as long as we have it
+  while (@terms) {
+      $op = shift @terms;
+      $rhs = shift @terms;
+      my $val = last_expr_val();
+      my $oper = $op-&gt;[1];
+      
+      push @tokens, process_node(@$rhs);
+      my $other_val = last_expr_val();
+
+      my $dest = $temps{P}++;
+
+      foreach ($oper) {
+        # Simple stuff -- addition, subtraction, multiplication,
+        # division, and modulus. Just a quick imcc transform
+        /(\+|\-|\*|\/|%)/ &amp;&amp; do { push @tokens, "new \$P$dest, .PerlInt\n";
+                push @tokens, "\$P$dest = $val $oper $other_val\n";
+                set_last_expr_val("\$P$dest");
+                last;
+              };
+        /and/ &amp;&amp; do { push @tokens, "new \$P$dest, .PerlInt\n";
+          push @tokens, "\$P$dest = $val &amp;&amp; $other_val\n";
+          set_last_expr_val("\$P$dest");
+          last;
+              };
+        /or/ &amp;&amp; do { push @tokens, "new \$P$dest, .PerlInt\n";
+               push @tokens, "\$P$dest = $val || $other_val\n";
+               set_last_expr_val("\$P$dest");
+               last;
+             };
+        /&lt;&gt;/ &amp;&amp; do { my $label = "eqcheck$tempcount";
+               $tempcount++;
+               push @tokens, "new \$P$dest, .Integer\n";
+               push @tokens, "\$P$dest = 1\n";
+               push @tokens, "ne $val, $other_val, $label\n";
+               push @tokens, "\$P$dest = 0\n";
+               push @tokens, "$label:\n";
+               set_last_expr_val("\$P$dest");
+               last;
+             }; 
+        /=/ &amp;&amp; do { my $label = "eqcheck$tempcount";
+          $tempcount++;
+          push @tokens, "new \$P$dest, .Integer\n";
+          push @tokens, "\$P$dest = 1\n";
+          push @tokens, "eq $val, $other_val, $label\n";
+          push @tokens, "\$P$dest = 0\n";
+          push @tokens, "$label:\n";
+          set_last_expr_val("\$P$dest");
+          last;
+        };  
+        /&lt;/ &amp;&amp; do { my $label = "eqcheck$tempcount";
+          $tempcount++;
+          push @tokens, "new \$P$dest, .Integer\n";
+          push @tokens, "\$P$dest = 1\n";
+          push @tokens, "lt $val, $other_val, $label\n";
+          push @tokens, "\$P$dest = 0\n";
+          push @tokens, "$label:\n";
+          set_last_expr_val("\$P$dest");
+          last;
+        };  
+        /&gt;/ &amp;&amp; do { my $label = "eqcheck$tempcount";
+          $tempcount++;
+          push @tokens, "new \$P$dest, .Integer\n";
+          push @tokens, "\$P$dest = 1\n";
+          push @tokens, "gt $val, $other_val, $label\n";
+          push @tokens, "\$P$dest = 0\n";
+          push @tokens, "$label:\n";
+          set_last_expr_val("\$P$dest");
+          last;
+        };  
+        die "Can't handle $oper";
+      }
+  }
+  return @tokens;
+}
+
+sub handle_paren_expr {
+    my ($nodetype, undef, $expr, undef) = @_;
+    return process_node(@$expr);
+}
+
+sub handle_stringconstant {
+    my ($nodetype, $stringval) = @_;
+    set_last_expr_val($stringval);
+    return;
+}
+
+sub handle_print {
+    my ($nodetype, undef, $expr) = @_;
+    my @nodes;
+    push @nodes, process_node(@$expr);
+    my $val = last_expr_val();
+    push @nodes, "  print $val\n";
+    return @nodes;
+}
+
+sub delegate {
+    my ($nodetype, $nodeval) = @_;
+    return process_node(@$nodeval);
+}
+</PRE>
+
+<P>
+El fichero fuente <code>foo.len</code>:
+
+<P>
+<PRE>
+declare foo
+declare bar
+
+foo = 15
+bar = (foo+8)*32-7
+
+print bar
+print "\n"
+print foo % 10
+print "\n"
+</PRE>
+
+<P>
+Compilamos:
+
+<P>
+<PRE>
+$ ./compiler.pl foo.len foo.pir
+</PRE>
+Esto produce por pantalla un volcado de los
+árboles de als diferentes sentencias.
+Asi para <code>declare foo</code>:
+<PRE>
+$VAR1 = [ [ 'statement', [ 'declare', 'declare', [ 'field', 'foo' ] ] ],
+</PRE>
+para la sentencia <code>foo = 15</code> el árbol es:
+
+<P>
+<PRE>
+[ 'statement',
+  [ 'assign',
+    [
+      'field',
+      'foo'
+    ],
+    '=',
+    [ 'expr',
+      [ 'logval',
+        [
+          [ 'cmpval',
+            [
+              [ 'addval',
+                [
+                  [ 'mulval',
+                    [
+                      [ 'modval',
+                        [
+                          [ 'simplevalue',
+                            [ 'constant',
+                              [
+                                'float',
+                                '15'
+                              ]
+] ] ] ] ] ] ] ] ] ] ] ] ] ] ],
+</PRE>
+Este es el árbol de la sentencia <code>print bar</code>:
+
+<P>
+<PRE>
+[ 'statement',
+  [ 'print',
+    'print',
+    [ 'expr',
+      [ 'logval',
+        [
+          [ 'cmpval',
+            [
+              [ 'addval',
+                [
+                  [ 'mulval',
+                    [
+                      [ 'modval',
+                        [
+                          [ 'simplevalue',
+                            [
+                              'field',
+                              'bar'
+] ] ] ] ] ] ] ] ] ] ] ] ] ] ],
+</PRE>
+Además de los árboles presentados en la
+salida estándar, se produce como salida el fichero <code>foo.pir</code>
+conteniendo el código parrot intermedio:
+<PRE>
+$ cat foo.pir
+.sub __MAIN prototyped
+  .param pmc argv
+  .local pmc foo
+  new foo, .PerlInt
+  .local pmc bar
+  new bar, .PerlInt
+  foo = 15
+new $P0, .PerlInt
+$P0 = foo + 8
+new $P1, .PerlInt
+$P1 = $P0 * 32
+new $P2, .PerlInt
+$P2 = $P1 - 7
+  bar = $P2
+  print bar
+  print "\n"
+new $P3, .PerlInt
+$P3 = foo % 10
+  print $P3
+  print "\n"
+  end
+.end
+</PRE>
+Antes de ejecutarlo veamos las opciones de <code>parrot</code>:
+<PRE>
+$ parrot -h
+parrot [Options] &lt;file&gt;
+  Options:
+    -h --help
+    -V --version
+   &lt;Run core options&gt;
+    -b --bounds-checks|--slow-core
+    -C --CGP-core
+    -f --fast-core
+    -g --computed-goto-core
+    -j --jit-core
+    -p --profile
+    -P --predereferenced-core
+    -S --switched-core
+    -t --trace
+   &lt;VM options&gt;
+    -d --debug[=HEXFLAGS]
+       --help-debug
+    -w --warnings
+    -G --no-gc
+       --gc-debug
+       --leak-test|--destroy-at-end
+    -. --wait    Read a keystroke before starting
+   &lt;Compiler options&gt;
+    -v --verbose
+    -E --pre-process-only
+    -o --output=FILE
+       --output-pbc
+    -O --optimize[=LEVEL]
+    -a --pasm
+    -c --pbc
+    -r --run-pbc
+    -y --yydebug
+   &lt;Language options&gt;
+       --python
+see docs/running.pod for more
+</PRE>
+Con la opción <code>-o</code> podemos producir un fichero en formato
+<code>pbc</code>:
+<PRE>
+$ parrot -o foo.pbc foo.pir
+</PRE>
+que podemos ejecutar con el depurador <code>pdb</code> 
+(para construirlo en el momento de la instalación de Parrot 
+deberás hacer <code>make pdb</code>).
+<PRE>
+$ pdb foo.pbc
+Parrot Debugger 0.0.2
+
+(pdb) h
+List of commands:
+    disassemble -- disassemble the bytecode
+    load -- load a source code file
+    list (l) -- list the source code file
+    run (r) -- run the program
+    break (b) -- add a breakpoint
+    watch (w) -- add a watchpoint
+    delete (d) -- delete a breakpoint
+    disable -- disable a breakpoint
+    enable  -- reenable a disabled breakpoint
+    continue (c) -- continue the program execution
+    next (n) -- run the next instruction
+    eval (e) -- run an instruction
+    trace (t) -- trace the next instruction
+    print (p) -- print the interpreter registers
+    stack (s) -- examine the stack
+    info -- print interpreter information
+    quit (q) -- exit the debugger
+    help (h) -- print this help
+
+Type "help" followed by a command name for full documentation.
+</PRE>
+Veamos el programa traducido:
+<PRE>
+(pdb) list 1 17
+1  new_p_ic P16,32
+2  new_p_ic P30,32
+3  set_p_ic P16,15
+4  new_p_ic P29,32
+5  add_p_p_ic P29,P16,8
+6  new_p_ic P28,32
+7  mul_p_p_ic P28,P29,32
+8  new_p_ic P29,32
+9  sub_p_p_ic P29,P28,7
+10  set_p_p P30,P29
+11  print_p P30
+12  print_sc "\n"
+13  new_p_ic P30,32
+14  mod_p_p_ic P30,P16,10
+15  print_p P30
+16  print_sc "\n"
+17  end
+</PRE>
+Procedemos a ejecutarlo:
+<PRE>
+(pdb) n
+2  new_p_ic P30,32
+(pdb)
+3  set_p_ic P16,15
+(pdb)
+4  new_p_ic P29,32
+(pdb)
+5  add_p_p_ic P29,P16,8
+(pdb) p P16
+P16 = [PerlInt]
+Stringified: 15
+5  add_p_p_ic P29,P16,8
+(pdb) c
+729
+5
+Program exited.
+(pdb) quit
+$
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html4162"
+  HREF="node188.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4156"
+  HREF="node175.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4150"
+  HREF="node186.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4158"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4160"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4163"
+  HREF="node188.html">Práctica</A>
+<B>Sup:</B> <A NAME="tex2html4157"
+  HREF="node175.html">RecDescent</A>
+<B> Ant:</B> <A NAME="tex2html4151"
+  HREF="node186.html">Práctica</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

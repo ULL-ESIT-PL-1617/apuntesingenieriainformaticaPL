@@ -1,0 +1,688 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Construyendo el AST con Expresiones Regulares 5.10</TITLE>
+<META NAME="description" CONTENT="Construyendo el AST con Expresiones Regulares 5.10">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="previous" HREF="node82.html">
+<LINK REL="up" HREF="node81.html">
+<LINK REL="next" HREF="node84.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2457"
+  HREF="node84.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2451"
+  HREF="node81.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2447"
+  HREF="node82.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2453"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2455"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2458"
+  HREF="node84.html">Práctica: Traducción de invitation</A>
+<B>Sup:</B> <A NAME="tex2html2452"
+  HREF="node81.html">Analisis Sintáctico con Expresiones</A>
+<B> Ant:</B> <A NAME="tex2html2448"
+  HREF="node82.html">Introducción al Anaĺisis Sintáctico</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><A NAME="tex2html2459"
+  HREF="node83.html#SECTION00892010000000000000">Programa Principal: usando la pila de atributos</A>
+<LI><A NAME="tex2html2460"
+  HREF="node83.html#SECTION00892020000000000000">Las Clases representando a los AST</A>
+<LI><A NAME="tex2html2461"
+  HREF="node83.html#SECTION00892030000000000000">Accediendo a los paréntesis lejanos: El módulo <TT>Regexp::Paren</TT></A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A NAME="SECTION00892000000000000000">
+Construyendo el AST con Expresiones Regulares 5.10</A>
+</H2>
+
+<P>
+Construiremos en esta sección un traductor de infijo a postfijo
+utilizando una aproximación general: construiremos una representación
+del Abstract Syntax Tree o AST (véase la sección 
+<A HREF="node147.html#section:aat">4.9</A>
+Árbol de Análisis Abstracto para una definición detallada de que es un árbol sintáctico).
+
+<P>
+Como la aplicación es un poco mas compleja la hemos dividido en varios ficheros.
+Esta es la estructura:
+
+<P>
+<PRE>
+.
+|-- ASTandtrans3.pl    # programa principal
+|-- BinaryOp.pm        # clases para el manejo de los nodos del AST
+|-- testreegxpparen.pl # prueba para Regexp::Paren
+`-- Regexp
+    `-- Paren.pm       # módulo de extensión de $^N
+</PRE>
+
+<P>
+La salida del programa puede ser dividida en tres partes.
+La primera muestra una antiderivación a derechas inversa:
+<PRE>
+pl@nereida:~/Lperltesting$ ./ASTandtrans3.pl
+2*(3-4)
+factor -&gt; NUM(2)
+factor -&gt; NUM(3)
+rt -&gt; empty
+term-&gt; factor rt
+factor -&gt; NUM(4)
+rt -&gt; empty
+term-&gt; factor rt
+re -&gt; empty
+re -&gt; [+-] term re
+exp -&gt; term re
+factor -&gt; ( exp )
+rt -&gt; empty
+rt -&gt; [*/] factor rt
+term-&gt; factor rt
+re -&gt; empty
+exp -&gt; term re
+matches: 2*(3-4)
+</PRE>
+Que leída de abajo a arriba nos da una derivación a derechas de la cadena <code>2*(3-4)</code>:
+<PRE>
+exp =&gt; term re =&gt; term =&gt; factor rt =&gt; 
+factor [*/](*) factor rt =&gt; factor [*/](*) factor =&gt; 
+factor [*/](*) ( exp ) =&gt; factor [*/](*) ( term re ) =&gt;  
+factor [*/](*) ( term [+-](-) term re ) =&gt;  
+factor [*/](*) ( term [+-](-) term ) =&gt; 
+factor [*/](*) ( term [+-](-) factor rt ) =&gt;
+factor [*/](*) ( term [+-](-) factor ) =&gt; 
+factor [*/](*) ( term [+-](-) NUM(4) ) =&gt;
+factor [*/](*) ( factor rt [+-](-) NUM(4) ) =&gt; 
+factor [*/](*) ( factor [+-](-) NUM(4) ) =&gt;
+factor [*/](*) ( NUM(3) [+-](-) NUM(4) )  =&gt; 
+NUM(2) [*/](*) ( NUM(3) [+-](-) NUM(4) )
+</PRE>
+La segunda parte nos muestra la representación del AST para la entrada dada (<code>2*(3-4)</code>):
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142><PRE>
+AST:
+$VAR1 = bless( {
+  'left' =&gt; bless( { 'val' =&gt; '2' }, 'NUM' ),
+  'right' =&gt; bless( {
+    'left' =&gt; bless( { 'val' =&gt; '3' }, 'NUM' ),
+    'right' =&gt; bless( { 'val' =&gt; '4' }, 'NUM' ),
+    'op' =&gt; '-'
+  }, 'ADD' ),
+  'op' =&gt; '*'
+}, 'MULT' );
+</PRE></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=113>
+<img src="ast234.png" alt="MUL(2,ADD(3,4))" height=200></TD>
+</TR>
+</TABLE>
+
+<P>
+La última parte de la salida nos muestra la traducción a postfijo
+de la expresión en infijo
+suministrada en la entrada (<code>2*(3-4)</code>):
+<PRE>
+2 3 4 - *
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00892010000000000000">
+Programa Principal: usando la pila de atributos</A>
+</H4>
+  
+
+<P>
+La gramática original que consideramos
+es recursiva a izquierdas:
+<PRE>
+ exp    -&gt;   exp [-+] term
+           | term
+ term   -&gt;   term [*/] factor
+           | factor
+ factor -&gt;  \( exp \)
+           | \d+
+</PRE>
+aplicando las técnicas explicadas en
+<A HREF="node142.html#subsection:eliminarecesquem">4.8.2</A>
+es posible transformar la gramática 
+en una no recursiva por la izquierda:
+<PRE>
+ exp       -&gt;   term restoexp
+ restoexp  -&gt;   [-+] term restoexp
+              | # vacío
+ term      -&gt;   term restoterm
+ restoterm -&gt;   [*/] factor restoterm
+              | # vacío
+ factor    -&gt;   \( exp \)
+              | \d+
+</PRE>
+
+<P>
+Ahora bien, no basta con transformar la gramática en una equivalente.
+Lo que tenemos como punto de partida no es una gramática sino un <A NAME="6574"></A><B>esquema de traducción</B>
+(véase la sección 
+<A HREF="node139.html#section:esquemas">4.7</A>)
+que construye el AST asociado con la expresión.
+Nuestro esquema de traducción conceptual es algo así:
+<PRE>
+ exp    -&gt;   exp ([-+]) term       { ADD-&gt;new(left =&gt; $exp, right =&gt; $term, op =&gt; $1) }
+           | term                  { $term }
+ term   -&gt;   term ([*/]) factor    { MULT-&gt;new(left =&gt; $exp, right =&gt; $term, op =&gt; $1) } 
+           | factor                { $factor }
+ factor -&gt;  \( exp \)              { $exp }
+           | (\d+)                 { NUM-&gt;new(val =&gt; $1) }
+</PRE>
+
+<P>
+Lo que queremos conseguir un conjunto de acciones semánticas
+asociadas para gramática no recursiva que sea equivalente 
+a este.
+
+<P>
+Este es el programa resultante una vez aplicadas las transformaciones.
+La implementación de la asociación entre símbolos y atributos la realizamos
+manualmente mediante una pila de atributos:
+<PRE>
+pl@nereida:~/Lperltesting$ cat -n ./ASTandtrans3.pl
+ 1  #!/usr/local/lib/perl/5.10.1/bin//perl5.10.1
+ 2  use v5.10;
+ 3  use strict;
+ 4  use Regexp::Paren qw{g};
+ 5  use BinaryOp;
+ 6
+ 7  use Data::Dumper;
+ 8  $Data::Dumper::Indent = 1;
+ 9
+10  # Builds AST
+11  my @stack;
+12  my $regexp = qr{
+13      (?&amp;exp)
+14
+15      (?(DEFINE)
+16          (?&lt;exp&gt;    (?&amp;term) (?&amp;re)
+17                       (?{ say "exp -&gt; term re" })
+18          )
+19
+20          (?&lt;re&gt;     \s* ([+-]) (?&amp;term)
+21                        (?{  # intermediate action
+22                            local our ($ch1, $term) = splice @stack, -2;
+23
+24                            push @stack, ADD-&gt;new( {left =&gt; $ch1, right =&gt; $term, op =&gt; g(1)});
+25                        })
+26                     (?&amp;re)
+27                       (?{ say "re -&gt; [+-] term re" })
+28                   | # empty
+29                       (?{ say "re -&gt; empty" })
+30          )
+31
+32          (?&lt;term&gt;   ((?&amp;factor)) (?&amp;rt)
+33                        (?{
+34                            say "term-&gt; factor rt";
+35                        })
+36          )
+37
+38          (?&lt;rt&gt;     \s*([*/]) (?&amp;factor)
+39                         (?{  # intermediate action
+40                              local our ($ch1, $ch2) = splice @stack, -2;
+41
+42                              push @stack, MULT-&gt;new({left =&gt; $ch1, right =&gt; $ch2, op =&gt; g(1)});
+43                          })
+44                     (?&amp;rt) # end of &lt;rt&gt; definition
+45                         (?{
+46                              say "rt -&gt; [*/] factor rt"
+47                          })
+48                   | # empty
+49                         (?{ say "rt -&gt; empty" })
+50          )
+51
+52          (?&lt;factor&gt; \s* (\d+)
+53                          (?{
+54                             say "factor -&gt; NUM($^N)";
+55                             push @stack, bless { 'val' =&gt; g(1) }, 'NUM';
+56                          })
+57                     | \s* \( (?&amp;exp) \s* \)
+58                          (?{ say "factor -&gt; ( exp )" })
+59          )
+60      )
+61  }xms;
+62
+63  my $input = &lt;&gt;;
+64  chomp($input);
+65  if ($input =~ $regexp) {
+66    say "matches: $&amp;";
+67    my $ast = pop @stack;
+68    say "AST:\n", Dumper $ast;
+69
+70    say $ast-&gt;translate;
+71  }
+72  else {
+73    say "does not match";
+74  }
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00892020000000000000">
+Las Clases representando a los AST</A>
+</H4>
+  
+
+<P>
+Cada nodo del AST es un objeto. La clase del nodo nos dice que tipo de nodo es.
+Así los nodos de la clase <code>MULT</code> agrupan a los nódos de multiplicación y división.
+Los nodos de la clase <code>ADD</code> agrupan a los nódos de suma y resta.
+El procedimiento general es asociar un método <code>translate</code> con cada clase de nodo.
+De esta forma se logra el polimorfismo necesario: cada clase de nodo sabe como traducirse
+y el método <code>translate</code> de cada clase puede escribirse como
+
+<UL>
+<LI>Obtener los resultados de llamar a <code>$child-&gt;translate</code> para cada uno
+de los nodos hijos <code>$child</code>. Por ejemplo, si el nodo fuera un nodo <code>IF_ELSE</code>
+de un hipotético lenguaje de programación, se llamaría a los métodos <code>translate</code> sobre sus tres hijos
+<code>boolexpr</code>, <code>ifstatement</code> y <code>elsestatement</code>.
+</LI>
+<LI>Combinar los resultados para producir la traducción adecuada del nodo actual.
+</LI>
+</UL>
+Es esta combinación la que mas puede cambiar según el tipo de nodo. Así, en el caso de 
+el nodo <code>IF_ELSE</code> el seudocódigo para la traducción sería algo parecido a esto:
+
+<P>
+<PRE>
+my $self = shift;
+my $etiqueta1 = generar_nueva_etiqueta;
+my $etiqueta2 = generar_nueva_etiqueta;
+
+my $boolexpr      = $self-&gt;boolexpr-&gt;translate;
+my $ifstatement   = $self-&gt;ifstatement-&gt;translate,  
+my $elsestatement = $self-&gt;elsestatement-&gt;translate, 
+return &lt;&lt; "ENDTRANS";
+    $boolexpr
+    JUMPZERO $etiqueta1:
+    $ifstatement
+    JUMP     $etiqueta2:
+  $etiqueta1:
+    $elsestatement
+  $etiqueta2:
+ENDTRANS
+</PRE>
+
+<P>
+Siguiendo estas observaciones el código de <code>BinaryOp.pm</code> queda así:
+<PRE>
+pl@nereida:~/Lperltesting$ cat -n BinaryOp.pm
+ 1  package BinaryOp;
+ 2  use strict;
+ 3  use base qw(Class::Accessor);
+ 4
+ 5  BinaryOp-&gt;mk_accessors(qw{left right op});
+ 6
+ 7  sub translate {
+ 8    my $self = shift;
+ 9
+10    return $self-&gt;left-&gt;translate." ".$self-&gt;right-&gt;translate." ".$self-&gt;op;
+11  }
+12
+13  package ADD;
+14  use base qw{BinaryOp};
+15
+16  package MULT;
+17  use base qw{BinaryOp};
+18
+19  package NUM;
+20
+21  sub translate {
+22    my $self = shift;
+23
+24    return $self-&gt;{val};
+25  }
+26
+27  1;
+</PRE>
+
+<P>
+Véase también:
+
+<UL>
+<LI><A NAME="tex2html167"
+  HREF="http://search.cpan.org/perldoc?Class::Accessor">Class::Accessor</A>
+</LI>
+</UL>
+
+<P>
+
+<H4><A NAME="SECTION00892030000000000000">
+Accediendo a los paréntesis lejanos: El módulo <TT>Regexp::Paren</TT></A>
+</H4>
+  
+
+<P>
+En esta solución utilizamos 
+las variables <code>@-</code> y <code>@+</code> para construir una función que nos 
+permite acceder a lo que casó con 
+los últimos paréntesis con memoria:
+
+<P>
+<BLOCKQUOTE><I>Since Perl 5.6.1 the special variables <code>@-</code> and <code>@+</code> can functionally replace
+<code>$`</code>, <code>$&amp;</code> and <code>$'</code>. These arrays contain pointers to the beginning and end of
+each match (see <A NAME="tex2html168"
+  HREF="http://search.cpan.org/perldoc/?perlvar"><TT>perlvar</TT></A>
+for the full story), so they give you essentially
+the same information, but without the risk of excessive string copying.
+</I></BLOCKQUOTE>
+
+<P>
+Véanse los párrafos en las páginas
+<A HREF="node53.html#parrafo:fincas"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>, <A HREF="node53.html#parrafo:iniciocas"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>) y
+<A HREF="node53.html#parrafo:lastpar"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> para mas información sobre <code>@-</code> y <code>@+</code>.
+
+<P>
+<code>g(1)</code> nos retorna lo que casó con el último paréntesis,
+<code>g(2)</code> lo que casó con el penúltimo, etc.
+
+<P>
+<PRE>
+pl@nereida:~/Lperltesting$ cat -n Regexp/Paren.pm
+ 1  package Regexp::Paren;
+ 2  use strict;
+ 3
+ 4  use base qw{Exporter};
+ 5
+ 6  our @EXPORT_OK = qw{g};
+ 7
+ 8  sub g {
+ 9    die "Error in 'Regexp::Paren::g'. Not used inside (?{ code }) construct\n" unless defined($_);
+10    my $ofs = - shift;
+11
+12    # Number of parenthesis that matched
+13    my $np = @-;
+14    die "Error. Illegal 'Regexp::Paren::g' ref inside (?{ code }) construct\n" unless ($np &gt; - $ofs &amp;&amp; $ofs &lt; 0);
+15    # $_ contains the string being matched
+16    substr($_, $-[$ofs], $+[$np+$ofs] - $-[$ofs])
+17  }
+18
+19  1;
+20
+21  =head1 NAME
+22
+23  Regexp::Paren - Extends $^N inside (?{ ... }) constructs
+24
+25  =head1 SYNOPSIS
+26
+27    use Regexp::Paren qw{g};
+28
+29    'abcde' =~ qr{(.)(.)(.)
+30                         (?{ print g(1)." ".g(2)." ".g(3)."\n" })                   # c b a
+31                 (.)     (?{ print g(1)." ".g(2)." ".g(3)." ".g(4)."\n" })          # d c b a
+32                 (.)     (?{ print g(1)." ".g(2)." ".g(3)." ".g(4)." ".g(5)."\n" }) # e d c b a
+33                }x;
+34
+35    print g(1)." ".g(2)." ".g(3)." ".g(4)." ".g(5)."\n"; # error!
+36
+37  =head1 DESCRIPTION
+38
+39  Inside a C&lt;(?{ ... })&gt; construct, C&lt;g(1)&gt; refers to what matched the last parenthesis
+40  (like C&lt;$^N&gt;), C&lt;g(2)&gt; refers to the string that matched with the parenthesis before
+41  the last, C&lt;g(3)&gt; refers to the string that matched with the parenthesis at distance 3,
+42  etc.
+43
+44  =head1 SEE ALSO
+45
+46  =over 2
+47
+48  =item * L&lt;perlre&gt;
+49
+50  =item * L&lt;perlretut&gt;
+51
+52  =item * PerlMonks node I&lt;Strange behavior o&gt; C&lt;@-&gt; I&lt;and&gt; C&lt;@+&gt; I&lt;in perl5.10 regexps&gt; L&lt;http://www.perlmonks.org/?node_id=794736&gt;
+53
+54  =item * PerlMonks node I&lt;Backreference variables in code embedded inside Perl 5.10 regexps&gt; L&lt;http://www.perlmonks.org/?node_id=794424&gt;
+55
+56  =back
+57
+58  =head1 AUTHOR
+59
+60  Casiano Rodriguez-Leon (casiano@ull.es)
+61
+62  =head1 ACKNOWLEDGMENTS
+63
+64  This work has been supported by CEE (FEDER) and the Spanish Ministry of
+65  I&lt;Educacion y Ciencia&gt; through I&lt;Plan Nacional I+D+I&gt; number TIN2005-08818-C04-04
+66  (ULL::OPLINK project L&lt;http://www.oplink.ull.es/&gt;).
+67  Support from Gobierno de Canarias was through GC02210601
+68  (I&lt;Grupos Consolidados&gt;).
+69  The University of La Laguna has also supported my work in many ways
+70  and for many years.
+71
+72  =head1 LICENCE AND COPYRIGHT
+73
+74  Copyright (c) 2009- Casiano Rodriguez-Leon (casiano@ull.es). All rights reserved.
+75
+76  These modules are free software; you can redistribute it and/or
+77  modify it under the same terms as Perl itself. See L&lt;perlartistic&gt;.
+78
+79  This program is distributed in the hope that it will be useful,
+80  but WITHOUT ANY WARRANTY; without even the implied warranty of
+81  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+</PRE>
+
+<P>
+Al ejecutar <code>perldoc Regexp::Paren</code> podemos ver la documentación
+incluida (véase la documentación en <A NAME="tex2html169"
+  HREF="http://search.cpan.org/perldoc/?perlpod"><TT>perlpod</TT></A>
+y <A NAME="tex2html170"
+  HREF="http://search.cpan.org/perldoc/?perlpodspec"><TT>perlpodspec</TT></A>
+así como la sección <A NAME="tex2html171"
+  HREF="http://www.google.es/search?q=site:nereida.deioc.ull.es+La Documentación en Perl&amp;ie=UTF-8&amp;hl=es">La Documentación en Perl</A>
+para mas detalles):
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=624><PRE>
+NAME
+    Regexp::Paren - Extends $^N inside (?{ ... }) constructs
+
+SYNOPSIS
+      use Regexp::Paren qw{g};
+
+      'abcde' =~ qr{(.)(.)(.)
+                           (?{ print g(1)." ".g(2)." ".g(3)."\n" })                   # c b a
+                   (.)     (?{ print g(1)." ".g(2)." ".g(3)." ".g(4)."\n" })          # d c b a
+                   (.)     (?{ print g(1)." ".g(2)." ".g(3)." ".g(4)." ".g(5)."\n" }) # e d c b a
+                  }x;
+
+      print g(1)." ".g(2)." ".g(3)." ".g(4)." ".g(5)."\n"; # error!
+
+DESCRIPTION
+    Inside a "(?{ ... })" construct, g(1) refers to what matched the last
+    parenthesis (like $^N), g(2) refers to the string that matched with the
+    parenthesis before the last, g(3) refers to the string that matched with
+    the parenthesis at distance 3, etc.
+
+SEE ALSO
+    * perlre
+    * perlretut
+    * PerlMonks node *Strange behavior o* "@-" *and* "@+" *in perl5.10
+      regexps* &lt;http://www.perlmonks.org/?node_id=794736&gt;
+    * PerlMonks node *Backreference variables in code embedded inside Perl
+      5.10 regexps* &lt;http://www.perlmonks.org/?node_id=794424&gt;
+
+AUTHOR
+    Casiano Rodriguez-Leon (casiano@ull.es)
+
+ACKNOWLEDGMENTS
+    This work has been supported by CEE (FEDER) and the Spanish Ministry of
+    *Educacion y Ciencia* through *Plan Nacional I+D+I* number
+    TIN2005-08818-C04-04 (ULL::OPLINK project &lt;http://www.oplink.ull.es/&gt;).
+    Support from Gobierno de Canarias was through GC02210601 (*Grupos
+    Consolidados*). The University of La Laguna has also supported my work
+    in many ways and for many years.
+
+LICENCE AND COPYRIGHT
+    Copyright (c) 2009- Casiano Rodriguez-Leon (casiano@ull.es). All rights
+</PRE></TD>
+</TR>
+</TABLE>
+
+<P>
+<HR>
+<A NAME="tex2html2457"
+  HREF="node84.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2451"
+  HREF="node81.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2447"
+  HREF="node82.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2453"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2455"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2458"
+  HREF="node84.html">Práctica: Traducción de invitation</A>
+<B>Sup:</B> <A NAME="tex2html2452"
+  HREF="node81.html">Analisis Sintáctico con Expresiones</A>
+<B> Ant:</B> <A NAME="tex2html2448"
+  HREF="node82.html">Introducción al Anaĺisis Sintáctico</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>AAA: Otros tipos de nodos</TITLE>
+<META NAME="description" CONTENT="AAA: Otros tipos de nodos">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node151.html">
+<LINK REL="previous" HREF="node149.html">
+<LINK REL="up" HREF="node147.html">
+<LINK REL="next" HREF="node151.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html3635"
+  HREF="node151.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3629"
+  HREF="node147.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3623"
+  HREF="node149.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3631"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3633"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3636"
+  HREF="node151.html">Declaraciones</A>
+<B>Sup:</B> <A NAME="tex2html3630"
+  HREF="node147.html">Árbol de Análisis Abstracto</A>
+<B> Ant:</B> <A NAME="tex2html3624"
+  HREF="node149.html">Realización del AAA para</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00993000000000000000">
+AAA: Otros tipos de nodos</A>
+</H2>
+Hemos optado por que las rutinas asociadas a variables sintácticas que 
+describen listas de subcategorías devuelvan 
+las correspondientes listas de nodos. Teníamos tres variables tipo lista.
+Las reglas para las listas eran:
+
+<P>
+<BR>
+<BR>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">Gramática de los Árboles de Tutu</TD>
+<TD ALIGN="LEFT">Gramática del lenguaje Tutu</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="43" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img248.png"
+ ALT="$ decls$">
+ <!-- MATH
+ $\rightarrow list\ decl$
+ -->
+<IMG
+ WIDTH="89" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img259.png"
+ ALT="$ \rightarrow list decl$">
+</TD>
+<TD ALIGN="LEFT">declarations <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ declaration  ';'  declarations    <IMG
+ WIDTH="10" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ \vert$">
+ declaration ';'</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="27" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img250.png"
+ ALT="$ sts$">
+ <!-- MATH
+ $\rightarrow list\ st$
+ -->
+<IMG
+ WIDTH="73" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img260.png"
+ ALT="$ \rightarrow list st$">
+</TD>
+<TD ALIGN="LEFT">statements   <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ statement  ';'  statements        <IMG
+ WIDTH="10" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ \vert$">
+ statement</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="46" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img253.png"
+ ALT="$ idlist$">
+ <!-- MATH
+ $\rightarrow list\ SIMPLEID$
+ -->
+<IMG
+ WIDTH="162" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img261.png"
+ ALT="$ \rightarrow list SIMPLEID$">
+</TD>
+<TD ALIGN="LEFT">idlist       <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ ID ',' idlist <IMG
+ WIDTH="10" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ \vert$">
+ ID</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+En este caso las subrutinas asociadas no devuelven
+objetos sino listas de objetos. 
+Esto da lugar a una compactación del AAA.
+Veánse los códigos de <code>statements</code> y <code>idlist</code>:
+<PRE>
+sub statements() {
+  my @s;
+
+  @s = (statement());
+  if ($lookahead eq ';') {
+    match(';');
+    push @s, statements();
+  }
+  return @s;
+}
+
+sub idlist() {
+  my @id;
+
+  if ($lookahead eq 'ID') {
+    @id = ($value); # no es un objeto 
+    match('ID');
+    if ($lookahead eq ',') {
+      match(',');
+      push @id, idlist();
+    }
+  }
+  else {
+    Error::fatal('Se esperaba un identificador');
+    @id = ('ERROR');
+  }
+  return @id;
+}
+</PRE>
+
+<P>
+<HR>
+<A NAME="tex2html3635"
+  HREF="node151.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html3629"
+  HREF="node147.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html3623"
+  HREF="node149.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html3631"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html3633"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html3636"
+  HREF="node151.html">Declaraciones</A>
+<B>Sup:</B> <A NAME="tex2html3630"
+  HREF="node147.html">Árbol de Análisis Abstracto</A>
+<B> Ant:</B> <A NAME="tex2html3624"
+  HREF="node149.html">Realización del AAA para</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

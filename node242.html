@@ -1,0 +1,520 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Podando el Arbol</TITLE>
+<META NAME="description" CONTENT="Podando el Arbol">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node243.html">
+<LINK REL="previous" HREF="node241.html">
+<LINK REL="up" HREF="node229.html">
+<LINK REL="next" HREF="node243.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html5041"
+  HREF="node243.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5035"
+  HREF="node229.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5029"
+  HREF="node241.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5037"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5039"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5042"
+  HREF="node243.html">Nombres para los Atributos</A>
+<B>Sup:</B> <A NAME="tex2html5036"
+  HREF="node229.html">Análisis Sintáctico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5030"
+  HREF="node241.html">Práctica: Análisis Sintáctico</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0013130000000000000000"></A>
+<A NAME="section:podandoelarbol"></A>
+<BR>
+Podando el Arbol
+</H1>
+
+<P>
+
+<H4><A NAME="SECTION0013130010000000000000">
+Acciones Explícitas Bajo la Directiva % tree</A>
+</H4>
+  
+
+<P>
+Como se ha mencionado anteriormente, 
+la directiva <code>%tree</code> es 
+es equivalente a escribir:
+
+<P>
+<PRE>
+         %default action { goto &amp;Parse::Eyapp::Driver::YYBuildAST }
+</PRE>
+
+<P>
+Donde el método <code>Parse::Eyapp::Driver::YYBuildAST</code> se encarga de
+retornar la referencia al objeto nodo recién construído.
+
+<P>
+La ubicación de acciones semánticas explícitas para una regla 
+altera la forma del árbol de análisis. 
+<B>El método <TT>Parse::Eyapp::Driver::YYBuildAST</TT> no inserta 
+en la lista de hijos de un nodo el atributo asociado
+con dicho símbolo a menos que este sea una referencia.
+Esto conlleva que una forma de eliminar un subárbol
+es estableciendo una acción semántica explícita que
+no retorne un nodo.</B>
+
+<P>
+
+<H4><A NAME="SECTION0013130020000000000000">
+Las Declaraciones no se Incluyen en el Arbol de Análisis</A>
+</H4>
+  
+
+<P>
+El siguiente ejemplo ilustra como utilizar esta propiedad
+en el análisis de un lenguaje mínimo en el que los programas
+(<code>P</code>) son secuencias de 
+declaraciones (<code>DS</code>) seguidas de sentencias (<code>SS</code>). 
+
+<P>
+En un compilador típico,
+las declaraciones influyen en el análisis semántico 
+(por ejemplo, enviando mensajes de error si el objeto ha sido repetidamente 
+declarado o si es usado sin haber sido previamente declarado, etc.)
+y la información proveída por las mismas 
+suele guardarse en una tabla de símbolos (declarada en la línea 5 
+en el siguiente código) para su utilización
+durante las fases posteriores.
+
+<P>
+<PRE>
+pl@nereida:~/LEyapp/examples$ sed -ne '1,58p' RetUndef.eyp | cat -n
+ 1  /* File RetUndef.eyp */
+ 2
+ 3  %tree
+ 4  %{
+ 5    use Data::Dumper;
+ 6    my %s; # symbol table
+ 7  %}
+ 8
+ 9  %%
+10  P:
+11    %name PROG
+12      $DS $SS
+13        {
+14          print Dumper($DS);
+15          $SS-&gt;{symboltable} = \%s;
+16          return $SS;
+17        }
+18  ;
+19
+20  SS:
+21     %name ST
+22       S
+23   | %name STS
+24       SS S
+25  ;
+26
+27  DS:
+28     %name DEC
+29       D
+30         {}
+31   | %name DECS
+32       DS  D
+33         {}
+34  ;
+35
+36  D : %name INTDEC
+37      'int' $ID
+38         {
+39           die "Error: $ID declared twice\n" if exists($s{$ID});
+40           $s{$ID} = 'int';
+41         }
+42    | %name STRDEC
+43      'string' $ID
+44        {
+45          die "Error: $ID declared twice\n" if exists($s{$ID});
+46          $s{$ID} = 'string';
+47        }
+48  ;
+49
+50  S: %name EXP
+51      $ID
+52        {
+53          die "Error: $ID not declared\n" unless exists($s{$ID});
+54          goto &amp;Parse::Eyapp::Driver::YYBuildAST; # build the node
+55        }
+56  ;
+57
+58  %%
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0013130030000000000000">
+La Tabla de Símbolos</A>
+</H4>
+  
+
+<P>
+Las acciones explícitas en las líneas 
+37-41 y 44-47 no retornan referencias y eso significa 
+que el subárbol de <code>D</code> no formará parte del árbol de 
+análisis. En vez de ello las acciones tienen por efecto
+almacenar el tipo en la entrada de la tabla de símbolos
+asociada con la variable.
+
+<P>
+
+<H4><A NAME="SECTION0013130040000000000000">
+Dando Nombre a los Atributos</A>
+</H4>
+  
+
+<P>
+Cuando en la parte derecha de una regla de producción un símbolo
+va precedido de un dolar como ocurre en el ejemplo con <code>ID</code>:
+
+<P>
+<PRE>
+36  D : %name INTDEC
+37      'int' $ID
+38         {
+39           die "Error: $ID declared twice\n" if exists($s{$ID});
+40           $s{$ID} = 'int';
+41         }
+</PRE>
+
+<P>
+le estamos indicamos a eyapp que construya una copia en una variable léxica <code>$ID</code>
+del atributo asociado con ese símbolo. Así el fragmento anterior es equivalente
+a escribir:
+
+<P>
+<PRE>
+  D : %name INTDEC
+      'int' ID
+         {
+           my $ID = $_[2];
+           die "Error: $ID declared twice\n" if exists($s{$ID});
+           $s{$ID} = 'int';
+         }
+</PRE>
+
+<P>
+Nótese que la tabla de símbolos es una variable léxica. Para evitar 
+su pérdida cuando termine la fase de análisis sintáctico
+se guarda como un atributo del nodo programa:
+<PRE>
+10  P:
+11    %name PROG
+12      $DS $SS
+13        {
+14          print Dumper($DS);
+15          $SS-&gt;{symboltable} = \%s;
+16          return $SS;
+17        }
+18  ;
+</PRE>
+
+<P>
+Si no se desea que el nombre del atributo coincida con el nombre de la variable
+se utiliza la notación <B>punto</B>. Por ejemplo:
+
+<P>
+<PRE>
+exp : exp.left '+' exp.right { $left + $right }
+;
+</PRE>
+
+<P>
+es equivalente a:
+
+<P>
+<PRE>
+exp : exp.left '+' exp.right 
+       { 
+         my $left  = $_[1];
+         my $right = $_[2];
+         $left + $right 
+       }
+;
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0013130050000000000000">
+Insertando Tareas Adicionales a la Construcción de un Nodo</A>
+</H4>
+  
+
+<P>
+Si queremos ejecutar ciertas tareas antes de la construcción de
+un nodo tendremos que insertar una acción semántica para las mismas.
+Para evitar la pérdida del subárbol deberemos llamar explícitamente
+a <code>Parse::Eyapp::Driver::YYBuildAST</code>. Este es el caso
+cuando se visitan los nodos sentencia (<code>S</code>):
+
+<P>
+<PRE>
+50  S: %name EXP
+51      $ID
+52        {
+53          die "Error: $ID not declared\n" unless exists($s{$ID});
+54          goto &amp;Parse::Eyapp::Driver::YYBuildAST; # build the node
+55        }
+56  ;
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION0013130060000000000000">
+El Programa Cliente y su Ejecución</A>
+</H4>
+  
+
+<P>
+Veamos el programa cliente:
+<PRE>
+pl@nereida:~/LEyapp/examples$ cat -n useretundef.pl
+ 1  #!/usr/bin/perl -w
+ 2  use strict;
+ 3  use Parse::Eyapp;
+ 4  use RetUndef;
+ 5  use Data::Dumper;
+ 6
+ 7  sub TERMINAL::info { $_[0]{attr} }
+ 8
+ 9  my $parser = RetUndef-&gt;new();
+10  my $t = $parser-&gt;Run;
+11  print $t-&gt;str,"\n";
+12
+13  $Data::Dumper::Indent = 1;
+14  print Dumper($t);
+</PRE>
+Observe como no hay nodos de tipo <code>D</code>  al ejecutar el 
+programa con entrada <code>int a string b a b</code>:
+
+<P>
+<PRE>
+pl@nereida:~/LEyapp/examples$ useretundef.pl
+int a string b a b
+$VAR1 = undef;
+STS(ST(EXP(TERMINAL[a])),EXP(TERMINAL[b]))
+</PRE>
+El volcado de <code>Dumper</code> en la línea 14 de <code>RetUndef.eyp</code>
+nos muestra que el atributo asociado con <code>DS</code> es <code>undef</code>.
+
+<P>
+El volcado de <code>Dumper</code> en la línea 14 de <code>useretundef.pl</code>
+da el siguiente resultado:
+<PRE>
+$VAR1 = bless( {
+  'symboltable' =&gt; {
+    'a' =&gt; 'int',
+    'b' =&gt; 'string'
+  },
+  'children' =&gt; [
+    bless( {
+      'children' =&gt; [
+        bless( {
+          'children' =&gt; [
+            bless( {
+              'children' =&gt; [],
+              'attr' =&gt; 'a',
+              'token' =&gt; 'ID'
+            }, 'TERMINAL' )
+          ]
+        }, 'EXP' )
+      ]
+    }, 'ST' ),
+    bless( {
+      'children' =&gt; [
+        bless( {
+          'children' =&gt; [],
+          'attr' =&gt; 'b',
+          'token' =&gt; 'ID'
+        }, 'TERMINAL' )
+      ]
+    }, 'EXP' )
+  ]
+}, 'STS' );
+</PRE>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html5043"
+  HREF="node242.html#SECTION0013130010000000000000">Acciones Explícitas Bajo la Directiva % tree</A>
+<LI><A NAME="tex2html5044"
+  HREF="node242.html#SECTION0013130020000000000000">Las Declaraciones no se Incluyen en el Arbol de Análisis</A>
+<LI><A NAME="tex2html5045"
+  HREF="node242.html#SECTION0013130030000000000000">La Tabla de Símbolos</A>
+<LI><A NAME="tex2html5046"
+  HREF="node242.html#SECTION0013130040000000000000">Dando Nombre a los Atributos</A>
+<LI><A NAME="tex2html5047"
+  HREF="node242.html#SECTION0013130050000000000000">Insertando Tareas Adicionales a la Construcción de un Nodo</A>
+<LI><A NAME="tex2html5048"
+  HREF="node242.html#SECTION0013130060000000000000">El Programa Cliente y su Ejecución</A>
+</UL></UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html5041"
+  HREF="node243.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html5035"
+  HREF="node229.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html5029"
+  HREF="node241.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html5037"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html5039"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html5042"
+  HREF="node243.html">Nombres para los Atributos</A>
+<B>Sup:</B> <A NAME="tex2html5036"
+  HREF="node229.html">Análisis Sintáctico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html5030"
+  HREF="node241.html">Práctica: Análisis Sintáctico</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

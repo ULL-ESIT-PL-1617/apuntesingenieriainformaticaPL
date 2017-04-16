@@ -1,0 +1,593 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Práctica: Gramática Simple en Parse::Eyapp</TITLE>
+<META NAME="description" CONTENT="Práctica: Gramática Simple en Parse::Eyapp">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node237.html">
+<LINK REL="previous" HREF="node235.html">
+<LINK REL="up" HREF="node229.html">
+<LINK REL="next" HREF="node237.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html4941"
+  HREF="node237.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4935"
+  HREF="node229.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4929"
+  HREF="node235.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4937"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4939"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4942"
+  HREF="node237.html">El Método YYName y</A>
+<B>Sup:</B> <A NAME="tex2html4936"
+  HREF="node229.html">Análisis Sintáctico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html4930"
+  HREF="node235.html">Práctica: Traductor de Términos</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001370000000000000000">
+Práctica: Gramática Simple en <TT>Parse::Eyapp</TT></A>
+</H1>
+   <A NAME="18364"></A>
+  
+<A NAME="practica:gramasimpleeneyapp"></A>
+<P>
+Escriba usando <code>Parse::Eyapp</code>
+un analizador sintáctico <code>PL::Simple</code> para la siguiente gramática:
+
+<P>
+<BR>
+<BR>
+<DIV ALIGN="CENTER">
+</DIV>
+<DIV ALIGN="CENTER"><TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1">
+0 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> p  <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ ds ss     </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+1 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> p  <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ ss         </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+2 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> ds <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ d  ';'  ds  </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+3 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> ds <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ d  ';'     </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+4 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> d  <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ INT  il     </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+5 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> d  <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ STRING  il </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+6 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> ss <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ s  ';'  ss  </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+7 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> ss <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ s          </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+8 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> s  <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ ID '=' e    </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+9 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> s  <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ PRINT  nel       </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+10 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> s <!-- MATH
+ $\rightarrow \epsilon$
+ -->
+<IMG
+ WIDTH="34" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img157.png"
+ ALT="$ \rightarrow \epsilon$">
+ </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+11 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> e <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ e '+' t    </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+12 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> e <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ e '-' t    </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+13 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> e <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ t           </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+14 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> t <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ t '*' f    </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+15 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> t <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ t '/' f     </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+16 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> t <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ f           </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+17 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> f <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ '(' e ')'   </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+18 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> f <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ ID         </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+19 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> f <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ NUM        </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+20 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> f <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ STR        </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+21 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> f <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ FUNCTIONID '(' el ')'   </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+22 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> il <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ ID ',' il  </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+23 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> il <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ ID         </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+24 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> el <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ nel   </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+25 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> el <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ <IMG
+ WIDTH="12" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img19.png"
+ ALT="$ \epsilon$">
+ </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+26 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> nel <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ e ',' nel    </FONT></TD>
+</TR>
+<TR><TD ALIGN="RIGHT"><FONT SIZE="-1"> 
+
+27 </FONT></TD>
+<TD ALIGN="LEFT"><FONT SIZE="-1"> nel <!-- MATH
+ $\rightarrow$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img48.png"
+ ALT="$ \rightarrow$">
+ e   </FONT></TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+<BR>
+
+<P>
+El terminal <code>ID</code> corresponde a identificador y <code>NUM</code> a un número entero sin signo. 
+El terminal <code>STR</code> a cadenas de dobles comillas.
+El terminal <code>FUNCTIONID</code> viene dado por la expresión regular <code>min|max|concat</code>.
+Declare dichos terminales en la cabecera usando la directiva <code>%token</code> (lea la documentación de 
+<code>Parse::Eyapp</code>). Una directiva como:
+<PRE>
+%token ID FUNCTIONID NUM
+</PRE>
+declara los terminales pero no les da prioridad.
+
+<P>
+
+<UL>
+<LI>Describa mediante ejemplos el lenguaje generado por esta gramática.
+¿Es ambigua la gramática?
+</LI>
+<LI>Admita comentarios como en <code>C</code>.
+</LI>
+<LI>Almacene los números de línea asociados con los terminales y utilice esa información
+en los diagnósticos de error.
+</LI>
+<LI>Para la escritura de las reglas del forma <!-- MATH
+ $s \rightarrow \epsilon$
+ -->
+<IMG
+ WIDTH="47" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img505.png"
+ ALT="$ s \rightarrow \epsilon$">
+
+repase los consejos dados en el párrafo <A HREF="node231.html#parrafo:reglasvacias">8.2</A>
+
+<P>
+</LI>
+<LI>Expanda la gramática para que incluya operaciones lógicas (<code>a &lt; b</code>, <code>a == b</code>, etc.).
+Observe que tales expresiones tiene menor prioridad que los operadores aditivos:
+<code>a = b &lt; c + 2</code> es interpretada como <code>a = b &lt; (c + 2)</code> 
+</LI>
+<LI>Escriba la documentación en un fichero de documentación aparte <code>PL/Simple.pod</code>.
+</LI>
+<LI>Escriba las pruebas.
+En las pruebas asegúrese de poner tanto entradas correctas como erróneas.
+</LI>
+<LI>Adjunte un estudio de cubrimiento con su práctica. 
+Añada los ficheros con el informe al <code>MANIFEST</code>. Ubiquelos en un directorio
+de informes.
+</LI>
+</UL>
+
+<P>
+<HR>
+<A NAME="tex2html4941"
+  HREF="node237.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4935"
+  HREF="node229.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4929"
+  HREF="node235.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4937"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4939"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4942"
+  HREF="node237.html">El Método YYName y</A>
+<B>Sup:</B> <A NAME="tex2html4936"
+  HREF="node229.html">Análisis Sintáctico con Parse::Eyapp</A>
+<B> Ant:</B> <A NAME="tex2html4930"
+  HREF="node235.html">Práctica: Traductor de Términos</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

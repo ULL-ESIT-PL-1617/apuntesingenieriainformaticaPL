@@ -1,0 +1,483 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Las Bases</TITLE>
+<META NAME="description" CONTENT="Las Bases">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node109.html">
+<LINK REL="previous" HREF="node105.html">
+<LINK REL="up" HREF="node105.html">
+<LINK REL="next" HREF="node107.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html2945"
+  HREF="node107.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2939"
+  HREF="node105.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2933"
+  HREF="node105.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2941"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2943"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2946"
+  HREF="node107.html">Repaso: Las Bases</A>
+<B>Sup:</B> <A NAME="tex2html2940"
+  HREF="node105.html">La Estructura de los</A>
+<B> Ant:</B> <A NAME="tex2html2934"
+  HREF="node105.html">La Estructura de los</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00910000000000000000"></A>
+<A NAME="section:lasbases"></A>
+<BR>
+Las Bases
+</H1>
+Puesto que no todos los alumnos que están interesados en esta sección
+tienen conocimientos previos de Perl, en esta sección
+comenzamos haciendo un breve repaso a como construir un módulo en Perl
+y al mismo tiempo repasamos las características usadas del lenguaje.
+Si quieres tener un conocimiento mas profundo
+de como construir un módulo, lee el capítulo
+sobre módulos en <A HREF="#chapter:modulos">
+<IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> [<A
+ HREF="node323.html#CasianoIntroAPerl">4</A>].
+
+<P>
+
+<H4><A NAME="SECTION00910010000000000000">
+Version</A>
+</H4>
+  
+
+<P>
+El comportamiento de Perl puede variar ligeramente si la versión que tenemos instalada es 
+antigua. Para ver la versión de Perl podemos hacer.
+
+<P>
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506$ perl -v
+
+This is perl, v5.8.4 built for i386-linux-thread-multi
+
+Copyright 1987-2004, Larry Wall
+
+Perl may be copied only under the terms of either the Artistic License or the
+GNU General Public License, which may be found in the Perl 5 source kit.
+
+Complete documentation for Perl, including FAQ lists, should be found on
+this system using `man perl' or `perldoc perl'.  If you have access to the
+Internet, point your browser at http://www.perl.com/, the Perl Home Page.
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00910020000000000000">
+h2xs</A>
+</H4>
+  
+
+<P>
+En primer lugar, construimos la estructura para nuestro proyecto de mini-lenguaje.
+La mejor forma de comenzar a escribir un módulo es usando la herramienta Perl
+<code>h2xs</code>. Supongamos que queremos construir un módulo <code>PL::Tutu</code>. 
+Los nombres de los módulos siguen un esquema de identificadores separados
+por una pareja de <code>:</code>. Para saber más sobre el esquema de nombres 
+de los módulos y la forma en la que estos se asigna a ficheros del sistema 
+operativo, lea la sección 
+sobre introducción a los módulos <A HREF="#section:introamodulos">
+<IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> [<A
+ HREF="node323.html#CasianoIntroAPerl">4</A>].
+
+<P>
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506$ h2xs -XA -n PL::Tutu
+Defaulting to backwards compatibility with perl 5.8.4
+If you intend this module to be compatible with earlier perl versions, please
+specify a minimum perl version with the -b option.
+
+Writing PL-Tutu/lib/PL/Tutu.pm
+Writing PL-Tutu/Makefile.PL
+Writing PL-Tutu/README
+Writing PL-Tutu/t/PL-Tutu.t
+Writing PL-Tutu/Changes
+Writing PL-Tutu/MANIFEST
+</PRE>
+La herramienta <code>h2xs</code> fué concebida para ayudar en la transformación
+de ficheros de cabecera de C en código Perl. La opción 
+<code>-X</code> hace que se omita la  creación de subrutinas externas (<code>XS</code>)
+La opción <code>-A</code> implica que el módulo no hará uso del <code>AutoLoader</code>.
+La opción <code>-n</code> proporciona el nombre del módulo.
+La llamada a <code>h2xs</code> crea la siguiente estructura de directorios y ficheros:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506$ tree
+.
+`-- PL-Tutu
+    |-- Changes
+    |-- MANIFEST
+    |-- Makefile.PL
+    |-- README
+    |-- lib
+    |   `-- PL
+    |       `-- Tutu.pm
+    `-- t
+        `-- PL-Tutu.t
+
+4 directories, 6 files
+</PRE>
+
+<P>
+
+<H4><A NAME="SECTION00910030000000000000">
+Generación del Makefile</A>
+</H4>
+  
+
+<P>
+Después de esto tenemos un módulo ''funcional'' que no hace nada.
+Lo podríamos instalar como si lo hubieramos descargado desde CPAN
+(Véase <A HREF="#section:instalacionamano">
+<IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> [<A
+ HREF="node323.html#CasianoIntroAPerl">4</A>]).
+
+<P>
+Después cambiamos al directorio <code>PL-Tutu/</code> y hacemos <code>perl Makefile.PL</code>.
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506$ cd PL-Tutu/
+lhp@nereida:~/Lperl/src/topdown/PL0506/PL-Tutu$ perl Makefile.PL
+Checking if your kit is complete...
+Looks good
+Writing Makefile for PL::Tutu
+</PRE>
+Esto crea el fichero <code>Makefile</code> necesario para actualizar 
+nuestra aplicación. Para saber más sobre <code>perl Makefile.PL</code>
+lea <A HREF="#section:construccion">
+<IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> [<A
+ HREF="node323.html#CasianoIntroAPerl">4</A>].
+
+<P>
+
+<H4><A NAME="SECTION00910040000000000000">
+Documentación</A>
+</H4>
+  
+
+<P>
+Pasamos ahora a trabajar en el módulo. Primero escribimos
+la parte relativa a la documentación. Para ello 
+editamos <code>Tutu.pm</code>:
+<PRE>
+lhp@nereida:~/Lperl/src/topdown/PL0506/PL-Tutu/lib/PL$ pwd
+/home/lhp/Lperl/src/topdown/PL0506/PL-Tutu/lib/PL
+lhp@nereida:~/Lperl/src/topdown/PL0506/PL-Tutu/lib/PL$ ls -l
+total 4
+-rw-r--r--  1 lhp lhp 2343 2005-09-28 11:16 Tutu.pm
+</PRE>
+y al final del mismo insertamos la documentación. Para saber más sobre el 
+lenguajes de marcas de Perl (<B>pod</B> por <B>plain old documentation</B>)
+lea <A HREF="#section:pod">
+<IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> [<A
+ HREF="node323.html#CasianoIntroAPerl">4</A>]. En este caso escribimos:
+<PRE>
+1;
+__END__
+
+=head1 NOMBRE
+
+PL::Tutu - Compilador para un lenguaje sencillo denominado
+          "Tutu" que usaremos en la asignatura PL
+
+=head1 SINOPSIS
+
+  use PL::Tutu;
+  
+  La subrutina PL::Tutu::compiler recibe dos argumentos: el 
+  nombre del fichero de entrada (fuente.tutu) y el nombre del fichero de
+  salida (código ensamblador para una especie de P-máquina).
+
+=head1 DESCRIPCIÓN
+
+Este módulo tiene dos objetivos: aprender a hacer un pequeño compilador
+y aprender a programar modularmente en Perl, usando un buen número
+de los recursos que este lenguaje ofrece.
+
+El siguiente es un ejemplo de código fuente tutu:
+ 
+  int a,b; 
+  string c;
+  a = 2+3;
+  b = 3*4; 
+  c = "hola"; 
+  p c; 
+  c = "mundo"; 
+  p c; 
+  p 9+2; 
+  p a+1; 
+  p b+1
+
+supuesto que está guardado en el fichero "test2.tutu", podemos 
+escribir un programa Perl "main.pl" para compilarlo: 
+
+    $ cat main.pl
+    #!/usr/bin/perl -w -I..
+    #use PL::Tutu;
+    use Tutu;
+
+    PL::Tutu::compiler(@ARGV);
+
+al ejecutar "main.pl":
+
+    $ ./main.pl test2.tutu test2.ok
+
+obtenemos el fichero "test2.ok" con el ensamblador: 
+    $ cat test2.ok
+    DATA holamundo
+    PUSH 5
+    PUSHADDR 0
+    STORE_INT
+    PUSH 12
+    PUSHADDR 1
+    STORE_INT
+    PUSHSTR 0 4
+    PUSHADDR 2
+    STORE_STRING
+    LOAD_STRING 2
+    PRINT_STR
+    PUSHSTR 4 5
+    PUSHADDR 2
+    STORE_STRING
+    LOAD_STRING 2
+    PRINT_STR
+    PUSH 11
+    PRINT_INT
+    LOAD 0
+    INC
+    PRINT_INT
+    LOAD 1
+    INC
+    PRINT_INT
+
+Para mas información consulta la página de la asignatura.
+¡Buena suerte!
+
+=head2 EXPORT
+
+No se exporta nada al espacio de nombres del cliente.
+
+
+=head1 AUTOR
+
+Casiano Rodríguez León, E&lt;lt&gt;casiano@ull.esE&lt;gt&gt;
+
+=head1 VÉASE TAMBIÉN
+
+L&lt;perl&gt;.
+
+=cut
+</PRE>
+La documentación puede ser mostrada utilizando el comando <code>perldoc</code>.
+
+<P>
+
+<center>
+<img src="perldoc.jpg">
+<p>
+El resultado de usar <tt>perldoc Tutu</tt>
+</center>
+<hr>
+<p>
+
+<P>
+La forma en la que se controla la calidad de un módulo es mediante 
+el desarrollo de pruebas. Las pruebas son programas perl que se sitúan en el directorio
+<code>t/</code> y que tienen la extensión <code>.t</code>. Para ejecutar las pruebas
+se escribe:
+
+<P>
+<PRE>
+make test
+</PRE>
+
+<P>
+Vease la sección <A HREF="#subsection:laspruebas">
+<IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> [<A
+ HREF="node323.html#CasianoIntroAPerl">4</A>] de los apuntes de LHP para ams detalles.
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsecciones</STRONG></A>
+
+<UL>
+<LI><UL>
+<LI><UL>
+<LI><A NAME="tex2html2947"
+  HREF="node106.html#SECTION00910010000000000000">Version</A>
+<LI><A NAME="tex2html2948"
+  HREF="node106.html#SECTION00910020000000000000">h2xs</A>
+<LI><A NAME="tex2html2949"
+  HREF="node106.html#SECTION00910030000000000000">Generación del Makefile</A>
+<LI><A NAME="tex2html2950"
+  HREF="node106.html#SECTION00910040000000000000">Documentación</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html2951"
+  HREF="node107.html">Repaso: Las Bases</A>
+<LI><A NAME="tex2html2952"
+  HREF="node108.html">Práctica: Crear y documentar el Módulo <TT>PL::Tutu</TT></A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<A NAME="tex2html2945"
+  HREF="node107.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html2939"
+  HREF="node105.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html2933"
+  HREF="node105.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html2941"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html2943"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html2946"
+  HREF="node107.html">Repaso: Las Bases</A>
+<B>Sup:</B> <A NAME="tex2html2940"
+  HREF="node105.html">La Estructura de los</A>
+<B> Ant:</B> <A NAME="tex2html2934"
+  HREF="node105.html">La Estructura de los</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>

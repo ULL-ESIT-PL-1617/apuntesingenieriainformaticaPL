@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Las Directivas skip y leftop</TITLE>
+<META NAME="description" CONTENT="Las Directivas skip y leftop">
+<META NAME="keywords" CONTENT="perlexamples">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="mystyle.css">
+
+<LINK REL="next" HREF="node181.html">
+<LINK REL="previous" HREF="node179.html">
+<LINK REL="up" HREF="node175.html">
+<LINK REL="next" HREF="node181.html">
+</HEAD>
+
+<BODY >
+
+<A NAME="tex2html4064"
+  HREF="node181.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4058"
+  HREF="node175.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4052"
+  HREF="node179.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4060"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4062"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4065"
+  HREF="node181.html">Las directivas rulevar y</A>
+<B>Sup:</B> <A NAME="tex2html4059"
+  HREF="node175.html">RecDescent</A>
+<B> Ant:</B> <A NAME="tex2html4053"
+  HREF="node179.html">La directiva commit</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001150000000000000000">
+Las Directivas <TT>skip</TT> y <TT>leftop</TT></A>
+</H1>
+Consideremos una extensión al conocido problema 
+del reconocimietno del lenguaje de <A NAME="13569"></A><B>valores separados por comas</B> 
+(véase la sección <A HREF="node73.html#section:csv">3.4.3</A>).
+El fichero de entrada contiene líneas como esta:
+
+<P>
+<PRE>
+"tierra, luna",1,"marte, deimos",9.374
+</PRE>
+
+<P>
+la extensión consiste en admitir que el separador puede cambiar
+entre líneas y en los campos de una línea, pudiendo ser
+no sólo la coma sino también un tabulador o el carácter dos puntos.
+El problema está en que los separadores dentro de las cadenas
+no deben confundirnos. Por ejemplo, la coma en 
+<code>"tierra, luna"</code> no debe ser interpretada como
+un separador.
+
+<P>
+He aqui una solución usando RD:
+
+<P>
+<PRE>
+ 1 #!/usr/local/bin/perl5.8.0 -w
+ 2 use strict;
+ 3 use Parse::RecDescent;
+ 4 use Data::Dumper;
+ 5 
+ 6 my $grammar = q{
+ 7   line : &lt;leftop: value sep value&gt; 
+ 8   value: /"([^"]*)"/ { $1; }
+ 9   sep : &lt;skip:""&gt; /[:,\t]/
+10 };
+11 
+12 my $parse = Parse::RecDescent-&gt;new($grammar);
+13 
+14 my $line;
+15 while ($line = &lt;&gt;) {
+16   print "$line\n";
+17   my $result = $parse-&gt;line($line);
+18   print Dumper($result);
+19 }
+</PRE>
+
+<P>
+La directiva <code>&lt;skip&gt;</code> usada en la línea 9 
+permite redifinir lo que el analizador entiende
+por ``blancos'': los símbolos sobre los que saltar. Por defecto
+el tabulador es un ``blanco''. En este ejemplo, cuando estamos 
+reconociendo un separador no queremos que sea así. La directiva
+<code>&lt;skip:""&gt;</code> hace que ningún símbolo sea considerado como blanco.
+
+<P>
+La directiva usada en la línea 7 <code>&lt;leftop: value sep value&gt;</code> 
+especifica una lista asociativa a izquierdas de elementos de tipo <code>value</code>
+separados por elementos del lenguaje denotado por <code>sep</code>.
+El valor retornado es un array anónimo conteniendo
+la lista de elementos. En general, si el separador es especificado
+como una cadena, la directiva no retorna
+el separador como parte de la lista. Por ejemplo,
+en el código:
+
+<P>
+<PRE>
+list: '(' &lt;leftop: list_item ',' list_item&gt; ')' { $return = $item[2] }
+</PRE>
+
+<P>
+el valor devuelto es una referencia a la lista, la cual no incluye
+las comas. Sin embargo, cuando el separador viene dado por una
+variable sintáctica o bien por medio de una expresión regular,
+las distintas apariciones del separador se incluyen
+en la lista devuelta. Este es el caso en nuestro ejemplo.
+
+<P>
+Veamos primero el fichero de entrada para la ejecución:
+<PRE>
+$ cat file.txt
+"xx":"yyy":"zzz"
+"xx","yyy","zzz"
+"xx"    "yyy"   "zzz"
+"xx"    "yyy","zzz"
+"xx":"yyy","zzz"
+"x:x":"y,y","z  zz"
+"x:x":"y,y","z  zz"."ttt"
+</PRE>
+La última fila usa el punto como separador del último campo.
+La ejecución de <code>Dumper($result)</code> en la línea 18
+nos muestra las listas formadas:
+<PRE>
+$ ./commaseparated.pl file.txt
+"xx":"yyy":"zzz"
+$VAR1 = [ 'xx', ':', 'yyy', ':', 'zzz' ];
+"xx","yyy","zzz"
+$VAR1 = [ 'xx', ',', 'yyy', ',', 'zzz' ];
+"xx"    "yyy"   "zzz"
+$VAR1 = [ 'xx', '     ', 'yyy', '     ', 'zzz' ];
+"xx"    "yyy","zzz"
+$VAR1 = [ 'xx', '     ', 'yyy', ',', 'zzz' ];
+"xx":"yyy","zzz"
+$VAR1 = [ 'xx', ':', 'yyy', ',', 'zzz' ];
+"x:x":"y,y","z  zz"
+$VAR1 = [ 'x:x', ':', 'y,y', ',', 'z  zz' ];
+"x:x":"y,y","z  zz"."ttt"
+$VAR1 = [ 'x:x', ':', 'y,y', ',', 'z  zz' ];
+</PRE>
+La última entrada <code>"x:x":"y,y","z  zz"."ttt"</code> muestra como el analizador
+se detiene en la cadena máximal <code>"x:x":"y,y","z  zz"</code> que pertenece 
+al lenguaje.
+
+<P>
+<P>
+<DIV><B>Ejercicio  6.5.1</B> &nbsp; 
+<I>La última salida del programa anterior no produce un rechazo de la cadena de entrada.
+Se limita a detenerse en la cadena máximal <code>"x:x":"y,y","z  zz"</code>
+que puede aceptar. Si queremos que la conducta sea de rechazo,
+se puede hacer que sea la línea completa la que se empareje. 
+Escriba una nueva versión del programa anterior que recoja esta 
+especificación.</I></DIV><P></P>
+
+<P>
+<P>
+<DIV><B>Ejercicio  6.5.2</B> &nbsp; 
+<I>Escriba una variante del ejercicio anterior 
+en la que se fuerze a que todos los separadores 
+en una misma línea sean iguales (aunque pueden
+ser diferentes en diferentes líneas).
+</I>
+<P></DIV><P></P>
+
+<P>
+<HR>
+<A NAME="tex2html4064"
+  HREF="node181.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html4058"
+  HREF="node175.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html4052"
+  HREF="node179.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html4060"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A> 
+<A NAME="tex2html4062"
+  HREF="node322.html">
+<IMG WIDTH="43" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="index" SRC="index.png"></A> <A NAME="tex2html2"
+  HREF="http://nereida.deioc.ull.es/~pl/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="PL.jpg"
+ ALT="PL"></A><A NAME="tex2html3"
+  HREF="http://campusvirtual.ull.es/0910/course/view.php?id=1148"><IMG
+  WIDTH="50" ALIGN="BOTTOM" BORDER="0"
+ SRC="hatpl.png"
+ ALT="PL moodle"></A><A NAME="tex2html4"
+  HREF="pl.ps"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="gv.jpeg"
+ ALT="ps"></A><A NAME="tex2html5"
+  HREF="perl_errata_form.html"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="icon_errata.jpg"
+ ALT="errata"></A><A NAME="tex2html6"
+  HREF="http://search.cpan.org/"><IMG
+  WIDTH="60" ALIGN="BOTTOM" BORDER="0"
+ SRC="lupa.gif"
+ ALT="modulos"></A><A NAME="tex2html7"
+  HREF="http://www.perlmonks.org/?node=Seekers of Perl Wisdom"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="monk.gif"
+ ALT="perlmonks"></A><A NAME="tex2html8"
+  HREF="http://perldoc.perl.org/"><IMG
+  WIDTH="30" ALIGN="BOTTOM" BORDER="0"
+ SRC="perlonion.jpeg"
+ ALT="perldoc"></A><A NAME="tex2html9"
+  HREF="http://nereida.deioc.ull.es/~lhp/perlexamples/"><IMG
+  WIDTH="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="logoLHP.jpg"
+ ALT="apuntes LHP"></A><A NAME="tex2html10"
+  HREF="http://www.google.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ggoogle.gif"
+ ALT="google"></A><A NAME="tex2html11"
+  HREF="http://www.etsii.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="etsii.png"
+ ALT="etsii"></A><A NAME="tex2html12"
+  HREF="http://www.ull.es/"><IMG
+  WIDTH="35" ALIGN="BOTTOM" BORDER="0"
+ SRC="ull.gif"
+ ALT="ull"></A><A NAME="tex2html13"
+  HREF="http://nereida.deioc.ull.es/"><IMG
+  WIDTH="32" ALIGN="BOTTOM" BORDER="0"
+ SRC="logopcgull.gif"
+ ALT="pcgull"></A>
+<BR>
+<B> Sig:</B> <A NAME="tex2html4065"
+  HREF="node181.html">Las directivas rulevar y</A>
+<B>Sup:</B> <A NAME="tex2html4059"
+  HREF="node175.html">RecDescent</A>
+<B> Ant:</B> <A NAME="tex2html4053"
+  HREF="node179.html">La directiva commit</A>
+ <B>Err:</B> <a href="perl_errata_form.html" target="_blank">Si hallas una errata ...</a>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+<I>Casiano Rodríguez León <BR>
+2013-03-05</I>
+</ADDRESS>
+</BODY>
+</HTML>
